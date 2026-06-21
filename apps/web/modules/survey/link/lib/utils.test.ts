@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { getElementsFromSurveyBlocks, getWebAppLocale, isRTL, isRTLLanguage } from "./utils";
 
 const createMockSurvey = (languages: TSurvey["languages"] = []): TSurvey =>

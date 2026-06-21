@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { logger } from "@formbricks/logger";
-import { AuthorizationError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { AuthorizationError } from "@salamruby/types/errors";
 import { verifyAccountDeletionSsoReauthIntent } from "@/lib/jwt";
-import { FORMBRICKS_CLOUD_ACCOUNT_DELETION_SURVEY_URL } from "@/modules/account/constants";
+import { SALAMRUBY_CLOUD_ACCOUNT_DELETION_SURVEY_URL } from "@/modules/account/constants";
 import { deleteUserWithAccountDeletionAuthorization } from "@/modules/account/lib/account-deletion";
 import { queueAccountDeletionAuditEvent } from "@/modules/account/lib/account-deletion-audit";
 import { completeAccountDeletionSsoIdentityConfirmationAndGetRedirectPath } from "./account-deletion-sso-complete";
@@ -11,14 +11,14 @@ import { completeAccountDeletionSsoIdentityConfirmationAndGetRedirectPath } from
 vi.mock("server-only", () => ({}));
 
 const mockConstants = vi.hoisted(() => ({
-  isFormbricksCloud: false,
+  isSalamRubyCloud: false,
 }));
 
 vi.mock("next-auth", () => ({
   getServerSession: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),
@@ -26,8 +26,8 @@ vi.mock("@formbricks/logger", () => ({
 }));
 
 vi.mock("@/lib/constants", () => ({
-  get IS_FORMBRICKS_CLOUD() {
-    return mockConstants.isFormbricksCloud;
+  get IS_SALAMRUBY_CLOUD() {
+    return mockConstants.isSalamRubyCloud;
   },
   WEBAPP_URL: "http://localhost:3000",
 }));
@@ -67,7 +67,7 @@ const intent = {
 describe("completeAccountDeletionSsoIdentityConfirmationAndGetRedirectPath", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockConstants.isFormbricksCloud = false;
+    mockConstants.isSalamRubyCloud = false;
 
     mockVerifyAccountDeletionSsoReauthIntent.mockReturnValue(intent);
     mockGetServerSession.mockResolvedValue({
@@ -109,12 +109,12 @@ describe("completeAccountDeletionSsoIdentityConfirmationAndGetRedirectPath", () 
     });
   });
 
-  test("redirects to the account deletion survey after SSO identity confirmation on Formbricks Cloud", async () => {
-    mockConstants.isFormbricksCloud = true;
+  test("redirects to the account deletion survey after SSO identity confirmation on SalamRuby Cloud", async () => {
+    mockConstants.isSalamRubyCloud = true;
 
     await expect(
       completeAccountDeletionSsoIdentityConfirmationAndGetRedirectPath({ intent: "intent-token" })
-    ).resolves.toBe(FORMBRICKS_CLOUD_ACCOUNT_DELETION_SURVEY_URL);
+    ).resolves.toBe(SALAMRUBY_CLOUD_ACCOUNT_DELETION_SURVEY_URL);
 
     expect(mockDeleteUserWithAccountDeletionAuthorization).toHaveBeenCalledWith({
       confirmationEmail: intent.email,

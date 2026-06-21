@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Turnstile, { useTurnstile } from "react-turnstile";
 import { z } from "zod";
-import { TUserLocale, ZUserName, ZUserPassword } from "@formbricks/types/user";
+import { TUserLocale, ZUserName, ZUserPassword } from "@salamruby/types/user";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { buildVerificationRequestedPath } from "@/modules/auth/lib/verification-links";
 import { createUserAction } from "@/modules/auth/signup/actions";
@@ -50,7 +50,7 @@ interface SignupFormProps {
   samlTenant: string;
   samlProduct: string;
   turnstileSiteKey?: string;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
 }
 
 export const SignupForm = ({
@@ -72,7 +72,7 @@ export const SignupForm = ({
   samlTenant,
   samlProduct,
   turnstileSiteKey,
-  isFormbricksCloud,
+  isSalamRubyCloud,
 }: SignupFormProps) => {
   const [showLogin, setShowLogin] = useState(false);
   const searchParams = useSearchParams();
@@ -250,7 +250,7 @@ export const SignupForm = ({
             )}
 
             {showLogin &&
-              (isFormbricksCloud ? (
+              (isSalamRubyCloud ? (
                 <label
                   htmlFor="product-updates"
                   className="my-4 flex cursor-pointer gap-x-2 rounded-md border border-slate-200 bg-slate-100 p-2 text-left">

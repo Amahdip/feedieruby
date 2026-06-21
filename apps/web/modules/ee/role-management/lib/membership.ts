@@ -1,10 +1,10 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ZString } from "@formbricks/types/common";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { TMembership, TMembershipUpdateInput, ZMembershipUpdateInput } from "@formbricks/types/memberships";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ZString } from "@salamruby/types/common";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { TMembership, TMembershipUpdateInput, ZMembershipUpdateInput } from "@salamruby/types/memberships";
 import { validateInputs } from "@/lib/utils/validate";
 
 export const updateMembership = async (

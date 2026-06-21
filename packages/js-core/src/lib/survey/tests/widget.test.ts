@@ -14,8 +14,8 @@ vi.mock("@/lib/common/config", () => ({
       update: vi.fn(),
     })),
   },
-  CONTAINER_ID: "formbricks-container",
-  RN_ASYNC_STORAGE_KEY: "formbricks-react-native",
+  CONTAINER_ID: "salamruby-container",
+  RN_ASYNC_STORAGE_KEY: "salamruby-react-native",
 }));
 
 vi.mock("@/lib/common/logger", () => ({
@@ -69,24 +69,24 @@ describe("widget-file", () => {
     configure: vi.fn(),
   };
 
-  const createMockFormbricksSurveys = (): NonNullable<Window["formbricksSurveys"]> => ({
+  const createMockSalamRubySurveys = (): NonNullable<Window["salamrubySurveys"]> => ({
     renderSurvey: vi.fn(),
     setNonce: vi.fn(),
   });
 
-  const getFormbricksSurveys = (): NonNullable<Window["formbricksSurveys"]> => {
-    const formbricksSurveys = window.formbricksSurveys;
-    if (!formbricksSurveys) {
-      throw new Error("window.formbricksSurveys is not set");
+  const getSalamRubySurveys = (): NonNullable<Window["salamrubySurveys"]> => {
+    const salamrubySurveys = window.salamrubySurveys;
+    if (!salamrubySurveys) {
+      throw new Error("window.salamrubySurveys is not set");
     }
 
-    return formbricksSurveys;
+    return salamrubySurveys;
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
     document.body.innerHTML = "";
-    delete window.formbricksSurveys;
+    delete window.salamrubySurveys;
 
     getInstanceConfigMock = vi.spyOn(Config, "getInstance");
     getInstanceLoggerMock = vi.spyOn(Logger, "getInstance").mockReturnValue(mockLogger as unknown as Logger);
@@ -125,7 +125,7 @@ describe("widget-file", () => {
     expect(mockLogger.debug).toHaveBeenCalledWith("A survey is already running. Skipping.");
   });
 
-  test("renderWidget sets isSurveyRunning, handles delay, loads formbricksSurveys, and calls .renderSurvey", async () => {
+  test("renderWidget sets isSurveyRunning, handles delay, loads salamrubySurveys, and calls .renderSurvey", async () => {
     const mockConfigValue = {
       get: vi.fn().mockReturnValue({
         appUrl: "https://fake.app",
@@ -159,7 +159,7 @@ describe("widget-file", () => {
     (filterSurveys as Mock).mockReturnValue([]);
     widget.setIsSurveyRunning(false);
 
-    window.formbricksSurveys = createMockFormbricksSurveys();
+    window.salamrubySurveys = createMockSalamRubySurveys();
 
     vi.useFakeTimers();
 
@@ -171,7 +171,7 @@ describe("widget-file", () => {
 
     vi.advanceTimersByTime(mockSurvey.delay * 1000);
 
-    expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalledWith(
+    expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalledWith(
       expect.objectContaining({
         survey: mockSurvey,
         appUrl: "https://fake.app",
@@ -264,24 +264,24 @@ describe("widget-file", () => {
 
     getInstanceConfigMock.mockReturnValue(mockConfigValue as unknown as Config);
 
-    document.body.innerHTML = `<div id="formbricks-container"></div>`;
+    document.body.innerHTML = `<div id="salamruby-container"></div>`;
     widget.closeSurvey();
-    expect(document.getElementById("formbricks-container")).toBeFalsy();
+    expect(document.getElementById("salamruby-container")).toBeFalsy();
 
     expect(mockConfigValue.update).toHaveBeenCalled();
   });
 
-  test("addWidgetContainer creates #formbricks-container in DOM", () => {
-    expect(document.getElementById("formbricks-container")).toBeFalsy();
+  test("addWidgetContainer creates #salamruby-container in DOM", () => {
+    expect(document.getElementById("salamruby-container")).toBeFalsy();
     widget.addWidgetContainer();
-    const el = document.getElementById("formbricks-container");
+    const el = document.getElementById("salamruby-container");
     expect(el).not.toBeNull();
   });
 
-  test("removeWidgetContainer removes #formbricks-container if it exists", () => {
-    document.body.innerHTML = `<div id="formbricks-container"></div>`;
+  test("removeWidgetContainer removes #salamruby-container if it exists", () => {
+    document.body.innerHTML = `<div id="salamruby-container"></div>`;
     widget.removeWidgetContainer();
-    expect(document.getElementById("formbricks-container")).toBeFalsy();
+    expect(document.getElementById("salamruby-container")).toBeFalsy();
   });
 
   test("renderWidget waits for pending identification before rendering", async () => {
@@ -319,7 +319,7 @@ describe("widget-file", () => {
     getInstanceConfigMock.mockReturnValue(mockConfigValue as unknown as Config);
     widget.setIsSurveyRunning(false);
 
-    window.formbricksSurveys = createMockFormbricksSurveys();
+    window.salamrubySurveys = createMockSalamRubySurveys();
 
     vi.useFakeTimers();
 
@@ -333,7 +333,7 @@ describe("widget-file", () => {
 
     vi.advanceTimersByTime(0);
 
-    expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalledWith(
+    expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalledWith(
       expect.objectContaining({
         contactId: "contact_abc",
       })
@@ -376,7 +376,7 @@ describe("widget-file", () => {
     getInstanceConfigMock.mockReturnValue(mockConfigValue as unknown as Config);
     widget.setIsSurveyRunning(false);
 
-    window.formbricksSurveys = createMockFormbricksSurveys();
+    window.salamrubySurveys = createMockSalamRubySurveys();
 
     vi.useFakeTimers();
 
@@ -389,7 +389,7 @@ describe("widget-file", () => {
     expect(mockUpdateQueue.waitForPendingWork).not.toHaveBeenCalled();
 
     vi.advanceTimersByTime(0);
-    expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalled();
+    expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalled();
 
     vi.useRealTimers();
   });
@@ -433,7 +433,7 @@ describe("widget-file", () => {
     mockUpdateQueue.waitForPendingWork.mockResolvedValue(true);
     widget.setIsSurveyRunning(false);
 
-    window.formbricksSurveys = createMockFormbricksSurveys();
+    window.salamrubySurveys = createMockSalamRubySurveys();
 
     vi.useFakeTimers();
 
@@ -445,7 +445,7 @@ describe("widget-file", () => {
     vi.advanceTimersByTime(0);
 
     // The contactId passed to renderSurvey should be read after the wait
-    expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalledWith(
+    expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalledWith(
       expect.objectContaining({
         contactId: "contact_after_identification",
       })
@@ -460,7 +460,7 @@ describe("widget-file", () => {
 
     widget.setIsSurveyRunning(false);
 
-    window.formbricksSurveys = createMockFormbricksSurveys();
+    window.salamrubySurveys = createMockSalamRubySurveys();
 
     await widget.renderWidget({
       ...mockSurvey,
@@ -472,10 +472,10 @@ describe("widget-file", () => {
     expect(mockLogger.debug).toHaveBeenCalledWith(
       "User identification failed. Skipping survey with segment filters."
     );
-    expect(getFormbricksSurveys().renderSurvey).not.toHaveBeenCalled();
+    expect(getSalamRubySurveys().renderSurvey).not.toHaveBeenCalled();
   });
 
-  describe("loadFormbricksSurveysExternally and waitForSurveysGlobal", () => {
+  describe("loadSalamRubySurveysExternally and waitForSurveysGlobal", () => {
     const scriptLoadMockConfig = {
       get: vi.fn().mockReturnValue({
         appUrl: "https://fake.app",
@@ -546,7 +546,7 @@ describe("widget-file", () => {
 
       // renderWidget catches the error internally — it resolves, not rejects
       await renderPromise;
-      expect(consoleSpy).toHaveBeenCalledWith("Failed to load Formbricks Surveys library:", "Network error");
+      expect(consoleSpy).toHaveBeenCalledWith("Failed to load SalamRuby Surveys library:", "Network error");
 
       consoleSpy.mockRestore();
     });
@@ -566,7 +566,7 @@ describe("widget-file", () => {
 
       const scriptEl = getAppendedScript();
 
-      // Script loaded but window.formbricksSurveys is never set
+      // Script loaded but window.salamrubySurveys is never set
       (scriptEl.onload as () => void)();
 
       // Advance past the 10s timeout (polls every 200ms)
@@ -574,10 +574,7 @@ describe("widget-file", () => {
 
       await renderPromise;
 
-      expect(consoleSpy).toHaveBeenCalledWith(
-        "Failed to load Formbricks Surveys library:",
-        expect.any(Error)
-      );
+      expect(consoleSpy).toHaveBeenCalledWith("Failed to load SalamRuby Surveys library:", expect.any(Error));
 
       vi.useRealTimers();
       consoleSpy.mockRestore();
@@ -588,7 +585,7 @@ describe("widget-file", () => {
       widget.setIsSurveyRunning(false);
 
       // Set nonce before surveys load to test nonce application
-      window.__formbricksNonce = "test-nonce-123";
+      window.__salamrubyNonce = "test-nonce-123";
 
       vi.useFakeTimers();
 
@@ -603,7 +600,7 @@ describe("widget-file", () => {
       (scriptEl.onload as () => void)();
 
       // Set the global after script "loads" — simulates browser finishing execution
-      window.formbricksSurveys = createMockFormbricksSurveys();
+      window.salamrubySurveys = createMockSalamRubySurveys();
 
       // Advance one polling interval for waitForSurveysGlobal to find it
       await vi.advanceTimersByTimeAsync(200);
@@ -613,8 +610,8 @@ describe("widget-file", () => {
       // Run remaining timers for survey.delay setTimeout
       vi.runAllTimers();
 
-      expect(getFormbricksSurveys().setNonce).toHaveBeenCalledWith("test-nonce-123");
-      expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalledWith(
+      expect(getSalamRubySurveys().setNonce).toHaveBeenCalledWith("test-nonce-123");
+      expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalledWith(
         expect.objectContaining({
           appUrl: "https://fake.app",
           workspaceId: "env_123",
@@ -623,7 +620,7 @@ describe("widget-file", () => {
       );
 
       vi.useRealTimers();
-      delete window.__formbricksNonce;
+      delete window.__salamrubyNonce;
     });
 
     test("deduplicates concurrent calls (returns cached promise)", async () => {
@@ -631,13 +628,13 @@ describe("widget-file", () => {
       widget.setIsSurveyRunning(false);
 
       // After the previous successful test, surveysLoadPromise holds a resolved promise.
-      // Calling renderWidget again (without formbricksSurveys on window, but with cached promise)
+      // Calling renderWidget again (without salamrubySurveys on window, but with cached promise)
       // should reuse the cached promise rather than creating a new script element.
-      delete window.formbricksSurveys;
+      delete window.salamrubySurveys;
 
       const appendChildSpy = vi.spyOn(document.head, "appendChild");
 
-      window.formbricksSurveys = createMockFormbricksSurveys();
+      window.salamrubySurveys = createMockSalamRubySurveys();
 
       vi.useFakeTimers();
 
@@ -655,7 +652,7 @@ describe("widget-file", () => {
       });
       expect(scriptAppendCalls.length).toBe(0);
 
-      expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalled();
+      expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalled();
 
       vi.useRealTimers();
     });
@@ -715,7 +712,7 @@ describe("widget-file", () => {
     getInstanceConfigMock.mockReturnValue(mockConfigValue as unknown as Config);
     widget.setIsSurveyRunning(false);
 
-    window.formbricksSurveys = createMockFormbricksSurveys();
+    window.salamrubySurveys = createMockSalamRubySurveys();
 
     vi.useFakeTimers();
 
@@ -730,7 +727,7 @@ describe("widget-file", () => {
     );
 
     vi.advanceTimersByTime(0);
-    expect(getFormbricksSurveys().renderSurvey).toHaveBeenCalled();
+    expect(getSalamRubySurveys().renderSurvey).toHaveBeenCalled();
 
     vi.useRealTimers();
   });

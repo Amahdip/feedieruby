@@ -1,9 +1,9 @@
 import { Column, Container, Heading, Hr, Link, Row, Section, Text } from "@react-email/components";
 import { FileDigitIcon, FileType2Icon } from "lucide-react";
-import type { TOrganization } from "@formbricks/types/organizations";
-import type { TResponse } from "@formbricks/types/responses";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import type { TSurvey } from "@formbricks/types/surveys/types";
+import type { TOrganization } from "@salamruby/types/organizations";
+import type { TResponse } from "@salamruby/types/responses";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import type { TSurvey } from "@salamruby/types/surveys/types";
 import { EmailButton } from "../../src/components/email-button";
 import { EmailTemplate } from "../../src/components/email-template";
 import { renderEmailResponseValue } from "../../src/lib/email-utils";

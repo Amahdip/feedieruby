@@ -10,7 +10,7 @@ FROM node:24-alpine3.23 AS base
 # WORKDIR /app
 # RUN yarn global add turbo
 # COPY . .
-# RUN turbo prune @formbricks/web --docker
+# RUN turbo prune @salamruby/web --docker
 
 #
 ## step 2: Install & build
@@ -59,7 +59,7 @@ RUN touch apps/web/.env
 RUN pnpm install --ignore-scripts --frozen-lockfile
 
 # Build the database package first
-RUN pnpm build --filter=@formbricks/database
+RUN pnpm build --filter=@salamruby/database
 
 # Build the project using our secret reader script
 # This mounts the secrets only during this build step without storing them in layers
@@ -72,7 +72,7 @@ RUN --mount=type=secret,id=database_url \
     --mount=type=secret,id=cubejs_api_secret \
     --mount=type=secret,id=sentry_auth_token \
     --mount=type=secret,id=posthog_key \
-    /tmp/read-secrets.sh pnpm build --filter=@formbricks/web...
+    /tmp/read-secrets.sh pnpm build --filter=@salamruby/web...
 
 #
 ## step 3: setup production runner

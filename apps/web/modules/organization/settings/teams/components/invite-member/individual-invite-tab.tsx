@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
-import { OrganizationRole } from "@formbricks/database/prisma-browser";
-import { ZId } from "@formbricks/types/common";
-import { TOrganizationRole, ZOrganizationRole } from "@formbricks/types/memberships";
-import { ZUserName } from "@formbricks/types/user";
+import { OrganizationRole } from "@salamruby/database/prisma-browser";
+import { ZId } from "@salamruby/types/common";
+import { TOrganizationRole, ZOrganizationRole } from "@salamruby/types/memberships";
+import { ZUserName } from "@salamruby/types/user";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
+import { HIDE_ENTERPRISE_UPSELL } from "@/lib/brand-color";
 import { AddMemberRole } from "@/modules/ee/role-management/components/add-member-role";
 import { TOrganizationTeam } from "@/modules/ee/teams/team-list/types/team";
 import { Alert, AlertDescription } from "@/modules/ui/components/alert";
@@ -26,7 +27,7 @@ interface IndividualInviteTabProps {
   onSubmit: (data: { name: string; email: string; role: TOrganizationRole; teamIds: string[] }[]) => void;
   teams: TOrganizationTeam[];
   isAccessControlAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   membershipRole?: TOrganizationRole;
   showTeamAdminRestrictions: boolean;
   enterpriseLicenseRequestFormUrl: string;
@@ -37,7 +38,7 @@ export const IndividualInviteTab = ({
   onSubmit,
   teams,
   isAccessControlAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   membershipRole,
   showTeamAdminRestrictions,
   enterpriseLicenseRequestFormUrl,
@@ -137,7 +138,7 @@ export const IndividualInviteTab = ({
               <AddMemberRole
                 control={control}
                 isAccessControlAllowed={isAccessControlAllowed}
-                isFormbricksCloud={isFormbricksCloud}
+                isSalamRubyCloud={isSalamRubyCloud}
                 membershipRole={membershipRole}
               />
               {watch("role") === "member" && (
@@ -184,15 +185,15 @@ export const IndividualInviteTab = ({
           </>
         )}
 
-        {!isAccessControlAllowed && (
+        {!isAccessControlAllowed && !HIDE_ENTERPRISE_UPSELL && (
           <Alert>
             <AlertDescription className="flex">
               {t("workspace.settings.teams.upgrade_plan_notice_message")}
               <Link
-                className="ml-1 underline"
+                className="ms-1 underline"
                 target="_blank"
                 href={
-                  isFormbricksCloud
+                  isSalamRubyCloud
                     ? `${workspaceBasePath}/settings/organization/billing`
                     : enterpriseLicenseRequestFormUrl
                 }>

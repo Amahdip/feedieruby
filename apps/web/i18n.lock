@@ -50,7 +50,7 @@ checksums:
     auth/login/login_to_your_account: 88f0beb509622ce2f3a22128a9ec9ba5
     auth/login/login_with_email: 8596217b9cec74845ebfe02d6d82e67a
     auth/login/lost_access: 917c4665b99c37377ed522ba53249006
-    auth/login/new_to_formbricks: 1a1d45aca05bb21eb8f795d7d62dc4e3
+    auth/login/new_to_salamruby: 1a1d45aca05bb21eb8f795d7d62dc4e3
     auth/login/oauth_account_not_linked_description: 74627dc30666699b21de093d16d83312
     auth/login/oauth_account_not_linked_title: 2eb8e132ed37b3b87c1dec392c224933
     auth/login/use_a_backup_code: 181e4ab6ba9e5b063b46925f1925eb2b
@@ -153,7 +153,7 @@ checksums:
     common/completed: 0e4bbce9985f25eb673d9a054c8d5334
     common/confirm: 90930b51154032f119fa75c1bd422d8b
     common/connect: 8778ee245078a8be4a2ce855c8c56edc
-    common/connect_formbricks: a9dd747575e7e035da69251366df6f95
+    common/connect_salamruby: a9dd747575e7e035da69251366df6f95
     common/connect_your_app: 347e3bd3bdfc4a4e9d037ba837f3a48c
     common/connected: aa0ceca574641de34c74b9e590664230
     common/contact: 9afa39bc47019ee6dec6c74b6273967c
@@ -229,7 +229,7 @@ checksums:
     common/filter: 626325a05e4c8800f7ede7012b0cadaf
     common/finish: ffa7a10f71182b48fefed7135bee24fa
     common/first_name: cf040a5d6a9fd696be400380cc99f54b
-    common/formbricks_version: d9967c797f3e49ca0cae78bc0ebd19cb
+    common/salamruby_version: d9967c797f3e49ca0cae78bc0ebd19cb
     common/full_name: f45991923345e8322c9ff8cd6b7e2b16
     common/gathering_responses: c5914490ed81bd77f13d411739f0c9ef
     common/general: b891e8f15579fc5d97bcaf3637f5ae59
@@ -343,7 +343,7 @@ checksums:
     common/placeholder: 88c2c168aff12ca70148fcb5f6b4c7b1
     common/please_select_at_least_one_survey: fb1cbeb670480115305e23444c347e50
     common/please_select_at_least_one_trigger: e88e64a1010a039745e80ed2e30951fe
-    common/powered_by_formbricks: 1c3e19894583292bfaf686cac84a4960
+    common/powered_by_salamruby: 1c3e19894583292bfaf686cac84a4960
     common/preview: 3173ee1f0f1d4e50665ca4a84c38e15d
     common/privacy: 7459744a63ef8af4e517a09024bd7c08
     common/product_manager: dfeadc96e6d3de22a884ee97974b505e
@@ -596,7 +596,7 @@ checksums:
     setup/intro/paragraph_1: 41e6a1e7c9a4a1922c7064a89f6733fd
     setup/intro/paragraph_2: 5b3cce4d8c75bab4d671e2af7fc7ee9f
     setup/intro/paragraph_3: 5568badc9cbb2e5571a38340c63e7c8e
-    setup/intro/welcome_to_formbricks: 561427153e3effa108f54407dfc2126f
+    setup/intro/welcome_to_salamruby: 561427153e3effa108f54407dfc2126f
     setup/invite/add_another_member: 02947deaa4710893794f3cc6e160c2b4
     setup/invite/continue: 3cfba90b4600131e82fc4260c568d044
     setup/invite/failed_to_invite: dc5ce0dcdf0df978f1102b729dc15584
@@ -1728,9 +1728,9 @@ checksums:
     workspace/app-connection/environment_id_legacy: d5c701874d34b4591e780755f7ac7a58
     workspace/app-connection/environment_id_legacy_alert: 09ac96821ff99fad4590c661503fa0cd
     workspace/app-connection/environment_id_legacy_alert_link: 25c529078a115d1ff044a321dd8ee01b
-    workspace/app-connection/formbricks_sdk_connected: 29e8a40ad6a7fdb5af5ee9451a70a9aa
-    workspace/app-connection/formbricks_sdk_not_connected: 557c534e665750978ba6edb0eacb428e
-    workspace/app-connection/formbricks_sdk_not_connected_description: 4ddbacae084238bd0cefeded0fe9dbb9
+    workspace/app-connection/salamruby_sdk_connected: 29e8a40ad6a7fdb5af5ee9451a70a9aa
+    workspace/app-connection/salamruby_sdk_not_connected: 557c534e665750978ba6edb0eacb428e
+    workspace/app-connection/salamruby_sdk_not_connected_description: 4ddbacae084238bd0cefeded0fe9dbb9
     workspace/app-connection/how_to_setup: 3bad40037f280b47fe6418fcbeb4c717
     workspace/app-connection/how_to_setup_description: 2ae5cd9456a8acd3986e3d3678e70ed2
     workspace/app-connection/receiving_data: 9f2a48c0b0278861add70b526061264c
@@ -1836,7 +1836,7 @@ checksums:
     workspace/contacts/upload_contacts_modal_preview: 2ea999d47068d8d626cde456ae0ac44a
     workspace/contacts/upload_contacts_modal_upload_btn: 47b7f3bcf478a7d8dc258d2efc80af37
     workspace/contacts/upload_contacts_success: cd5d6b6d587586dd4f944868c92835bc
-    workspace/formbricks_logo: b7ee57de32c8b13463cc8ca8643eddd4
+    workspace/salamruby_logo: b7ee57de32c8b13463cc8ca8643eddd4
     workspace/general/cannot_delete_only_workspace: 853f32a75d92b06eaccc0d43d767c183
     workspace/general/custom_scripts: a6a06a2e20764d76d3e22e5e17d98dbb
     workspace/general/custom_scripts_card_description: 1585c47126e4b68f9f79f232631c67a1
@@ -1924,7 +1924,7 @@ checksums:
     workspace/integrations/notion/link_database: 877df9eb2e6b1e071f419a2d495c6b8e
     workspace/integrations/notion/link_new_database: dd0a6d419bebce80a4f820826d2de37e
     workspace/integrations/notion/link_notion_database: b952ea593758ae76a00a2022e00c93eb
-    workspace/integrations/notion/map_formbricks_fields_to_notion_property: ba600b4f12337312a019b4011a4025f6
+    workspace/integrations/notion/map_salamruby_fields_to_notion_property: ba600b4f12337312a019b4011a4025f6
     workspace/integrations/notion/no_databases_found: 6414b0818ff29c3ee71790ceb66e7bec
     workspace/integrations/notion/notion_integration: 16802cfcb079492f4b608617e6bb7cd2
     workspace/integrations/notion/notion_integration_description: a06f071006dc4a228956bb6dce3f5e3f
@@ -2098,10 +2098,10 @@ checksums:
     workspace/look/enable_custom_styling_description: c640ce557046d87b2944118dbc7aaffe
     workspace/look/failed_to_remove_logo: c3b5aa87d945f7ea83e029d1ee90d310
     workspace/look/failed_to_update_logo: f8c9f8fe947f559dc698a3439d73f0c5
-    workspace/look/formbricks_branding: 98dad6e31b03d235725c4d95065e36ff
-    workspace/look/formbricks_branding_hidden: fda9ba81f8d7fdaacf8dc1642034e145
-    workspace/look/formbricks_branding_settings_description: 5bb39206c6412c703895593f465a01f9
-    workspace/look/formbricks_branding_shown: 6c9861cf8f95e8a68c5c64b2630d96cd
+    workspace/look/salamruby_branding: 98dad6e31b03d235725c4d95065e36ff
+    workspace/look/salamruby_branding_hidden: fda9ba81f8d7fdaacf8dc1642034e145
+    workspace/look/salamruby_branding_settings_description: 5bb39206c6412c703895593f465a01f9
+    workspace/look/salamruby_branding_shown: 6c9861cf8f95e8a68c5c64b2630d96cd
     workspace/look/generate_theme_btn: 0345bf322c191e70d01fd6607ec5c2f8
     workspace/look/generate_theme_confirmation: f119dbb85fb2bda1c0bcdc581724ef3b
     workspace/look/generate_theme_header: 4df5f30a20cf78e248465915f222fd1b
@@ -2116,8 +2116,8 @@ checksums:
     workspace/look/replace_logo: b69a290f789ae2dfeb067c463482c824
     workspace/look/reset_styling: f25db45ece8637d660bd9d455c9b0265
     workspace/look/reset_styling_confirmation: 9ebc0403ebb8a51ed93ec2711db85796
-    workspace/look/show_formbricks_branding_in: 80fabfec9b34a13c0445d02b923216ed
-    workspace/look/show_powered_by_formbricks: a0e96edadec8ef326423feccc9d06be7
+    workspace/look/show_salamruby_branding_in: 80fabfec9b34a13c0445d02b923216ed
+    workspace/look/show_powered_by_salamruby: a0e96edadec8ef326423feccc9d06be7
     workspace/look/styling_updated_successfully: b8b74b50dde95abcd498633e9d0c891f
     workspace/look/suggest_colors: ddc4543b416ab774007b10a3434343cd
     workspace/look/suggested_colors_applied_please_save: a440b8e29a327822a94d9bbf8c52e2ed
@@ -2331,7 +2331,7 @@ checksums:
     workspace/settings/enterprise/enterprise_features: 3271476140733924b2a2477c4fdf3d12
     workspace/settings/enterprise/feedback_directories: cf9a57b3cbac0f04b98e06fb693e986e
     workspace/settings/enterprise/get_an_enterprise_license_to_get_access_to_all_features: afd3c00f19097e88ed051800979eea44
-    workspace/settings/enterprise/hide_powered_by_formbricks: 2c7d9016686c38f4b6801953e1884352
+    workspace/settings/enterprise/hide_powered_by_salamruby: 2c7d9016686c38f4b6801953e1884352
     workspace/settings/enterprise/insights_dashboards: 04e267e196068634607d701fb7346d30
     workspace/settings/enterprise/keep_full_control_over_your_data_privacy_and_security: 43aa041cc3e2b2fdd35d2d34659a6b7a
     workspace/settings/enterprise/license_features_table_access: 550606d4a12bdf108c1b12b925ca1b3a
@@ -2371,7 +2371,7 @@ checksums:
     workspace/settings/enterprise/teams_and_access_roles: ecde7a5204109c220a358d46210c869d
     workspace/settings/enterprise/two_factor_authentication: bc68ddd9c3c82225ef641f097e0940db
     workspace/settings/enterprise/unify_feedback_inbox: e56481905ea1cf0e47dc30cf0fac6d22
-    workspace/settings/enterprise/unlock_the_full_power_of_formbricks_free_for_30_days: 104d07b63a42911c9673ceb08a4dbd43
+    workspace/settings/enterprise/unlock_the_full_power_of_salamruby_free_for_30_days: 104d07b63a42911c9673ceb08a4dbd43
     workspace/settings/enterprise/white_glove_onboarding: 79d5f04ad3decd659e63f5cf61628ea0
     workspace/settings/enterprise/whitelabel_email_follow_ups: 4d62c861b60c5dceb6ad72cd5d1186d7
     workspace/settings/feedback_directories/archive: fa813ab3074103e5daad07462af25789
@@ -2749,7 +2749,7 @@ checksums:
     workspace/surveys/edit/conditional_logic: 8da827c6111ff1638af11d37f5a72bf7
     workspace/surveys/edit/confirm_default_language: 67ee675555346c972ae1b5a630351645
     workspace/surveys/edit/confirm_survey_changes: 98228b8f52285a04df33ee59b9b04648
-    workspace/surveys/edit/connect_formbricks_and_launch_surveys: 5c77647d9e40d68117386b8ca4826cd7
+    workspace/surveys/edit/connect_salamruby_and_launch_surveys: 5c77647d9e40d68117386b8ca4826cd7
     workspace/surveys/edit/contact_fields: 0d4e3f4d2eb3481aabe3ac60a692fa74
     workspace/surveys/edit/contains: 41c8c25407527a5336404313f4c8d650
     workspace/surveys/edit/continue_to_settings: b9853a7eedb3ae295088268fe5a44824
@@ -2853,7 +2853,7 @@ checksums:
     workspace/surveys/edit/follow_ups_modal_trigger_type_response: 8b0e49e76ba09241f512201871bef0f2
     workspace/surveys/edit/follow_ups_modal_updated_successfull_toast: 61204fada3231f4f1fe3866e87e1130a
     workspace/surveys/edit/follow_ups_new: 224c779d252b3e75086e4ed456ba2548
-    workspace/surveys/edit/formbricks_sdk_is_not_connected: 35165b0cac182a98408007a378cc677e
+    workspace/surveys/edit/salamruby_sdk_is_not_connected: 35165b0cac182a98408007a378cc677e
     workspace/surveys/edit/four_points: b289628a6b8a6cd0f7d17a14ca6cd7bf
     workspace/surveys/edit/heading: 79e9dfa461f38a239d34b9833ca103f1
     workspace/surveys/edit/hidden_field_added_successfully: 76c289ee9b9b0a271a5cbb278aec8c60
@@ -3322,7 +3322,7 @@ checksums:
     workspace/surveys/share/send_email/embed_code_copied_to_clipboard: 94dfaa227e6e533bef7d6305961568f0
     workspace/surveys/share/send_email/embed_code_copied_to_clipboard_failed: 106f735e3237b1ae1c9186bb76a74faf
     workspace/surveys/share/send_email/embed_code_tab: 08f559317cc34a2cbfe4594fe9e475f4
-    workspace/surveys/share/send_email/formbricks_email_survey_preview: 3240ad34aac02860909e10187745070e
+    workspace/surveys/share/send_email/salamruby_email_survey_preview: 3240ad34aac02860909e10187745070e
     workspace/surveys/share/send_email/nav_title: d42c7c6710f749cb2075f51794083b8c
     workspace/surveys/share/send_email/send_preview: 0ce6fba95d2a2abc4b1007ccab625a4b
     workspace/surveys/share/send_email/send_preview_email: 400341cb44b6e23fa77f70f0db718d8f
@@ -3344,7 +3344,7 @@ checksums:
     workspace/surveys/summary/completed_tooltip: fdb268d9ed33284f73ab098b6175f1aa
     workspace/surveys/summary/configure_alerts: 05cc642cd9398034d7e68589d22d97cf
     workspace/surveys/summary/congrats: 378f06fe96289e527153f8201088ff74
-    workspace/surveys/summary/connect_your_website_or_app_with_formbricks_to_get_started: d24183c86d08b16d58daa8ad887b2837
+    workspace/surveys/summary/connect_your_website_or_app_with_salamruby_to_get_started: d24183c86d08b16d58daa8ad887b2837
     workspace/surveys/summary/csat_satisfied: 4d6121afdc705a70465a230d6d1f6217
     workspace/surveys/summary/csat_satisfied_tooltip: 3a69a76559a40fbbdff14525d83b459c
     workspace/surveys/summary/current_count: 6a3e59de8559e88e991e0aeafa9cfeec
@@ -3525,7 +3525,7 @@ checksums:
     workspace/unify/custom_source_type: d931a8a74d3a5becd568e398107979da
     workspace/unify/custom_source_type_placeholder: f139e3e5d70dbf426d7c6b5ab2b198cc
     workspace/unify/default_source_name_csv: ef4060fef24c4fec064987b9d2a9fa4b
-    workspace/unify/default_source_name_formbricks: 9088b01e1085b1cf42412597ebeea051
+    workspace/unify/default_source_name_salamruby: 9088b01e1085b1cf42412597ebeea051
     workspace/unify/delete_feedback_record: 86d7262c000cfb1f91ea373036cd3616
     workspace/unify/delete_feedback_record_confirmation: dd2b12e75cb52a73f92c997c347a8f36
     workspace/unify/delete_feedback_records_confirmation: cd8a4ba828963fb6dab5c96606565079
@@ -3538,7 +3538,7 @@ checksums:
     workspace/unify/enter_name_for_source: de6d02a0a8ccc99204ad831ca6dcdbd3
     workspace/unify/enum: 96fc644f35edd6b1c09d1d503f078acc
     workspace/unify/error_source_field_mapping_duplicate: 4e507ae4a99f53dfa75d849d32566bf2
-    workspace/unify/error_source_formbricks_mapping_duplicate: 48524e22fa33bd0b2829f7aea49c711b
+    workspace/unify/error_source_salamruby_mapping_duplicate: 48524e22fa33bd0b2829f7aea49c711b
     workspace/unify/error_source_name_duplicate: 56a1a05212e87dff21261d1db90fdb11
     workspace/unify/error_source_name_required: b2d5f79f6126e23128d7bef0c1736ff2
     workspace/unify/error_source_questions_required: d7d8e388959ab83a9195ba63bebf6516
@@ -3566,7 +3566,7 @@ checksums:
     workspace/unify/field_id: 7791b5d581b7a525dcadf11ec73c6ab7
     workspace/unify/field_label: 6384505ca0e40010c666b712511132a6
     workspace/unify/field_type: 2581066dc304c853a4a817c20996fa08
-    workspace/unify/formbricks_surveys: eba2fce04ee68f02626e5509adf7d66a
+    workspace/unify/salamruby_surveys: eba2fce04ee68f02626e5509adf7d66a
     workspace/unify/go_to_feedback_directories: 16b66b62f85e7be311778f39315d118a
     workspace/unify/historical_import_complete: f46f98bf4db63bf2993bfb234dc95f62
     workspace/unify/import_csv_data: f05e1d1ed88d528256efe5702df46646
@@ -3591,7 +3591,7 @@ checksums:
     workspace/unify/no_feedback_directory_linked_member_description: e799b17da03899cabd125c3cf672c10d
     workspace/unify/no_feedback_directory_linked_title: b01a53d508aeeb1c8ad080ee07efcd04
     workspace/unify/no_feedback_records: 4b72636a55afb4dcf977161ad5a15467
-    workspace/unify/no_formbricks_surveys_available_description: 2218334806910168bdfb6f283f31b963
+    workspace/unify/no_salamruby_surveys_available_description: 2218334806910168bdfb6f283f31b963
     workspace/unify/no_sources_connected: 0e8a5612530bfc82091091f40f95012f
     workspace/unify/or_drag_and_drop: 6c7d6b05d39dcbfc710d35fcab25cb8c
     workspace/unify/question_type_not_supported: 8d9f7554e3b509dfd5307d8d1fef08d7
@@ -3634,7 +3634,7 @@ checksums:
     workspace/unify/source: 45309626f464f4bda161ee783a4c8c80
     workspace/unify/source_connect_csv_description: 8db7e23acbfa89920694d61ac9585b44
     workspace/unify/source_connect_feedback_record_mcp_description: a3f56e2a6e403f4021e83f1b1a466d95
-    workspace/unify/source_connect_formbricks_description: 2d7aa0bb9b9f9251184c0e60ee409a8a
+    workspace/unify/source_connect_salamruby_description: 2d7aa0bb9b9f9251184c0e60ee409a8a
     workspace/unify/source_created_successfully: b04ab49a6ca938dd7c46bfb124cf4925
     workspace/unify/source_deleted_successfully: 4ef727e15effca6390190c08219a9176
     workspace/unify/source_duplicated_successfully: 6b9e3ae0f97ae78a5db25582f153c898

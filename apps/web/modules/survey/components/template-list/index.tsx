@@ -4,11 +4,11 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { Workspace } from "@formbricks/database/prisma-browser";
-import type { TSurveyType } from "@formbricks/types/surveys/types";
-import { type TTemplate, type TTemplateFilter, ZTemplateRole } from "@formbricks/types/templates";
-import type { TUserLocale } from "@formbricks/types/user";
-import { ZWorkspaceConfigChannel, ZWorkspaceConfigIndustry } from "@formbricks/types/workspace";
+import type { Workspace } from "@salamruby/database/prisma-browser";
+import type { TSurveyType } from "@salamruby/types/surveys/types";
+import { type TTemplate, type TTemplateFilter, ZTemplateRole } from "@salamruby/types/templates";
+import type { TUserLocale } from "@salamruby/types/user";
+import { ZWorkspaceConfigChannel, ZWorkspaceConfigIndustry } from "@salamruby/types/workspace";
 import { CUSTOM_SURVEY_TEMPLATE_ID, templates } from "@/app/lib/templates";
 import { getV3ApiErrorMessage } from "@/modules/api/lib/v3-client";
 import type { TAIUnavailableReason } from "@/modules/ee/analysis/charts/lib/ai-availability";
@@ -129,7 +129,7 @@ export const TemplateList = ({
           loading={createSurveyMutation.isPending}
           noPreview={noPreview}
         />
-        {showAICreateCard && (
+        {showAICreateCard && isAIAvailable && (
           <CreateWithAITemplate
             workspaceId={workspaceId}
             language={language}

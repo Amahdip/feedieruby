@@ -1,5 +1,5 @@
 {
-  "name": "@formbricks/database",
+  "name": "@salamruby/database",
   "packageManager": "pnpm@10.32.1",
   "private": true,
   "version": "0.1.0",
@@ -63,8 +63,8 @@
     "create-migration": "dotenv -e ../../.env -- tsx ./src/scripts/create-migration.ts"
   },
   "dependencies": {
-    "@formbricks/logger": "workspace:*",
-    "@formbricks/types": "workspace:*",
+    "@salamruby/logger": "workspace:*",
+    "@salamruby/types": "workspace:*",
     "@paralleldrive/cuid2": "2.3.1",
     "@prisma/adapter-pg": "7.8.0",
     "@prisma/client": "7.8.0",
@@ -75,8 +75,8 @@
     "zod-openapi": "5.4.6"
   },
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*",
-    "@formbricks/eslint-config": "workspace:*",
+    "@salamruby/config-typescript": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
     "@types/pg": "8.16.0",
     "dotenv-cli": "11.0.0",
     "glob": "13.0.6",

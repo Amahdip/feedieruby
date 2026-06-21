@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TUser } from "@formbricks/types/user";
+import { TUser } from "@salamruby/types/user";
 import { DeleteAccountModal } from "@/modules/account/components/DeleteAccountModal";
 import { Alert, AlertDescription, AlertTitle } from "@/modules/ui/components/alert";
 import { Button } from "@/modules/ui/components/button";
 
 interface RemovedFromOrganizationProps {
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isSsoIdentityConfirmationDisabled: boolean;
   requiresPasswordConfirmation: boolean;
   user: TUser;
@@ -16,7 +16,7 @@ interface RemovedFromOrganizationProps {
 
 export const RemovedFromOrganization = ({
   user,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isSsoIdentityConfirmationDisabled,
   requiresPasswordConfirmation,
 }: Readonly<RemovedFromOrganizationProps>) => {
@@ -35,7 +35,7 @@ export const RemovedFromOrganization = ({
         open={isModalOpen}
         setOpen={setIsModalOpen}
         user={user}
-        isFormbricksCloud={isFormbricksCloud}
+        isSalamRubyCloud={isSalamRubyCloud}
         organizationsWithSingleOwner={[]}
         isSsoIdentityConfirmationDisabled={isSsoIdentityConfirmationDisabled}
       />

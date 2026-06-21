@@ -1,10 +1,10 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZString } from "@formbricks/types/common";
-import { DatabaseError, UnknownError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZString } from "@salamruby/types/common";
+import { DatabaseError, UnknownError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { TOrganizationWorkspace } from "@/modules/ee/teams/team-list/types/workspace";
 

@@ -4,8 +4,8 @@ import { ChevronDownIcon, SparklesIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { cn } from "@/lib/cn";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { translateSurveyFieldsAction } from "@/modules/ee/ai-translation/lib/actions";
@@ -57,7 +57,7 @@ export const ManageTranslationsModal = ({
   defaultLanguageName,
   workspaceId,
   isAIAvailable,
-  aiUnavailableReason,
+  aiUnavailableReason: _aiUnavailableReason,
 }: ManageTranslationsModalProps) => {
   const { t } = useTranslation();
 
@@ -215,22 +215,27 @@ export const ManageTranslationsModal = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent width="wide" className="max-h-[85dvh]">
-        <DialogHeader>
-          <DialogTitle>{t("workspace.surveys.edit.manage_translations")}</DialogTitle>
-          <div className="mt-2 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-1.5 w-20 overflow-hidden rounded-full bg-slate-200">
-                <div
-                  className={cn("h-full rounded-full transition-all", progressColor)}
-                  style={{ width: `${progress.percentage}%` }}
-                />
-              </div>
-              <span className={cn("text-sm font-medium", progressTextColor)}>
-                {progress.translated}/{progress.total}
-              </span>
+      <DialogContent width="wide" className="max-h-[85dvh] gap-0 px-0 pb-0 pt-10">
+        <DialogHeader className="top-0 gap-0 border-b border-slate-200 px-4 pb-3 pt-4">
+          <DialogTitle className="pe-8 text-base font-semibold">
+            {t("workspace.surveys.edit.manage_translations")}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-4 py-3">
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-20 overflow-hidden rounded-full bg-slate-200">
+              <div
+                className={cn("h-full rounded-full transition-all", progressColor)}
+                style={{ width: `${progress.percentage}%` }}
+              />
             </div>
-            <div className="flex items-center gap-2">
+            <span className={cn("text-sm font-medium", progressTextColor)}>
+              {progress.translated}/{progress.total}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            {isAIAvailable && (
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -239,58 +244,47 @@ export const ManageTranslationsModal = ({
                         size="sm"
                         className="text-xs"
                         onClick={handleTranslateWithAI}
-                        disabled={!isAIAvailable || isTranslating || emptyFields.length === 0}
+                        disabled={isTranslating || emptyFields.length === 0}
                         loading={isTranslating}>
-                        <SparklesIcon className="mr-1 size-3.5" />
+                        <SparklesIcon className="me-1 size-3.5" />
                         {t("workspace.surveys.edit.ai_translate")}
                       </Button>
                     </div>
                   </TooltipTrigger>
-                  {!isAIAvailable && !isTranslating && (
-                    <TooltipContent>
-                      {{
-                        not_enabled: t("workspace.surveys.edit.ai_translation_not_enabled"),
-                        instance_not_configured: t(
-                          "workspace.surveys.edit.ai_translation_instance_not_configured"
-                        ),
-                      }[aiUnavailableReason ?? ""] ??
-                        t("workspace.surveys.edit.ai_translation_not_available")}
-                    </TooltipContent>
-                  )}
-                  {isAIAvailable && emptyFields.length === 0 && !isTranslating && (
+                  {emptyFields.length === 0 && !isTranslating && (
                     <TooltipContent>
                       {t("workspace.surveys.edit.ai_translation_all_fields_populated")}
                     </TooltipContent>
                   )}
                 </Tooltip>
               </TooltipProvider>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" size="sm" className="text-xs">
-                    {missingFirst
-                      ? t("workspace.surveys.edit.missing_first")
-                      : t("workspace.surveys.edit.show_in_order")}
-                    <ChevronDownIcon className="ml-1 size-3.5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="text-xs">
-                  <DropdownMenuItem
-                    className={cn(!missingFirst && "font-semibold", "text-xs")}
-                    onSelect={() => setMissingFirst(false)}>
-                    {t("workspace.surveys.edit.show_in_order")}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className={cn(missingFirst && "font-semibold", "text-xs")}
-                    onSelect={() => setMissingFirst(true)}>
-                    {t("workspace.surveys.edit.missing_first")}
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" size="sm" className="text-xs">
+                  {missingFirst
+                    ? t("workspace.surveys.edit.missing_first")
+                    : t("workspace.surveys.edit.show_in_order")}
+                  <ChevronDownIcon className="ms-1 size-3.5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="text-xs">
+                <DropdownMenuItem
+                  className={cn(!missingFirst && "font-semibold", "text-xs")}
+                  onSelect={() => setMissingFirst(false)}>
+                  {t("workspace.surveys.edit.show_in_order")}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className={cn(missingFirst && "font-semibold", "text-xs")}
+                  onSelect={() => setMissingFirst(true)}>
+                  {t("workspace.surveys.edit.missing_first")}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-        </DialogHeader>
+        </div>
 
-        <DialogBody>
+        <DialogBody className="px-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b text-left text-slate-500">
@@ -315,7 +309,7 @@ export const ManageTranslationsModal = ({
           </table>
         </DialogBody>
 
-        <DialogFooter>
+        <DialogFooter className="px-4 pb-4">
           <Button variant="secondary" size="sm" onClick={handleCancel}>
             {t("common.cancel")}
           </Button>

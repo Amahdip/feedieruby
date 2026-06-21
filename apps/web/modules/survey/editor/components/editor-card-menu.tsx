@@ -4,11 +4,11 @@ import { createId } from "@paralleldrive/cuid2";
 import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon, CopyIcon, EllipsisIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyBlockLogic } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey, TSurveyEndScreenCard, TSurveyRedirectUrlCard } from "@formbricks/types/surveys/types";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyBlockLogic } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey, TSurveyEndScreenCard, TSurveyRedirectUrlCard } from "@salamruby/types/surveys/types";
 import { getElementsFromBlocks } from "@/modules/survey/lib/client-utils";
 import {
   getCXElementNameMap,
@@ -236,7 +236,7 @@ export const EditorCardMenu = ({
                   {t("workspace.surveys.edit.change_question_type")}
                 </DropdownMenuSubTrigger>
 
-                <DropdownMenuSubContent className="ml-2">
+                <DropdownMenuSubContent className="ms-2">
                   {Object.entries(availableElementTypes).map(([type, name]) => {
                     if (type === card.type) return null;
                     return (
@@ -252,7 +252,7 @@ export const EditorCardMenu = ({
                           changeElementType(type as TSurveyElementTypeEnum);
                         }}
                         icon={ELEMENTS_ICON_MAP[type as TSurveyElementTypeEnum]}>
-                        <span className="ml-2">{name}</span>
+                        <span>{name}</span>
                       </DropdownMenuItem>
                     );
                   })}
@@ -276,20 +276,20 @@ export const EditorCardMenu = ({
                   {t("workspace.surveys.edit.add_question_below")}
                 </DropdownMenuSubTrigger>
 
-                <DropdownMenuSubContent className="ml-2">
+                <DropdownMenuSubContent className="ms-2">
                   {Object.entries(availableElementTypes).map(([type, name]) => {
                     return (
                       <DropdownMenuItem
                         key={type}
                         className="min-h-8"
+                        icon={ELEMENTS_ICON_MAP[type as TSurveyElementTypeEnum]}
                         onClick={(e) => {
                           e.stopPropagation();
                           if (cardType === "element") {
                             addElementCardBelow(type as TSurveyElementTypeEnum);
                           }
                         }}>
-                        {ELEMENTS_ICON_MAP[type as TSurveyElementTypeEnum]}
-                        <span className="ml-2">{name}</span>
+                        <span>{name}</span>
                       </DropdownMenuItem>
                     );
                   })}
@@ -302,7 +302,7 @@ export const EditorCardMenu = ({
                   {t("workspace.surveys.edit.move_question_to_block")}
                 </DropdownMenuSubTrigger>
 
-                <DropdownMenuSubContent className="ml-2">
+                <DropdownMenuSubContent className="ms-2">
                   {survey.blocks.map((block) => {
                     // Don't show current block in the list
                     if (block.id === blockId) return null;
@@ -316,8 +316,8 @@ export const EditorCardMenu = ({
                           e.stopPropagation();
                           moveElementToBlock(card.id, block.id);
                         }}
-                        icon={<ArrowRightIcon className="size-4" />}>
-                        <span className="ml-2">{blockName}</span>
+                        icon={<ArrowRightIcon className="size-4 rtl:rotate-180" />}>
+                        <span>{blockName}</span>
                       </DropdownMenuItem>
                     );
                   })}

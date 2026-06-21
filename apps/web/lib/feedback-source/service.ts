@@ -1,21 +1,21 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import type { PrismaClientKnownRequestError } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ZId, ZOptionalNumber } from "@formbricks/types/common";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import type { PrismaClientKnownRequestError } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ZId, ZOptionalNumber } from "@salamruby/types/common";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TFeedbackSource,
   TFeedbackSourceCreateInput,
   TFeedbackSourceFieldMappingCreateInput,
-  TFeedbackSourceFormbricksMappingCreateInput,
+  TFeedbackSourceSalamRubyMappingCreateInput,
   TFeedbackSourceUpdateInput,
   TFeedbackSourceWithMappings,
   ZFeedbackSourceCreateInput,
   ZFeedbackSourceUpdateInput,
-} from "@formbricks/types/feedback-source";
+} from "@salamruby/types/feedback-source";
 import { ITEMS_PER_PAGE } from "../constants";
 import { validateInputs } from "../utils/validate";
 
@@ -31,7 +31,7 @@ const selectFeedbackSourceWithMappings = {
   lastSyncAt: true,
   createdBy: true,
   creator: { select: { name: true } },
-  formbricksMappings: {
+  salamrubyMappings: {
     select: {
       id: true,
       createdAt: true,
@@ -137,9 +137,9 @@ export const getFeedbackSourcesBySurveyId = reactCache(
     try {
       const feedbackSources = await prisma.feedbackSource.findMany({
         where: {
-          type: "formbricks_survey",
+          type: "salamruby_survey",
           status: "active",
-          formbricksMappings: {
+          salamrubyMappings: {
             some: {
               surveyId,
             },
@@ -224,7 +224,7 @@ const mapUniqueConstraintError = (error: PrismaClientKnownRequestError): Invalid
   const target = error.meta?.target;
   const targetFields = Array.isArray(target) ? (target as string[]) : [];
   if (targetFields.includes("elementId") || targetFields.includes("surveyId")) {
-    return new InvalidInputError("FEEDBACK_SOURCE_FORMBRICKS_MAPPING_DUPLICATE");
+    return new InvalidInputError("FEEDBACK_SOURCE_SALAMRUBY_MAPPING_DUPLICATE");
   }
   if (targetFields.includes("sourceFieldId") || targetFields.includes("targetFieldId")) {
     return new InvalidInputError("FEEDBACK_SOURCE_FIELD_MAPPING_DUPLICATE");
@@ -232,9 +232,9 @@ const mapUniqueConstraintError = (error: PrismaClientKnownRequestError): Invalid
   return new InvalidInputError("FEEDBACK_SOURCE_NAME_DUPLICATE");
 };
 
-export type TFormbricksMappingsInput = {
-  type: "formbricks_survey";
-  mappings: TFeedbackSourceFormbricksMappingCreateInput[];
+export type TSalamRubyMappingsInput = {
+  type: "salamruby_survey";
+  mappings: TFeedbackSourceSalamRubyMappingCreateInput[];
 };
 
 export type TFieldMappingsInput = {
@@ -242,7 +242,7 @@ export type TFieldMappingsInput = {
   mappings: TFeedbackSourceFieldMappingCreateInput[];
 };
 
-export type TMappingsInput = TFormbricksMappingsInput | TFieldMappingsInput;
+export type TMappingsInput = TSalamRubyMappingsInput | TFieldMappingsInput;
 
 export const createFeedbackSourceWithMappings = async (
   workspaceId: string,
@@ -263,10 +263,10 @@ export const createFeedbackSourceWithMappings = async (
         },
       });
 
-      if (mappingsInput?.type === "formbricks_survey") {
+      if (mappingsInput?.type === "salamruby_survey") {
         await Promise.all(
           mappingsInput.mappings.map((mapping) =>
-            tx.feedbackSourceFormbricksMapping.create({
+            tx.feedbackSourceSalamRubyMapping.create({
               data: {
                 feedbackSourceId: feedbackSource.id,
                 workspaceId,
@@ -331,14 +331,14 @@ export const updateFeedbackSourceWithMappings = async (
         },
       });
 
-      if (mappingsInput?.type === "formbricks_survey") {
-        await tx.feedbackSourceFormbricksMapping.deleteMany({
+      if (mappingsInput?.type === "salamruby_survey") {
+        await tx.feedbackSourceSalamRubyMapping.deleteMany({
           where: { feedbackSourceId, workspaceId },
         });
 
         await Promise.all(
           mappingsInput.mappings.map((mapping) =>
-            tx.feedbackSourceFormbricksMapping.create({
+            tx.feedbackSourceSalamRubyMapping.create({
               data: {
                 feedbackSourceId,
                 workspaceId,

@@ -1,5 +1,5 @@
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getWorkspaces } from "@/lib/workspace/service";
 import { getTranslate } from "@/lingodotdev/server";
 import { IdBadge } from "@/modules/ui/components/id-badge";
@@ -36,7 +36,7 @@ export const GeneralSettingsPage = async (props: { params: Promise<{ workspaceId
         description={t("workspace.general.recontact_waiting_time_settings_description")}>
         <EditWaitingTimeForm workspace={workspace} isReadOnly={isReadOnly} />
       </SettingsCard>
-      {!IS_FORMBRICKS_CLOUD && (
+      {!IS_SALAMRUBY_CLOUD && (
         <SettingsCard
           title={t("workspace.general.custom_scripts")}
           description={t("workspace.general.custom_scripts_card_description")}>

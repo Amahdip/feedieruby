@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
-import { TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { TResponseData, TResponseVariables } from "@formbricks/types/responses";
-import { TSurveyBlockLogic, TSurveyBlockLogicAction } from "@formbricks/types/surveys/blocks";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TConditionGroup, TSingleCondition } from "@formbricks/types/surveys/logic";
-import { TSurveyLogicAction } from "@formbricks/types/surveys/types";
+import { TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { TResponseData, TResponseVariables } from "@salamruby/types/responses";
+import { TSurveyBlockLogic, TSurveyBlockLogicAction } from "@salamruby/types/surveys/blocks";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TConditionGroup, TSingleCondition } from "@salamruby/types/surveys/logic";
+import { TSurveyLogicAction } from "@salamruby/types/surveys/types";
 import {
   addConditionBelow,
   createGroupFromResource,
@@ -75,7 +75,7 @@ describe("surveyLogic", () => {
         subheader: {
           default: "We appreciate your feedback.‌‌‍‍‌‍‍‍‌‌‌‍‍‌‍‌‌‌‌‌‌‌‍‌‍‌‌",
         },
-        buttonLink: "https://formbricks.com",
+        buttonLink: "https://salamruby.com",
         buttonLabel: {
           default: "Create your own Survey‌‌‍‍‌‍‍‍‌‌‌‍‍‌‍‌‍‌‌‌‌‌‍‌‍‌‌",
         },

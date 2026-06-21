@@ -17,7 +17,7 @@ import {
   ACTION_CLASS_PAGE_URL_RULES,
   TActionClassInput,
   TActionClassPageUrlRule,
-} from "@formbricks/types/action-classes";
+} from "@salamruby/types/action-classes";
 import { cn } from "@/lib/cn";
 import { testURLmatch } from "@/lib/utils/url";
 import { Button } from "@/modules/ui/components/button";
@@ -156,7 +156,7 @@ export const PageUrlSelector = ({ form, isReadOnly }: PageUrlSelectorProps) => {
             }}
           />
           <Button variant="secondary" size="sm" type="button" onClick={handleAddMore} disabled={isReadOnly}>
-            <PlusIcon className="mr-2 size-4" />
+            <PlusIcon className="me-2 size-4" />
             {t("workspace.actions.add_url")}
           </Button>
           <div className="mt-4">
@@ -180,7 +180,7 @@ export const PageUrlSelector = ({ form, isReadOnly }: PageUrlSelectorProps) => {
                 <Button
                   type="button"
                   variant="secondary"
-                  className="ml-2 whitespace-nowrap"
+                  className="ms-2 whitespace-nowrap"
                   onClick={() => {
                     handleMatchClick();
                   }}>
@@ -220,7 +220,7 @@ const UrlInput = ({
   return (
     <div className="flex w-full flex-col gap-2">
       {fields.map((field, index) => (
-        <div key={field.id} className="ml-1 flex items-start gap-x-2">
+        <div key={field.id} className="ms-1 flex items-start gap-x-2">
           {index !== 0 && (
             <Select value={connector} onValueChange={onConnectorChange} disabled={disabled}>
               <SelectTrigger className="h-[40px] w-[80px] bg-white">

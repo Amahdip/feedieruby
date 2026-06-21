@@ -1,5 +1,5 @@
-import { logger } from "@formbricks/logger";
-import { ZUploadPrivateFileRequest } from "@formbricks/types/storage";
+import { logger } from "@salamruby/logger";
+import { ZUploadPrivateFileRequest } from "@salamruby/types/storage";
 import { parseAndValidateJsonBody } from "@/app/lib/api/parse-and-validate-json-body";
 import { responses } from "@/app/lib/api/response";
 import { THandlerParams, withV1ApiWrapper } from "@/app/lib/api/with-api-logging";

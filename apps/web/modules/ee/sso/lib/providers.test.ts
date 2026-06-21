@@ -58,7 +58,7 @@ describe("SSO Providers", () => {
     expect(oidcProvider.checks).toContain("state");
   });
 
-  test("should map the OIDC profile into the Formbricks user shape", () => {
+  test("should map the OIDC profile into the SalamRuby user shape", () => {
     const oidcProvider = getProviderById("openid") as TOidcProvider;
     const oidcProfile: Parameters<NonNullable<TOidcProvider["profile"]>>[0] = {
       sub: "oidc-user-1",

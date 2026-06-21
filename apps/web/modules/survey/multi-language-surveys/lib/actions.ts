@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { ZLanguageInput } from "@formbricks/types/workspace";
+import { ZId } from "@salamruby/types/common";
+import { ZLanguageInput } from "@salamruby/types/workspace";
 import {
   createLanguage,
   deleteLanguage,

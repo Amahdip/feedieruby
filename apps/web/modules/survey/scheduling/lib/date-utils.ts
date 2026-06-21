@@ -1,7 +1,9 @@
+import type { TFunction } from "i18next";
 import {
   SURVEY_SCHEDULING_LOCAL_HOUR,
   SURVEY_SCHEDULING_LOCAL_MINUTE,
   SURVEY_SCHEDULING_TIME_ZONE,
+  SURVEY_SCHEDULING_TIME_ZONE_I18N_KEYS,
 } from "./constants";
 
 const DATE_ONLY_SELECTION_UTC_HOUR = 12;
@@ -158,3 +160,9 @@ export const normalizeDateOnlySelectionToSurveySchedulingDateTime = (date: Date 
 
 export const isDateDue = (date: Date | null, now: Date = new Date()): boolean =>
   date !== null && date.getTime() <= now.getTime();
+
+export const getSurveySchedulingTimeZoneDisplayLabel = (t: TFunction): string => {
+  const i18nKey = SURVEY_SCHEDULING_TIME_ZONE_I18N_KEYS[SURVEY_SCHEDULING_TIME_ZONE];
+
+  return i18nKey ? t(i18nKey) : SURVEY_SCHEDULING_TIME_ZONE;
+};

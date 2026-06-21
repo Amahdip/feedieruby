@@ -1,27 +1,27 @@
 ---
 title: "Cluster Setup"
-description: "Run Formbricks in a high-availability cluster."
+description: "Run SalamRuby in a high-availability cluster."
 icon: "circle-nodes"
 ---
 
 ## Overview
 
-Running Formbricks as a cluster of multiple instances gives you:
+Running SalamRuby as a cluster of multiple instances gives you:
 
 - **High Availability**: surveys remain accessible even if one app pod becomes unavailable
-- **Load Distribution**: traffic can be spread across multiple stateless Formbricks app instances
+- **Load Distribution**: traffic can be spread across multiple stateless SalamRuby app instances
 - **Scalability**: you can scale app replicas horizontally as usage grows
 - **Zero-Downtime Updates**: rolling deployments are possible with the right orchestration setup
 
 ## Requirements
 
-For a Formbricks v5 cluster setup, plan for:
+For a SalamRuby v5 cluster setup, plan for:
 
-- shared PostgreSQL for Formbricks and Hub, with `pgvector` support if Hub shares the same database
+- shared PostgreSQL for SalamRuby and Hub, with `pgvector` support if Hub shares the same database
 - shared Redis/Valkey for caching, rate limiting, and audit-related flows
 - shared S3-compatible storage if you use file uploads or organization branding assets
 - a load balancer or ingress layer in front of the app
-- Formbricks Hub as part of the runtime
+- SalamRuby Hub as part of the runtime
 - Envoy Gateway or an equivalent external edge rate limiter for the v5-covered public and API-key routes
 
 ## Architecture
@@ -33,11 +33,11 @@ graph TD
         RL["Envoy Or Equivalent Edge Rate Limiter"]
     end
 
-    subgraph Formbricks Cluster
-        FB1["Formbricks App 1"]
-        FB2["Formbricks App 2"]
-        FB3["Formbricks App n"]
-        HUB["Formbricks Hub"]
+    subgraph SalamRuby Cluster
+        FB1["SalamRuby App 1"]
+        FB2["SalamRuby App 2"]
+        FB3["SalamRuby App n"]
+        HUB["SalamRuby Hub"]
     end
 
     subgraph Data Storage
@@ -71,20 +71,20 @@ graph TD
 
 ### Component Description
 
-1. **Formbricks App Replicas**
+1. **SalamRuby App Replicas**
 
    - stateless application instances that serve the UI, APIs, and survey flows
    - can be scaled horizontally behind a load balancer
 
-2. **Formbricks Hub**
+2. **SalamRuby Hub**
 
-   - required in Formbricks v5
+   - required in SalamRuby v5
    - stores and serves Hub-backed feedback record data
    - can share the same PostgreSQL database as the main app when configured that way
 
 3. **PostgreSQL**
 
-   - primary persistent store for the Formbricks app and, by default, Hub
+   - primary persistent store for the SalamRuby app and, by default, Hub
    - should be backed up and monitored like any other stateful production dependency
 
 4. **Redis / Valkey**
@@ -105,7 +105,7 @@ graph TD
 ## Redis Configuration
 
 <Note>
-  Redis/Valkey is required for Formbricks to function. The application will not start without `REDIS_URL`.
+  Redis/Valkey is required for SalamRuby to function. The application will not start without `REDIS_URL`.
 </Note>
 
 ```sh env
@@ -132,34 +132,34 @@ S3_FORCE_PATH_STYLE=1
 When using S3 in a cluster setup, ensure:
 
 - all replicas use the same bucket
-- CORS allows your Formbricks origin (for RustFS, set `RUSTFS_CORS_ALLOWED_ORIGINS`; see [File Uploads](/self-hosting/configuration/file-uploads#rustfs-cors-configuration))
-- the credentials have read/write access for the assets you expect Formbricks to manage
+- CORS allows your SalamRuby origin (for RustFS, set `RUSTFS_CORS_ALLOWED_ORIGINS`; see [File Uploads](/self-hosting/configuration/file-uploads#rustfs-cors-configuration))
+- the credentials have read/write access for the assets you expect SalamRuby to manage
 
 ## v5 Cluster Notes
 
 ### Hub Is Mandatory
 
-Formbricks v5 self-hosting requires Hub. Do not plan a cluster upgrade that keeps Hub disabled.
+SalamRuby v5 self-hosting requires Hub. Do not plan a cluster upgrade that keeps Hub disabled.
 
 ### Edge Rate Limiting Must Exist Somewhere
 
-You do not have to use the Formbricks Helm chart's Envoy bundle, but you do need equivalent edge protection for
+You do not have to use the SalamRuby Helm chart's Envoy bundle, but you do need equivalent edge protection for
 the v5-covered public and API-key routes. Use the
 [rate-limiting guide](/self-hosting/advanced/rate-limiting) for the exact route coverage.
 
 ### Cube Is Optional
 
 Cube is only needed for analytics dashboards or other analysis flows that depend on Cube queries. It is not part
-of the baseline Formbricks v5 cluster runtime.
+of the baseline SalamRuby v5 cluster runtime.
 
 ## Kubernetes Setup
 
 The current Kubernetes deployment path uses the OCI chart published from
-[`charts/formbricks`](https://github.com/formbricks/formbricks/tree/main/charts/formbricks):
+[`charts/salamruby`](https://github.com/salamruby/salamruby/tree/main/charts/salamruby):
 
 ```sh
-helm install formbricks oci://ghcr.io/formbricks/helm-charts/formbricks \
-  -n formbricks \
+helm install salamruby oci://ghcr.io/salamruby/helm-charts/salamruby \
+  -n salamruby \
   --create-namespace \
   -f values.yaml
 ```

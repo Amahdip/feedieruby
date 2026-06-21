@@ -4,8 +4,8 @@ import { TFunction } from "i18next";
 import { ChevronDownIcon, X } from "lucide-react";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { TFilterOption, TSortOption } from "@formbricks/types/surveys/types";
-import { TWorkspaceConfigChannel } from "@formbricks/types/workspace";
+import type { TFilterOption, TSortOption } from "@salamruby/types/surveys/types";
+import { TWorkspaceConfigChannel } from "@salamruby/types/workspace";
 import { SortOption } from "@/modules/survey/list/components/sort-option";
 import { initialFilters } from "@/modules/survey/list/lib/constants";
 import { TSurveyOverviewFilters } from "@/modules/survey/list/types/survey-overview";
@@ -111,7 +111,7 @@ export const SurveyFilters = ({
           value={name}
           onChange={setName}
           placeholder={t("workspace.surveys.search_by_survey_name")}
-          className="border-slate-700"
+          className="border-slate-300"
         />
         <div>
           <SurveyFilterDropdown
@@ -155,24 +155,22 @@ export const SurveyFilters = ({
         <DropdownMenu>
           <DropdownMenuTrigger
             asChild
-            className="surveyFilterDropdown h-full cursor-pointer border border-slate-700 outline-none hover:bg-slate-900">
-            <div className="min-w-auto h-8 rounded-md border sm:flex sm:px-2">
-              <div className="hidden w-full items-center justify-between hover:text-white sm:flex">
-                <span className="text-sm">
-                  {t("common.sort_by")}:{" "}
-                  {getSortOptions(t).find((option) => option.value === sortBy)
-                    ? getSortOptions(t).find((option) => option.value === sortBy)?.label
-                    : ""}
-                </span>
-                <ChevronDownIcon className="ml-2 size-4" />
-              </div>
+            className="surveyFilterDropdown h-full cursor-pointer border border-slate-300 bg-white outline-none hover:bg-slate-50">
+            <div className="min-w-auto hidden h-8 rounded-md sm:flex sm:items-center sm:gap-2 sm:px-2">
+              <span className="text-sm text-slate-700">
+                {t("common.sort_by")}:{" "}
+                {getSortOptions(t).find((option) => option.value === sortBy)
+                  ? getSortOptions(t).find((option) => option.value === sortBy)?.label
+                  : ""}
+              </span>
+              <ChevronDownIcon className="size-4 shrink-0 text-slate-500" />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="bg-slate-900">
+          <DropdownMenuContent align="end">
             {getSortOptions(t).map((option) => (
               <SortOption
                 option={option}
-                key={option.label}
+                key={option.value}
                 sortBy={surveyFilters.sortBy}
                 handleSortChange={handleSortChange}
               />

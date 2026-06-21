@@ -1,10 +1,10 @@
 import "server-only";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, InvalidInputError } from "@formbricks/types/errors";
-import type { TSurveyFilterCriteria } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, InvalidInputError } from "@salamruby/types/errors";
+import type { TSurveyFilterCriteria } from "@salamruby/types/surveys/types";
 import { buildWhereClause } from "@/modules/survey/lib/utils";
 import type { TSurvey } from "../types/surveys";
 import {

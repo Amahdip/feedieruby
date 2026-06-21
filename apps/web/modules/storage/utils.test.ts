@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { StorageErrorCode } from "@formbricks/storage";
-import { TResponseData } from "@formbricks/types/responses";
-import { ZAllowedFileExtension } from "@formbricks/types/storage";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyQuestion } from "@formbricks/types/surveys/types";
+import { StorageErrorCode } from "@salamruby/storage";
+import { TResponseData } from "@salamruby/types/responses";
+import { ZAllowedFileExtension } from "@salamruby/types/storage";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyQuestion } from "@salamruby/types/surveys/types";
 import {
   isAllowedFileExtension,
   isValidImageFile,

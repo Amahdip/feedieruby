@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { describe, expect, test } from "vitest";
-import { ZSegmentCreateInput, ZSegmentFilters, ZSegmentUpdateInput } from "@formbricks/types/segment";
+import { ZSegmentCreateInput, ZSegmentFilters, ZSegmentUpdateInput } from "@salamruby/types/segment";
 
 const validFilters = [
   {

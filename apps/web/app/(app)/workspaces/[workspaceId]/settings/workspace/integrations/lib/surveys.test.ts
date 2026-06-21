@@ -1,9 +1,9 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError } from "@formbricks/types/errors";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError } from "@salamruby/types/errors";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { selectSurvey } from "@/lib/survey/service";
 import { transformPrismaSurvey } from "@/lib/survey/utils";
 import { validateInputs } from "@/lib/utils/validate";
@@ -15,14 +15,14 @@ vi.mock("@/lib/survey/service", () => ({
 }));
 vi.mock("@/lib/survey/utils");
 vi.mock("@/lib/utils/validate");
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     survey: {
       findMany: vi.fn(),
     },
   },
 }));
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

@@ -1,10 +1,10 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { TWidgetLayout } from "@formbricks/types/analysis";
-import { ZId } from "@formbricks/types/common";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { TWidgetLayout } from "@salamruby/types/analysis";
+import { ZId } from "@salamruby/types/common";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { selectChart } from "@/modules/ee/analysis/charts/lib/charts";
 import {

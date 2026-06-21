@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
-import { TOrganization } from "@formbricks/types/organizations";
-import { FORMBRICKS_ENVIRONMENT_ID_LS } from "@/lib/localStorage";
+import { TOrganizationRole } from "@salamruby/types/memberships";
+import { TOrganization } from "@salamruby/types/organizations";
+import { SALAMRUBY_ENVIRONMENT_ID_LS } from "@/lib/localStorage";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { TOrganizationTeam } from "@/modules/ee/teams/team-list/types/team";
@@ -32,7 +32,7 @@ interface OrganizationActionsProps {
   teams: TOrganizationTeam[];
   isInviteDisabled: boolean;
   isAccessControlAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isMultiOrgEnabled: boolean;
   isUserManagementDisabledFromUi: boolean;
   isStorageConfigured: boolean;
@@ -49,7 +49,7 @@ export const OrganizationActions = ({
   isLeaveOrganizationDisabled,
   isInviteDisabled,
   isAccessControlAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isMultiOrgEnabled,
   isUserManagementDisabledFromUi,
   isStorageConfigured,
@@ -80,7 +80,7 @@ export const OrganizationActions = ({
       toast.success(t("workspace.settings.general.member_deleted_successfully"));
       router.refresh();
       setLoading(false);
-      localStorage.removeItem(FORMBRICKS_ENVIRONMENT_ID_LS);
+      localStorage.removeItem(SALAMRUBY_ENVIRONMENT_ID_LS);
       router.push("/");
     } catch (err) {
       toast.error(`Error: ${err instanceof Error ? err.message : "Unknown error occurred"}`);
@@ -167,7 +167,7 @@ export const OrganizationActions = ({
         onSubmit={handleAddMembers}
         membershipRole={membershipRole}
         isAccessControlAllowed={isAccessControlAllowed}
-        isFormbricksCloud={isFormbricksCloud}
+        isSalamRubyCloud={isSalamRubyCloud}
         teams={teams}
         isStorageConfigured={isStorageConfigured}
         isOwnerOrManager={isOwnerOrManager}

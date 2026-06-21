@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma, Workspace } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { logger } from "@formbricks/logger";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma, Workspace } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { logger } from "@salamruby/logger";
+import { DatabaseError } from "@salamruby/types/errors";
 import { getWorkspaceWithTeamIds } from "./workspace";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     workspace: {
       findUnique: vi.fn(),
@@ -14,7 +14,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

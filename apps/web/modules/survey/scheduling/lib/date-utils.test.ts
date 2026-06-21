@@ -33,29 +33,29 @@ describe("survey scheduling date utils", () => {
     const storedDate = new Date("2026-01-17T12:00:00.000Z");
 
     expect(normalizeDateOnlySelectionToSurveySchedulingDateTime(storedDate)?.toISOString()).toBe(
-      "2026-01-16T23:00:00.000Z"
+      "2026-01-16T20:30:00.000Z"
     );
   });
 
   test("keeps already-normalized survey scheduling values stable when re-saved", () => {
-    const normalizedStoredDate = new Date("2026-04-16T22:00:00.000Z");
+    const normalizedStoredDate = new Date("2026-04-16T20:30:00.000Z");
     const calendarDate = toCalendarDate(normalizedStoredDate);
     const reselectedDate = toDateOnlySelection(calendarDate);
 
     expect(reselectedDate.toISOString()).toBe("2026-04-17T12:00:00.000Z");
     expect(normalizeDateOnlySelectionToSurveySchedulingDateTime(normalizedStoredDate)?.toISOString()).toBe(
-      "2026-04-16T22:00:00.000Z"
+      "2026-04-16T20:30:00.000Z"
     );
     expect(normalizeDateOnlySelectionToSurveySchedulingDateTime(reselectedDate)?.toISOString()).toBe(
-      "2026-04-16T22:00:00.000Z"
+      "2026-04-16T20:30:00.000Z"
     );
   });
 
-  test("uses the timezone's DST offset when normalizing summer dates", () => {
+  test("uses the timezone offset when normalizing summer dates", () => {
     const storedDate = new Date("2026-07-10T12:00:00.000Z");
 
     expect(normalizeDateOnlySelectionToSurveySchedulingDateTime(storedDate)?.toISOString()).toBe(
-      "2026-07-09T22:00:00.000Z"
+      "2026-07-09T20:30:00.000Z"
     );
   });
 
@@ -64,12 +64,12 @@ describe("survey scheduling date utils", () => {
 
     expect(minSelectableDate.getFullYear()).toBe(2026);
     expect(minSelectableDate.getMonth()).toBe(3);
-    expect(minSelectableDate.getDate()).toBe(17);
+    expect(minSelectableDate.getDate()).toBe(18);
     expect(minSelectableDate.getHours()).toBe(12);
   });
 
   test("documents the default scheduling configuration", () => {
-    expect(SURVEY_SCHEDULING_TIME_ZONE).toBe("Europe/Berlin");
+    expect(SURVEY_SCHEDULING_TIME_ZONE).toBe("Asia/Tehran");
     expect(SURVEY_SCHEDULING_LOCAL_HOUR).toBe(0);
     expect(SURVEY_SCHEDULING_LOCAL_MINUTE).toBe(0);
   });

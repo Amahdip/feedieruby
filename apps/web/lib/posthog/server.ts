@@ -1,6 +1,6 @@
 import "server-only";
 import { PostHog } from "posthog-node";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { POSTHOG_KEY } from "@/lib/constants";
 
 const POSTHOG_HOST = "https://eu.i.posthog.com";

@@ -1,6 +1,6 @@
 "use client";
 
-import { TOrganizationRole } from "@formbricks/types/memberships";
+import { TOrganizationRole } from "@salamruby/types/memberships";
 import { WorkspaceAndOrgSwitch } from "@/app/(app)/workspaces/[workspaceId]/components/workspace-and-org-switch";
 import { useWorkspaceContext } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 
@@ -8,7 +8,7 @@ interface TopControlBarProps {
   currentOrganizationId: string;
   isMultiOrgEnabled: boolean;
   organizationWorkspacesLimit: number;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isLicenseActive: boolean;
   isOwnerOrManager: boolean;
   isAccessControlAllowed: boolean;
@@ -19,7 +19,7 @@ export const TopControlBar = ({
   currentOrganizationId,
   isMultiOrgEnabled,
   organizationWorkspacesLimit,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isLicenseActive,
   isOwnerOrManager,
   isAccessControlAllowed,
@@ -37,7 +37,7 @@ export const TopControlBar = ({
         currentOrganizationId={currentOrganizationId}
         isMultiOrgEnabled={isMultiOrgEnabled}
         organizationWorkspacesLimit={organizationWorkspacesLimit}
-        isFormbricksCloud={isFormbricksCloud}
+        isSalamRubyCloud={isSalamRubyCloud}
         isLicenseActive={isLicenseActive}
         isOwnerOrManager={isOwnerOrManager}
         isMembershipPending={isMembershipPending}

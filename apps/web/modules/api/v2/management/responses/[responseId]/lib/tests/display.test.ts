@@ -1,11 +1,11 @@
 import { displayId, mockDisplay } from "./__mocks__/display.mock";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
 import { deleteDisplay } from "../display";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     display: {
       delete: vi.fn(),

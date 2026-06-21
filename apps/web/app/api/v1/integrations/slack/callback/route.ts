@@ -1,9 +1,9 @@
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import {
   TIntegrationSlackConfig,
   TIntegrationSlackConfigData,
   TIntegrationSlackCredential,
-} from "@formbricks/types/integration/slack";
+} from "@salamruby/types/integration/slack";
 import { responses } from "@/app/lib/api/response";
 import { withV1ApiWrapper } from "@/app/lib/api/with-api-logging";
 import { SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SLACK_REDIRECT_URI, WEBAPP_URL } from "@/lib/constants";

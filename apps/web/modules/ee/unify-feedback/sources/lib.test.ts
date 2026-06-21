@@ -1,9 +1,9 @@
 import { describe, expect, test, vi } from "vitest";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { transformToUnifySurvey } from "./lib";
 
-vi.mock("@formbricks/types/surveys/validation", () => ({
+vi.mock("@salamruby/types/surveys/validation", () => ({
   getTextContent: (str: string) => str,
 }));
 

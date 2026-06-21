@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { ZUserEmail } from "@formbricks/types/user";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { ZUserEmail } from "@salamruby/types/user";
 import { WEBAPP_URL } from "@/lib/constants";
 import { verifySsoRelinkIntent } from "@/lib/jwt";
 import { actionClient } from "@/lib/utils/action-client";

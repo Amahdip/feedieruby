@@ -41,9 +41,9 @@ module.exports = {
           light: "#00E6CA",
           dark: "#00C4B8",
         },
-        focus: "var(--formbricks-focus, #1982fc)",
-        // error: "rgb(from var(--formbricks-error) r g b / <alpha-value>)",
-        brandnew: "var(--formbricks-brand, #038178)",
+        focus: "var(--salamruby-focus, #1982fc)",
+        // error: "rgb(from var(--salamruby-error) r g b / <alpha-value>)",
+        brandnew: "var(--salamruby-brand, #038178)",
         primary: {
           DEFAULT: "#0f172a",
           foreground: "#fefefe",

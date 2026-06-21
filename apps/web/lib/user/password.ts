@@ -1,8 +1,8 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { User } from "@formbricks/database/prisma";
-import { InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { User } from "@salamruby/database/prisma";
+import { InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { verifyPassword } from "@/modules/auth/lib/utils";
 
 export const getUserAuthenticationData = reactCache(

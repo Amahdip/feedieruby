@@ -2,8 +2,8 @@
 
 import { HandshakeIcon, Undo2Icon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { recallToHeadline } from "@/lib/utils/recall";
 import {
   Select,

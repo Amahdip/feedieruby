@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { logger } from "@formbricks/logger";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { logger } from "@salamruby/logger";
+import { DatabaseError } from "@salamruby/types/errors";
 import { deleteInvite, getInvite, getIsValidInviteToken } from "./invite";
 
 // Mock data
@@ -29,7 +29,7 @@ const mockInvite = {
 };
 
 // Mock prisma methods
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     invite: {
       delete: vi.fn(),
@@ -39,7 +39,7 @@ vi.mock("@formbricks/database", () => ({
 }));
 
 // Mock logger
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { cache as reactCache } from "react";
-import { AuthenticationError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { AuthenticationError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getOrganization } from "@/lib/organization/service";

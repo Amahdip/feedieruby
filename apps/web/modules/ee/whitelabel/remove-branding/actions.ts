@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { ZId } from "@salamruby/types/common";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { getOrganization } from "@/lib/organization/service";
 import { capturePostHogEvent } from "@/lib/posthog";
 import { authenticatedActionClient } from "@/lib/utils/action-client";

@@ -28,7 +28,7 @@ jobs:
         env:
           POSTGRES_USER: test
           POSTGRES_PASSWORD: test
-          POSTGRES_DB: formbricks
+          POSTGRES_DB: salamruby
         ports:
           - 5432:5432
         # Health check to ensure PostgreSQL is ready before using it
@@ -66,7 +66,7 @@ jobs:
           file: ./apps/web/Dockerfile
           push: false
           load: true
-          tags: formbricks-test:${{ env.GITHUB_SHA }}
+          tags: salamruby-test:${{ env.GITHUB_SHA }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           secrets: |
@@ -86,16 +86,16 @@ jobs:
 
           # Test connection using psql with timeout and proper error handling
           echo "Testing PostgreSQL connection with 30 second timeout..."
-          if timeout 30 bash -c 'until PGPASSWORD=test psql -h localhost -U test -d formbricks -c "\dt" >/dev/null 2>&1; do
+          if timeout 30 bash -c 'until PGPASSWORD=test psql -h localhost -U test -d salamruby -c "\dt" >/dev/null 2>&1; do
             echo "Waiting for PostgreSQL to be ready..."
             sleep 2
           done'; then
             echo "✅ PostgreSQL connection successful"
-            PGPASSWORD=test psql -h localhost -U test -d formbricks -c "SELECT version();"
+            PGPASSWORD=test psql -h localhost -U test -d salamruby -c "SELECT version();"
 
             # Enable necessary extensions that might be required by migrations
             echo "Enabling required PostgreSQL extensions..."
-            PGPASSWORD=test psql -h localhost -U test -d formbricks -c "CREATE EXTENSION IF NOT EXISTS vector;" || echo "Vector extension already exists or not available"
+            PGPASSWORD=test psql -h localhost -U test -d salamruby -c "CREATE EXTENSION IF NOT EXISTS vector;" || echo "Vector extension already exists or not available"
 
           else
             echo "❌ PostgreSQL connection failed after 30 seconds"
@@ -141,17 +141,17 @@ jobs:
           DOCKER_RUN_ARGS="--add-host=host.docker.internal:host-gateway"
 
           # Start the container with host.docker.internal pointing to the host
-          docker run --name formbricks-test \
+          docker run --name salamruby-test \
             $DOCKER_RUN_ARGS \
             -p 3000:3000 \
-            -e DATABASE_URL="postgresql://test:test@host.docker.internal:5432/formbricks" \
+            -e DATABASE_URL="postgresql://test:test@host.docker.internal:5432/salamruby" \
             -e ENCRYPTION_KEY="$DUMMY_ENCRYPTION_KEY" \
             -e REDIS_URL="redis://host.docker.internal:6379" \
             -e HUB_API_URL="http://localhost:4000" \
             -e HUB_API_KEY="build-time-placeholder" \
             -e CUBEJS_API_URL="http://localhost:4000" \
             -e CUBEJS_API_SECRET="build-time-placeholder" \
-            -d "formbricks-test:$GITHUB_SHA"
+            -d "salamruby-test:$GITHUB_SHA"
 
           # Start health check polling immediately (every 5 seconds for up to 5 minutes)
           echo "🏥 Polling /health endpoint every 5 seconds for up to 5 minutes..."
@@ -165,10 +165,10 @@ jobs:
             RETRY_COUNT=$((RETRY_COUNT + 1))
 
             # Check if container is still running
-            if [ "$(docker inspect -f '{{.State.Running}}' formbricks-test 2>/dev/null)" != "true" ]; then
+            if [ "$(docker inspect -f '{{.State.Running}}' salamruby-test 2>/dev/null)" != "true" ]; then
               echo "❌ Container stopped running after $((RETRY_COUNT * 5)) seconds!"
               echo "📋 Container logs:"
-              docker logs formbricks-test
+              docker logs salamruby-test
               exit 1
             fi
 
@@ -176,7 +176,7 @@ jobs:
             if [ $((RETRY_COUNT % 12)) -eq 0 ] || [ $RETRY_COUNT -eq 1 ]; then
               echo "Health check attempt $RETRY_COUNT of $MAX_RETRIES ($(($RETRY_COUNT * 5)) seconds elapsed)..."
               echo "📋 Recent container logs:"
-              docker logs --tail 10 formbricks-test
+              docker logs --tail 10 salamruby-test
             fi
 
             # Try health endpoint with shorter timeout for faster polling
@@ -193,11 +193,11 @@ jobs:
 
           # Show full container logs for debugging
           echo "📋 Full container logs:"
-          docker logs formbricks-test
+          docker logs salamruby-test
 
           # Clean up the container
           echo "🧹 Cleaning up..."
-          docker rm -f formbricks-test
+          docker rm -f salamruby-test
 
           # Exit with failure if health check did not succeed
           if [ "$HEALTH_CHECK_SUCCESS" != "true" ]; then

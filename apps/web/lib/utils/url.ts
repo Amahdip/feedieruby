@@ -1,4 +1,4 @@
-import { TActionClassPageUrlRule } from "@formbricks/types/action-classes";
+import { TActionClassPageUrlRule } from "@salamruby/types/action-classes";
 
 export const testURLmatch = (
   testUrl: string,

@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
-import { AuthenticationError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TTag } from "@formbricks/types/tags";
+import { AuthenticationError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TTag } from "@salamruby/types/tags";
 import { DEFAULT_LOCALE } from "@/lib/constants";
 import { getDisplaysByContactId } from "@/lib/display/service";
 import { getResponsesByContactId } from "@/lib/response/service";

@@ -1,15 +1,15 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TOrganizationBilling } from "@formbricks/types/organizations";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TOrganizationBilling } from "@salamruby/types/organizations";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { getOrganizationBillingWithReadThroughSync } from "@/modules/ee/billing/lib/organization-billing";
 import { getOrganizationBilling, getSurvey } from "./survey";
 
 // Mock prisma
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     survey: {
       findUnique: vi.fn(),

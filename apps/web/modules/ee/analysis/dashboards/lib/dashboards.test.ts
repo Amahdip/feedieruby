@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
 
 vi.mock("server-only", () => ({}));
 
@@ -26,7 +26,7 @@ var mockTxWidget: {
   deleteMany: ReturnType<typeof vi.fn>;
 };
 
-vi.mock("@formbricks/database", () => {
+vi.mock("@salamruby/database", () => {
   const txDash = { findFirst: vi.fn(), create: vi.fn(), update: vi.fn(), delete: vi.fn() };
   const txChart = { findFirst: vi.fn() };
   const txWidget = {

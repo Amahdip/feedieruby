@@ -1,18 +1,18 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   ValidationError,
-} from "@formbricks/types/errors";
-import { TSurveyQuota, TSurveyQuotaInput } from "@formbricks/types/quota";
+} from "@salamruby/types/errors";
+import { TSurveyQuota, TSurveyQuotaInput } from "@salamruby/types/quota";
 import { validateInputs } from "@/lib/utils/validate";
 import { createQuota, deleteQuota, getQuota, getQuotas, reduceQuotaLimits, updateQuota } from "./quotas";
 
 // Mock dependencies
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     surveyQuota: {
       findMany: vi.fn(),

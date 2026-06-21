@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { deleteSurvey } from "./surveys";
 
@@ -10,13 +10,13 @@ vi.mock("@/lib/utils/validate", () => ({
   validateInputs: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     $transaction: vi.fn(),
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     warn: vi.fn(),

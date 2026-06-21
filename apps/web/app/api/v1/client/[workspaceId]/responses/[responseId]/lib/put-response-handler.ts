@@ -1,8 +1,8 @@
-import { logger } from "@formbricks/logger";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TResponse, TResponseUpdateInput } from "@formbricks/types/responses";
-import { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TResponse, TResponseUpdateInput } from "@salamruby/types/responses";
+import { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { responses } from "@/app/lib/api/response";
 import { THandlerParams } from "@/app/lib/api/with-api-logging";
 import { sendToPipeline } from "@/app/lib/pipelines";

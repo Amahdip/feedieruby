@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { OrganizationAccessType } from "@formbricks/types/api-key";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { logger } from "@salamruby/logger";
+import { OrganizationAccessType } from "@salamruby/types/api-key";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { authenticatedApiClient } from "@/modules/api/v2/auth/authenticated-api-client";
 import { responses } from "@/modules/api/v2/lib/response";
 import { handleApiError } from "@/modules/api/v2/lib/utils";
@@ -29,10 +29,10 @@ export const GET = async (request: NextRequest, props: { params: Promise<{ organ
     },
     externalParams: props.params,
     handler: async ({ authentication, parsedInput: { query, params } }) => {
-      if (IS_FORMBRICKS_CLOUD) {
+      if (IS_SALAMRUBY_CLOUD) {
         return handleApiError(request, {
           type: "bad_request",
-          details: [{ field: "organizationId", issue: "This endpoint is not supported on Formbricks Cloud" }],
+          details: [{ field: "organizationId", issue: "This endpoint is not supported on SalamRuby Cloud" }],
         });
       }
 
@@ -62,13 +62,13 @@ export const POST = async (request: Request, props: { params: Promise<{ organiza
     },
     externalParams: props.params,
     handler: async ({ authentication, parsedInput: { body, params }, auditLog }) => {
-      if (IS_FORMBRICKS_CLOUD) {
+      if (IS_SALAMRUBY_CLOUD) {
         return handleApiError(
           request,
           {
             type: "bad_request",
             details: [
-              { field: "organizationId", issue: "This endpoint is not supported on Formbricks Cloud" },
+              { field: "organizationId", issue: "This endpoint is not supported on SalamRuby Cloud" },
             ],
           },
           auditLog
@@ -111,13 +111,13 @@ export const PATCH = async (request: Request, props: { params: Promise<{ organiz
     },
     externalParams: props.params,
     handler: async ({ authentication, parsedInput: { body, params }, auditLog }) => {
-      if (IS_FORMBRICKS_CLOUD) {
+      if (IS_SALAMRUBY_CLOUD) {
         return handleApiError(
           request,
           {
             type: "bad_request",
             details: [
-              { field: "organizationId", issue: "This endpoint is not supported on Formbricks Cloud" },
+              { field: "organizationId", issue: "This endpoint is not supported on SalamRuby Cloud" },
             ],
           },
           auditLog

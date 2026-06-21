@@ -1,7 +1,7 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 
 export const getContactByUserId = async (

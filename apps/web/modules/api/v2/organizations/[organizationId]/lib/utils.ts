@@ -1,6 +1,6 @@
-import { logger } from "@formbricks/logger";
-import { OrganizationAccessType } from "@formbricks/types/api-key";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { logger } from "@salamruby/logger";
+import { OrganizationAccessType } from "@salamruby/types/api-key";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import { hasOrganizationAccess } from "@/modules/organization/settings/api-keys/lib/utils";
 
 export const hasOrganizationIdAndAccess = (

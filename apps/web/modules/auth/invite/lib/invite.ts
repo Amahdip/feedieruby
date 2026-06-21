@@ -1,7 +1,7 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { type InviteWithCreator } from "@/modules/auth/invite/types/invites";
 
 export const deleteInvite = async (inviteId: string): Promise<boolean> => {

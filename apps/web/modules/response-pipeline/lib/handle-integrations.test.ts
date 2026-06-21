@@ -1,30 +1,30 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import {
   TIntegrationAirtable,
   TIntegrationAirtableConfig,
   TIntegrationAirtableConfigData,
   TIntegrationAirtableCredential,
-} from "@formbricks/types/integration/airtable";
+} from "@salamruby/types/integration/airtable";
 import {
   TIntegrationGoogleSheets,
   TIntegrationGoogleSheetsConfig,
   TIntegrationGoogleSheetsConfigData,
   TIntegrationGoogleSheetsCredential,
-} from "@formbricks/types/integration/google-sheet";
+} from "@salamruby/types/integration/google-sheet";
 import {
   TIntegrationNotion,
   TIntegrationNotionConfigData,
   TIntegrationNotionCredential,
-} from "@formbricks/types/integration/notion";
+} from "@salamruby/types/integration/notion";
 import {
   TIntegrationSlack,
   TIntegrationSlackConfigData,
   TIntegrationSlackCredential,
-} from "@formbricks/types/integration/slack";
-import { TResponse, TResponseMeta } from "@formbricks/types/responses";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey, TSurveyQuestionTypeEnum } from "@formbricks/types/surveys/types";
+} from "@salamruby/types/integration/slack";
+import { TResponse, TResponseMeta } from "@salamruby/types/responses";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey, TSurveyQuestionTypeEnum } from "@salamruby/types/surveys/types";
 import { writeData as airtableWriteData } from "@/lib/airtable/service";
 import { writeData as googleSheetWriteData } from "@/lib/googleSheet/service";
 import { getLocalizedValue } from "@/lib/i18n/utils";
@@ -46,7 +46,7 @@ vi.mock("@/lib/slack/service");
 vi.mock("@/lib/utils/datetime");
 vi.mock("@/lib/utils/recall");
 vi.mock("@/lib/utils/strings");
-vi.mock("@formbricks/logger");
+vi.mock("@salamruby/logger");
 
 // Mock data
 const surveyId = "survey1";

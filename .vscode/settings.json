@@ -7,8 +7,8 @@
   ],
   "javascript.updateImportsOnFileMove.enabled": "always",
   "sonarlint.connectedMode.project": {
-    "connectionId": "formbricks",
-    "projectKey": "formbricks_formbricks"
+    "connectionId": "salamruby",
+    "projectKey": "salamruby_salamruby"
   },
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",

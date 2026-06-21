@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma, Response as ResponsePrisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TResponse, TResponseInput } from "@formbricks/types/responses";
+import { prisma } from "@salamruby/database";
+import { Prisma, Response as ResponsePrisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TResponse, TResponseInput } from "@salamruby/types/responses";
 import { getResponseContact } from "@/lib/response/service";
 import { calculateTtcTotal } from "@/lib/response/utils";
 import { getOrganizationIdFromWorkspaceId } from "@/lib/utils/helper";
@@ -84,7 +84,7 @@ const mockTransformedResponses = [mockResponse, { ...mockResponse, id: "response
 
 // Mock dependencies
 vi.mock("@/lib/constants", () => ({
-  IS_FORMBRICKS_CLOUD: true,
+  IS_SALAMRUBY_CLOUD: true,
   ENCRYPTION_KEY: "mock-encryption-key",
   ENTERPRISE_LICENSE_KEY: "mock-enterprise-license-key",
   GITHUB_ID: "mock-github-id",
@@ -108,7 +108,7 @@ vi.mock("@/lib/utils/helper");
 vi.mock("@/lib/response/service");
 vi.mock("@/lib/response/utils");
 vi.mock("@/lib/utils/validate");
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     response: {
       create: vi.fn(),
@@ -116,7 +116,7 @@ vi.mock("@formbricks/database", () => ({
     },
   },
 }));
-vi.mock("@formbricks/logger");
+vi.mock("@salamruby/logger");
 vi.mock("./contact");
 
 type MockTx = {

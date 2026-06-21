@@ -1,10 +1,10 @@
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
-import { logger } from "@formbricks/logger";
-import { InvalidInputError, UniqueConstraintError } from "@formbricks/types/errors";
-import { TResponseWithQuotaFull } from "@formbricks/types/quota";
-import { TResponseInput, ZResponseInput } from "@formbricks/types/responses";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { InvalidInputError, UniqueConstraintError } from "@salamruby/types/errors";
+import { TResponseWithQuotaFull } from "@salamruby/types/quota";
+import { TResponseInput, ZResponseInput } from "@salamruby/types/responses";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { validateSingleUseResponseInput } from "@/app/api/client/[workspaceId]/responses/lib/single-use";
 import { RequestBodyTooLargeError, parseJsonBodyWithLimit } from "@/app/lib/api/request-body";
 import { responses } from "@/app/lib/api/response";

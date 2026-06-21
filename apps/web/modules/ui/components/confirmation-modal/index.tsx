@@ -117,8 +117,8 @@ export const ConfirmationModal = ({
             <CircleAlert className="size-4 text-slate-500" />
           )}
           <div className="flex flex-col">
-            <DialogTitle className="w-full truncate text-left">{title}</DialogTitle>
-            <DialogDescription className="w-full text-left">
+            <DialogTitle className="w-full truncate text-start">{title}</DialogTitle>
+            <DialogDescription className="w-full text-start">
               <span className="mt-2 whitespace-pre-wrap">
                 {description ?? t("workspace.general.this_action_cannot_be_undone")}
               </span>

@@ -1,6 +1,6 @@
 import "server-only";
-import { logger } from "@formbricks/logger";
-import { AuthorizationError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { AuthorizationError } from "@salamruby/types/errors";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";
 import { getOrganizationIdFromWorkspaceId } from "@/lib/utils/helper";
 import { getFeedbackDirectoryAuthContext } from "@/modules/ee/feedback-directory/lib/feedback-directory";

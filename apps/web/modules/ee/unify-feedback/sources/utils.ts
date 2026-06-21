@@ -1,5 +1,5 @@
 import { TFunction } from "i18next";
-import { TFeedbackSourceType, THubFieldType, ZHubFieldType } from "@formbricks/types/feedback-source";
+import { TFeedbackSourceType, THubFieldType, ZHubFieldType } from "@salamruby/types/feedback-source";
 import {
   CSV_REQUIRED_UI_FIELDS,
   CSV_TARGET_FIELDS,
@@ -21,9 +21,9 @@ export interface TFeedbackSourceOption {
 
 export const getFeedbackSourceOptions = (t: TFunction): TFeedbackSourceOption[] => [
   {
-    id: "formbricks_survey",
-    name: t("workspace.unify.formbricks_surveys"),
-    description: t("workspace.unify.source_connect_formbricks_description"),
+    id: "salamruby_survey",
+    name: t("workspace.unify.salamruby_surveys"),
+    description: t("workspace.unify.source_connect_salamruby_description"),
     disabled: false,
   },
   {

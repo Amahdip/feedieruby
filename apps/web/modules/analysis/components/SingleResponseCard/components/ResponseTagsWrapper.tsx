@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { logger } from "@formbricks/logger";
-import { TResponse } from "@formbricks/types/responses";
-import { TTag } from "@formbricks/types/tags";
-import { TUserLocale } from "@formbricks/types/user";
+import { logger } from "@salamruby/logger";
+import { TResponse } from "@salamruby/types/responses";
+import { TTag } from "@salamruby/types/tags";
+import { TUserLocale } from "@salamruby/types/user";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { IdBadge } from "@/modules/ui/components/id-badge";
 import { Tag } from "@/modules/ui/components/tag";

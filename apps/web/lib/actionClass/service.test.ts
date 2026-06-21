@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { TActionClass, TActionClassInput } from "@formbricks/types/action-classes";
-import { DatabaseError, ResourceNotFoundError, UniqueConstraintError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { TActionClass, TActionClassInput } from "@salamruby/types/action-classes";
+import { DatabaseError, ResourceNotFoundError, UniqueConstraintError } from "@salamruby/types/errors";
 import {
   createActionClass,
   deleteActionClass,
@@ -13,7 +13,7 @@ import {
   updateActionClass,
 } from "./service";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     actionClass: {
       findMany: vi.fn(),

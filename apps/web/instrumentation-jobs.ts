@@ -6,8 +6,8 @@ import {
   removeRecurringSurveySchedulingJobSchedule,
   startJobsRuntime,
   upsertRecurringSurveySchedulingJobSchedule,
-} from "@formbricks/jobs";
-import { logger } from "@formbricks/logger";
+} from "@salamruby/jobs";
+import { logger } from "@salamruby/logger";
 import { getJobsQueueingConfig, getJobsWorkerBootstrapConfig } from "@/lib/jobs/config";
 import { processResponsePipelineJob } from "@/modules/response-pipeline/lib/process-response-pipeline-job";
 import {
@@ -21,12 +21,12 @@ import { processSurveySchedulingJob } from "@/modules/survey/scheduling/lib/proc
 const WORKER_STARTUP_RETRY_DELAY_MS = 30_000;
 
 type TJobsRuntimeGlobal = typeof globalThis & {
-  formbricksJobsRecurringRegistration: Promise<void> | undefined;
-  formbricksJobsRecurringRegistered: boolean | undefined;
-  formbricksJobsRecurringRetryTimeout: ReturnType<typeof setTimeout> | undefined;
-  formbricksJobsRuntime: JobsRuntimeHandle | undefined;
-  formbricksJobsRuntimeInitializing: Promise<JobsRuntimeHandle> | undefined;
-  formbricksJobsRuntimeRetryTimeout: ReturnType<typeof setTimeout> | undefined;
+  salamrubyJobsRecurringRegistration: Promise<void> | undefined;
+  salamrubyJobsRecurringRegistered: boolean | undefined;
+  salamrubyJobsRecurringRetryTimeout: ReturnType<typeof setTimeout> | undefined;
+  salamrubyJobsRuntime: JobsRuntimeHandle | undefined;
+  salamrubyJobsRuntimeInitializing: Promise<JobsRuntimeHandle> | undefined;
+  salamrubyJobsRuntimeRetryTimeout: ReturnType<typeof setTimeout> | undefined;
 };
 
 const globalForJobsRuntime = globalThis as TJobsRuntimeGlobal;
@@ -63,23 +63,23 @@ const registerSurveySchedulingSchedule = async (): Promise<void> => {
 };
 
 const clearRecurringJobsRetryTimeout = (): void => {
-  if (globalForJobsRuntime.formbricksJobsRecurringRetryTimeout) {
-    clearTimeout(globalForJobsRuntime.formbricksJobsRecurringRetryTimeout);
-    globalForJobsRuntime.formbricksJobsRecurringRetryTimeout = undefined;
+  if (globalForJobsRuntime.salamrubyJobsRecurringRetryTimeout) {
+    clearTimeout(globalForJobsRuntime.salamrubyJobsRecurringRetryTimeout);
+    globalForJobsRuntime.salamrubyJobsRecurringRetryTimeout = undefined;
   }
 };
 
 const scheduleRecurringJobsRetry = (): void => {
   if (
-    globalForJobsRuntime.formbricksJobsRecurringRegistered ||
-    globalForJobsRuntime.formbricksJobsRecurringRegistration ||
-    globalForJobsRuntime.formbricksJobsRecurringRetryTimeout
+    globalForJobsRuntime.salamrubyJobsRecurringRegistered ||
+    globalForJobsRuntime.salamrubyJobsRecurringRegistration ||
+    globalForJobsRuntime.salamrubyJobsRecurringRetryTimeout
   ) {
     return;
   }
 
-  globalForJobsRuntime.formbricksJobsRecurringRetryTimeout = setTimeout(() => {
-    globalForJobsRuntime.formbricksJobsRecurringRetryTimeout = undefined;
+  globalForJobsRuntime.salamrubyJobsRecurringRetryTimeout = setTimeout(() => {
+    globalForJobsRuntime.salamrubyJobsRecurringRetryTimeout = undefined;
     void registerRecurringJobs().catch(() => undefined);
   }, WORKER_STARTUP_RETRY_DELAY_MS);
 
@@ -90,23 +90,23 @@ const scheduleRecurringJobsRetry = (): void => {
 };
 
 const clearJobsWorkerRetryTimeout = (): void => {
-  if (globalForJobsRuntime.formbricksJobsRuntimeRetryTimeout) {
-    clearTimeout(globalForJobsRuntime.formbricksJobsRuntimeRetryTimeout);
-    globalForJobsRuntime.formbricksJobsRuntimeRetryTimeout = undefined;
+  if (globalForJobsRuntime.salamrubyJobsRuntimeRetryTimeout) {
+    clearTimeout(globalForJobsRuntime.salamrubyJobsRuntimeRetryTimeout);
+    globalForJobsRuntime.salamrubyJobsRuntimeRetryTimeout = undefined;
   }
 };
 
 const scheduleJobsWorkerRetry = (): void => {
   if (
-    globalForJobsRuntime.formbricksJobsRuntime ||
-    globalForJobsRuntime.formbricksJobsRuntimeInitializing ||
-    globalForJobsRuntime.formbricksJobsRuntimeRetryTimeout
+    globalForJobsRuntime.salamrubyJobsRuntime ||
+    globalForJobsRuntime.salamrubyJobsRuntimeInitializing ||
+    globalForJobsRuntime.salamrubyJobsRuntimeRetryTimeout
   ) {
     return;
   }
 
-  globalForJobsRuntime.formbricksJobsRuntimeRetryTimeout = setTimeout(() => {
-    globalForJobsRuntime.formbricksJobsRuntimeRetryTimeout = undefined;
+  globalForJobsRuntime.salamrubyJobsRuntimeRetryTimeout = setTimeout(() => {
+    globalForJobsRuntime.salamrubyJobsRuntimeRetryTimeout = undefined;
     void registerJobsWorker().catch(() => undefined);
   }, WORKER_STARTUP_RETRY_DELAY_MS);
 
@@ -122,25 +122,25 @@ export const registerRecurringJobs = async (): Promise<void> => {
     return;
   }
 
-  if (globalForJobsRuntime.formbricksJobsRecurringRegistered) {
+  if (globalForJobsRuntime.salamrubyJobsRecurringRegistered) {
     return;
   }
 
-  if (globalForJobsRuntime.formbricksJobsRecurringRegistration) {
-    return await globalForJobsRuntime.formbricksJobsRecurringRegistration;
+  if (globalForJobsRuntime.salamrubyJobsRecurringRegistration) {
+    return await globalForJobsRuntime.salamrubyJobsRecurringRegistration;
   }
 
-  globalForJobsRuntime.formbricksJobsRecurringRegistration = (async () => {
+  globalForJobsRuntime.salamrubyJobsRecurringRegistration = (async () => {
     await registerSurveySchedulingSchedule();
     clearRecurringJobsRetryTimeout();
-    globalForJobsRuntime.formbricksJobsRecurringRegistered = true;
-    globalForJobsRuntime.formbricksJobsRecurringRegistration = undefined;
+    globalForJobsRuntime.salamrubyJobsRecurringRegistered = true;
+    globalForJobsRuntime.salamrubyJobsRecurringRegistration = undefined;
   })();
 
   try {
-    return await globalForJobsRuntime.formbricksJobsRecurringRegistration;
+    return await globalForJobsRuntime.salamrubyJobsRecurringRegistration;
   } catch (error) {
-    globalForJobsRuntime.formbricksJobsRecurringRegistration = undefined;
+    globalForJobsRuntime.salamrubyJobsRecurringRegistration = undefined;
     logger.error({ err: error }, "BullMQ recurring job registration failed");
     scheduleRecurringJobsRetry();
     throw error;
@@ -156,12 +156,12 @@ export const registerJobsWorker = async (): Promise<JobsRuntimeHandle | null> =>
     return null;
   }
 
-  if (globalForJobsRuntime.formbricksJobsRuntime) {
-    return globalForJobsRuntime.formbricksJobsRuntime;
+  if (globalForJobsRuntime.salamrubyJobsRuntime) {
+    return globalForJobsRuntime.salamrubyJobsRuntime;
   }
 
-  if (globalForJobsRuntime.formbricksJobsRuntimeInitializing) {
-    return await globalForJobsRuntime.formbricksJobsRuntimeInitializing;
+  if (globalForJobsRuntime.salamrubyJobsRuntimeInitializing) {
+    return await globalForJobsRuntime.salamrubyJobsRuntimeInitializing;
   }
 
   const runtimeOptions = jobsWorkerBootstrapConfig.runtimeOptions;
@@ -176,22 +176,22 @@ export const registerJobsWorker = async (): Promise<JobsRuntimeHandle | null> =>
         [SURVEY_SCHEDULING_JOB_NAME]: surveySchedulingJobHandler,
       };
 
-  globalForJobsRuntime.formbricksJobsRuntimeInitializing = (async () => {
+  globalForJobsRuntime.salamrubyJobsRuntimeInitializing = (async () => {
     const runtime = await startJobsRuntime({
       ...runtimeOptions,
       jobHandlerOverrides,
     });
 
     clearJobsWorkerRetryTimeout();
-    globalForJobsRuntime.formbricksJobsRuntime = runtime;
-    globalForJobsRuntime.formbricksJobsRuntimeInitializing = undefined;
+    globalForJobsRuntime.salamrubyJobsRuntime = runtime;
+    globalForJobsRuntime.salamrubyJobsRuntimeInitializing = undefined;
     return runtime;
   })();
 
   try {
-    return await globalForJobsRuntime.formbricksJobsRuntimeInitializing;
+    return await globalForJobsRuntime.salamrubyJobsRuntimeInitializing;
   } catch (error) {
-    globalForJobsRuntime.formbricksJobsRuntimeInitializing = undefined;
+    globalForJobsRuntime.salamrubyJobsRuntimeInitializing = undefined;
     logger.error({ err: error }, "BullMQ worker registration failed");
     scheduleJobsWorkerRetry();
     throw error;
@@ -199,14 +199,14 @@ export const registerJobsWorker = async (): Promise<JobsRuntimeHandle | null> =>
 };
 
 export const resetJobsWorkerRegistrationForTests = async (): Promise<void> => {
-  const runtime = globalForJobsRuntime.formbricksJobsRuntime;
-  const initializing = globalForJobsRuntime.formbricksJobsRuntimeInitializing;
+  const runtime = globalForJobsRuntime.salamrubyJobsRuntime;
+  const initializing = globalForJobsRuntime.salamrubyJobsRuntimeInitializing;
   clearRecurringJobsRetryTimeout();
   clearJobsWorkerRetryTimeout();
-  globalForJobsRuntime.formbricksJobsRecurringRegistered = undefined;
-  globalForJobsRuntime.formbricksJobsRecurringRegistration = undefined;
-  globalForJobsRuntime.formbricksJobsRuntime = undefined;
-  globalForJobsRuntime.formbricksJobsRuntimeInitializing = undefined;
+  globalForJobsRuntime.salamrubyJobsRecurringRegistered = undefined;
+  globalForJobsRuntime.salamrubyJobsRecurringRegistration = undefined;
+  globalForJobsRuntime.salamrubyJobsRuntime = undefined;
+  globalForJobsRuntime.salamrubyJobsRuntimeInitializing = undefined;
 
   const runtimesToClose = new Set<JobsRuntimeHandle>();
 
@@ -223,12 +223,12 @@ export const resetJobsWorkerRegistrationForTests = async (): Promise<void> => {
     }
   }
 
-  if (globalForJobsRuntime.formbricksJobsRuntime) {
-    runtimesToClose.add(globalForJobsRuntime.formbricksJobsRuntime);
+  if (globalForJobsRuntime.salamrubyJobsRuntime) {
+    runtimesToClose.add(globalForJobsRuntime.salamrubyJobsRuntime);
   }
 
-  globalForJobsRuntime.formbricksJobsRuntime = undefined;
-  globalForJobsRuntime.formbricksJobsRuntimeInitializing = undefined;
+  globalForJobsRuntime.salamrubyJobsRuntime = undefined;
+  globalForJobsRuntime.salamrubyJobsRuntimeInitializing = undefined;
 
   await Promise.all(
     [...runtimesToClose].map(async (runtimeHandle) => {

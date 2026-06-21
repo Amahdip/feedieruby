@@ -1,6 +1,6 @@
 import { type Job, type JobsOptions, Queue } from "bullmq";
 import type IORedis from "ioredis";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { closeRedisConnection, createProducerConnection, getRedisUrlFromEnv } from "@/src/connection";
 import {
   JOBS_DEFAULT_JOB_OPTIONS,
@@ -31,15 +31,15 @@ export interface JobsQueueHandle {
 }
 
 interface TGlobalJobsQueueState {
-  formbricksJobsQueue: Queue | undefined;
-  formbricksJobsProducerConnection: IORedis | undefined;
-  formbricksJobsQueueInitializing: Promise<JobsQueueHandle> | undefined;
+  salamrubyJobsQueue: Queue | undefined;
+  salamrubyJobsProducerConnection: IORedis | undefined;
+  salamrubyJobsQueueInitializing: Promise<JobsQueueHandle> | undefined;
 }
 
 const globalForJobsQueue = globalThis as unknown as TGlobalJobsQueueState;
 
-let queueSingleton = globalForJobsQueue.formbricksJobsQueue;
-let connectionSingleton = globalForJobsQueue.formbricksJobsProducerConnection;
+let queueSingleton = globalForJobsQueue.salamrubyJobsQueue;
+let connectionSingleton = globalForJobsQueue.salamrubyJobsProducerConnection;
 
 const hasActiveConnection = (connection?: IORedis): connection is IORedis =>
   connection !== undefined && connection.status !== "end";
@@ -66,23 +66,23 @@ export const getJobsQueue = async (): Promise<JobsQueueHandle> => {
   }
 
   if (
-    globalForJobsQueue.formbricksJobsQueue &&
-    hasActiveConnection(globalForJobsQueue.formbricksJobsProducerConnection)
+    globalForJobsQueue.salamrubyJobsQueue &&
+    hasActiveConnection(globalForJobsQueue.salamrubyJobsProducerConnection)
   ) {
-    queueSingleton = globalForJobsQueue.formbricksJobsQueue;
-    connectionSingleton = globalForJobsQueue.formbricksJobsProducerConnection;
+    queueSingleton = globalForJobsQueue.salamrubyJobsQueue;
+    connectionSingleton = globalForJobsQueue.salamrubyJobsProducerConnection;
 
     return {
-      queue: globalForJobsQueue.formbricksJobsQueue,
-      connection: globalForJobsQueue.formbricksJobsProducerConnection,
+      queue: globalForJobsQueue.salamrubyJobsQueue,
+      connection: globalForJobsQueue.salamrubyJobsProducerConnection,
     };
   }
 
-  if (globalForJobsQueue.formbricksJobsQueueInitializing) {
-    return await globalForJobsQueue.formbricksJobsQueueInitializing;
+  if (globalForJobsQueue.salamrubyJobsQueueInitializing) {
+    return await globalForJobsQueue.salamrubyJobsQueueInitializing;
   }
 
-  globalForJobsQueue.formbricksJobsQueueInitializing = (async (): Promise<JobsQueueHandle> => {
+  globalForJobsQueue.salamrubyJobsQueueInitializing = (async (): Promise<JobsQueueHandle> => {
     const connection = createProducerConnection({ redisUrl: getRedisUrlFromEnv() });
     const queue = createJobsQueue({ connection });
 
@@ -100,8 +100,8 @@ export const getJobsQueue = async (): Promise<JobsQueueHandle> => {
 
     queueSingleton = queue;
     connectionSingleton = connection;
-    globalForJobsQueue.formbricksJobsQueue = queue;
-    globalForJobsQueue.formbricksJobsProducerConnection = connection;
+    globalForJobsQueue.salamrubyJobsQueue = queue;
+    globalForJobsQueue.salamrubyJobsProducerConnection = connection;
 
     return {
       queue,
@@ -110,9 +110,9 @@ export const getJobsQueue = async (): Promise<JobsQueueHandle> => {
   })();
 
   try {
-    return await globalForJobsQueue.formbricksJobsQueueInitializing;
+    return await globalForJobsQueue.salamrubyJobsQueueInitializing;
   } finally {
-    globalForJobsQueue.formbricksJobsQueueInitializing = undefined;
+    globalForJobsQueue.salamrubyJobsQueueInitializing = undefined;
   }
 };
 
@@ -416,7 +416,7 @@ export const resetJobsQueueFactory = async (): Promise<void> => {
 
   queueSingleton = undefined;
   connectionSingleton = undefined;
-  globalForJobsQueue.formbricksJobsQueue = undefined;
-  globalForJobsQueue.formbricksJobsProducerConnection = undefined;
-  globalForJobsQueue.formbricksJobsQueueInitializing = undefined;
+  globalForJobsQueue.salamrubyJobsQueue = undefined;
+  globalForJobsQueue.salamrubyJobsProducerConnection = undefined;
+  globalForJobsQueue.salamrubyJobsQueueInitializing = undefined;
 };

@@ -1,7 +1,7 @@
-import { getCacheService } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { getCacheService } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { type OverallHealthStatus } from "@/modules/api/v2/health/types/health-status";
 import { type ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 

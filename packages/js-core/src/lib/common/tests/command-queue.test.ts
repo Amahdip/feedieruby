@@ -142,7 +142,7 @@ describe("CommandQueue", () => {
     await queue.add(failingCmd, CommandType.GeneralAction, true);
     await queue.wait();
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith("🧱 Formbricks - Global error: ", expect.any(Error));
+    expect(consoleErrorSpy).toHaveBeenCalledWith("🧱 SalamRuby - Global error: ", expect.any(Error));
     consoleErrorSpy.mockRestore();
   });
 

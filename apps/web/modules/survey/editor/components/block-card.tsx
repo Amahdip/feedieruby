@@ -7,13 +7,13 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { ChevronDownIcon, ChevronRightIcon, GripIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyBlock, TSurveyBlockLogic } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
-import { TUserLocale } from "@formbricks/types/user";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyBlock, TSurveyBlockLogic } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
+import { TUserLocale } from "@salamruby/types/user";
 import { cn } from "@/lib/cn";
 import { recallToHeadline } from "@/lib/utils/recall";
 import { AddElementToBlockButton } from "@/modules/survey/editor/components/add-element-to-block-button";
@@ -63,7 +63,7 @@ interface BlockCardProps {
   lastElementIndex: number;
   invalidElements?: string[];
   addElement: (element: any, index?: number) => void;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isCxMode: boolean;
   locale: TUserLocale;
   responseCount: number;
@@ -97,7 +97,7 @@ export const BlockCard = ({
   lastElementIndex,
   invalidElements,
   addElement,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isCxMode,
   locale,
   responseCount,
@@ -222,7 +222,7 @@ export const BlockCard = ({
     // FileUpload needs extra props
     if (element.type === TSurveyElementTypeEnum.FileUpload) {
       additionalProps.workspace = workspace;
-      additionalProps.isFormbricksCloud = isFormbricksCloud;
+      additionalProps.isSalamRubyCloud = isSalamRubyCloud;
     }
 
     // @ts-expect-error - These props should cover everything
@@ -408,16 +408,18 @@ export const BlockCard = ({
                             onOpenChange={setOpenAdvanced}
                             className="mt-5">
                             <Collapsible.CollapsibleTrigger
-                              className="flex items-center text-sm text-slate-700"
+                              className="flex w-full items-center gap-2 text-sm text-slate-700"
                               aria-label="Toggle advanced settings">
+                              <span className="text-start">
+                                {openAdvanced
+                                  ? t("workspace.surveys.edit.hide_question_settings")
+                                  : t("workspace.surveys.edit.show_question_settings")}
+                              </span>
                               {openAdvanced ? (
-                                <ChevronDownIcon className="mr-1 h-4 w-3" />
+                                <ChevronDownIcon className="h-4 w-3 shrink-0" />
                               ) : (
-                                <ChevronRightIcon className="mr-2 h-4 w-3" />
+                                <ChevronRightIcon className="h-4 w-3 shrink-0 rtl:rotate-180" />
                               )}
-                              {openAdvanced
-                                ? t("workspace.surveys.edit.hide_question_settings")
-                                : t("workspace.surveys.edit.show_question_settings")}
                             </Collapsible.CollapsibleTrigger>
 
                             <Collapsible.CollapsibleContent className="flex flex-col gap-4" ref={parent}>

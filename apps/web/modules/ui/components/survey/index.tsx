@@ -1,17 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SurveyContainerProps } from "@formbricks/types/formbricks-surveys";
+import { SurveyContainerProps } from "@salamruby/types/salamruby-surveys";
 import { executeRecaptcha, loadRecaptchaScript } from "@/modules/ui/components/survey/recaptcha";
 
-const createContainerId = () => `formbricks-survey-container`;
+const createContainerId = () => `salamruby-survey-container`;
 
 // Module-level flag to prevent concurrent script loads across component instances
 let isLoadingScript = false;
 
 declare global {
   interface Window {
-    formbricksSurveys: {
+    salamrubySurveys: {
       renderSurveyInline: (props: SurveyContainerProps) => void;
       renderSurveyModal: (props: SurveyContainerProps) => void;
       renderSurvey: (props: SurveyContainerProps) => void;
@@ -29,7 +29,7 @@ export const SurveyInline = (props: Omit<SurveyContainerProps, "containerId">) =
   );
 
   const renderInline = useCallback(
-    () => window.formbricksSurveys.renderSurvey({ ...props, containerId, getRecaptchaToken, mode: "inline" }),
+    () => window.salamrubySurveys.renderSurvey({ ...props, containerId, getRecaptchaToken, mode: "inline" }),
     [containerId, props, getRecaptchaToken]
   );
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -71,7 +71,7 @@ export const SurveyInline = (props: Omit<SurveyContainerProps, "containerId">) =
     }
 
     const loadScript = async () => {
-      if (!window.formbricksSurveys) {
+      if (!window.salamrubySurveys) {
         try {
           if (props.isSpamProtectionEnabled && props.recaptchaSiteKey) {
             await loadRecaptchaScript(props.recaptchaSiteKey);

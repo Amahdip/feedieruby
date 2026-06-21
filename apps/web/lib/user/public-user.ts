@@ -1,4 +1,4 @@
-import { Prisma } from "@formbricks/database/prisma";
+import { Prisma } from "@salamruby/database/prisma";
 
 export const publicUserSelect = {
   id: true,

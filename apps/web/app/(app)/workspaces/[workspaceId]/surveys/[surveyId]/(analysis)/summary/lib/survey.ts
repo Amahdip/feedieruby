@@ -1,7 +1,7 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
 import { convertFloatTo2Decimal } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/utils";
 
 export const deleteResponsesAndDisplaysForSurvey = async (

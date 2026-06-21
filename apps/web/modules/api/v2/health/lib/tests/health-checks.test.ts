@@ -1,24 +1,24 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { ErrorCode, getCacheService } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import { err, ok } from "@formbricks/types/error-handlers";
+import { ErrorCode, getCacheService } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import { err, ok } from "@salamruby/types/error-handlers";
 import { checkCacheHealth, checkDatabaseHealth, performHealthChecks } from "../health-checks";
 
 // Mock dependencies
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     $queryRaw: vi.fn(),
   },
 }));
 
-vi.mock("@formbricks/cache", () => ({
+vi.mock("@salamruby/cache", () => ({
   getCacheService: vi.fn(),
   ErrorCode: {
     RedisConnectionError: "redis_connection_error",
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),

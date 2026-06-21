@@ -6,15 +6,13 @@ import { CheckIcon } from "lucide-react";
 import { KeyboardEventHandler, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { cn } from "@/lib/cn";
-import {
-  SURVEY_SCHEDULING_TIME_LABEL,
-  SURVEY_SCHEDULING_TIME_ZONE_LABEL,
-} from "@/modules/survey/scheduling/lib/constants";
+import { SURVEY_SCHEDULING_TIME_LABEL } from "@/modules/survey/scheduling/lib/constants";
 import {
   getMinimumSurveySchedulingCalendarDate,
+  getSurveySchedulingTimeZoneDisplayLabel,
   toCalendarDate,
   toDateOnlySelection,
 } from "@/modules/survey/scheduling/lib/date-utils";
@@ -41,6 +39,7 @@ export const ResponseOptionsCard = ({
   locale,
 }: ResponseOptionsCardProps) => {
   const { t } = useTranslation();
+  const surveySchedulingTimeZoneLabel = getSurveySchedulingTimeZoneDisplayLabel(t);
   const [open, setOpen] = useState(localSurvey.type === "link");
   const autoComplete = localSurvey.autoComplete !== null;
   const [surveyClosedMessageToggle, setSurveyClosedMessageToggle] = useState(false);
@@ -334,7 +333,7 @@ export const ResponseOptionsCard = ({
             title={t("workspace.surveys.edit.publish_survey_on_date")}
             description={t("workspace.surveys.edit.survey_will_be_published_at_midnight_cet", {
               time: SURVEY_SCHEDULING_TIME_LABEL,
-              timeZone: SURVEY_SCHEDULING_TIME_ZONE_LABEL,
+              timeZone: surveySchedulingTimeZoneLabel,
             })}
             childBorder={true}>
             <div className="p-4">
@@ -374,7 +373,7 @@ export const ResponseOptionsCard = ({
             title={t("workspace.surveys.edit.close_survey_on_date")}
             description={t("workspace.surveys.edit.survey_will_be_closed_at_midnight_cet", {
               time: SURVEY_SCHEDULING_TIME_LABEL,
-              timeZone: SURVEY_SCHEDULING_TIME_ZONE_LABEL,
+              timeZone: surveySchedulingTimeZoneLabel,
             })}
             childBorder={true}>
             <div className="p-4">

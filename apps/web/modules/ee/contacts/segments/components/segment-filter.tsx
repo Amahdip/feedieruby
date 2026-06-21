@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
 import {
   ARITHMETIC_OPERATORS,
   DATE_OPERATORS,
@@ -34,7 +34,7 @@ import {
   type TSegmentPersonFilter,
   type TSegmentSegmentFilter,
   isDateOperator,
-} from "@formbricks/types/segment";
+} from "@salamruby/types/segment";
 import { cn } from "@/lib/cn";
 import { structuredClone } from "@/lib/pollyfills/structuredClone";
 import {

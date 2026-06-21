@@ -5,7 +5,7 @@ import { ChevronDownIcon, ChevronRightIcon, CogIcon, FoldersIcon, Loader2, PlusI
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { getWorkspacesForSwitcherAction } from "@/app/(app)/workspaces/[workspaceId]/actions";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { BreadcrumbItem } from "@/modules/ui/components/breadcrumb";
@@ -14,6 +14,8 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/modules/ui/components/dropdown-menu";
@@ -28,7 +30,7 @@ interface WorkspaceBreadcrumbProps {
   currentWorkspaceName?: string; // Optional: pass directly if context not available
   isOwnerOrManager: boolean;
   organizationWorkspacesLimit: number;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isLicenseActive: boolean;
   currentOrganizationId: string;
   isAccessControlAllowed: boolean;
@@ -41,7 +43,7 @@ export const WorkspaceBreadcrumb = ({
   currentWorkspaceName,
   isOwnerOrManager,
   organizationWorkspacesLimit,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isLicenseActive,
   currentOrganizationId,
   isAccessControlAllowed,
@@ -122,7 +124,7 @@ export const WorkspaceBreadcrumb = ({
   };
 
   const getLimitModalButtons = (): [ModalButton, ModalButton] => {
-    if (isFormbricksCloud) {
+    if (isSalamRubyCloud) {
       return [
         {
           text: t("workspace.settings.billing.upgrade"),
@@ -140,7 +142,7 @@ export const WorkspaceBreadcrumb = ({
         text: t("workspace.settings.billing.upgrade"),
         href: isLicenseActive
           ? `${workspaceBasePath}/settings/organization/enterprise`
-          : "https://formbricks.com/upgrade-self-hosted-license",
+          : "https://salamruby.com/upgrade-self-hosted-license",
       },
       {
         text: t("common.cancel"),
@@ -158,7 +160,7 @@ export const WorkspaceBreadcrumb = ({
             <span>{workspaceName}</span>
             {isPending && <Loader2 className="size-3 animate-spin" strokeWidth={1.5} />}
             {isEnvironmentBreadcrumbVisible && !isWorkspaceDropdownOpen ? (
-              <ChevronRightIcon className="size-3" strokeWidth={1.5} />
+              <ChevronRightIcon className="size-3 rtl:rotate-180" strokeWidth={1.5} />
             ) : (
               <ChevronDownIcon className="size-3" strokeWidth={1.5} />
             )}
@@ -166,10 +168,10 @@ export const WorkspaceBreadcrumb = ({
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="start" className="mt-2">
-          <div className="px-2 py-1.5 text-sm font-medium text-slate-500">
-            <FoldersIcon className="mr-2 inline size-4" strokeWidth={1.5} />
+          <DropdownMenuLabel className="flex items-center gap-2 font-medium text-slate-500">
+            <FoldersIcon className="size-4 shrink-0" strokeWidth={1.5} />
             {t("common.choose_workspace")}
-          </div>
+          </DropdownMenuLabel>
           {isLoadingWorkspaces && (
             <div className="flex items-center justify-center py-2">
               <Loader2 className="size-4 animate-spin" />
@@ -198,9 +200,7 @@ export const WorkspaceBreadcrumb = ({
                     checked={ws.id === currentWorkspaceId}
                     onClick={() => handleWorkspaceChange(ws.id)}
                     className="cursor-pointer">
-                    <div className="flex items-center gap-2">
-                      <span>{ws.name}</span>
-                    </div>
+                    {ws.name}
                   </DropdownMenuCheckboxItem>
                 ))}
               </DropdownMenuGroup>
@@ -210,9 +210,9 @@ export const WorkspaceBreadcrumb = ({
                     <button
                       type="button"
                       aria-disabled="true"
-                      className="relative flex w-full cursor-not-allowed select-none items-center justify-between rounded-lg py-1.5 pl-8 pr-2 text-sm font-medium text-slate-400">
+                      className="relative flex w-full cursor-not-allowed select-none items-center gap-2 rounded-lg py-1.5 pe-2 ps-8 text-sm font-medium text-slate-400">
+                      <PlusIcon className="size-4 shrink-0" strokeWidth={1.5} />
                       <span>{t("common.add_new_workspace")}</span>
-                      <PlusIcon className="ml-2 size-4" strokeWidth={1.5} />
                     </button>
                   </PopoverTrigger>
                   <PopoverContent className="w-fit max-w-72 px-3 py-2 text-sm text-slate-700">
@@ -222,24 +222,24 @@ export const WorkspaceBreadcrumb = ({
                   </PopoverContent>
                 </Popover>
               ) : (
-                <DropdownMenuCheckboxItem
+                <DropdownMenuItem
                   onClick={handleAddWorkspace}
-                  className="w-full cursor-pointer justify-between">
-                  <span>{t("common.add_new_workspace")}</span>
-                  <PlusIcon className="ml-2 size-4" strokeWidth={1.5} />
-                </DropdownMenuCheckboxItem>
+                  className="cursor-pointer"
+                  icon={<PlusIcon className="size-4 shrink-0" strokeWidth={1.5} />}>
+                  {t("common.add_new_workspace")}
+                </DropdownMenuItem>
               )}
             </>
           )}
           <DropdownMenuSeparator />
-          <DropdownMenuCheckboxItem
+          <DropdownMenuItem
             onClick={() =>
               handleWorkspaceSettingsNavigation(`${workspaceBasePath}/settings/workspace/general`)
             }
-            className="cursor-pointer">
-            <CogIcon className="mr-2 size-4" strokeWidth={1.5} />
+            className="cursor-pointer"
+            icon={<CogIcon className="size-4 shrink-0" strokeWidth={1.5} />}>
             {t("common.settings")}
-          </DropdownMenuCheckboxItem>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       {/* Modals */}

@@ -46,9 +46,7 @@ export const BaseCard = ({
                 !isNaN(percentage) &&
                 Number.isFinite(percentage) &&
                 !isLoading && (
-                  <span className="ml-1 rounded-xl bg-slate-100 px-2 py-1 text-xs">
-                    {Math.round(percentage)}%
-                  </span>
+                  <span className="rounded-xl bg-slate-100 px-2 py-1 text-xs">{Math.round(percentage)}%</span>
                 )}
             </p>
             {children}

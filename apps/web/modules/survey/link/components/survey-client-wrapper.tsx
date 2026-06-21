@@ -3,10 +3,10 @@
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TResponseData } from "@formbricks/types/responses";
-import { TSurvey, TSurveyStyling } from "@formbricks/types/surveys/types";
-import { TWorkspaceStyling } from "@formbricks/types/workspace";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TResponseData } from "@salamruby/types/responses";
+import { TSurvey, TSurveyStyling } from "@salamruby/types/surveys/types";
+import { TWorkspaceStyling } from "@salamruby/types/workspace";
 import { toJsWorkspaceStateSurvey } from "@/lib/survey/client-utils";
 import { getElementsFromBlocks } from "@/modules/survey/lib/client-utils";
 import { CustomScriptsInjector } from "@/modules/survey/link/components/custom-scripts-injector";
@@ -36,7 +36,7 @@ interface SurveyClientWrapperProps {
   IMPRINT_URL?: string;
   PRIVACY_URL?: string;
   TERMS_URL?: string;
-  IS_FORMBRICKS_CLOUD: boolean;
+  IS_SALAMRUBY_CLOUD: boolean;
 }
 
 let setBlockId = (_: string) => {};
@@ -61,7 +61,7 @@ export const SurveyClientWrapper = ({
   IMPRINT_URL,
   PRIVACY_URL,
   TERMS_URL,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
 }: SurveyClientWrapperProps) => {
   const searchParams = useSearchParams();
   const { i18n } = useTranslation();
@@ -161,7 +161,7 @@ export const SurveyClientWrapper = ({
   return (
     <>
       {/* Inject custom scripts for tracking/analytics (self-hosted only) */}
-      {!IS_FORMBRICKS_CLOUD && !isPreview && (
+      {!IS_SALAMRUBY_CLOUD && !isPreview && (
         <CustomScriptsInjector
           workspaceScripts={workspace.customHeadScripts}
           surveyScripts={survey.customHeadScripts}
@@ -179,7 +179,7 @@ export const SurveyClientWrapper = ({
         handleResetSurvey={handleResetSurvey}
         isEmbed={isEmbed}
         publicDomain={publicDomain}
-        IS_FORMBRICKS_CLOUD={IS_FORMBRICKS_CLOUD}
+        IS_SALAMRUBY_CLOUD={IS_SALAMRUBY_CLOUD}
         IMPRINT_URL={IMPRINT_URL}
         PRIVACY_URL={PRIVACY_URL}
         TERMS_URL={TERMS_URL}

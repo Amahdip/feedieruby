@@ -1,9 +1,9 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
-import { DatabaseError, InvalidInputError, OperationNotAllowedError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
+import { DatabaseError, InvalidInputError, OperationNotAllowedError } from "@salamruby/types/errors";
 import { MAX_ATTRIBUTE_CLASSES_PER_ENVIRONMENT } from "@/lib/constants";
 import { formatSnakeCaseToTitleCase } from "@/lib/utils/safe-identifier";
 import { TContactAttributeKeyCreateInput } from "@/modules/ee/contacts/api/v1/management/contact-attribute-keys/[contactAttributeKeyId]/types/contact-attribute-keys";

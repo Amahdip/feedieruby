@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { AuthorizationError } from "@formbricks/types/errors";
-import { ZUserEmail } from "@formbricks/types/user";
+import { logger } from "@salamruby/logger";
+import { AuthorizationError } from "@salamruby/types/errors";
+import { ZUserEmail } from "@salamruby/types/user";
 import { WEBAPP_URL } from "@/lib/constants";
 import { capturePostHogEvent } from "@/lib/posthog";
 import { authenticatedActionClient } from "@/lib/utils/action-client";

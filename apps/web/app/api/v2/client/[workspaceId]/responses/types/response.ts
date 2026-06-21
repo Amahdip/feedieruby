@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { ZResponseInput } from "@formbricks/types/responses";
+import { ZId } from "@salamruby/types/common";
+import { ZResponseInput } from "@salamruby/types/responses";
 
 export const ZResponseInputV2 = ZResponseInput.omit({ userId: true }).extend({
   contactId: ZId.nullish(),

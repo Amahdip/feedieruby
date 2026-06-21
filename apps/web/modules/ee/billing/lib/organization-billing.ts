@@ -1,19 +1,19 @@
 import "server-only";
 import Stripe from "stripe";
-import { createCacheKey } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { createCacheKey } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   type TCloudBillingInterval,
   type TCloudBillingPlan,
   type TOrganizationBilling,
   type TOrganizationStripePendingChange,
   type TOrganizationStripeSubscriptionStatus,
-} from "@formbricks/types/organizations";
+} from "@salamruby/types/organizations";
 import { cache } from "@/lib/cache";
-import { IS_FORMBRICKS_CLOUD, WEBAPP_URL } from "@/lib/constants";
+import { IS_SALAMRUBY_CLOUD, WEBAPP_URL } from "@/lib/constants";
 import { getWorkspace } from "@/lib/workspace/service";
 import {
   type TStandardCloudPlan,
@@ -48,9 +48,9 @@ export const invalidateOrganizationBillingCache = async (organizationId: string)
 
 export const getDefaultOrganizationBilling = (): TOrganizationBilling => ({
   limits: {
-    workspaces: IS_FORMBRICKS_CLOUD ? 1 : 3,
+    workspaces: IS_SALAMRUBY_CLOUD ? 1 : 3,
     monthly: {
-      responses: IS_FORMBRICKS_CLOUD ? 250 : 1500,
+      responses: IS_SALAMRUBY_CLOUD ? 250 : 1500,
     },
   },
   stripeCustomerId: null,
@@ -1024,7 +1024,7 @@ const getOrganizationOwner = async (
 export const ensureStripeCustomerForOrganization = async (
   organizationId: string
 ): Promise<{ customerId: string | null }> => {
-  if (!IS_FORMBRICKS_CLOUD || !stripeClient) {
+  if (!IS_SALAMRUBY_CLOUD || !stripeClient) {
     return { customerId: null };
   }
 
@@ -1160,7 +1160,7 @@ export const syncOrganizationBillingFromStripe = async (
   organizationId: string,
   event?: { id: string; created: number }
 ): Promise<TOrganizationBilling | null> => {
-  if (!IS_FORMBRICKS_CLOUD || !stripeClient) {
+  if (!IS_SALAMRUBY_CLOUD || !stripeClient) {
     return null;
   }
 
@@ -1283,7 +1283,7 @@ const getOrganizationBillingFromDatabase = async (
 export const getOrganizationBillingWithReadThroughSync = async (
   organizationId: string
 ): Promise<TOrganizationBilling | null> => {
-  if (!IS_FORMBRICKS_CLOUD) {
+  if (!IS_SALAMRUBY_CLOUD) {
     // Self-hosted does not need Stripe read-through sync or Redis-backed billing cache.
     return await getOrganizationBillingFromDatabase(organizationId);
   }
@@ -1349,7 +1349,7 @@ export const reconcileCloudStripeSubscriptionsForOrganization = async (
   organizationId: string
 ): Promise<void> => {
   const client = stripeClient;
-  if (!IS_FORMBRICKS_CLOUD || !client) return;
+  if (!IS_SALAMRUBY_CLOUD || !client) return;
 
   const billing = await getOrganizationBillingFromDatabase(organizationId);
   const customerId = billing?.stripeCustomerId;
@@ -1436,7 +1436,7 @@ export const reconcileCloudStripeSubscriptionsForOrganization = async (
 };
 
 export const ensureCloudStripeSetupForOrganization = async (organizationId: string): Promise<void> => {
-  if (!IS_FORMBRICKS_CLOUD || !stripeClient) return;
+  if (!IS_SALAMRUBY_CLOUD || !stripeClient) return;
   await ensureStripeCustomerForOrganization(organizationId);
   await reconcileCloudStripeSubscriptionsForOrganization(organizationId);
   await syncOrganizationBillingFromStripe(organizationId);

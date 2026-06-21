@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { getOrganization } from "@/lib/organization/service";
 import { getEnterpriseLicense } from "@/modules/ee/license-check/lib/license";
 import { getSelfHostedOrganizationEntitlementsContext } from "./self-hosted-provider";

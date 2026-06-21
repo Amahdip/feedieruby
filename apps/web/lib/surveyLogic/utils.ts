@@ -1,14 +1,14 @@
 import { createId } from "@paralleldrive/cuid2";
-import { TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { TResponseData, TResponseVariables } from "@formbricks/types/responses";
+import { TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { TResponseData, TResponseVariables } from "@salamruby/types/responses";
 import {
   TSurveyBlockLogic,
   TSurveyBlockLogicAction,
   TSurveyBlockLogicActionObjective,
-} from "@formbricks/types/surveys/blocks";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TConditionGroup, TSingleCondition } from "@formbricks/types/surveys/logic";
-import { TActionCalculate, TSurveyLogicAction, TSurveyVariable } from "@formbricks/types/surveys/types";
+} from "@salamruby/types/surveys/blocks";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TConditionGroup, TSingleCondition } from "@salamruby/types/surveys/logic";
+import { TActionCalculate, TSurveyLogicAction, TSurveyVariable } from "@salamruby/types/surveys/types";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 import { getElementsFromBlocks } from "@/modules/survey/lib/client-utils";
 

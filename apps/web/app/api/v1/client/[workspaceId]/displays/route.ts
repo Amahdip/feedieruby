@@ -1,6 +1,6 @@
-import { logger } from "@formbricks/logger";
-import { ZDisplayCreateInput } from "@formbricks/types/displays";
-import { InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { ZDisplayCreateInput } from "@salamruby/types/displays";
+import { InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { RequestBodyTooLargeError, parseJsonBodyWithLimit } from "@/app/lib/api/request-body";
 import { responses } from "@/app/lib/api/response";
 import { transformErrorToDetails } from "@/app/lib/api/validator";

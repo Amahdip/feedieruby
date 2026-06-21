@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { getDisplaysByContactId } from "@/lib/display/service";
 import { getResponsesByContactId } from "@/lib/response/service";
 import { getLocale } from "@/lingodotdev/language";

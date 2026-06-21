@@ -1,9 +1,9 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { type Prisma, type SurveyStatus } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ValidationError } from "@formbricks/types/errors";
-import type { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { type Prisma, type SurveyStatus } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ValidationError } from "@salamruby/types/errors";
+import type { TSurvey } from "@salamruby/types/surveys/types";
 import { queueAuditEventWithoutRequest } from "@/modules/ee/audit-logs/lib/handler";
 import { type TAuditStatus } from "@/modules/ee/audit-logs/types/audit-log";
 import { SURVEY_SCHEDULING_RECONCILIATION_BATCH_SIZE } from "./constants";

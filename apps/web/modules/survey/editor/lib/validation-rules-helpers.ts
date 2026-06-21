@@ -1,9 +1,9 @@
-import { TSurveyElement } from "@formbricks/types/surveys/elements";
+import { TSurveyElement } from "@salamruby/types/surveys/elements";
 import {
   TAddressField,
   TContactInfoField,
   TValidationRuleType,
-} from "@formbricks/types/surveys/validation-rules";
+} from "@salamruby/types/surveys/validation-rules";
 import { RULE_TYPE_CONFIG } from "./validation-rules-config";
 
 // Field options for address elements

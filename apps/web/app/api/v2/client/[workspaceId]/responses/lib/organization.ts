@@ -1,7 +1,7 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
-import { TOrganizationBilling } from "@formbricks/types/organizations";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
+import { TOrganizationBilling } from "@salamruby/types/organizations";
 
 export const getOrganizationBillingByWorkspaceId = reactCache(
   async (workspaceId: string): Promise<TOrganizationBilling | null> => {

@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { TDisplayCreateInput } from "@formbricks/types/displays";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { TDisplayCreateInput } from "@salamruby/types/displays";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   ValidationError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { getContactByUserId } from "./contact";
 import { createDisplay } from "./display";
@@ -18,7 +18,7 @@ vi.mock("@/lib/utils/validate", () => ({
   ), // Pass through validation for testing
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     contact: {
       create: vi.fn(),

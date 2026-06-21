@@ -1,14 +1,14 @@
 import { cleanup } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma, WebhookSource } from "@formbricks/database/prisma";
-import { DatabaseError, InvalidInputError, ValidationError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma, WebhookSource } from "@salamruby/database/prisma";
+import { DatabaseError, InvalidInputError, ValidationError } from "@salamruby/types/errors";
 import { TWebhookInput } from "@/app/api/v1/webhooks/types/webhooks";
 import { validateInputs } from "@/lib/utils/validate";
 import { validateWebhookUrl } from "@/lib/utils/validate-webhook-url";
 import { createWebhook } from "./webhook";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     webhook: {
       create: vi.fn(),

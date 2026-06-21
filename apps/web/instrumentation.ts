@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/nextjs";
 import { type Instrumentation } from "next";
-import { logger } from "@formbricks/logger";
-import { isExpectedError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { isExpectedError } from "@salamruby/types/errors";
 import { IS_PRODUCTION, PROMETHEUS_ENABLED, SENTRY_DSN } from "@/lib/constants";
 
 export const onRequestError: Instrumentation.onRequestError = (...args) => {

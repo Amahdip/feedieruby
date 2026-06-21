@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { ErrorCode } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import { AuthorizationError, InvalidInputError } from "@formbricks/types/errors";
+import { ErrorCode } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import { AuthorizationError, InvalidInputError } from "@salamruby/types/errors";
 import { cache } from "@/lib/cache";
 import { createAccountDeletionSsoReauthIntent, verifyAccountDeletionSsoReauthIntent } from "@/lib/jwt";
 import { getUserAuthenticationData } from "@/lib/user/password";
@@ -18,7 +18,7 @@ import {
   validateAccountDeletionSsoReauthenticationCallback,
 } from "./account-deletion-sso-reauth";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     account: {
       findUnique: vi.fn(),
@@ -29,7 +29,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),
@@ -50,8 +50,8 @@ vi.mock("@/lib/constants", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/constants")>();
   return {
     ...actual,
-    SAML_PRODUCT: "formbricks",
-    SAML_TENANT: "formbricks.com",
+    SAML_PRODUCT: "salamruby",
+    SAML_TENANT: "salamruby.com",
     WEBAPP_URL: "http://localhost:3000",
   };
 });
@@ -220,9 +220,9 @@ describe("account deletion SSO identity confirmation", () => {
     expect(result).toEqual({
       authorizationParams: {
         forceAuthn: "true",
-        product: "formbricks",
+        product: "salamruby",
         provider: "saml",
-        tenant: "formbricks.com",
+        tenant: "salamruby.com",
       },
       callbackUrl: "http://localhost:3000/auth/account-deletion/sso/complete?intent=intent-token",
       provider: "saml",

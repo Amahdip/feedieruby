@@ -13,6 +13,7 @@ interface NavigationLinkProps {
   isTextVisible: boolean;
   disabled?: boolean;
   disabledMessage?: string;
+  isRtl?: boolean;
 }
 
 export const NavigationLink = ({
@@ -24,6 +25,7 @@ export const NavigationLink = ({
   isTextVisible = true,
   disabled = false,
   disabledMessage,
+  isRtl = false,
 }: NavigationLinkProps) => {
   const tooltipText = disabled ? disabledMessage || linkText : linkText;
   const activeClass = "bg-slate-50 border-r-4 border-brand-dark font-semibold text-slate-900";
@@ -42,14 +44,12 @@ export const NavigationLink = ({
   const expandedColorClass = getColorClass("text-slate-600 hover:text-slate-900");
 
   const label = (
-    <span
-      className={cn(
-        "ml-2 flex transition-opacity duration-100",
-        isTextVisible ? "opacity-0" : "opacity-100"
-      )}>
+    <span className={cn("flex transition-opacity duration-100", isTextVisible ? "opacity-0" : "opacity-100")}>
       {linkText}
     </span>
   );
+
+  const tooltipSide = isRtl ? "left" : "right";
 
   return (
     <>
@@ -57,7 +57,7 @@ export const NavigationLink = ({
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
-              <li className={cn("mb-1 ml-2 rounded-l-md py-2 pl-2 text-sm", collapsedColorClass)}>
+              <li className={cn("mb-1 ms-2 rounded-s-md py-2 ps-2 text-sm", collapsedColorClass)}>
                 {disabled ? (
                   <div className="flex items-center">{children}</div>
                 ) : (
@@ -65,15 +65,15 @@ export const NavigationLink = ({
                 )}
               </li>
             </TooltipTrigger>
-            <TooltipContent side="right">{tooltipText}</TooltipContent>
+            <TooltipContent side={tooltipSide}>{tooltipText}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ) : (
-        <li className={cn("mb-1 rounded-l-md py-2 pl-5 text-sm", expandedColorClass)}>
+        <li className={cn("mb-1 rounded-s-md py-2 ps-5 text-sm", expandedColorClass)}>
           {disabled ? (
             <Popover>
               <PopoverTrigger asChild>
-                <div className="flex items-center">
+                <div className="flex items-center gap-2">
                   {children}
                   {label}
                 </div>
@@ -83,7 +83,7 @@ export const NavigationLink = ({
               </PopoverContent>
             </Popover>
           ) : (
-            <Link href={href} className="flex items-center">
+            <Link href={href} className="flex items-center gap-2">
               {children}
               {label}
             </Link>

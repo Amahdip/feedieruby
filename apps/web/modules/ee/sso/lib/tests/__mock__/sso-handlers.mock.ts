@@ -1,6 +1,6 @@
 import type { Account } from "next-auth";
-import type { TOrganization } from "@formbricks/types/organizations";
-import type { TUser } from "@formbricks/types/user";
+import type { TOrganization } from "@salamruby/types/organizations";
+import type { TUser } from "@salamruby/types/user";
 
 // Mock user data
 export const mockUser: TUser = {

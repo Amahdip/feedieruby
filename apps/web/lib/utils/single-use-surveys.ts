@@ -3,7 +3,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { symmetricEncrypt } from "@/lib/crypto";
 import { env } from "@/lib/env";
 
-const SINGLE_USE_SIGNATURE_PAYLOAD_PREFIX = "formbricks.single-use.v1";
+const SINGLE_USE_SIGNATURE_PAYLOAD_PREFIX = "salamruby.single-use.v1";
 
 export type TSurveySingleUseLinkParams = {
   suId: string;

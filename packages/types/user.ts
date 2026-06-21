@@ -4,6 +4,7 @@ export const ZUserLocale = z.enum([
   "de-DE",
   "en-US",
   "es-ES",
+  "fa-IR",
   "fr-FR",
   "hu-HU",
   "ja-JP",

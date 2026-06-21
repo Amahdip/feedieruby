@@ -1,5 +1,5 @@
-import { logger } from "@formbricks/logger";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { getOrganizationBillingByWorkspaceId } from "@/app/api/v2/client/[workspaceId]/responses/lib/organization";
 import { verifyRecaptchaToken } from "@/app/api/v2/client/[workspaceId]/responses/lib/recaptcha";
 import { TResponseInputV2 } from "@/app/api/v2/client/[workspaceId]/responses/types/response";

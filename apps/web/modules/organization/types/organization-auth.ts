@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { ZMembership } from "@formbricks/types/memberships";
-import { ZOrganization } from "@formbricks/types/organizations";
-import { ZUser } from "@formbricks/types/user";
+import { ZMembership } from "@salamruby/types/memberships";
+import { ZOrganization } from "@salamruby/types/organizations";
+import { ZUser } from "@salamruby/types/user";
 
 export const ZOrganizationAuth = z.object({
   organization: ZOrganization,

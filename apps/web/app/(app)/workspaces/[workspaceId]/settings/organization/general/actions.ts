@@ -1,10 +1,10 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
-import type { TOrganizationRole } from "@formbricks/types/memberships";
-import { ZOrganizationUpdateInput } from "@formbricks/types/organizations";
+import { ZId } from "@salamruby/types/common";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
+import type { TOrganizationRole } from "@salamruby/types/memberships";
+import { ZOrganizationUpdateInput } from "@salamruby/types/organizations";
 import { isInstanceAIConfigured } from "@/lib/ai/service";
 import { deleteOrganization, getOrganization, updateOrganization } from "@/lib/organization/service";
 import { authenticatedActionClient } from "@/lib/utils/action-client";

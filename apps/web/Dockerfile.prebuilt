@@ -1,0 +1,210 @@
+# Runtime image for SalamRuby when the Next.js app is already built on the host.
+# Build: scripts/build-salamruby-image-from-host.sh
+
+# Build-time only: borrow Prisma linux-musl engines (host builds cannot produce Alpine binaries).
+FROM ghcr.io/formbricks/formbricks:latest AS prisma-engine-donor
+
+FROM node:24-alpine3.23 AS runner
+
+RUN apk update && apk upgrade --no-cache \
+    && npm install --ignore-scripts -g npm@11.15.0 \
+    && addgroup -S nextjs \
+    && adduser -S -u 1001 -G nextjs nextjs
+
+WORKDIR /home/nextjs
+
+COPY apps/web/.next/standalone ./
+RUN chown -R nextjs:nextjs ./ && chmod -R 755 ./
+
+COPY apps/web/next.config.mjs .
+RUN chmod 644 ./next.config.mjs
+
+COPY apps/web/package.json .
+RUN chmod 644 ./package.json
+
+COPY prisma.config.mjs ./prisma.config.mjs
+RUN chmod 644 ./prisma.config.mjs
+
+COPY apps/web/.next/static ./apps/web/.next/static
+RUN chown -R nextjs:nextjs ./apps/web/.next/static && chmod -R 755 ./apps/web/.next/static
+
+COPY apps/web/public ./apps/web/public
+RUN chown -R nextjs:nextjs ./apps/web/public && chmod -R 755 ./apps/web/public
+
+RUN mkdir -p ./packages/database/migrations && chown -R nextjs:nextjs ./packages/database
+
+COPY packages/database/package.json ./packages/database/package.json
+RUN chown nextjs:nextjs ./packages/database/package.json && chmod 644 ./packages/database/package.json
+
+COPY packages/database/schema.prisma ./packages/database/schema.prisma
+RUN chown nextjs:nextjs ./packages/database/schema.prisma && chmod 644 ./packages/database/schema.prisma
+
+COPY packages/database/dist ./packages/database/dist
+RUN chown -R nextjs:nextjs ./packages/database/dist && chmod -R 755 ./packages/database/dist
+
+COPY packages/database/migrations ./packages/database/migrations
+RUN chown -R nextjs:nextjs ./packages/database/migrations && chmod -R 755 ./packages/database/migrations
+
+COPY packages/database/generated ./packages/database/generated
+RUN chown -R nextjs:nextjs ./packages/database/generated && chmod -R 755 ./packages/database/generated
+
+COPY node_modules/@prisma ./node_modules/@prisma
+RUN chown -R nextjs:nextjs ./node_modules/@prisma && chmod -R 755 ./node_modules/@prisma
+
+COPY --from=prisma-engine-donor /home/nextjs/node_modules/@prisma/engines ./node_modules/@prisma/engines
+RUN chown -R nextjs:nextjs ./node_modules/@prisma/engines && chmod -R 755 ./node_modules/@prisma/engines
+
+COPY node_modules/prisma ./node_modules/prisma
+RUN mkdir -p ./node_modules/.bin \
+    && ln -sf ../prisma/build/index.js ./node_modules/.bin/prisma \
+    && chown -R nextjs:nextjs ./node_modules/prisma ./node_modules/.bin \
+    && chmod -R 755 ./node_modules/prisma
+
+COPY node_modules/dotenv ./node_modules/dotenv
+RUN chmod -R 755 ./node_modules/dotenv
+
+COPY node_modules/@standard-schema ./node_modules/@standard-schema
+COPY node_modules/c12 ./node_modules/c12
+COPY node_modules/confbox ./node_modules/confbox
+COPY node_modules/deepmerge-ts ./node_modules/deepmerge-ts
+COPY node_modules/defu ./node_modules/defu
+COPY node_modules/destr ./node_modules/destr
+COPY node_modules/effect ./node_modules/effect
+COPY node_modules/empathic ./node_modules/empathic
+COPY node_modules/exsolve ./node_modules/exsolve
+COPY node_modules/fast-check ./node_modules/fast-check
+COPY node_modules/giget ./node_modules/giget
+COPY node_modules/jiti ./node_modules/jiti
+COPY node_modules/ohash ./node_modules/ohash
+COPY node_modules/pathe ./node_modules/pathe
+COPY node_modules/perfect-debounce ./node_modules/perfect-debounce
+COPY node_modules/pkg-types ./node_modules/pkg-types
+COPY node_modules/pure-rand ./node_modules/pure-rand
+COPY node_modules/rc9 ./node_modules/rc9
+COPY node_modules/cross-spawn ./node_modules/cross-spawn
+COPY node_modules/foreground-child ./node_modules/foreground-child
+COPY node_modules/get-port-please ./node_modules/get-port-please
+COPY node_modules/graceful-fs ./node_modules/graceful-fs
+COPY node_modules/grammex ./node_modules/grammex
+COPY node_modules/graphmatch ./node_modules/graphmatch
+COPY node_modules/isexe ./node_modules/isexe
+COPY node_modules/path-key ./node_modules/path-key
+COPY node_modules/proper-lockfile ./node_modules/proper-lockfile
+COPY node_modules/remeda ./node_modules/remeda
+COPY node_modules/retry ./node_modules/retry
+COPY node_modules/shebang-command ./node_modules/shebang-command
+COPY node_modules/shebang-regex ./node_modules/shebang-regex
+COPY node_modules/signal-exit ./node_modules/signal-exit
+COPY node_modules/std-env ./node_modules/std-env
+COPY node_modules/valibot ./node_modules/valibot
+COPY node_modules/which ./node_modules/which
+COPY node_modules/zeptomatch ./node_modules/zeptomatch
+RUN chmod -R 755 \
+  ./node_modules/@standard-schema \
+  ./node_modules/c12 \
+  ./node_modules/confbox \
+  ./node_modules/deepmerge-ts \
+  ./node_modules/defu \
+  ./node_modules/destr \
+  ./node_modules/effect \
+  ./node_modules/empathic \
+  ./node_modules/exsolve \
+  ./node_modules/fast-check \
+  ./node_modules/giget \
+  ./node_modules/jiti \
+  ./node_modules/ohash \
+  ./node_modules/pathe \
+  ./node_modules/perfect-debounce \
+  ./node_modules/pkg-types \
+  ./node_modules/pure-rand \
+  ./node_modules/rc9 \
+  ./node_modules/cross-spawn \
+  ./node_modules/foreground-child \
+  ./node_modules/get-port-please \
+  ./node_modules/graceful-fs \
+  ./node_modules/grammex \
+  ./node_modules/graphmatch \
+  ./node_modules/isexe \
+  ./node_modules/path-key \
+  ./node_modules/proper-lockfile \
+  ./node_modules/remeda \
+  ./node_modules/retry \
+  ./node_modules/shebang-command \
+  ./node_modules/shebang-regex \
+  ./node_modules/signal-exit \
+  ./node_modules/std-env \
+  ./node_modules/valibot \
+  ./node_modules/which \
+  ./node_modules/zeptomatch
+
+COPY node_modules/pg ./node_modules/pg
+COPY node_modules/pg-connection-string ./node_modules/pg-connection-string
+COPY node_modules/pg-cloudflare ./node_modules/pg-cloudflare
+COPY node_modules/pg-int8 ./node_modules/pg-int8
+COPY node_modules/pg-pool ./node_modules/pg-pool
+COPY node_modules/pg-protocol ./node_modules/pg-protocol
+COPY node_modules/pg-types ./node_modules/pg-types
+COPY node_modules/pgpass ./node_modules/pgpass
+COPY node_modules/postgres-array ./node_modules/postgres-array
+COPY node_modules/postgres-bytea ./node_modules/postgres-bytea
+COPY node_modules/postgres-date ./node_modules/postgres-date
+COPY node_modules/postgres-interval ./node_modules/postgres-interval
+COPY node_modules/split2 ./node_modules/split2
+RUN chmod -R 755 \
+  ./node_modules/pg \
+  ./node_modules/pg-connection-string \
+  ./node_modules/pg-cloudflare \
+  ./node_modules/pg-int8 \
+  ./node_modules/pg-pool \
+  ./node_modules/pg-protocol \
+  ./node_modules/pg-types \
+  ./node_modules/pgpass \
+  ./node_modules/postgres-array \
+  ./node_modules/postgres-bytea \
+  ./node_modules/postgres-date \
+  ./node_modules/postgres-interval \
+  ./node_modules/split2
+
+COPY node_modules/@paralleldrive/cuid2 ./node_modules/@paralleldrive/cuid2
+RUN chmod -R 755 ./node_modules/@paralleldrive/cuid2
+
+COPY packages/database/node_modules/uuid ./node_modules/uuid
+RUN chmod -R 755 ./node_modules/uuid \
+    && node --input-type=module -e "\
+      import { v7 } from 'uuid'; \
+      if (typeof v7 !== 'function') { \
+        throw new Error('uuid v7 missing in runtime image'); \
+      }"
+
+COPY node_modules/@noble/hashes ./node_modules/@noble/hashes
+RUN chmod -R 755 ./node_modules/@noble/hashes
+
+COPY node_modules/zod ./node_modules/zod
+RUN chmod -R 755 ./node_modules/zod
+
+COPY node_modules/pino ./node_modules/pino
+RUN chmod -R 755 ./node_modules/pino
+
+COPY node_modules/pino-opentelemetry-transport ./node_modules/pino-opentelemetry-transport
+RUN chmod -R 755 ./node_modules/pino-opentelemetry-transport
+
+COPY node_modules/pino-abstract-transport ./node_modules/pino-abstract-transport
+RUN chmod -R 755 ./node_modules/pino-abstract-transport
+
+COPY node_modules/otlp-logger ./node_modules/otlp-logger
+RUN chmod -R 755 ./node_modules/otlp-logger
+
+COPY apps/web/scripts/docker/next-start.sh /home/nextjs/start.sh
+RUN chown nextjs:nextjs /home/nextjs/start.sh && chmod +x /home/nextjs/start.sh
+
+EXPOSE 3000
+ENV HOSTNAME="0.0.0.0"
+USER nextjs
+
+RUN mkdir -p /home/nextjs/apps/web/uploads/ && \
+    mkdir -p /home/nextjs/apps/web/saml-connection
+
+VOLUME /home/nextjs/apps/web/uploads/
+VOLUME /home/nextjs/apps/web/saml-connection
+
+CMD ["/home/nextjs/start.sh"]

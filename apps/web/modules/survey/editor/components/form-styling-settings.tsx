@@ -6,8 +6,8 @@ import { CheckIcon, SparklesIcon } from "lucide-react";
 import React, { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { TSurveyStyling } from "@formbricks/types/surveys/types";
-import { TWorkspaceStyling } from "@formbricks/types/workspace";
+import { TSurveyStyling } from "@salamruby/types/surveys/types";
+import { TWorkspaceStyling } from "@salamruby/types/workspace";
 import { cn } from "@/lib/cn";
 import { Button } from "@/modules/ui/components/button";
 import {

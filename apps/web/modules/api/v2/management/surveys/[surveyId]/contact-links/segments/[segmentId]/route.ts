@@ -1,4 +1,4 @@
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { getOrganizationIdFromSurveyId } from "@/lib/utils/helper";
 import { authenticatedApiClient } from "@/modules/api/v2/auth/authenticated-api-client";
 import { responses } from "@/modules/api/v2/lib/response";

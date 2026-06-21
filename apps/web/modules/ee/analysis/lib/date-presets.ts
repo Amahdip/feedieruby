@@ -1,5 +1,5 @@
 import { addDays, formatDate, startOfDay, startOfMonth, startOfQuarter, startOfYear } from "date-fns";
-import type { TChartQuery } from "@formbricks/types/analysis";
+import type { TChartQuery } from "@salamruby/types/analysis";
 
 // Cube's native "last N days" / "this month" / etc. strings exclude today; we expand them
 // to explicit inclusive ranges so charts behave like every other analytics tool (GA, Mixpanel,

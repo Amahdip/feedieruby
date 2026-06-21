@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TTemplate, TTemplateFilter } from "@formbricks/types/templates";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TTemplate, TTemplateFilter } from "@salamruby/types/templates";
 import { cn } from "@/lib/cn";
 import { replacePresetPlaceholders } from "@/lib/utils/templates";
 import { Button } from "@/modules/ui/components/button";
@@ -53,8 +53,8 @@ export const Template = ({
   const cardContent = (
     <>
       <TemplateTags template={template} selectedFilter={selectedFilter} />
-      <h3 className="text-md mb-1 mt-3 text-left font-bold text-slate-700">{template.name}</h3>
-      <p className="text-left text-xs text-slate-600">{template.description}</p>
+      <h3 className="text-md mb-1 mt-3 text-start font-bold text-slate-700">{template.name}</h3>
+      <p className="text-start text-xs text-slate-600">{template.description}</p>
       {showCreateSurveyButton && (
         <div className="flex justify-start">
           <Button

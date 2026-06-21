@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
+import { prisma } from "@salamruby/database";
 import { finalizeSuccessfulSignIn } from "@/modules/auth/lib/sign-in-tracking";
 import { buildVerificationRequestedPath } from "@/modules/auth/lib/verification-links";
 import { sendVerificationEmail } from "@/modules/email";
@@ -13,7 +13,7 @@ const mocks = vi.hoisted(() => ({
   queueAuditEventBackground: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     $transaction: vi.fn(),
     user: {
@@ -56,7 +56,7 @@ vi.mock("@/modules/ee/audit-logs/lib/handler", () => ({
   queueAuditEventBackground: mocks.queueAuditEventBackground,
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     withContext: vi.fn(() => ({

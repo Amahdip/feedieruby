@@ -108,25 +108,23 @@ export const setup = async (
     logger.debug("No existing configuration found.");
   }
 
-  // formbricks is in error state, skip setup
+  // salamruby is in error state, skip setup
   if (existingConfig?.status.value === "error") {
     if (isDebug) {
-      logger.debug(
-        "Formbricks is in error state, but debug mode is active. Resetting config and continuing."
-      );
+      logger.debug("SalamRuby is in error state, but debug mode is active. Resetting config and continuing.");
       config.resetConfig();
       return okVoid();
     }
 
-    console.error("🧱 Formbricks - Formbricks was set to an error state.");
+    console.error("🧱 SalamRuby - SalamRuby was set to an error state.");
 
     const expiresAt = existingConfig.status.expiresAt;
 
     if (expiresAt && !isNowExpired(new Date(expiresAt))) {
-      console.error("🧱 Formbricks - Error state is not expired, skipping initialization");
+      console.error("🧱 SalamRuby - Error state is not expired, skipping initialization");
       return okVoid();
     }
-    console.error("🧱 Formbricks - Error state is expired. Continuing with initialization.");
+    console.error("🧱 SalamRuby - Error state is expired. Continuing with initialization.");
   }
 
   logger.debug("Start setup");
@@ -369,7 +367,7 @@ export const handleErrorOnFirstSetup = (e: { code: string; responseMessage: stri
     logger.error(`Error during first setup: ${e.code} - ${e.responseMessage}. Please try again later.`);
   }
 
-  // put formbricks in error state (by creating a new config) and throw error
+  // put salamruby in error state (by creating a new config) and throw error
   const initialErrorConfig: Partial<TConfig> = {
     status: {
       value: "error",
@@ -381,21 +379,21 @@ export const handleErrorOnFirstSetup = (e: { code: string; responseMessage: stri
     localStorage.setItem(JS_LOCAL_STORAGE_KEY, JSON.stringify(initialErrorConfig));
   })();
 
-  throw new Error("Could not set up formbricks");
+  throw new Error("Could not set up salamruby");
 };
 
-export const putFormbricksInErrorState = (formbricksConfig: Config): void => {
+export const putSalamRubyInErrorState = (salamrubyConfig: Config): void => {
   const logger = Logger.getInstance();
 
   if (getIsDebug()) {
-    logger.debug("Not putting formbricks in error state because debug mode is active (no error state)");
+    logger.debug("Not putting salamruby in error state because debug mode is active (no error state)");
     return;
   }
 
-  logger.debug("Putting formbricks in error state");
-  // change formbricks status to error
-  formbricksConfig.update({
-    ...formbricksConfig.get(),
+  logger.debug("Putting salamruby in error state");
+  // change salamruby status to error
+  salamrubyConfig.update({
+    ...salamrubyConfig.get(),
     status: {
       value: "error",
       expiresAt: new Date(new Date().getTime() + 10 * 60000), // 10 minutes in the future

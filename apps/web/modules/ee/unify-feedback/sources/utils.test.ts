@@ -15,10 +15,10 @@ import {
 const mockT = (key: string) => key;
 
 describe("getFeedbackSourceOptions", () => {
-  test("returns formbricks, csv, api ingestion, and mcp options", () => {
+  test("returns salamruby, csv, api ingestion, and mcp options", () => {
     const options = getFeedbackSourceOptions(mockT as never);
     expect(options).toHaveLength(4);
-    expect(options[0].id).toBe("formbricks_survey");
+    expect(options[0].id).toBe("salamruby_survey");
     expect(options[1].id).toBe("csv");
     expect(options[2].id).toBe("api_ingestion");
     expect(options[3].id).toBe("feedback_record_mcp");
@@ -31,8 +31,8 @@ describe("getFeedbackSourceOptions", () => {
 
   test("uses translation keys for name and description", () => {
     const options = getFeedbackSourceOptions(mockT as never);
-    expect(options[0].name).toBe("workspace.unify.formbricks_surveys");
-    expect(options[0].description).toBe("workspace.unify.source_connect_formbricks_description");
+    expect(options[0].name).toBe("workspace.unify.salamruby_surveys");
+    expect(options[0].description).toBe("workspace.unify.source_connect_salamruby_description");
     expect(options[1].name).toBe("workspace.unify.csv_import");
     expect(options[1].description).toBe("workspace.unify.source_connect_csv_description");
     expect(options[2].name).toBe("workspace.unify.api_ingestion");

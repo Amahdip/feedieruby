@@ -1,9 +1,9 @@
 import { userAgent } from "next/server";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { TContactAttributesInput } from "@formbricks/types/contact-attribute";
-import { ResourceNotFoundError, ValidationError } from "@formbricks/types/errors";
-import { TJsPersonState } from "@formbricks/types/js";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { TContactAttributesInput } from "@salamruby/types/contact-attribute";
+import { ResourceNotFoundError, ValidationError } from "@salamruby/types/errors";
+import { TJsPersonState } from "@salamruby/types/js";
 import { RequestBodyTooLargeError, parseJsonBodyWithLimit } from "@/app/lib/api/request-body";
 import { responses } from "@/app/lib/api/response";
 import { THandlerParams, withV1ApiWrapper } from "@/app/lib/api/with-api-logging";

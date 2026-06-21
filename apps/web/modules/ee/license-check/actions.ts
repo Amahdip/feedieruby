@@ -1,14 +1,14 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
+import { ZId } from "@salamruby/types/common";
 import {
   AuthenticationError,
   OperationNotAllowedError,
   ResourceNotFoundError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import { cache } from "@/lib/cache";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getOrganization } from "@/lib/organization/service";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
@@ -46,7 +46,7 @@ export const recheckLicenseAction = authenticatedActionClient
       await applyRateLimit(rateLimitConfigs.actions.licenseRecheck, ctx.user.id);
 
       // Only allow on self-hosted instances
-      if (IS_FORMBRICKS_CLOUD) {
+      if (IS_SALAMRUBY_CLOUD) {
         throw new OperationNotAllowedError("License recheck is only available on self-hosted instances");
       }
 

@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { InvalidInputError, ResourceNotFoundError, ValidationError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { InvalidInputError, ResourceNotFoundError, ValidationError } from "@salamruby/types/errors";
 import { mockUser } from "./mock-data";
 import { createUser, getUser, getUserByEmail, updateUser, updateUserLastLoginAt } from "./user";
 
@@ -15,7 +15,7 @@ const mockPrismaUser = {
   groupId: "groupId",
 };
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     $transaction: vi.fn(),
     user: {

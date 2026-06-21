@@ -82,7 +82,7 @@ export class CommandQueue {
       if (currentItem.checkSetup) {
         const setupResult = checkSetup();
         if (!setupResult.ok) {
-          console.warn(`🧱 Formbricks - Setup not complete.`);
+          console.warn(`🧱 SalamRuby - Setup not complete.`);
           continue;
         }
       }
@@ -91,7 +91,7 @@ export class CommandQueue {
         // first check if there are pending updates in the update queue
         const updateQueue = UpdateQueue.getInstance();
         if (!updateQueue.isEmpty()) {
-          console.log("🧱 Formbricks - Waiting for pending updates to complete before executing command");
+          console.log("🧱 SalamRuby - Waiting for pending updates to complete before executing command");
           await updateQueue.processUpdates();
         }
       }
@@ -103,9 +103,9 @@ export class CommandQueue {
       const result = await wrapThrowsAsync(executeCommand)();
 
       if (!result.ok) {
-        console.error("🧱 Formbricks - Global error: ", result.error);
+        console.error("🧱 SalamRuby - Global error: ", result.error);
       } else if (!result.data.ok) {
-        console.error("🧱 Formbricks - Global error: ", result.data.error);
+        console.error("🧱 SalamRuby - Global error: ", result.data.error);
       }
     }
 

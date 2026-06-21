@@ -72,7 +72,7 @@ async function fetchOpenAlerts(repo, token) {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "formbricks-dependabot-to-linear",
+        "User-Agent": "salamruby-dependabot-to-linear",
       },
     });
     if (!res.ok) {

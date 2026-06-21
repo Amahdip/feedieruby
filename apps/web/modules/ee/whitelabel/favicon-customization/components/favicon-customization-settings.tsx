@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { type ChangeEvent, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TAllowedFileExtension } from "@formbricks/types/storage";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TAllowedFileExtension } from "@salamruby/types/storage";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
@@ -168,6 +168,12 @@ export const FaviconCustomizationSettings = ({
       description={t("workspace.settings.domain.favicon_customization_description")}>
       {hasWhiteLabelPermission ? (
         <div className="w-full space-y-4">
+          {!isStorageConfigured && !faviconUrl && (
+            <Alert variant="warning">
+              <AlertDescription>{t("workspace.settings.domain.favicon_requires_storage")}</AlertDescription>
+            </Alert>
+          )}
+
           {faviconUrl ? (
             <Image
               src={faviconUrl}
@@ -176,7 +182,7 @@ export const FaviconCustomizationSettings = ({
               height={64}
               className="-mb-2 size-16 rounded-lg border object-contain p-1"
             />
-          ) : (
+          ) : isStorageConfigured ? (
             <FileInput
               id="favicon-input"
               allowedFileExtensions={allowedFileExtensions}
@@ -191,7 +197,7 @@ export const FaviconCustomizationSettings = ({
               maxSizeInMB={MAX_FAVICON_SIZE_MB}
               isStorageConfigured={isStorageConfigured}
             />
-          )}
+          ) : null}
 
           <Input
             ref={fileInputRef}
@@ -228,9 +234,11 @@ export const FaviconCustomizationSettings = ({
             </Button>
           )}
 
-          <Alert variant="info">
-            <AlertDescription>{t("workspace.settings.domain.favicon_size_hint")}</AlertDescription>
-          </Alert>
+          {isStorageConfigured && (
+            <Alert variant="info">
+              <AlertDescription>{t("workspace.settings.domain.favicon_size_hint")}</AlertDescription>
+            </Alert>
+          )}
 
           {isReadOnly && (
             <Alert variant="warning">

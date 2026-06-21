@@ -16,6 +16,7 @@ export interface TIso639Language {
     "ru-RU": string;
     "hu-HU": string;
     "tr-TR": string;
+    "fa-IR"?: string;
   };
 }
 
@@ -4289,7 +4290,7 @@ export const iso639Languages = [
 ] as const satisfies readonly TIso639Language[];
 
 /**
- * Union of every ISO 639 language code Formbricks supports.
+ * Union of every ISO 639 language code SalamRuby supports.
  * Derived automatically from the `iso639Languages` array — stays in sync
  * without any manual maintenance.
  */

@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { getOrganizationsByUserId } from "./organization";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     organization: {
       findMany: vi.fn(),

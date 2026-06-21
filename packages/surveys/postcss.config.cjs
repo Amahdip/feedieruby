@@ -31,18 +31,18 @@ const remtoEm = (opts = {}) => {
 // browser-compatibility fallback for `@property` declarations.
 //
 // Problem: CSS `@layer` at-rules are globally scoped by spec — they cannot be
-// confined by a surrounding selector. Even though all other Formbricks survey
+// confined by a surrounding selector. Even though all other SalamRuby survey
 // styles are correctly scoped to `#fbjs`, the `@layer properties` block
 // contains a bare `*, :before, :after, ::backdrop` selector that resets all
 // `--tw-*` CSS custom properties on every element of the host page. This
 // breaks shadows, rings, transforms, and other Tailwind utilities on any site
-// that uses Tailwind v4 alongside the Formbricks SDK.
+// that uses Tailwind v4 alongside the SalamRuby SDK.
 //
 // The `@property` declarations already present in the same stylesheet cover
 // the same browser-compatibility need for all supporting browsers, so removing
 // `@layer properties` does not affect survey rendering.
 //
-// See: https://github.com/formbricks/js/issues/46
+// See: https://github.com/salamruby/js/issues/46
 const stripLayerProperties = () => {
   return {
     postcssPlugin: "postcss-strip-layer-properties",

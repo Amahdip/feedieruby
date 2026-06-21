@@ -1,19 +1,18 @@
 "use client";
 
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { ChevronDownIcon, LayoutTemplateIcon, PlusCircleIcon, SparklesIcon } from "lucide-react";
+import { ChevronDownIcon, LayoutTemplateIcon, PlusCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type ComponentProps, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TSurveyType } from "@formbricks/types/surveys/types";
-import type { TUserLocale } from "@formbricks/types/user";
-import type { TWorkspaceConfigChannel } from "@formbricks/types/workspace";
+import type { TSurveyType } from "@salamruby/types/surveys/types";
+import type { TUserLocale } from "@salamruby/types/user";
+import type { TWorkspaceConfigChannel } from "@salamruby/types/workspace";
 import { CUSTOM_SURVEY_TEMPLATE_ID } from "@/app/lib/templates";
-import { FORMBRICKS_SURVEYS_FILTERS_KEY_LS } from "@/lib/localStorage";
+import { SALAMRUBY_SURVEYS_FILTERS_KEY_LS } from "@/lib/localStorage";
 import { getV3ApiErrorMessage } from "@/modules/api/lib/v3-client";
 import type { TAIUnavailableReason } from "@/modules/ee/analysis/charts/lib/ai-availability";
-import { CreateWithAIDialog } from "@/modules/survey/components/template-list/components/create-with-ai-dialog";
 import { useCreateSurveyFromTemplate } from "@/modules/survey/components/template-list/hooks/use-create-survey-from-template";
 import { useDeleteSurvey } from "@/modules/survey/list/hooks/use-delete-survey";
 import { useSurveys } from "@/modules/survey/list/hooks/use-surveys";
@@ -57,10 +56,14 @@ type NewSurveyMenuProps = {
   aiUnavailableReason?: TAIUnavailableReason;
 };
 
-const NewSurveyMenu = ({ workspace, language, isAIAvailable, aiUnavailableReason }: NewSurveyMenuProps) => {
+const NewSurveyMenu = ({
+  workspace,
+  language,
+  isAIAvailable: _isAIAvailable,
+  aiUnavailableReason: _aiUnavailableReason,
+}: NewSurveyMenuProps) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const [isAIDialogOpen, setIsAIDialogOpen] = useState(false);
   const createSurveyMutation = useCreateSurveyFromTemplate();
   const workspaceBasePath = `/workspaces/${workspace.id}`;
 
@@ -103,11 +106,6 @@ const NewSurveyMenu = ({ workspace, language, isAIAvailable, aiUnavailableReason
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-52">
           <DropdownMenuItem
-            icon={<SparklesIcon className="size-4" />}
-            onSelect={() => setIsAIDialogOpen(true)}>
-            {t("workspace.surveys.ai_create.create_with_ai")}
-          </DropdownMenuItem>
-          <DropdownMenuItem
             icon={<LayoutTemplateIcon className="size-4" />}
             onSelect={() => router.push(`${workspaceBasePath}/surveys/templates`)}>
             {t("workspace.surveys.ai_create.choose_template")}
@@ -123,14 +121,6 @@ const NewSurveyMenu = ({ workspace, language, isAIAvailable, aiUnavailableReason
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <CreateWithAIDialog
-        workspaceId={workspace.id}
-        language={language}
-        isAIAvailable={isAIAvailable}
-        aiUnavailableReason={aiUnavailableReason}
-        open={isAIDialogOpen}
-        onOpenChange={setIsAIDialogOpen}
-      />
     </>
   );
 };
@@ -155,11 +145,11 @@ export const SurveysList = ({
       return;
     }
 
-    const storedFilters = globalThis.window.localStorage.getItem(FORMBRICKS_SURVEYS_FILTERS_KEY_LS);
+    const storedFilters = globalThis.window.localStorage.getItem(SALAMRUBY_SURVEYS_FILTERS_KEY_LS);
     const parsedFilters = parseStoredSurveyFilters(storedFilters, currentWorkspaceChannel);
 
     if (storedFilters && !parsedFilters) {
-      globalThis.window.localStorage.removeItem(FORMBRICKS_SURVEYS_FILTERS_KEY_LS);
+      globalThis.window.localStorage.removeItem(SALAMRUBY_SURVEYS_FILTERS_KEY_LS);
       setSurveyFilters(initialFilters);
     } else if (parsedFilters) {
       setSurveyFilters(parsedFilters);
@@ -179,7 +169,7 @@ export const SurveysList = ({
     }
 
     globalThis.window.localStorage.setItem(
-      FORMBRICKS_SURVEYS_FILTERS_KEY_LS,
+      SALAMRUBY_SURVEYS_FILTERS_KEY_LS,
       JSON.stringify(normalizedFilters)
     );
   }, [normalizedFilters, isFilterInitialized]);
@@ -287,7 +277,7 @@ export const SurveysList = ({
     surveyContent = (
       <div>
         <div className="flex-col space-y-3" ref={parent}>
-          <div className="mt-6 grid w-full grid-cols-8 place-items-center gap-3 px-6 pr-8 text-sm text-slate-800">
+          <div className="mt-6 grid w-full grid-cols-8 place-items-center gap-3 px-6 pe-8 text-sm text-slate-800">
             <div className="col-span-2 place-self-start">{t("common.name")}</div>
             <div className="col-span-1">{t("common.status")}</div>
             <div className="col-span-1">{t("common.responses")}</div>

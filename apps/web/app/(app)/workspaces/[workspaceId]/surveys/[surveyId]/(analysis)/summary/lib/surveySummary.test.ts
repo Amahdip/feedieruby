@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TResponseFilterCriteria } from "@formbricks/types/responses";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey, TSurveySummary } from "@formbricks/types/surveys/types";
-import { TLanguage } from "@formbricks/types/workspace";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TResponseFilterCriteria } from "@salamruby/types/responses";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey, TSurveySummary } from "@salamruby/types/surveys/types";
+import { TLanguage } from "@salamruby/types/workspace";
 import { getQuotasSummary } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/survey";
 import { getDisplayCountBySurveyId } from "@/lib/display/service";
 import { getLocalizedValue } from "@/lib/i18n/utils";
@@ -48,7 +48,7 @@ vi.mock("@/lib/surveyLogic/utils", () => ({
 vi.mock("@/lib/utils/validate", () => ({
   validateInputs: vi.fn(),
 }));
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     response: {
       findMany: vi.fn(),

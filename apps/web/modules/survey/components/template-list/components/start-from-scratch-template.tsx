@@ -2,8 +2,8 @@
 
 import { PlusCircleIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TTemplate } from "@formbricks/types/templates";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TTemplate } from "@salamruby/types/templates";
 import { customSurveyTemplate } from "@/app/lib/templates";
 import { cn } from "@/lib/cn";
 import { replacePresetPlaceholders } from "@/lib/utils/templates";
@@ -52,10 +52,10 @@ export const StartFromScratchTemplate = ({
   const cardContent = (
     <>
       <PlusCircleIcon className="size-8 text-brand-dark transition-all duration-150 group-hover:scale-110" />
-      <h3 className="text-md mb-1 mt-3 text-left font-bold text-slate-700">{customSurvey.name}</h3>
-      <p className="text-left text-xs text-slate-600">{customSurvey.description}</p>
+      <h3 className="text-md mb-1 mt-3 text-start font-bold text-slate-700">{customSurvey.name}</h3>
+      <p className="text-start text-xs text-slate-600">{customSurvey.description}</p>
       {showCreateSurveyButton && (
-        <div className="text-left">
+        <div className="text-start">
           <Button
             className="mt-6 max-w-full px-6 py-3"
             disabled={activeTemplate === null}

@@ -18,7 +18,7 @@ export const getErrorMessage = (err: unknown): string => {
 };
 
 // Duck-typed: `instanceof` against the SDK error class breaks under Next dev/Turbopack
-// when @formbricks/hub is loaded into more than one module scope.
+// when @salamruby/hub is loaded into more than one module scope.
 export const getErrorStatus = (err: unknown): number =>
   err && typeof err === "object" && typeof (err as { status?: unknown }).status === "number"
     ? (err as { status: number }).status

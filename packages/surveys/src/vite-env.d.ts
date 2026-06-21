@@ -2,7 +2,7 @@
 
 declare global {
   interface Window {
-    formbricksSurveys?: {
+    salamrubySurveys?: {
       renderSurveyInline: (...args: unknown[]) => unknown;
       renderSurveyModal: (...args: unknown[]) => unknown;
       renderSurvey: (options: unknown) => void;

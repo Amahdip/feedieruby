@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { useSurvey } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/context/survey-context";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { updateSurveyAction } from "@/modules/survey/editor/actions";
@@ -60,9 +60,9 @@ export const SurveyStatusDropdown = () => {
           }}>
           <SelectTrigger className="w-[170px] bg-white md:w-[200px]">
             <SelectValue>
-              <div className="flex items-center">
+              <div className="flex items-center gap-2">
                 <SurveyStatusIndicator status={survey.status} isScheduled={isScheduled} />
-                <span className="ml-2 text-sm text-slate-700">
+                <span className="text-sm text-slate-700">
                   {survey.status === "inProgress" && t("common.in_progress")}
                   {survey.status === "paused" && (isScheduled ? t("common.scheduled") : t("common.paused"))}
                   {survey.status === "completed" && t("common.completed")}
@@ -72,19 +72,19 @@ export const SurveyStatusDropdown = () => {
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem className="group font-normal hover:text-slate-900" value="inProgress">
-              <div className="flex w-full items-center justify-center gap-4">
+              <div className="flex w-full items-center gap-2">
                 <SurveyStatusIndicator status={"inProgress"} />
                 {t("common.in_progress")}
               </div>
             </SelectItem>
             <SelectItem className="group font-normal hover:text-slate-900" value="paused">
-              <div className="flex w-full items-center justify-center gap-2">
+              <div className="flex w-full items-center gap-2">
                 <SurveyStatusIndicator status={"paused"} isScheduled={isScheduled} />
                 {isScheduled ? t("common.scheduled") : t("common.paused")}
               </div>
             </SelectItem>
             <SelectItem className="group font-normal hover:text-slate-900" value="completed">
-              <div className="flex w-full items-center justify-center gap-2">
+              <div className="flex w-full items-center gap-2">
                 <SurveyStatusIndicator status={"completed"} />
                 {t("common.completed")}
               </div>

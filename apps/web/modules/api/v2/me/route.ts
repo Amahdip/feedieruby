@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
-import { prisma } from "@formbricks/database";
-import { OrganizationAccessType } from "@formbricks/types/api-key";
+import { prisma } from "@salamruby/database";
+import { OrganizationAccessType } from "@salamruby/types/api-key";
 import { authenticatedApiClient } from "@/modules/api/v2/auth/authenticated-api-client";
 import { responses } from "@/modules/api/v2/lib/response";
 import { handleApiError } from "@/modules/api/v2/lib/utils";

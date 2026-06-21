@@ -1,10 +1,10 @@
 "use server";
 
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZId, ZString } from "@formbricks/types/common";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZId, ZString } from "@salamruby/types/common";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { getQuota as getQuotaService } from "@/modules/ee/quotas/lib/quotas";
 

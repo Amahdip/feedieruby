@@ -1,8 +1,8 @@
 import { TFunction } from "i18next";
 import { toast } from "react-hot-toast";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { TI18nString } from "@formbricks/types/i18n";
-import { ZSegmentFilters } from "@formbricks/types/segment";
+import { TI18nString } from "@salamruby/types/i18n";
+import { ZSegmentFilters } from "@salamruby/types/segment";
 import {
   TSurveyAddressElement,
   TSurveyCTAElement,
@@ -15,20 +15,20 @@ import {
   TSurveyOpenTextElement,
   TSurveyPictureSelectionElement,
   TSurveyRatingElement,
-} from "@formbricks/types/surveys/elements";
-import { validateElementLabels } from "@formbricks/types/surveys/elements-validation";
+} from "@salamruby/types/surveys/elements";
+import { validateElementLabels } from "@salamruby/types/surveys/elements-validation";
 import {
   TSurvey,
   TSurveyEndScreenCard,
   TSurveyLanguage,
   TSurveyRedirectUrlCard,
   TSurveyWelcomeCard,
-} from "@formbricks/types/surveys/types";
+} from "@salamruby/types/surveys/types";
 import {
   TValidateIdErrorCode,
   validateCardFieldsForAllLanguages,
   validateQuestionLabels,
-} from "@formbricks/types/surveys/validation";
+} from "@salamruby/types/surveys/validation";
 import { checkForEmptyFallBackValue } from "@/lib/utils/recall";
 import * as validation from "./validation";
 

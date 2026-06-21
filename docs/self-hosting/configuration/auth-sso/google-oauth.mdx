@@ -1,34 +1,34 @@
 ---
 title: "Google OAuth"
-description: "Configure Google OAuth for secure Single Sign-On with your Formbricks instance. Implement enterprise-grade authentication for your survey platform with Google credentials."
+description: "Configure Google OAuth for secure Single Sign-On with your SalamRuby instance. Implement enterprise-grade authentication for your survey platform with Google credentials."
 icon: "google"
 ---
 
-<Note>Google OAuth is part of the Formbricks [Enterprise Edition](/self-hosting/advanced/license)</Note>
+<Note>Google OAuth is part of the SalamRuby [Enterprise Edition](/self-hosting/advanced/license)</Note>
 
 ### Google OAuth
 
-Integrating Google OAuth with your Formbricks instance allows users to log in using their Google credentials, ensuring a secure and streamlined user experience. This guide will walk you through the process of setting up Google OAuth for your Formbricks instance.
+Integrating Google OAuth with your SalamRuby instance allows users to log in using their Google credentials, ensuring a secure and streamlined user experience. This guide will walk you through the process of setting up Google OAuth for your SalamRuby instance.
 
 ### Requirements
 
 - A Google Cloud Platform (GCP) account
 
-- A Formbricks instance running
+- A SalamRuby instance running
 
 ### Account Deletion SSO Confirmation
 
-For SSO-only users, Formbricks asks the user to type their email address and then redirects them through Google OAuth before deleting the account. Formbricks asks Google for an interactive login prompt, and the deletion continues only when Google returns the same linked provider account.
+For SSO-only users, SalamRuby asks the user to type their email address and then redirects them through Google OAuth before deleting the account. SalamRuby asks Google for an interactive login prompt, and the deletion continues only when Google returns the same linked provider account.
 
 This confirms the Google identity for the current deletion attempt, but it does not validate a provider-side freshness proof. Google still controls whether it asks for a password or MFA.
 
 <Warning>
-  If you set `DISABLE_ACCOUNT_DELETION_SSO_CONFIRMATION=1`, Formbricks skips this SSO identity confirmation
+  If you set `DISABLE_ACCOUNT_DELETION_SSO_CONFIRMATION=1`, SalamRuby skips this SSO identity confirmation
   redirect for passwordless SSO accounts. Users can delete their account with only the in-app email text
   confirmation. Keep it unset unless you accept this security trade-off.
 </Warning>
 
-### How to connect your Formbricks instance to Google
+### How to connect your SalamRuby instance to Google
 
 {/* prettier-ignore-start */}
 
@@ -46,7 +46,7 @@ This confirms the Google identity for the current deletion attempt, but it does 
 
   <Step title="Configure OAuth Consent Screen">
     - If this is your first time creating a client ID, configure your consent screen by clicking **Consent Screen**.
-    - Fill in the necessary details and under **Authorized domains**, add the domain where your Formbricks instance is hosted.
+    - Fill in the necessary details and under **Authorized domains**, add the domain where your SalamRuby instance is hosted.
   </Step>
 
   <Step title="Create OAuth 2.0 Client IDs">
@@ -82,12 +82,12 @@ This confirms the Google identity for the current deletion attempt, but it does 
     ```
   </Step>
 
-  <Step title="Restart Your Formbricks Instance">
+  <Step title="Restart Your SalamRuby Instance">
     <Note>
       Restarting your Docker containers may cause a brief period of downtime. Plan accordingly.
     </Note>
     
-    - Once the environment variables have been updated, it's crucial to restart your Docker containers to apply the changes. This ensures that your Formbricks instance can utilize the new Google OAuth configuration for user authentication.
+    - Once the environment variables have been updated, it's crucial to restart your Docker containers to apply the changes. This ensures that your SalamRuby instance can utilize the new Google OAuth configuration for user authentication.
     
     - Navigate to your Docker setup directory where your `docker-compose.yml` file is located.
     

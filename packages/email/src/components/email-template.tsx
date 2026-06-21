@@ -2,8 +2,15 @@ import { Body, Container, Head, Html, Img, Link, Section, Tailwind, Text } from 
 import { TEmailTemplateLegalProps } from "../types/email";
 import { TFunction } from "../types/translations";
 
-const fbLogoUrl = "https://app.formbricks.com/logo-transparent.png";
-const logoLink = "https://formbricks.com?utm_source=email_header&utm_medium=email";
+const getWebappUrl = (): string => {
+  const url = process.env.WEBAPP_URL ?? process.env.PUBLIC_URL ?? "";
+  const trimmed = url.trim().replace(/\/$/, "");
+  return trimmed || "http://localhost:3000";
+};
+
+const WEBAPP_URL = getWebappUrl();
+const fbLogoUrl = `${WEBAPP_URL}/logo-transparent.png`;
+const logoLink = `${WEBAPP_URL}/?utm_source=email_header&utm_medium=email`;
 const FORCE_LIGHT_COLOR_SCHEME = "only light";
 
 interface EmailTemplateProps extends TEmailTemplateLegalProps {
@@ -68,7 +75,7 @@ export function EmailTemplate({
           <Section className="mt-4 text-center text-sm">
             <Link
               className="m-0 text-sm font-normal text-slate-500"
-              href="https://formbricks.com/?utm_source=email_header&utm_medium=email"
+              href={logoLink}
               target="_blank"
               rel="noopener noreferrer">
               {t("emails.email_template_text_1")}

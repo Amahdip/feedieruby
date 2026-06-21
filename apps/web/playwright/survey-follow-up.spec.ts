@@ -40,7 +40,7 @@ test.describe("Survey Follow-Up Create & Edit", async () => {
       await page.getByRole("button", { name: "Save" }).click();
 
       // The success toast should appear — this was the bug: previously save failed silently
-      const successToast = await page.waitForSelector(".formbricks__toast__success", { timeout: 5000 });
+      const successToast = await page.waitForSelector(".salamruby__toast__success", { timeout: 5000 });
       expect(successToast).toBeTruthy();
     });
 
@@ -67,7 +67,7 @@ test.describe("Survey Follow-Up Create & Edit", async () => {
       await page.getByRole("button", { name: "Save" }).click();
 
       // The success toast should appear
-      const successToast = await page.waitForSelector(".formbricks__toast__success", { timeout: 5000 });
+      const successToast = await page.waitForSelector(".salamruby__toast__success", { timeout: 5000 });
       expect(successToast).toBeTruthy();
 
       // Verify the updated name appears in the list
@@ -95,7 +95,7 @@ test.describe("Survey Follow-Up Create & Edit", async () => {
       await page.getByRole("button", { name: "Save" }).click();
 
       // The success toast should appear
-      const successToast = await page.waitForSelector(".formbricks__toast__success", { timeout: 5000 });
+      const successToast = await page.waitForSelector(".salamruby__toast__success", { timeout: 5000 });
       expect(successToast).toBeTruthy();
 
       // Verify both follow-ups appear in the list

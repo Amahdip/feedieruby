@@ -1,11 +1,11 @@
 import { createId } from "@paralleldrive/cuid2";
 import { cache as reactCache } from "react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { TActionClassType } from "@formbricks/types/action-classes";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { TActionClassType } from "@salamruby/types/action-classes";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { getOrganizationByWorkspaceId } from "@/lib/organization/service";
 import { checkForInvalidMediaInBlocks } from "@/lib/survey/utils";
 import { validateInputs } from "@/lib/utils/validate";
@@ -76,7 +76,7 @@ vi.mock("@/lingodotdev/server", () => ({
   },
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     survey: {
       findMany: vi.fn(),
@@ -109,7 +109,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

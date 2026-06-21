@@ -1,7 +1,7 @@
 import "server-only";
-import type { TSurveyType } from "@formbricks/types/surveys/types";
-import type { TTemplate } from "@formbricks/types/templates";
-import type { TUserLocale } from "@formbricks/types/user";
+import type { TSurveyType } from "@salamruby/types/surveys/types";
+import type { TTemplate } from "@salamruby/types/templates";
+import type { TUserLocale } from "@salamruby/types/user";
 import { isInternalI18nString, isPlainObject } from "../../guards";
 
 export type TV3TemplateSurveyCreatePayload = {

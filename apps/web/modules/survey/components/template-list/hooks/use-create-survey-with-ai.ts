@@ -2,7 +2,7 @@
 
 import { type SyntheticEvent, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { TUserLocale } from "@formbricks/types/user";
+import type { TUserLocale } from "@salamruby/types/user";
 import { V3ApiError, getV3ApiErrorMessage } from "@/modules/api/lib/v3-client";
 import {
   AI_SURVEY_PROMPT_MIN_LENGTH,

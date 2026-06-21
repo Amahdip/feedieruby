@@ -1,6 +1,6 @@
 "use client";
 
-import { TSortOption } from "@formbricks/types/surveys/types";
+import { TSortOption } from "@salamruby/types/surveys/types";
 import { TSurveyOverviewFilters } from "@/modules/survey/list/types/survey-overview";
 import { DropdownMenuItem } from "@/modules/ui/components/dropdown-menu";
 
@@ -11,6 +11,8 @@ interface SortOptionProps {
 }
 
 export const SortOption = ({ option, sortBy, handleSortChange }: SortOptionProps) => {
+  const isSelected = sortBy === option.value;
+
   return (
     <DropdownMenuItem
       key={option.label}
@@ -18,10 +20,15 @@ export const SortOption = ({ option, sortBy, handleSortChange }: SortOptionProps
       onClick={() => {
         handleSortChange(option);
       }}>
-      <div className="flex h-full w-full items-center gap-x-2 px-2 py-1 hover:bg-slate-700">
+      <div className="flex h-full w-full items-center gap-x-2 px-2 py-1">
         <span
-          className={`h-4 w-4 rounded-full border ${sortBy === option.value ? "border-slate-900 bg-brand-dark outline outline-brand-dark" : "border-white"}`}></span>
-        <p className="font-normal text-white">{option.label}</p>
+          className={`size-4 shrink-0 rounded-full border ${
+            isSelected
+              ? "border-brand-dark bg-brand-dark outline outline-brand-dark"
+              : "border-slate-300 bg-white"
+          }`}
+        />
+        <p className="font-normal text-slate-700">{option.label}</p>
       </div>
     </DropdownMenuItem>
   );

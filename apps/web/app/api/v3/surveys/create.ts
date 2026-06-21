@@ -1,5 +1,5 @@
 import "server-only";
-import type { TSurveyCreateInput } from "@formbricks/types/surveys/types";
+import type { TSurveyCreateInput } from "@salamruby/types/surveys/types";
 import type { TV3Authentication } from "@/app/api/v3/lib/types";
 import { getOrganizationByWorkspaceId } from "@/lib/organization/service";
 import { createSurvey } from "@/lib/survey/service";

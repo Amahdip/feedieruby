@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, ResourceNotFoundError, ValidationError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, ResourceNotFoundError, ValidationError } from "@salamruby/types/errors";
 import { TWorkspaceWithLanguages } from "@/modules/survey/list/types/surveys";
 import { TUserWorkspace } from "@/modules/survey/list/types/workspaces";
 import { doesWorkspaceExist, getUserWorkspaces, getWorkspace, getWorkspaceWithLanguages } from "./workspace";
 
 vi.mock("@/lib/utils/validate");
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     workspace: {
       findFirst: vi.fn(),
@@ -22,7 +22,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

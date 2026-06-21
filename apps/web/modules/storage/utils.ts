@@ -1,14 +1,14 @@
 import "server-only";
-import { type StorageError, StorageErrorCode } from "@formbricks/storage";
-import { TResponseData } from "@formbricks/types/responses";
+import { type StorageError, StorageErrorCode } from "@salamruby/storage";
+import { TResponseData } from "@salamruby/types/responses";
 import {
   type TAccessType,
   type TAllowedFileExtension,
   ZAllowedFileExtension,
-} from "@formbricks/types/storage";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyElementTypeEnum, TSurveyFileUploadElement } from "@formbricks/types/surveys/elements";
-import { TSurveyQuestion, TSurveyQuestionTypeEnum } from "@formbricks/types/surveys/types";
+} from "@salamruby/types/storage";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyElementTypeEnum, TSurveyFileUploadElement } from "@salamruby/types/surveys/elements";
+import { TSurveyQuestion, TSurveyQuestionTypeEnum } from "@salamruby/types/surveys/types";
 import { responses } from "@/app/lib/api/response";
 import { WEBAPP_URL } from "@/lib/constants";
 import { getPublicDomain } from "@/lib/getPublicUrl";

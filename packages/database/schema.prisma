@@ -329,7 +329,7 @@ enum SurveyScriptMode {
 }
 
 /// Represents a complete survey configuration including questions, styling, and display rules.
-/// Core model for the survey functionality in Formbricks.
+/// Core model for the survey functionality in SalamRuby.
 ///
 /// @property id - Unique identifier for the survey
 /// @property name - Display name of the survey
@@ -395,21 +395,21 @@ model Survey {
   /// [SurveySingleUse]
   singleUse Json? @default("{\"enabled\": false, \"isEncrypted\": true}")
 
-  isVerifyEmailEnabled            Boolean                           @default(false)
-  isSingleResponsePerEmailEnabled Boolean                           @default(false)
-  isBackButtonHidden              Boolean                           @default(false)
-  isAutoProgressingEnabled        Boolean                           @default(false)
-  isCaptureIpEnabled              Boolean                           @default(false)
+  isVerifyEmailEnabled            Boolean                          @default(false)
+  isSingleResponsePerEmailEnabled Boolean                          @default(false)
+  isBackButtonHidden              Boolean                          @default(false)
+  isAutoProgressingEnabled        Boolean                          @default(false)
+  isCaptureIpEnabled              Boolean                          @default(false)
   pin                             String?
   displayPercentage               Decimal?
   languages                       SurveyLanguage[]
   showLanguageSwitch              Boolean?
   followUps                       SurveyFollowUp[]
   /// [SurveyRecaptcha]
-  recaptcha                       Json?                             @default("{\"enabled\": false, \"threshold\":0.1}")
+  recaptcha                       Json?                            @default("{\"enabled\": false, \"threshold\":0.1}")
   /// [SurveyLinkMetadata]
-  metadata                        Json                              @default("{}")
-  feedbackSourceMappings          FeedbackSourceFormbricksMapping[]
+  metadata                        Json                             @default("{}")
+  feedbackSourceMappings          FeedbackSourceSalamRubyMapping[]
 
   slug String? @unique
 
@@ -530,7 +530,7 @@ enum IntegrationType {
 }
 
 /// Represents third-party service integrations.
-/// Enables data flow between Formbricks and external services.
+/// Enables data flow between SalamRuby and external services.
 ///
 /// @property id - Unique identifier for the integration
 /// @property type - The service being integrated (Google Sheets, Notion, etc.)
@@ -584,7 +584,7 @@ enum SurveyOverlay {
   dark
 }
 
-/// Main grouping mechanism for resources in Formbricks.
+/// Main grouping mechanism for resources in SalamRuby.
 /// Each organization can have multiple workspaces to separate different applications or products.
 ///
 /// @property id - Unique identifier for the workspace
@@ -637,8 +637,8 @@ model Workspace {
   @@unique([organizationId, name])
 }
 
-/// Represents the top-level organizational hierarchy in Formbricks.
-/// Self-hosting instances typically have a single organization, while Formbricks Cloud
+/// Represents the top-level organizational hierarchy in SalamRuby.
+/// Self-hosting instances typically have a single organization, while SalamRuby Cloud
 /// supports multiple organizations with multi-tenancy.
 ///
 /// @property id - Unique identifier for the organization
@@ -745,7 +745,7 @@ model Invite {
 }
 
 /// Represents enhanced API authentication keys with organization-level ownership.
-/// Used for authenticating API requests to Formbricks with more granular permissions.
+/// Used for authenticating API requests to SalamRuby with more granular permissions.
 ///
 /// @property id - Unique identifier for the API key
 /// @property label - Optional descriptive name for the key
@@ -813,7 +813,7 @@ enum IdentityProvider {
 /// Enables OAuth and other external authentication methods.
 ///
 /// @property id - Unique identifier for the account
-/// @property user - The Formbricks user who owns this account
+/// @property user - The SalamRuby user who owns this account
 /// @property provider - The authentication provider (GitHub, Google, etc.)
 /// @property providerAccountId - User ID from the provider
 /// @property access_token - OAuth access token
@@ -843,7 +843,7 @@ model Account {
 /// Stores active authentication sessions for revocable server-side login state.
 ///
 /// @property sessionToken - Opaque token stored in the browser cookie
-/// @property user - The Formbricks user who owns this session
+/// @property user - The SalamRuby user who owns this session
 /// @property expires - Hard expiry for the session
 model Session {
   id           String   @id @default(cuid())
@@ -880,7 +880,7 @@ model PasswordResetToken {
   @@index([expiresAt])
 }
 
-/// Represents a user in the Formbricks system.
+/// Represents a user in the SalamRuby system.
 /// Central model for user authentication and profile management.
 ///
 /// @property id - Unique identifier for the user
@@ -1147,7 +1147,7 @@ model DashboardWidget {
 }
 
 enum FeedbackSourceType {
-  formbricks_survey
+  salamruby_survey
   csv
 }
 
@@ -1175,28 +1175,28 @@ enum HubFieldType {
 ///
 /// @property id - Unique identifier for the feedback source
 /// @property name - Display name for the feedback source
-/// @property type - Type of feedback source (formbricks_survey, csv, …)
+/// @property type - Type of feedback source (salamruby_survey, csv, …)
 /// @property status - Current state of the feedback source (active, paused, error)
 /// @property workspace - The workspace this feedback source belongs to
 /// @property feedbackDirectory - Hub directory the feedback source writes into
-/// @property formbricksMappings - Element mappings for Formbricks feedback sources
+/// @property salamrubyMappings - Element mappings for SalamRuby feedback sources
 /// @property fieldMappings - Field mappings for other feedback source types
 model FeedbackSource {
-  id                  String                            @id @default(cuid())
-  createdAt           DateTime                          @default(now()) @map(name: "created_at")
-  updatedAt           DateTime                          @updatedAt @map(name: "updated_at")
+  id                  String                           @id @default(cuid())
+  createdAt           DateTime                         @default(now()) @map(name: "created_at")
+  updatedAt           DateTime                         @updatedAt @map(name: "updated_at")
   name                String
   type                FeedbackSourceType
-  status              FeedbackSourceStatus              @default(active)
+  status              FeedbackSourceStatus             @default(active)
   workspaceId         String
-  workspace           Workspace                         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace           Workspace                        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   feedbackDirectoryId String
-  feedbackDirectory   FeedbackDirectory                 @relation(fields: [feedbackDirectoryId], references: [id], onDelete: Cascade)
-  formbricksMappings  FeedbackSourceFormbricksMapping[]
+  feedbackDirectory   FeedbackDirectory                @relation(fields: [feedbackDirectoryId], references: [id], onDelete: Cascade)
+  salamrubyMappings   FeedbackSourceSalamRubyMapping[]
   fieldMappings       FeedbackSourceFieldMapping[]
-  lastSyncAt          DateTime?                         @map(name: "last_sync_at")
-  createdBy           String?                           @map(name: "created_by")
-  creator             User?                             @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+  lastSyncAt          DateTime?                        @map(name: "last_sync_at")
+  createdBy           String?                          @map(name: "created_by")
+  creator             User?                            @relation(fields: [createdBy], references: [id], onDelete: SetNull)
 
   @@unique([id, workspaceId])
   @@unique([workspaceId, name])
@@ -1204,7 +1204,7 @@ model FeedbackSource {
   @@index([feedbackDirectoryId])
 }
 
-/// Maps survey elements to Hub FeedbackRecords for Formbricks feedback sources.
+/// Maps survey elements to Hub FeedbackRecords for SalamRuby feedback sources.
 /// Each row represents one element that will create FeedbackRecords when answered.
 ///
 /// @property id - Unique identifier for the mapping
@@ -1213,7 +1213,7 @@ model FeedbackSource {
 /// @property elementId - The element ID within the survey (from blocks[].elements[].id)
 /// @property hubFieldType - The field_type to use in Hub (text, nps, rating, etc.)
 /// @property customFieldLabel - Optional override for the element headline as field_label in Hub
-model FeedbackSourceFormbricksMapping {
+model FeedbackSourceSalamRubyMapping {
   id               String         @id @default(cuid())
   createdAt        DateTime       @default(now()) @map(name: "created_at")
   feedbackSourceId String         @map(name: "feedback_source_id")
@@ -1230,7 +1230,7 @@ model FeedbackSourceFormbricksMapping {
   @@index([surveyId])
 }
 
-/// Generic field mapping for non-Formbricks feedback sources (CSV today; webhook/email/slack later).
+/// Generic field mapping for non-SalamRuby feedback sources (CSV today; webhook/email/slack later).
 /// Maps source fields to Hub FeedbackRecord fields.
 ///
 /// @property id - Unique identifier for the mapping

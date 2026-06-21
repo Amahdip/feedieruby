@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { SurveyContainerProps } from "@formbricks/types/formbricks-surveys";
+import { SurveyContainerProps } from "@salamruby/types/salamruby-surveys";
 import { isRTLLanguage } from "@/lib/utils";
 import { SurveyContainer } from "../wrappers/survey-container";
 import { Survey } from "./survey";

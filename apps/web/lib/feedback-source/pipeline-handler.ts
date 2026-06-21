@@ -1,8 +1,8 @@
 import "server-only";
-import { logger } from "@formbricks/logger";
-import { TFeedbackSourceWithMappings } from "@formbricks/types/feedback-source";
-import { TResponse } from "@formbricks/types/responses";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { TFeedbackSourceWithMappings } from "@salamruby/types/feedback-source";
+import { TResponse } from "@salamruby/types/responses";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { createFeedbackRecordsBatch } from "@/modules/hub";
 import { getFeedbackSourcesBySurveyId, updateFeedbackSource } from "./service";
 import { transformResponseToFeedbackRecords } from "./transform";
@@ -40,7 +40,7 @@ const processFeedbackSource = async (
   const feedbackRecords = transformResponseToFeedbackRecords(
     response,
     survey,
-    feedbackSource.formbricksMappings,
+    feedbackSource.salamrubyMappings,
     feedbackSource.feedbackDirectoryId
   );
 

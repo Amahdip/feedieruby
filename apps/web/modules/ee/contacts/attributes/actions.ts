@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { ZContactAttributeDataType } from "@formbricks/types/contact-attribute-key";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ZId } from "@salamruby/types/common";
+import { ZContactAttributeDataType } from "@salamruby/types/contact-attribute-key";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { capturePostHogEvent } from "@/lib/posthog";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";

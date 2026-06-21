@@ -1,5 +1,5 @@
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
 import { POSTHOG_KEY } from "@/lib/constants";
 import { capturePostHogEvent } from "@/lib/posthog";
 import { updateUserLastLoginAt } from "@/modules/auth/lib/user";

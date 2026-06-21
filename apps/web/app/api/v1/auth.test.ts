@@ -1,12 +1,12 @@
 import { NextRequest } from "next/server";
 import { describe, expect, test, vi } from "vitest";
-import { TAPIKeyWorkspacePermission } from "@formbricks/types/auth";
+import { TAPIKeyWorkspacePermission } from "@salamruby/types/auth";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   UniqueConstraintError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import { getApiKeyWithPermissions } from "@/modules/organization/settings/api-keys/lib/api-key";
 import { hasPermission } from "@/modules/organization/settings/api-keys/lib/utils";
 import { authenticateRequest, handleErrorResponse } from "./auth";

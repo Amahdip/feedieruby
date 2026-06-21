@@ -1,6 +1,6 @@
 import { NoObjectGeneratedError } from "ai";
 import { describe, expect, test, vi } from "vitest";
-import { InvalidInputError } from "@formbricks/types/errors";
+import { InvalidInputError } from "@salamruby/types/errors";
 import { AI_CHART_PROMPT_ERROR_CODE } from "./ai-chart-errors";
 import { getAIChartPromptError } from "./ai-chart-errors.server";
 

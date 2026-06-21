@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { TUser } from "@formbricks/types/user";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { TUser } from "@salamruby/types/user";
 import { updateUser } from "./user";
 
 vi.mock("@/modules/storage/utils", () => ({
   isValidImageFile: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     user: {
       update: vi.fn(),

@@ -1,8 +1,8 @@
 import { useEffect } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { type TI18nString } from "@formbricks/types/i18n";
-import { type TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { type TResponseData, type TResponseTtc, type TResponseVariables } from "@formbricks/types/responses";
+import { type TI18nString } from "@salamruby/types/i18n";
+import { type TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { type TResponseData, type TResponseTtc, type TResponseVariables } from "@salamruby/types/responses";
 import { SubmitButton } from "@/components/buttons/submit-button";
 import { ScrollableContainer } from "@/components/wrappers/scrollable-container";
 import { getLocalizedValue } from "@/lib/i18n";

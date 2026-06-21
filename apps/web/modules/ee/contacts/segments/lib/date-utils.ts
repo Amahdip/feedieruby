@@ -1,4 +1,4 @@
-import { TTimeUnit } from "@formbricks/types/segment";
+import { TTimeUnit } from "@salamruby/types/segment";
 
 /**
  * Subtracts a time unit from a date

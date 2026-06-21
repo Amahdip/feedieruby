@@ -1,5 +1,5 @@
-import { TAPIKeyWorkspacePermission } from "@formbricks/types/auth";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { TAPIKeyWorkspacePermission } from "@salamruby/types/auth";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { findWorkspaceByIdOrLegacyEnvId } from "@/lib/utils/resolve-client-id";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 import { hasPermission } from "@/modules/organization/settings/api-keys/lib/utils";

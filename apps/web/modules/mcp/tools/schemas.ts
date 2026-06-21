@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { ZSurveyFilters, ZSurveyStatus, ZSurveyType } from "@formbricks/types/surveys/types";
+import { ZId } from "@salamruby/types/common";
+import { ZSurveyFilters, ZSurveyStatus, ZSurveyType } from "@salamruby/types/surveys/types";
 
 export const ZMcpListSurveysInput = z.object({
   workspaceId: ZId.describe("Workspace ID whose surveys should be listed."),

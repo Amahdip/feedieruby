@@ -1,4 +1,4 @@
 module.exports = {
-  extends: ["@formbricks/eslint-config/legacy-next.js"],
+  extends: ["@salamruby/eslint-config/legacy-next.js"],
   ignorePatterns: ["**/package.json", "**/tsconfig.json"],
 };

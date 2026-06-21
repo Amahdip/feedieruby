@@ -1,11 +1,11 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ZId } from "@formbricks/types/common";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TSurveyQuota, TSurveyQuotaInput } from "@formbricks/types/quota";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ZId } from "@salamruby/types/common";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TSurveyQuota, TSurveyQuotaInput } from "@salamruby/types/quota";
 import { validateInputs } from "@/lib/utils/validate";
 
 export const getQuota = reactCache(async (quotaId: string): Promise<TSurveyQuota> => {

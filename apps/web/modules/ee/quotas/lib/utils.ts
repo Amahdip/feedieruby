@@ -1,10 +1,10 @@
 import "server-only";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { TSurveyQuota } from "@formbricks/types/quota";
-import { TResponseData, TResponseVariables } from "@formbricks/types/responses";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { TSurveyQuota } from "@salamruby/types/quota";
+import { TResponseData, TResponseVariables } from "@salamruby/types/responses";
 import { updateResponse } from "@/lib/response/service";
 import { evaluateLogic } from "@/lib/surveyLogic/utils";
 import { validateInputs } from "@/lib/utils/validate";

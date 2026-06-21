@@ -1,17 +1,17 @@
 ---
 title: "Migration"
-description: "Formbricks Self-hosted version migration"
+description: "SalamRuby Self-hosted version migration"
 icon: "arrow-right"
 ---
 
 ## v5
 
-Formbricks v5 changes the self-hosted runtime contract. If you are upgrading an existing Formbricks 4.x
+SalamRuby v5 changes the self-hosted runtime contract. If you are upgrading an existing SalamRuby 4.x
 deployment, review this section before starting the new version.
 
 ### What Changes In v5
 
-- **Formbricks Hub is now mandatory** for self-hosted Formbricks v5 deployments.
+- **SalamRuby Hub is now mandatory** for self-hosted SalamRuby v5 deployments.
 - **Cube is now part of the baseline stack** alongside Hub. Docker, one-click, and Helm all bundle Cube by
   default; `CUBEJS_API_SECRET` is required. Operators can disable the bundled Cube deployment in Helm to use
   an external cluster instead.
@@ -20,14 +20,14 @@ deployment, review this section before starting the new version.
 - **AI features are configured at the instance level** via `AI_*` environment variables.
 
 <Warning>
-  Formbricks v5 removes application-level rate limiting for several routes that are now expected to be
+  SalamRuby v5 removes application-level rate limiting for several routes that are now expected to be
   protected by Envoy Gateway or an equivalent edge rate limiter. If your self-hosted instance does not
   already have equivalent edge protection, add it before exposing the v5 stack.
 </Warning>
 
 ### Before You Upgrade
 
-Before you restart your instance on Formbricks v5:
+Before you restart your instance on SalamRuby v5:
 
 - back up your database
 - identify your current deployment type: one-click, manual Docker Compose, or Kubernetes/Helm
@@ -39,25 +39,25 @@ Before you restart your instance on Formbricks v5:
 
 ### Required Config And Infrastructure Changes
 
-#### Formbricks Hub
+#### SalamRuby Hub
 
-Formbricks v5 expects Hub to be part of the self-hosted stack.
+SalamRuby v5 expects Hub to be part of the self-hosted stack.
 
 - `HUB_API_KEY` is required
-- `HUB_API_URL` must point to the Hub service the Formbricks app can reach
-- `HUB_DATABASE_URL` is optional; when unset, Hub can share the same PostgreSQL database as Formbricks
+- `HUB_API_URL` must point to the Hub service the SalamRuby app can reach
+- `HUB_DATABASE_URL` is optional; when unset, Hub can share the same PostgreSQL database as SalamRuby
 - bundled Docker and Helm assets run Hub database migrations automatically during startup or upgrade, and the
   migration steps are idempotent
 
 <Note>
   Hub-specific source code and standalone deployment assets live in the
-  [Formbricks Hub repository](https://github.com/formbricks/hub). For a normal Formbricks v5 upgrade, use that
-  repository as reference material only; the canonical migration steps stay in these Formbricks docs.
+  [SalamRuby Hub repository](https://github.com/salamruby/hub). For a normal SalamRuby v5 upgrade, use that
+  repository as reference material only; the canonical migration steps stay in these SalamRuby docs.
 </Note>
 
 #### Edge Rate Limiting
 
-Formbricks v5 splits rate limiting across two layers:
+SalamRuby v5 splits rate limiting across two layers:
 
 - Envoy Gateway, or an equivalent edge rate limiter, for covered public and API-key routes
 - the application server for the remaining session-authenticated routes, server actions, and uncovered APIs
@@ -83,10 +83,10 @@ enterprise functionality.
 
 #### Cube
 
-Cube is part of the baseline Formbricks v5 stack.
+Cube is part of the baseline SalamRuby v5 stack.
 
 - the Docker, one-click, and Helm deployments all bundle the `cube` service by default
-- the Formbricks app requires `CUBEJS_API_URL` and `CUBEJS_API_SECRET`; the install/dev-setup scripts
+- the SalamRuby app requires `CUBEJS_API_URL` and `CUBEJS_API_SECRET`; the install/dev-setup scripts
   generate the secret automatically for new installs
 - Helm operators who want to run an external Cube cluster can set `cube.enabled: false` and provide their
   own endpoint via `deployment.env.CUBEJS_API_URL`
@@ -98,11 +98,11 @@ Cube is part of the baseline Formbricks v5 stack.
 
 <Tabs>
   <Tab title="One-Click">
-    From the `formbricks` directory created by the installer:
+    From the `salamruby` directory created by the installer:
 
     ```bash
-    cd formbricks
-    docker compose exec postgres pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v5_$(date +%Y%m%d_%H%M%S).dump
+    cd salamruby
+    docker compose exec postgres pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v5_$(date +%Y%m%d_%H%M%S).dump
     ```
 
     <Info>
@@ -113,7 +113,7 @@ Cube is part of the baseline Formbricks v5 stack.
     From the directory that contains your `docker-compose.yml`:
 
     ```bash
-    docker compose exec postgres pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v5_$(date +%Y%m%d_%H%M%S).dump
+    docker compose exec postgres pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v5_$(date +%Y%m%d_%H%M%S).dump
     ```
 
     <Info>
@@ -125,7 +125,7 @@ Cube is part of the baseline Formbricks v5 stack.
     If you are using the in-cluster PostgreSQL released by the Helm chart:
 
     ```bash
-    kubectl exec -n formbricks formbricks-postgresql-0 -- pg_dump -Fc -U formbricks -d formbricks > formbricks_pre_v5_$(date +%Y%m%d_%H%M%S).dump
+    kubectl exec -n salamruby salamruby-postgresql-0 -- pg_dump -Fc -U salamruby -d salamruby > salamruby_pre_v5_$(date +%Y%m%d_%H%M%S).dump
     ```
 
     If you use a managed PostgreSQL service, create a provider snapshot or run `pg_dump` directly against the
@@ -137,21 +137,21 @@ Cube is part of the baseline Formbricks v5 stack.
 
 <Tabs>
   <Tab title="One-Click">
-    The one-click `./formbricks.sh update` command only pulls new images. It does **not** rewrite your existing
-    `formbricks/docker-compose.yml`, so you must merge the v5 stack changes before the first v5 restart.
+    The one-click `./salamruby.sh update` command only pulls new images. It does **not** rewrite your existing
+    `salamruby/docker-compose.yml`, so you must merge the v5 stack changes before the first v5 restart.
 
     ```bash
-    curl -fsSL -o formbricks/docker-compose.v5.yml https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/docker-compose.yml
+    curl -fsSL -o salamruby/docker-compose.v5.yml https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/docker-compose.yml
     ```
 
-    Then compare `formbricks/docker-compose.v5.yml` with your existing `formbricks/docker-compose.yml` and merge
+    Then compare `salamruby/docker-compose.v5.yml` with your existing `salamruby/docker-compose.yml` and merge
     the v5 additions:
 
     - add a non-empty `HUB_API_KEY` and reuse the same value wherever your deployment resolves Hub auth
     - keep `HUB_API_URL` at `http://hub:8080` unless Hub runs elsewhere
-    - include the bundled `formbricks-migrate`, `hub-migrate`, and `hub` services
-    - sync `formbricks/cube/cube.js` and `formbricks/cube/schema/FeedbackRecords.js` from the current
-      release and ensure `formbricks/.env` contains `CUBEJS_API_SECRET` (Cube is part of the baseline stack
+    - include the bundled `salamruby-migrate`, `hub-migrate`, and `hub` services
+    - sync `salamruby/cube/cube.js` and `salamruby/cube/schema/FeedbackRecords.js` from the current
+      release and ensure `salamruby/.env` contains `CUBEJS_API_SECRET` (Cube is part of the baseline stack
       in v5)
     - if your older setup still uses bundled MinIO for uploads, review that storage path separately before the
       first v5 restart; newer self-hosting updates move the bundled object-storage path to RustFS, while
@@ -163,7 +163,7 @@ Cube is part of the baseline Formbricks v5 stack.
     After the compose file is updated and your edge rate limiter is in place:
 
     ```bash
-    ./formbricks.sh update
+    ./salamruby.sh update
     ```
   </Tab>
   <Tab title="Docker Compose">
@@ -171,14 +171,14 @@ Cube is part of the baseline Formbricks v5 stack.
     only updating images:
 
     ```bash
-    curl -fsSL -o docker-compose.v5.yml https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/docker-compose.yml
+    curl -fsSL -o docker-compose.v5.yml https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/docker-compose.yml
     ```
 
     At minimum, confirm:
 
     - `HUB_API_KEY` is configured and the same value is available wherever your deployment resolves Hub auth
     - `HUB_API_URL` points to the Hub service the app can reach
-    - the compose stack includes `formbricks-migrate`, `hub-migrate`, and `hub`
+    - the compose stack includes `salamruby-migrate`, `hub-migrate`, and `hub`
     - the v5 stack also includes `cube`, `cube/cube.js`, and `cube/schema/FeedbackRecords.js`, with
       `CUBEJS_API_SECRET` available through your `.env` or shell environment
     - if your legacy Compose file still includes bundled MinIO for uploads, treat that as a separate storage
@@ -202,11 +202,11 @@ Cube is part of the baseline Formbricks v5 stack.
     </Info>
   </Tab>
   <Tab title="Kubernetes">
-    Upgrade using the current Formbricks chart:
+    Upgrade using the current SalamRuby chart:
 
     ```bash
-    helm upgrade formbricks oci://ghcr.io/formbricks/helm-charts/formbricks \
-      -n formbricks \
+    helm upgrade salamruby oci://ghcr.io/salamruby/helm-charts/salamruby \
+      -n salamruby \
       -f values.yaml
     ```
 
@@ -227,8 +227,8 @@ Cube is part of the baseline Formbricks v5 stack.
 
 After the upgrade:
 
-- confirm the Formbricks app starts and `GET /health` returns successfully
-- confirm the Hub service is healthy and reachable from the Formbricks app
+- confirm the SalamRuby app starts and `GET /health` returns successfully
+- confirm the Hub service is healthy and reachable from the SalamRuby app
 - verify any Hub-backed connector or feedback flows you use
 - verify covered routes are rate-limited at the edge layer
 - verify AI features only if you configured the required `AI_*` variables
@@ -238,13 +238,13 @@ After the upgrade:
 
 Common upgrade issues:
 
-- **Missing `HUB_API_KEY`**: Formbricks cannot authenticate to Hub, and Hub itself may fail to start
+- **Missing `HUB_API_KEY`**: SalamRuby cannot authenticate to Hub, and Hub itself may fail to start
 - **Bad `HUB_API_URL`**: the app starts, but Hub-backed features fail because the service cannot be reached
 - **No edge rate limiter in front of covered routes**: the v5 deployment runs, but those routes are no longer
   protected by the legacy in-app limiter
 - **Missing AI provider configuration**: AI features remain unavailable until `AI_PROVIDER`, `AI_MODEL`, and the
   matching provider settings are set correctly
-- **Missing `CUBEJS_API_SECRET`** (or unreachable Cube endpoint): the Formbricks app fails env validation
+- **Missing `CUBEJS_API_SECRET`** (or unreachable Cube endpoint): the SalamRuby app fails env validation
   at boot, or — if env vars are present but Cube is unreachable — dashboards and analysis queries fail
   while the rest of the app stays healthy
 - **Cube healthcheck fails with `wget: not found`**: older v5 Docker Compose files used `wget` for the
@@ -254,7 +254,7 @@ Common upgrade issues:
 If you need to roll back:
 
 - restore the pre-upgrade database backup if schema or data changes require it
-- revert your image tags or Helm release values to the last known-good Formbricks 4.x version
+- revert your image tags or Helm release values to the last known-good SalamRuby 4.x version
 - revert compose or Helm configuration changes introduced for the v5 rollout
 
 **Workspaces and Environment IDs**
@@ -265,17 +265,17 @@ integrations backward compatible during migration.
 **Website & App Surveys SDK: Migrate to Workspace ID**
 
 <Info>
-  Formbricks v5 also includes the Environment ID to Workspace ID transition for SDK setup. If you still rely on a
+  SalamRuby v5 also includes the Environment ID to Workspace ID transition for SDK setup. If you still rely on a
   legacy Environment ID, read the [Migrate to Workspace ID guide](/surveys/website-app-surveys/workspace-id-migration).
 </Info>
 
 ## v4.7
 
-Formbricks v4.7 introduces **typed contact attributes** with native `number` and `date` data types. This enables comparison-based segment filters (e.g. "signup date before 2025-01-01") that were previously not possible with string-only attribute values.
+SalamRuby v4.7 introduces **typed contact attributes** with native `number` and `date` data types. This enables comparison-based segment filters (e.g. "signup date before 2025-01-01") that were previously not possible with string-only attribute values.
 
 ### What Happens Automatically
 
-When Formbricks v4.7 starts for the first time, the data migration will:
+When SalamRuby v4.7 starts for the first time, the data migration will:
 
 1. Analyze all existing contact attribute keys and infer their data types (`text`, `number`, or `date`) based on the stored values
 2. Update the `ContactAttributeKey` table with the detected `dataType` for each key
@@ -294,15 +294,15 @@ When Formbricks v4.7 starts for the first time, the data migration will:
 
 <Tabs>
   <Tab title="Docker">
-    Before running these steps, navigate to the `formbricks` directory where your `docker-compose.yml` file is located.
+    Before running these steps, navigate to the `salamruby` directory where your `docker-compose.yml` file is located.
 
     ```bash
-    docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v4.7_$(date +%Y%m%d_%H%M%S).dump
+    docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v4.7_$(date +%Y%m%d_%H%M%S).dump
     ```
 
     <Info>
       If you run into "**No such container**", use `docker ps` to find your container name, e.g.
-      `formbricks_postgres_1`.
+      `salamruby_postgres_1`.
     </Info>
 
   </Tab>
@@ -310,11 +310,11 @@ When Formbricks v4.7 starts for the first time, the data migration will:
     If you are using the **in-cluster PostgreSQL** deployed by the Helm chart:
 
     ```bash
-    kubectl exec -n formbricks formbricks-postgresql-0 -- pg_dump -Fc -U formbricks -d formbricks > formbricks_pre_v4.7_$(date +%Y%m%d_%H%M%S).dump
+    kubectl exec -n salamruby salamruby-postgresql-0 -- pg_dump -Fc -U salamruby -d salamruby > salamruby_pre_v4.7_$(date +%Y%m%d_%H%M%S).dump
     ```
 
     <Info>
-      If your PostgreSQL pod has a different name, run `kubectl get pods -n formbricks` to find it.
+      If your PostgreSQL pod has a different name, run `kubectl get pods -n salamruby` to find it.
     </Info>
 
     If you are using a **managed PostgreSQL** service (e.g. AWS RDS, Cloud SQL), use your provider's backup/snapshot feature or run `pg_dump` directly against the external host.
@@ -322,7 +322,7 @@ When Formbricks v4.7 starts for the first time, the data migration will:
   </Tab>
 </Tabs>
 
-**2. Upgrade to Formbricks v4.7**
+**2. Upgrade to SalamRuby v4.7**
 
 <Tabs>
   <Tab title="Docker">
@@ -333,15 +333,15 @@ When Formbricks v4.7 starts for the first time, the data migration will:
     # Stop the current instance
     docker compose down
 
-    # Start with Formbricks v4.7
+    # Start with SalamRuby v4.7
     docker compose up -d
     ```
 
   </Tab>
   <Tab title="Kubernetes">
     ```bash
-    helm upgrade formbricks oci://ghcr.io/formbricks/helm-charts/formbricks \
-      -n formbricks \
+    helm upgrade salamruby oci://ghcr.io/salamruby/helm-charts/salamruby \
+      -n salamruby \
       --set deployment.image.tag=v4.7.0
     ```
 
@@ -355,24 +355,24 @@ When Formbricks v4.7 starts for the first time, the data migration will:
 
 **3. Check the Migration Logs**
 
-After Formbricks starts, check the logs to see whether the value backfill was completed or skipped:
+After SalamRuby starts, check the logs to see whether the value backfill was completed or skipped:
 
 <Tabs>
   <Tab title="Docker">
     ```bash
-    docker compose logs formbricks | grep -i "backfill"
+    docker compose logs salamruby | grep -i "backfill"
     ```
   </Tab>
   <Tab title="Kubernetes">
     ```bash
     # Check the application pod logs
-    kubectl logs -n formbricks -l app.kubernetes.io/name=formbricks --tail=200 | grep -i "backfill"
+    kubectl logs -n salamruby -l app.kubernetes.io/name=salamruby --tail=200 | grep -i "backfill"
     ```
 
     If the Helm migration Job ran, you can also inspect its logs:
 
     ```bash
-    kubectl logs -n formbricks job/formbricks-migration
+    kubectl logs -n salamruby job/salamruby-migration
     ```
 
   </Tab>
@@ -382,24 +382,24 @@ If you see a message like `Skipping value backfill (X rows >= 1000000 threshold)
 
 **4. Run the Backfill Script (large datasets only)**
 
-If the migration skipped the value backfill, run the standalone backfill script inside the running Formbricks container:
+If the migration skipped the value backfill, run the standalone backfill script inside the running SalamRuby container:
 
 <Tabs>
   <Tab title="Docker">
     ```bash
-    docker exec formbricks node packages/database/dist/scripts/backfill-attribute-values.js
+    docker exec salamruby node packages/database/dist/scripts/backfill-attribute-values.js
     ```
 
-    <Info>Replace `formbricks` with your actual container name if it differs. Use `docker ps` to find it.</Info>
+    <Info>Replace `salamruby` with your actual container name if it differs. Use `docker ps` to find it.</Info>
 
   </Tab>
   <Tab title="Kubernetes">
     ```bash
-    kubectl exec -n formbricks deploy/formbricks -- node packages/database/dist/scripts/backfill-attribute-values.js
+    kubectl exec -n salamruby deploy/salamruby -- node packages/database/dist/scripts/backfill-attribute-values.js
     ```
 
     <Info>
-      If your Formbricks deployment has a different name, run `kubectl get deploy -n formbricks` to find it.
+      If your SalamRuby deployment has a different name, run `kubectl get deploy -n salamruby` to find it.
     </Info>
 
   </Tab>
@@ -432,14 +432,14 @@ Backfill Complete!
 
 Key characteristics of the backfill script:
 
-- **Safe to run while Formbricks is live** -- it does not lock the entire table or wrap work in a long transaction
+- **Safe to run while SalamRuby is live** -- it does not lock the entire table or wrap work in a long transaction
 - **Idempotent** -- it only updates rows where the typed columns are still `NULL`, so you can safely run it multiple times
 - **Resumable** -- each batch commits independently, so if the process is interrupted you can re-run it and it picks up where it left off
 - **No timeout risk** -- unlike the migration, this script runs outside the migration transaction and has no time limit
 
 **5. Verify the Upgrade**
 
-- Access your Formbricks instance at the same URL as before
+- Access your SalamRuby instance at the same URL as before
 - If you use contact segments with number or date filters, verify they return the expected results
 - Check that existing surveys and response data are intact
 
@@ -450,13 +450,13 @@ Key characteristics of the backfill script:
 <Warning>
   **Important: Migration Required**
 
-Formbricks 4 introduces additional requirements for self-hosting setups and makes a dedicated Redis cache as well as S3-compatible file storage mandatory.
+SalamRuby 4 introduces additional requirements for self-hosting setups and makes a dedicated Redis cache as well as S3-compatible file storage mandatory.
 
 </Warning>
 
-Formbricks 4.0 is a **major milestone** that sets up the technical foundation for future iterations and feature improvements. This release focuses on modernizing core infrastructure components to improve reliability, scalability, and enable advanced features going forward.
+SalamRuby 4.0 is a **major milestone** that sets up the technical foundation for future iterations and feature improvements. This release focuses on modernizing core infrastructure components to improve reliability, scalability, and enable advanced features going forward.
 
-### What's New in Formbricks 4.0
+### What's New in SalamRuby 4.0
 
 **🚀 New Enterprise Features:**
 
@@ -471,7 +471,7 @@ Formbricks 4.0 is a **major milestone** that sets up the technical foundation fo
 
 ### What This Means for Your Self-Hosting Setup
 
-These improvements in Formbricks 4.0 also make some infrastructure requirements mandatory going forward:
+These improvements in SalamRuby 4.0 also make some infrastructure requirements mandatory going forward:
 
 - **Redis** for caching
 - **RustFS or S3-compatible storage** for file uploads
@@ -480,7 +480,7 @@ These services are already included in the updated one-click setup for self-host
 
 ### Why We Made These Changes
 
-We know this represents more moving parts in your infrastructure and might even introduce more complexity in hosting Formbricks, and we don't take this decision lightly. As Formbricks grows into a comprehensive Survey and Experience Management platform, we've reached a point where the simple, single-service approach was holding back our ability to deliver the reliable, feature-rich product our users demand and deserve.
+We know this represents more moving parts in your infrastructure and might even introduce more complexity in hosting SalamRuby, and we don't take this decision lightly. As SalamRuby grows into a comprehensive Survey and Experience Management platform, we've reached a point where the simple, single-service approach was holding back our ability to deliver the reliable, feature-rich product our users demand and deserve.
 
 By moving to dedicated, professional-grade services for these critical functions, we're building the foundation needed to deliver:
 
@@ -493,7 +493,7 @@ We believe this is the only path forward to build the comprehensive Survey and E
 
 ### Migration Steps for v4.0
 
-Additional migration steps are needed if you are using a self-hosted Formbricks setup that uses either local file storage (not S3-compatible file storage) or doesn't already use a Redis cache.
+Additional migration steps are needed if you are using a self-hosted SalamRuby setup that uses either local file storage (not S3-compatible file storage) or doesn't already use a Redis cache.
 
 ### Legacy one-click v4.0 upgrade
 
@@ -502,7 +502,7 @@ For historical v4.0 upgrades, our original one-click migration script is still a
 ```bash
 # Download the latest script
 curl -fsSL -o migrate-to-v4.sh \
-  https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/migrate-to-v4.sh
+  https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/migrate-to-v4.sh
 
 # Make it executable
 chmod +x migrate-to-v4.sh
@@ -515,36 +515,36 @@ This script guides you through the steps for the infrastructure migration and do
 
 - Adds a Redis service to your setup and configures it
 - Adds a bundled MinIO service to your setup, configures it, and migrates local files to it
-- Pulls the latest Formbricks image and updates your instance
+- Pulls the latest SalamRuby image and updates your instance
 
 ### Manual Setup
 
-If you use a different setup to host your Formbricks instance, you need to make sure to make the necessary adjustments to run Formbricks 4.0.
+If you use a different setup to host your SalamRuby instance, you need to make sure to make the necessary adjustments to run SalamRuby 4.0.
 
 #### Redis
 
-Formbricks 4.0 requires a Redis instance to work properly. Please add a Redis instance to your Docker setup, your K8s infrastructure, or however you are hosting Formbricks at the moment. Formbricks works with the latest versions of Redis as well as Valkey.
+SalamRuby 4.0 requires a Redis instance to work properly. Please add a Redis instance to your Docker setup, your K8s infrastructure, or however you are hosting SalamRuby at the moment. SalamRuby works with the latest versions of Redis as well as Valkey.
 
 You need to configure the `REDIS_URL` environment variable and point it to your Redis instance.
 
 #### S3-compatible storage
 
-To use file storage (e.g., file upload questions, image choice questions, custom survey backgrounds, etc.), you need to have S3-compatible file storage set up and connected to Formbricks.
+To use file storage (e.g., file upload questions, image choice questions, custom survey backgrounds, etc.), you need to have S3-compatible file storage set up and connected to SalamRuby.
 
-Formbricks supports multiple storage providers (among many other S3-compatible storages):
+SalamRuby supports multiple storage providers (among many other S3-compatible storages):
 
 - AWS S3
 - Digital Ocean Spaces
 - Hetzner Object Storage
 - Custom RustFS server
 
-Please make sure to set up a storage bucket with one of these solutions and then link it to Formbricks using the following environment variables:
+Please make sure to set up a storage bucket with one of these solutions and then link it to SalamRuby using the following environment variables:
 
 ```
   S3_ACCESS_KEY: your-access-key
   S3_SECRET_KEY: your-secret-key
   S3_REGION: us-east-1
-  S3_BUCKET_NAME: formbricks-uploads
+  S3_BUCKET_NAME: salamruby-uploads
   S3_ENDPOINT_URL: https://files.yourdomain.com # not needed for AWS S3
   S3_FORCE_PATH_STYLE: 1 # set this only for custom endpoints like RustFS, MinIO, or LocalStack; omit for AWS S3
 ```
@@ -553,18 +553,18 @@ Please make sure to set up a storage bucket with one of these solutions and then
 
 **1. Backup your Database**
 
-**Critical Step**: Create a complete database backup before proceeding. Formbricks 4.0 will automatically remove unused database tables and fields during startup.
+**Critical Step**: Create a complete database backup before proceeding. SalamRuby 4.0 will automatically remove unused database tables and fields during startup.
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v4.0_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v4.0_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into "**No such container**", use `docker ps` to find your container name, e.g.
-  `formbricks_postgres_1`.
+  `salamruby_postgres_1`.
 </Info>
 
-**2. Upgrade to Formbricks 4.0**
+**2. Upgrade to SalamRuby 4.0**
 
 Pull the latest Docker images and restart the setup (example for docker-compose):
 
@@ -575,13 +575,13 @@ docker compose pull
 # Stop the current instance
 docker compose down
 
-# Start with Formbricks 4.0
+# Start with SalamRuby 4.0
 docker compose up -d
 ```
 
 **3. Automatic Database Migration**
 
-When you start Formbricks 4.0 for the first time, it will **automatically**:
+When you start SalamRuby 4.0 for the first time, it will **automatically**:
 
 - Detect and apply required database schema updates
 - Remove unused database tables and fields
@@ -591,7 +591,7 @@ No manual intervention is required for the database migration.
 
 **4. Verify Your Upgrade**
 
-- Access your Formbricks instance at the same URL as before
+- Access your SalamRuby instance at the same URL as before
 - Test file uploads to ensure S3 storage integration works correctly. Check the [File Upload Troubleshooting](/self-hosting/configuration/file-uploads#troubleshooting) section if you face any issues.
 - Verify that existing surveys and data are intact
 - Check that previously uploaded files are accessible
@@ -599,7 +599,7 @@ No manual intervention is required for the database migration.
 ### v3.3
 
 <Info>
-  With Formbricks 3.0, we introduced an automatic data migration system. If you're using a version older than
+  With SalamRuby 3.0, we introduced an automatic data migration system. If you're using a version older than
   **v2.7**, you must upgrade step-by-step through earlier versions (e.g. **2.4 → 2.5 → 2.6 → 2.7**). Once you
   reach **v2.7**, you can upgrade directly to **any v3.x or future release** without needing intermediate
   migrations.
@@ -607,53 +607,53 @@ No manual intervention is required for the database migration.
 
 ### Steps to Migrate
 
-This guide is for users who are **self-hosting Formbricks** using the **one-click setup**. If you have a different setup, you may need to adjust the commands accordingly.
+This guide is for users who are **self-hosting SalamRuby** using the **one-click setup**. If you have a different setup, you may need to adjust the commands accordingly.
 
-Before running these steps, **navigate to the `formbricks` directory** where your `docker-compose.yml` file is located.
+Before running these steps, **navigate to the `salamruby` directory** where your `docker-compose.yml` file is located.
 
 1. **Backup your Database**: Backing up your database is crucial before upgrading. Use the following command to create a backup:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v3.3_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v3.3_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “**No such container**”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Info>
 
-If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `formbricks` database.
+If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `salamruby` database.
 
-1. Pull the latest version of Formbricks:
+1. Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-1. Stop the running Formbricks instance & remove the related containers:
+1. Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-1. Restarting the containers with the latest version of Formbricks:
+1. Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
 ```
 
-When you start the latest version of **Formbricks**, it will **automatically detect and apply any required data migrations** during startup. You don’t need to run any manual migration steps or download separate migration images.
+When you start the latest version of **SalamRuby**, it will **automatically detect and apply any required data migrations** during startup. You don’t need to run any manual migration steps or download separate migration images.
 
 - Access your updated instance
 
-Once the containers are running, simply go to the **same URL** as before to access your updated **Formbricks** instance.
+Once the containers are running, simply go to the **same URL** as before to access your updated **SalamRuby** instance.
 
-That’s it! This new process ensures your **Formbricks** setup stays up to date with the latest schema changes as soon as you run the updated container.
+That’s it! This new process ensures your **SalamRuby** setup stays up to date with the latest schema changes as soon as you run the updated container.
 
 ### v3.2
 
 <Info>
-  With Formbricks 3.0, we introduced an automatic data migration system. If you're using a version older than
+  With SalamRuby 3.0, we introduced an automatic data migration system. If you're using a version older than
   **v2.7**, you must upgrade step-by-step through earlier versions (e.g. **2.4 → 2.5 → 2.6 → 2.7**). Once you
   reach **v2.7**, you can upgrade directly to **any v3.x or future release** without needing intermediate
   migrations.
@@ -661,53 +661,53 @@ That’s it! This new process ensures your **Formbricks** setup stays up to date
 
 ### Steps to Migrate
 
-This guide is for users who are **self-hosting Formbricks** using the **one-click setup**. If you have a different setup, you may need to adjust the commands accordingly.
+This guide is for users who are **self-hosting SalamRuby** using the **one-click setup**. If you have a different setup, you may need to adjust the commands accordingly.
 
-Before running these steps, **navigate to the `formbricks` directory** where your `docker-compose.yml` file is located.
+Before running these steps, **navigate to the `salamruby` directory** where your `docker-compose.yml` file is located.
 
 1. **Backup your Database**: Backing up your database is crucial before upgrading. Use the following command to create a backup:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v3.2_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v3.2_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “**No such container**”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Info>
 
-If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `formbricks` database.
+If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `salamruby` database.
 
-1. Pull the latest version of Formbricks:
+1. Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-1. Stop the running Formbricks instance & remove the related containers:
+1. Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-1. Restarting the containers with the latest version of Formbricks:
+1. Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
 ```
 
-When you start the latest version of **Formbricks**, it will **automatically detect and apply any required data migrations** during startup. You don’t need to run any manual migration steps or download separate migration images.
+When you start the latest version of **SalamRuby**, it will **automatically detect and apply any required data migrations** during startup. You don’t need to run any manual migration steps or download separate migration images.
 
 - Access your updated instance
 
-Once the containers are running, simply go to the **same URL** as before to access your updated **Formbricks** instance.
+Once the containers are running, simply go to the **same URL** as before to access your updated **SalamRuby** instance.
 
-That’s it! This new process ensures your **Formbricks** setup stays up to date with the latest schema changes as soon as you run the updated container.
+That’s it! This new process ensures your **SalamRuby** setup stays up to date with the latest schema changes as soon as you run the updated container.
 
 ### v3.1
 
 <Info>
-  With Formbricks 3.0, we introduced an automatic data migration system. If you're using a version older than
+  With SalamRuby 3.0, we introduced an automatic data migration system. If you're using a version older than
   **v2.7**, you must upgrade step-by-step through earlier versions (e.g. **2.4 → 2.5 → 2.6 → 2.7**). Once you
   reach **v2.7**, you can upgrade directly to **any v3.x or future release** without needing intermediate
   migrations.
@@ -715,71 +715,71 @@ That’s it! This new process ensures your **Formbricks** setup stays up to date
 
 ### Steps to Migrate
 
-This guide is for users who are **self-hosting Formbricks** using the **one-click setup**. If you have a different setup, you may need to adjust the commands accordingly.
+This guide is for users who are **self-hosting SalamRuby** using the **one-click setup**. If you have a different setup, you may need to adjust the commands accordingly.
 
-Before running these steps, **navigate to the `formbricks` directory** where your `docker-compose.yml` file is located.
+Before running these steps, **navigate to the `salamruby` directory** where your `docker-compose.yml` file is located.
 
 1. **Backup your Database**: Backing up your database is crucial before upgrading. Use the following command to create a backup:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v3.1_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v3.1_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “**No such container**”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Info>
 
-If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `formbricks` database.
+If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `salamruby` database.
 
-1. Pull the latest version of Formbricks:
+1. Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-1. Stop the running Formbricks instance & remove the related containers:
+1. Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-1. Restarting the containers with the latest version of Formbricks:
+1. Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
 ```
 
-When you start the latest version of **Formbricks**, it will **automatically detect and apply any required data migrations** during startup. You don’t need to run any manual migration steps or download separate migration images.
+When you start the latest version of **SalamRuby**, it will **automatically detect and apply any required data migrations** during startup. You don’t need to run any manual migration steps or download separate migration images.
 
 - Access your updated instance
 
-Once the containers are running, simply go to the **same URL** as before to access your updated **Formbricks** instance.
+Once the containers are running, simply go to the **same URL** as before to access your updated **SalamRuby** instance.
 
-That’s it! This new process ensures your **Formbricks** setup stays up to date with the latest schema changes as soon as you run the updated container.
+That’s it! This new process ensures your **SalamRuby** setup stays up to date with the latest schema changes as soon as you run the updated container.
 
 ## v3.0
 
 <Warning>
   **Important: Do Not Upgrade to 3.0 If You Need SSO, User Identification, or Cluster Support**
 
-With **Formbricks 3.0**, we're making changes to ensure long-term sustainability while still supporting open source. While the **Community Edition** has gained [new features](https://formbricks.com/blog/formbricks-3-0), some [advanced capabilities](https://formbricks.com/docs/self-hosting/license) are now part of the **Enterprise Edition**.
+With **SalamRuby 3.0**, we're making changes to ensure long-term sustainability while still supporting open source. While the **Community Edition** has gained [new features](https://salamruby.com/blog/salamruby-3-0), some [advanced capabilities](https://salamruby.com/docs/self-hosting/license) are now part of the **Enterprise Edition**.
 
-⚠️ **No Downgrade Option:** If you upgrade to **3.0** and run the data migration, **you cannot revert to 2.7.2**. If you rely on **SSO, user identification, or cluster support**, either **stay on version 2.7.x** or reach out to us on [**GitHub Discussions**](https://github.com/formbricks/formbricks/discussions) **for a custom quote**.
+⚠️ **No Downgrade Option:** If you upgrade to **3.0** and run the data migration, **you cannot revert to 2.7.2**. If you rely on **SSO, user identification, or cluster support**, either **stay on version 2.7.x** or reach out to us on [**GitHub Discussions**](https://github.com/salamruby/salamruby/discussions) **for a custom quote**.
 
 </Warning>
 
 This major release brings a better approach to **data migrations**.
 
-- If you're using **Formbricks v2.7 or later**, you can upgrade **directly** to **v3.x** and future versions.
+- If you're using **SalamRuby v2.7 or later**, you can upgrade **directly** to **v3.x** and future versions.
 
 - If you're on a version **older than v2.7**, you **must upgrade step-by-step** (e.g. **2.4 → 2.5 → 2.6 → 2.7**) before moving to v3.x.
 
 ### Steps to Migrate
 
-This guide is for users **self-hosting** Formbricks with the **one-click setup**. If you're using a different setup, you might adjust the commands.
+This guide is for users **self-hosting** SalamRuby with the **one-click setup**. If you're using a different setup, you might adjust the commands.
 
-- &#x20;Navigate to the Formbricks Directory
+- &#x20;Navigate to the SalamRuby Directory
 
 Before running any steps, go to the directory where your `docker-compose.yml` file is located.
 
@@ -788,54 +788,54 @@ Before running any steps, go to the directory where your `docker-compose.yml` fi
 Backing up your database is **crucial** before upgrading. Use the following command to create a backup:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v3.0_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v3.0_$(date +%Y%m%d_%H%M%S).dump
 
 ```
 
 <Info>
   **Note:** If you see a “No such container” error, run `docker ps` to find your actual container name (e.g.
-  `formbricks_postgres_1`).
+  `salamruby_postgres_1`).
 </Info>
 
 <Info>
   Tip: If you want to store the backup as a `.sql` file, remove the `-Fc` (custom format) option. If you need
-  to restore it later, use `psql` with an empty Formbricks database.
+  to restore it later, use `psql` with an empty SalamRuby database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
 ```
 
-When you start the latest version of Formbricks, it will automatically detect and run any necessary data migrations during startup. There is no need to run any manual migration steps or pull any separate migration images.
+When you start the latest version of SalamRuby, it will automatically detect and run any necessary data migrations during startup. There is no need to run any manual migration steps or pull any separate migration images.
 
 - Access your updated instance
 
-That’s it! Once the containers are up and running, simply navigate to the same URL as before to access your fully migrated Formbricks instance.
+That’s it! Once the containers are up and running, simply navigate to the same URL as before to access your fully migrated SalamRuby instance.
 
 ## v2.7
 
 <Info>
-  AI Features & Database Update: This release lays the groundwork for upcoming AI features, now in private beta. Formbricks requires the `pgvector` extension in PostgreSQL.
+  AI Features & Database Update: This release lays the groundwork for upcoming AI features, now in private beta. SalamRuby requires the `pgvector` extension in PostgreSQL.
 
 One-Click Setup Users: Use the `pgvector/pgvector:pg15` image instead of `postgres:15-alpine` to ensure compatibility.
 
 </Info>
 
-Formbricks v2.7 includes all the features and improvements developed by the community during Hacktoberfest 2024. Additionally, this release introduces an advanced team-based access control system, which is available in the Formbricks Enterprise Edition.
+SalamRuby v2.7 includes all the features and improvements developed by the community during Hacktoberfest 2024. Additionally, this release introduces an advanced team-based access control system, which is available in the SalamRuby Enterprise Edition.
 
 ### Additional Updates
 
@@ -843,24 +843,24 @@ If you previously used organisation-based access control (an enterprise feature)
 
 ### Steps to Migrate
 
-This guide is for users who are self-hosting Formbricks using our one-click setup. If you are using a different setup, you might adjust the commands accordingly.
+This guide is for users who are self-hosting SalamRuby using our one-click setup. If you are using a different setup, you might adjust the commands accordingly.
 
-To run all these steps, please navigate to the Formbricks folder where your `docker-compose.yml` file is located.
+To run all these steps, please navigate to the SalamRuby folder where your `docker-compose.yml` file is located.
 
 - **Backup your Database:** This is a crucial step. Please make sure to backup your database before proceeding with the upgrade. You can use the following command to backup your database.&#x20;
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.7_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.7_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Note>
   If you run into “No such container”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Note>
 
 <Note>
   If you want to store the backup as an \*.sql file, remove the `-Fc` option. To restore, use `psql` with an
-  empty Formbricks database.
+  empty SalamRuby database.
 </Note>
 
 - If you use an older `docker-compose.yml` file from the one-click setup, modify it to use the `pgvector/pgvector:pg15` image instead of `postgres:15-alpine`:
@@ -879,19 +879,19 @@ services:
       - 5432:5432
 ```
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance and remove the related containers:
+- Stop the running SalamRuby instance and remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -902,22 +902,22 @@ docker compose up -d
 <Tip>To find the Docker network name for your Postgres database, run `docker network ls`.</Tip>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:latest && \
+docker pull ghcr.io/salamruby/data-migrations:latest && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.7" \
-  ghcr.io/formbricks/data-migrations:v2.7.0
+  ghcr.io/salamruby/data-migrations:v2.7.0
 
 ```
 
 The command above will migrate your data to the latest schema. This step is important to update your existing data to the new structure. The changes will only be made if the script runs successfully. You can run the script multiple times safely.
 
-- That's it! Once the migration is finished, you can **access your Formbricks instance** at the same URL as before.
+- That's it! Once the migration is finished, you can **access your SalamRuby instance** at the same URL as before.
 
 ## v2.6
 
-Formbricks v2.6 introduces advanced logic jumps for surveys, allowing more complex branching logic, including variables, conditions, and more. This release also includes numerous bug fixes, significant performance improvements for website and app surveys, and enhanced stability.
+SalamRuby v2.6 introduces advanced logic jumps for surveys, allowing more complex branching logic, including variables, conditions, and more. This release also includes numerous bug fixes, significant performance improvements for website and app surveys, and enhanced stability.
 
 <Info>
   This release includes the final step of deprecating server-side action tracking (previously used for segment
@@ -927,39 +927,39 @@ Formbricks v2.6 introduces advanced logic jumps for surveys, allowing more compl
 
 ### Steps to Migrate
 
-This guide is for users who are self-hosting Formbricks using our one-click setup. If you're using a different setup, you might need to adjust the commands accordingly.
+This guide is for users who are self-hosting SalamRuby using our one-click setup. If you're using a different setup, you might need to adjust the commands accordingly.
 
 To run these steps, navigate to the folder where your `docker-compose.yml` file is located.
 
 - **Backup your Database:** This is an important step. Make sure to back up your database before proceeding with the upgrade. You can use this command to back up your database:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.6_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.6_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you get a "No such container" error, run `docker ps` to find your container name, for example,
-  `formbricks_postgres_1`.
+  `salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a
-  restore scenario, you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario, you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -970,21 +970,21 @@ docker compose up -d
 <Info>To find the Docker network name for your Postgres database, run the command:</Info>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:latest && \
+docker pull ghcr.io/salamruby/data-migrations:latest && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.6" \
-  ghcr.io/formbricks/data-migrations:v2.6.0
+  ghcr.io/salamruby/data-migrations:v2.6.0
 ```
 
 The command above will migrate your data to the latest schema. This is an important step to update your existing data to the new structure. Changes will only be made if the script runs successfully. You can run the script multiple times without issues.
 
-- Once the migration is complete, **you can access your Formbricks instance** at the same URL as before.
+- Once the migration is complete, **you can access your SalamRuby instance** at the same URL as before.
 
 ## v2.5
 
-Formbricks v2.5 lets you visualise responses in a data table format. This release also brings a few bug fixes and performance improvements.
+SalamRuby v2.5 lets you visualise responses in a data table format. This release also brings a few bug fixes and performance improvements.
 
 <Info>
   This release fixes the inconsistency of CTA and consent question values when a question is skipped. The
@@ -994,39 +994,39 @@ Formbricks v2.5 lets you visualise responses in a data table format. This releas
 
 ### Steps to Migrate
 
-This guide is for users self-hosting Formbricks with our one-click setup. If you're using a different setup, you may need to adjust the commands.
+This guide is for users self-hosting SalamRuby with our one-click setup. If you're using a different setup, you may need to adjust the commands.
 
 To begin, navigate to the folder where your `docker-compose.yml` file is located.
 
 - **Backup your Database**: This step is important. Please make sure to back up your database before upgrading. You can use the following command to back up your database:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.5_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.5_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “No such container”, use `docker ps` to find your container name,
-  e.g.`formbricks_postgres_1`.
+  e.g.`salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a
-  restore scenario you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1037,63 +1037,63 @@ docker compose up -d
 <Info>To find your Docker Network name for your Postgres Database, find it using `docker network ls`</Info>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:latest && \
+docker pull ghcr.io/salamruby/data-migrations:latest && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.5" \
-  ghcr.io/formbricks/data-migrations:v2.5.3
+  ghcr.io/salamruby/data-migrations:v2.5.3
 ```
 
 The command will migrate your data to the latest schema, ensuring your existing data is updated to the new structure. Changes will only be made if the script runs successfully, and you can safely run the script multiple times.
 
-- Once the migration is complete, **you can access your Formbricks instance** at the same URL as before.
+- Once the migration is complete, **you can access your SalamRuby instance** at the same URL as before.
 
 ## v2.4
 
-Formbricks v2.4 lets you create multiple endings for your surveys and choose which one users see based on logic jumps. This version also includes bug fixes and performance improvements.
+SalamRuby v2.4 lets you create multiple endings for your surveys and choose which one users see based on logic jumps. This version also includes bug fixes and performance improvements.
 
 <Info>
   This release will remove support for advanced targeting (enterprise targeting for app surveys) using actions
   (e.g. targeting users who triggered action x 3 times in the last month). Actions can still be used as
-  triggers, but they will no longer be stored on the server to improve Formbricks' overall performance.
+  triggers, but they will no longer be stored on the server to improve SalamRuby' overall performance.
 </Info>
 
 ### Steps to Migrate
 
-This guide is for users who are self-hosting Formbricks with our one-click setup. If you're using a different setup, you may need to adjust the commands accordingly.
+This guide is for users who are self-hosting SalamRuby with our one-click setup. If you're using a different setup, you may need to adjust the commands accordingly.
 
 To follow these steps, go to the folder where your `docker-compose.yml` file is located.
 
 1. **Backup your Database**: This step is important. Please make sure to back up your database before upgrading. You can use the following command to back up your database:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.4_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.4_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “No such container”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as a `*.sql` file, remove the `-Fc` (custom format) option. In case of a
-  restore scenario, you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario, you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1104,17 +1104,17 @@ Now let's migrate the data to the latest schema:
 To find your Docker Network name for your Postgres Database, find it using `docker network ls`
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:v2.4.3 && \
+docker pull ghcr.io/salamruby/data-migrations:v2.4.3 && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.4" \
-  ghcr.io/formbricks/data-migrations:v2.4.3
+  ghcr.io/salamruby/data-migrations:v2.4.3
 ```
 
 The command above will migrate your data to the latest schema. This is an important step to update your data structure. Changes are only applied if the script runs successfully. You can run the script multiple times without issues.
 
-- That's it! Once the migration is done, you can access your Formbricks instance at the same URL as before.
+- That's it! Once the migration is done, you can access your SalamRuby instance at the same URL as before.
 
 ### Additional Updates
 
@@ -1122,7 +1122,7 @@ The command above will migrate your data to the latest schema. This is an import
 
 ## v2.3
 
-Formbricks v2.3 introduces new colour options for rating questions, enhanced multi-language support for Chinese (Simplified & Traditional), and includes several bug fixes and performance improvements.
+SalamRuby v2.3 introduces new colour options for rating questions, enhanced multi-language support for Chinese (Simplified & Traditional), and includes several bug fixes and performance improvements.
 
 ### Steps to Migrate
 
@@ -1131,39 +1131,39 @@ Formbricks v2.3 introduces new colour options for rating questions, enhanced mul
   surveys in Chinese, you can skip the migration step.
 </Info>
 
-This guide is for users self-hosting Formbricks with our one-click setup. If you're using a different setup, adjust the commands as needed.
+This guide is for users self-hosting SalamRuby with our one-click setup. If you're using a different setup, adjust the commands as needed.
 
 To proceed, go to the folder where your `docker-compose.yml` file is located.
 
 - **Backup your Database**: This is a crucial step. Please make sure to backup your database before proceeding with the upgrade. You can use the following command to backup your database:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.3_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.3_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “**No such containe**r”, use `docker ps` to find your container name, e.g.
-  `formbricks_postgres_1`.
+  `salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a
-  restore scenario you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1174,62 +1174,62 @@ docker compose up -d
 <Info>To find your Docker Network name for your Postgres Database, find it using `docker network ls`</Info>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:v2.3.0 && \
+docker pull ghcr.io/salamruby/data-migrations:v2.3.0 && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.3" \
-  ghcr.io/formbricks/data-migrations:v2.3.0
+  ghcr.io/salamruby/data-migrations:v2.3.0
 
 ```
 
 The command above will migrate your data to the latest schema, which is essential for updating your data structure. Changes will only be made if the script runs successfully. You can safely run the script multiple times.
 
-- Once the migration is complete, **you can access your Formbricks instance** at the same URL as before.
+- Once the migration is complete, **you can access your SalamRuby instance** at the same URL as before.
 
 ### Additional Updates
 
-The feature to create short URLs in Formbricks is now deprecated. Existing short URLs will continue to work for now, but it is recommended to use long URLs instead. Support for short URL redirects will be removed in a future release.
+The feature to create short URLs in SalamRuby is now deprecated. Existing short URLs will continue to work for now, but it is recommended to use long URLs instead. Support for short URL redirects will be removed in a future release.
 
 ## v2.2
 
-Formbricks v2.2 introduces XM research presets, providing a brand-new product onboarding experience. Our goal is to make user research "obviously easy" across different industries, starting with Software-as-a-Service and E-Commerce.
+SalamRuby v2.2 introduces XM research presets, providing a brand-new product onboarding experience. Our goal is to make user research "obviously easy" across different industries, starting with Software-as-a-Service and E-Commerce.
 
 ### Steps to Migrate
 
-This guide is for users who are self-hosting Formbricks with our one-click setup. If you're using a different setup, you may need to adjust the commands accordingly.
+This guide is for users who are self-hosting SalamRuby with our one-click setup. If you're using a different setup, you may need to adjust the commands accordingly.
 
-To run all these steps, please navigate to the `formbricks` folder where your `docker-compose.yml` file is located.
+To run all these steps, please navigate to the `salamruby` folder where your `docker-compose.yml` file is located.
 
 1. **Backup your Database**: This is a crucial step. Please make sure to backup your database before proceeding with the upgrade. You can use the following command to backup your database:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.2_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.2_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “No such container”, use `docker ps` to find your container name, e.g.
-  `formbricks_postgres_1`.
+  `salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a
-  restore scenario you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1240,17 +1240,17 @@ docker compose up -d
 <Info>To find your Docker Network name for your Postgres Database, find it using `docker network ls`</Info>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:v2.2 && \
+docker pull ghcr.io/salamruby/data-migrations:v2.2 && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.2" \
-  ghcr.io/formbricks/data-migrations:v2.2
+  ghcr.io/salamruby/data-migrations:v2.2
 ```
 
 The command above will migrate your data to the latest schema. This is an important step to update your existing data. Changes will only be made if the script runs successfully. You can safely run the script multiple times.
 
-- Once the migration is complete, **you can access your Formbricks instance** at the same URL as before.
+- Once the migration is complete, **you can access your SalamRuby instance** at the same URL as before.
 
 ### Changes in Environment Variables
 
@@ -1258,7 +1258,7 @@ The command above will migrate your data to the latest schema. This is an import
 
 ## v2.1
 
-Formbricks v2.1 introduces more options for creating No-Code Actions and improves the self-hosting experience with a new onboarding process for fresh instances.
+SalamRuby v2.1 introduces more options for creating No-Code Actions and improves the self-hosting experience with a new onboarding process for fresh instances.
 
 <Info>
   To improve the user experience and simplify setup for self-hosting instances, we are transitioning to a single organization model. This change allows self-hosts to manage their instance centrally and more easily control access. A new permissions system will also be introduced soon, providing more granular control over projects and resources within an organization.
@@ -1269,39 +1269,39 @@ If you've previously created multiple organizations, you can still switch betwee
 
 ### Steps to Migrate
 
-This guide is for users self-hosting Formbricks using our one-click setup. If you are using a different setup, you may need to adjust the commands accordingly.
+This guide is for users self-hosting SalamRuby using our one-click setup. If you are using a different setup, you may need to adjust the commands accordingly.
 
-To follow these steps, please navigate to the Formbricks folder where your `docker-compose.yml` file is located.
+To follow these steps, please navigate to the SalamRuby folder where your `docker-compose.yml` file is located.
 
 - **Backup your Database**: This is an essential step. Please ensure that you back up your database before proceeding with the upgrade. You can use the following command to back it up:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.1_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.1_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “No such container”, use `docker ps` to find your container name, e.g.
-  `formbricks_postgres_1`.
+  `salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as a `*.sql` file remove the `-Fc` (custom format) option. In case of a
-  restore scenario you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers.
+- Stop the running SalamRuby instance & remove the related containers.
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1312,17 +1312,17 @@ docker compose up -d
 <Info>To find your Docker network name for the Postgres database, run the following `docker network ls`</Info>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:v2.1.0 && \
+docker pull ghcr.io/salamruby/data-migrations:v2.1.0 && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.1" \
-  ghcr.io/formbricks/data-migrations:v2.1.0
+  ghcr.io/salamruby/data-migrations:v2.1.0
 ```
 
-Once the migration script runs successfully, your data will be migrated to the latest schema. The script is designed to run safely multiple times, so you don’t need to worry if it’s executed more than once. After completing the migration, you can continue to access your Formbricks instance at the same URL as before.
+Once the migration script runs successfully, your data will be migrated to the latest schema. The script is designed to run safely multiple times, so you don’t need to worry if it’s executed more than once. After completing the migration, you can continue to access your SalamRuby instance at the same URL as before.
 
-- That's it! Once the migration is complete, you can **now access your Formbricks instance** at the same URL as before.
+- That's it! Once the migration is complete, you can **now access your SalamRuby instance** at the same URL as before.
 
 ### Changes in Environment Variables
 
@@ -1334,60 +1334,60 @@ Once the migration script runs successfully, your data will be migrated to the l
 
 ## v2.0
 
-Formbricks v2.0 introduces significant features such as **Multi-Language Surveys** and **Advanced Styling for Surveys**, aimed at improving the flexibility and appearance of your surveys. Additionally, the release includes several optimisations, bug fixes, and smaller improvements to ensure a smoother user experience.
+SalamRuby v2.0 introduces significant features such as **Multi-Language Surveys** and **Advanced Styling for Surveys**, aimed at improving the flexibility and appearance of your surveys. Additionally, the release includes several optimisations, bug fixes, and smaller improvements to ensure a smoother user experience.
 
-If you are upgrading to Formbricks v2.0, follow this guide to ensure a smooth migration of your existing Formbricks instance without encountering issues or build errors.
+If you are upgrading to SalamRuby v2.0, follow this guide to ensure a smooth migration of your existing SalamRuby instance without encountering issues or build errors.
 
 <Info>
   This upgrade requires a **data migration**. Please make sure to back up your database before proceeding.
-  Follow the steps below to upgrade your Formbricks instance to v2.0.
+  Follow the steps below to upgrade your SalamRuby instance to v2.0.
 </Info>
 
 <Info>
-  If you've used the Formbricks Enterprise Edition with a free beta license key, your instance will be
+  If you've used the SalamRuby Enterprise Edition with a free beta license key, your instance will be
   downgraded to the Community Edition 2.0. You can find all license details on the [license
-  page](https://formbricks.com/docs/self-hosting/license).
+  page](https://salamruby.com/docs/self-hosting/license).
 </Info>
 
 <Warning>
   We are moving from DockerHub to GitHub Packages for our images. If you are still pulling the images from
   DockerHub please change `image:
-  formbricks/formbricks:latest` to `image:ghcr.io/formbricks/formbricks:latest` in
+  salamruby/salamruby:latest` to `image:ghcr.io/salamruby/salamruby:latest` in
   your `docker-compose.yml` file.
 </Warning>
 
 ### Steps to Migrate
 
-This guide is for users who are self-hosting Formbricks using our one-click setup. If you are using a different setup, you might adjust the commands accordingly.
+This guide is for users who are self-hosting SalamRuby using our one-click setup. If you are using a different setup, you might adjust the commands accordingly.
 
-To run all these steps, please navigate to the `formbricks` folder where your `docker-compose.yml` file is located.
+To run all these steps, please navigate to the `salamruby` folder where your `docker-compose.yml` file is located.
 
 1. **Backup your Database**: This is an essential step. Please ensure that you back up your database before proceeding with the upgrade. You can use the following command to back it up:
 
 ```bash
-docker exec formbricks-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v2.0_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v2.0_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “No such container”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Info>
 
-If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `formbricks` database.
+If you prefer storing the backup as an `*.sql` file remove the `-Fc` (custom format) option. In case of a restore scenario you will need to use `psql` then with an empty `salamruby` database.
 
-- Pull the latest version of Formbricks:
+- Pull the latest version of SalamRuby:
 
 ```bash
 docker compose pull
 ```
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers with the latest version of Formbricks:
+- Restarting the containers with the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1398,28 +1398,28 @@ docker compose up -d
 <Info>To find your Docker Network name for your Postgres Database, find it using `docker network ls`</Info>
 
 ```bash
-docker pull ghcr.io/formbricks/data-migrations:v2.0.3 && \
+docker pull ghcr.io/salamruby/data-migrations:v2.0.3 && \
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v2.0" \
-  ghcr.io/formbricks/data-migrations:v2.0.3
+  ghcr.io/salamruby/data-migrations:v2.0.3
 ```
 
 The above command will migrate your data to the latest schema. This is a crucial step to migrate your existing data to the new structure. Only if the script runs successful, changes are made to the database. The script can safely run multiple times.
 
-- That's it! Once the migration is complete, you can **now access your Formbricks instance** at the same URL as before.
+- That's it! Once the migration is complete, you can **now access your SalamRuby instance** at the same URL as before.
 
-### App Surveys with @formbricks/js
+### App Surveys with @salamruby/js
 
 With this upgrade, we now dynamically fetch the package from our API endpoint and have updated the package entry points to support both app and website surveys. This ensures that you always have the latest version of the package (v2.0.0+).
 
 **Old approach:** (v1.6.5)
 
 ```ts
-import formbricks from "@formbricks/js";
+import salamruby from "@salamruby/js";
 
-formbricks.init({
+salamruby.init({
   environmentId: "<environment-id>",
   apiHost: "<api-host>",
   userId: "<user-id>", // optional
@@ -1431,9 +1431,9 @@ formbricks.init({
 Website surveys:
 
 ```ts
-import formbricks from "@formbricks/js/website";
+import salamruby from "@salamruby/js/website";
 
-formbricks.init({
+salamruby.init({
   environmentId: "<environment-id>",
   apiHost: "<api-host>",
   // userId is not supported here
@@ -1443,9 +1443,9 @@ formbricks.init({
 App surveys:
 
 ```ts
-import formbricks from "@formbricks/js/app";
+import salamruby from "@salamruby/js/app";
 
-formbricks.init({
+salamruby.init({
   environmentId: "<environment-id>",
   apiHost: "<api-host>",
   userId: "<user-id>", // required
@@ -1454,42 +1454,42 @@ formbricks.init({
 
 ## v1.6
 
-Formbricks v1.6 introduces key features like Advanced Targeting, Segmentation, on-the-fly survey triggers, and stability improvements. This update also changes some environment variables. Follow this guide to upgrade your Formbricks instance to v1.6 smoothly.
+SalamRuby v1.6 introduces key features like Advanced Targeting, Segmentation, on-the-fly survey triggers, and stability improvements. This update also changes some environment variables. Follow this guide to upgrade your SalamRuby instance to v1.6 smoothly.
 
 <Info>
   This upgrade requires a data migration. Ensure you back up your database before proceeding. Follow the steps
-  below to upgrade your Formbricks instance to v1.6.
+  below to upgrade your SalamRuby instance to v1.6.
 </Info>
 
 ### Steps to Migrate
 
-This guide is for users self-hosting Formbricks with our one-click setup. If you're using a different setup, adjust the commands accordingly.
+This guide is for users self-hosting SalamRuby with our one-click setup. If you're using a different setup, adjust the commands accordingly.
 
-Navigate to the Formbricks folder containing your `docker-compose.yml` file to run the steps.
+Navigate to the SalamRuby folder containing your `docker-compose.yml` file to run the steps.
 
 - **Backup your Database**: This is a crucial step. Please make sure to backup your database before proceeding with the upgrade. You can use the following command to backup your database:
 
 ```bash
-docker exec formbricks-quickstart-postgres-1 pg_dump -Fc -U postgres -d formbricks > formbricks_pre_v1.6_$(date +%Y%m%d_%H%M%S).dump
+docker exec salamruby-quickstart-postgres-1 pg_dump -Fc -U postgres -d salamruby > salamruby_pre_v1.6_$(date +%Y%m%d_%H%M%S).dump
 ```
 
 <Info>
   If you run into “No such container”, use `docker ps` to find your container name,
-  e.g. `formbricks_postgres_1`.
+  e.g. `salamruby_postgres_1`.
 </Info>
 
 <Info>
   If you prefer storing the backup as a `*.sql` file remove the `-Fc` (custom format) option. In case of a
-  restore scenario you will need to use `psql` then with an empty `formbricks` database.
+  restore scenario you will need to use `psql` then with an empty `salamruby` database.
 </Info>
 
-- Stop the running Formbricks instance & remove the related containers:
+- Stop the running SalamRuby instance & remove the related containers:
 
 ```bash
 docker compose down
 ```
 
-- Restarting the containers will automatically pull the latest version of Formbricks:
+- Restarting the containers will automatically pull the latest version of SalamRuby:
 
 ```bash
 docker compose up -d
@@ -1501,42 +1501,42 @@ docker compose up -d
 
 ```bash
 docker run --rm \
-  --network=formbricks_default \
-  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/formbricks?schema=public" \
+  --network=salamruby_default \
+  -e DATABASE_URL="postgresql://postgres:postgres@postgres:5432/salamruby?schema=public" \
   -e UPGRADE_TO_VERSION="v1.6" \
-  ghcr.io/formbricks/data-migrations:v1.6.1
+  ghcr.io/salamruby/data-migrations:v1.6.1
 
 ```
 
 The above command will migrate your data to the latest schema. This is a crucial step to migrate your existing data to the new structure. Only if the script runs successful, changes are made to the database. The script can safely run multiple times.
 
-1. That's it! Once the migration is complete, you can **now access your Formbricks instance** at the same URL as before.
+1. That's it! Once the migration is complete, you can **now access your SalamRuby instance** at the same URL as before.
 
 #### Restoring the database after a failed upgrade
 
 ```bash
-docker exec -i formbricks-quickstart-postgres-1 pg_restore --clean -U postgres -v -d formbricks < formbricks_pre_v1.6_<timestamp_of_your_dump_file>.dump
+docker exec -i salamruby-quickstart-postgres-1 pg_restore --clean -U postgres -v -d salamruby < salamruby_pre_v1.6_<timestamp_of_your_dump_file>.dump
 ```
 
 <Info>
-  Replace the path to `formbricks_pre_v1.6_<timestamp_of_your_dump_file>.dump` with the exact path to your `.dump` file.
+  Replace the path to `salamruby_pre_v1.6_<timestamp_of_your_dump_file>.dump` with the exact path to your `.dump` file.
 </Info>
 
 <Info>This will wipe the database and restore from the `.dump` file.</Info>
 
-### App Surveys with `@formbricks/js`
+### App Surveys with `@salamruby/js`
 
-If you're using the `@formbricks/js` package, update it to version \~1.6.5 to access the latest features and improvements.
+If you're using the `@salamruby/js` package, update it to version \~1.6.5 to access the latest features and improvements.
 
 <Info>
   Currently, the package needs to be pinned to `~1.6.5`, see [this
-  issue](https://github.com/formbricks/formbricks/issues/2273).
+  issue](https://github.com/salamruby/salamruby/issues/2273).
 </Info>
 
 ### Upgrade and pin the client package
 
 ```bash
-npm install @formbricks/js@~1.6.5
+npm install @salamruby/js@~1.6.5
 ```
 
 ### Deprecated Environment Variables
@@ -1549,7 +1549,7 @@ npm install @formbricks/js@~1.6.5
 
 ## v1.2
 
-Formbricks v1.2 introduces new features for Link Surveys and enhances security. However, there are some breaking changes related to environment variables. This guide will help you upgrade your Formbricks instance to v1.2 smoothly.
+SalamRuby v1.2 introduces new features for Link Surveys and enhances security. However, there are some breaking changes related to environment variables. This guide will help you upgrade your SalamRuby instance to v1.2 smoothly.
 
 ### New Environment Variables
 
@@ -1565,7 +1565,7 @@ Formbricks v1.2 introduces new features for Link Surveys and enhances security. 
 
 ## v1.1
 
-Formbricks v1.1 introduces new features and improvements but includes breaking changes with environment variables. This guide will help you upgrade your Formbricks instance to v1.1 without data loss.
+SalamRuby v1.1 introduces new features and improvements but includes breaking changes with environment variables. This guide will help you upgrade your SalamRuby instance to v1.1 without data loss.
 
 ### Renamed Environment Variables
 
@@ -1581,7 +1581,7 @@ Formbricks v1.1 introduces new features and improvements but includes breaking c
 | `NEXT_PUBLIC_GITHUB_AUTH_ENABLED`         | `GITHUB_AUTH_ENABLED`         |
 | `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED`         | `GOOGLE_AUTH_ENABLED`         |
 | `NEXT_PUBLIC_WEBAPP_URL`                  | `WEBAPP_URL`                  |
-| `NEXT_PUBLIC_IS_FORMBRICKS_CLOUD`         | `IS_FORMBRICKS_CLOUD`         |
+| `NEXT_PUBLIC_IS_SALAMRUBY_CLOUD`         | `IS_SALAMRUBY_CLOUD`         |
 | `NEXT_PUBLIC_SURVEY_BASE_URL`             | `SURVEY_BASE_URL`             |
 
 Please note that their values and the logic remains exactly the same. Only the prefix has been deprecated. The other environment variables remain the same as well.
@@ -1614,14 +1614,14 @@ For a more detailed guide on these environment variables, please refer to the
 version: "3.3"
 x-environment: &environment
   environment:
-    # The url of your Formbricks instance used in the admin panel
+    # The url of your SalamRuby instance used in the admin panel
     WEBAPP_URL:
 
     # Required for next-auth. Should be the same as WEBAPP_URL
     NEXTAUTH_URL:
 
-    # PostgreSQL DB for Formbricks to connect to
-    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/formbricks?schema=public"
+    # PostgreSQL DB for SalamRuby to connect to
+    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/salamruby?schema=public"
 
     # NextJS Auth
     # @see: https://next-auth.js.org/configuration/options#nextauth_secret
@@ -1675,5 +1675,5 @@ x-environment: &environment
     # GOOGLE_CLIENT_SECRET:
 ```
 
-If you have any questions or require help, feel free to reach out to us on [**GitHub Discussions**](https://github.com/formbricks/formbricks/discussions). 😃[
-](https://formbricks.com/docs/developer-docs/rest-api)
+If you have any questions or require help, feel free to reach out to us on [**GitHub Discussions**](https://github.com/salamruby/salamruby/discussions). 😃[
+](https://salamruby.com/docs/developer-docs/rest-api)

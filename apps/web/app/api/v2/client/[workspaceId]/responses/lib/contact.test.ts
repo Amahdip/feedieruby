@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
+import { prisma } from "@salamruby/database";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
 import { getContact } from "./contact";
 
 // Mock dependencies
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     contact: {
       findUnique: vi.fn(),

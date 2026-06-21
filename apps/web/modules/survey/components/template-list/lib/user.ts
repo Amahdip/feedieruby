@@ -1,8 +1,8 @@
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { TUser, TUserUpdateInput } from "@formbricks/types/user";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { TUser, TUserUpdateInput } from "@salamruby/types/user";
 
 // function to update a user's user
 export const updateUser = async (personId: string, data: TUserUpdateInput): Promise<TUser> => {

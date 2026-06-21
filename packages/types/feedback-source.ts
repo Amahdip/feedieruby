@@ -2,7 +2,7 @@ import { z } from "zod";
 import { TSurveyElementTypeEnum } from "./surveys/constants";
 
 // Feedback source type enum
-export const ZFeedbackSourceType = z.enum(["formbricks_survey", "csv"]);
+export const ZFeedbackSourceType = z.enum(["salamruby_survey", "csv"]);
 export type TFeedbackSourceType = z.infer<typeof ZFeedbackSourceType>;
 
 // Feedback source status enum
@@ -64,8 +64,8 @@ export const ZFeedbackSource = z.object({
 });
 export type TFeedbackSource = z.infer<typeof ZFeedbackSource>;
 
-// Formbricks element mapping
-export const ZFeedbackSourceFormbricksMapping = z.object({
+// SalamRuby element mapping
+export const ZFeedbackSourceSalamRubyMapping = z.object({
   id: z.cuid2(),
   createdAt: z.date(),
   feedbackSourceId: z.cuid2(),
@@ -75,7 +75,7 @@ export const ZFeedbackSourceFormbricksMapping = z.object({
   hubFieldType: ZHubFieldType,
   customFieldLabel: z.string().nullable(),
 });
-export type TFeedbackSourceFormbricksMapping = z.infer<typeof ZFeedbackSourceFormbricksMapping>;
+export type TFeedbackSourceSalamRubyMapping = z.infer<typeof ZFeedbackSourceSalamRubyMapping>;
 
 export const ZFeedbackSourceFieldMapping = z.object({
   id: z.cuid2(),
@@ -89,7 +89,7 @@ export const ZFeedbackSourceFieldMapping = z.object({
 export type TFeedbackSourceFieldMapping = z.infer<typeof ZFeedbackSourceFieldMapping>;
 
 export const ZFeedbackSourceWithMappings = ZFeedbackSource.extend({
-  formbricksMappings: z.array(ZFeedbackSourceFormbricksMapping),
+  salamrubyMappings: z.array(ZFeedbackSourceSalamRubyMapping),
   fieldMappings: z.array(ZFeedbackSourceFieldMapping),
   creatorName: z.string().nullable().optional(),
 });
@@ -104,15 +104,15 @@ export const ZFeedbackSourceCreateInput = z.object({
 });
 export type TFeedbackSourceCreateInput = z.infer<typeof ZFeedbackSourceCreateInput>;
 
-// Create Formbricks mapping input
-export const ZFeedbackSourceFormbricksMappingCreateInput = z.object({
+// Create SalamRuby mapping input
+export const ZFeedbackSourceSalamRubyMappingCreateInput = z.object({
   surveyId: z.cuid2(),
   elementId: z.string(),
   hubFieldType: ZHubFieldType,
   customFieldLabel: z.string().optional(),
 });
-export type TFeedbackSourceFormbricksMappingCreateInput = z.infer<
-  typeof ZFeedbackSourceFormbricksMappingCreateInput
+export type TFeedbackSourceSalamRubyMappingCreateInput = z.infer<
+  typeof ZFeedbackSourceSalamRubyMappingCreateInput
 >;
 
 // Create field mapping input

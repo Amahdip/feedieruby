@@ -10,7 +10,7 @@ export const getSelectionColumn = <T extends object>(): ColumnDef<T, unknown> =>
     size: 60,
     enableResizing: false,
     header: ({ table }) => (
-      <div className="flex w-full items-center justify-center pr-4">
+      <div className="flex w-full items-center justify-center pe-4">
         <Checkbox
           checked={table.getIsAllPageRowsSelected()}
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
@@ -19,7 +19,7 @@ export const getSelectionColumn = <T extends object>(): ColumnDef<T, unknown> =>
       </div>
     ),
     cell: ({ row }) => (
-      <div className="flex w-full items-center justify-center pr-4">
+      <div className="flex w-full items-center justify-center pe-4">
         <Checkbox
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}

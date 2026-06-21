@@ -1,4 +1,4 @@
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 
 export const authorize = async (workspaceId: string, apiHost: string): Promise<string> => {
   const res = await fetch(`${apiHost}/api/google-sheet`, {

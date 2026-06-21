@@ -3,9 +3,9 @@
 import { InboxIcon } from "lucide-react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { type TI18nString } from "@formbricks/types/i18n";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey, TSurveyElementSummaryPictureSelection } from "@formbricks/types/surveys/types";
+import { type TI18nString } from "@salamruby/types/i18n";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey, TSurveyElementSummaryPictureSelection } from "@salamruby/types/surveys/types";
 import { getChoiceIdByValue } from "@/lib/response/utils";
 import { IdBadge } from "@/modules/ui/components/id-badge";
 import { ProgressBar } from "@/modules/ui/components/progress-bar";
@@ -35,8 +35,8 @@ export const PictureChoiceSummary = ({ elementSummary, survey, setFilter }: Pict
         survey={survey}
         additionalInfo={
           elementSummary.element.allowMulti ? (
-            <div className="flex items-center rounded-lg bg-slate-100 p-2">
-              <InboxIcon className="mr-2 size-4" />
+            <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+              <InboxIcon className="size-4 shrink-0" />
               {t("common.count_selections", { count: elementSummary.selectionCount })}
             </div>
           ) : undefined

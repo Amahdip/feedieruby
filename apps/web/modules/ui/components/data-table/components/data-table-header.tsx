@@ -41,8 +41,8 @@ export const DataTableHeader = <T,>({
       style={style}
       key={header.id}
       className={cn("group relative h-10 border-b border-slate-200 bg-white px-4 text-center", {
-        "border-r": showColumnDividers && !header.column.getIsLastColumn(),
-        "border-l": showColumnDividers && !header.column.getIsFirstColumn(),
+        "border-e": showColumnDividers && !header.column.getIsLastColumn(),
+        "border-s": showColumnDividers && !header.column.getIsFirstColumn(),
       })}>
       <div className="flex items-center gap-1">
         {header.column.id !== "select" && header.column.id !== "createdAt" && (
@@ -57,7 +57,7 @@ export const DataTableHeader = <T,>({
           </div>
         )}
 
-        <div className="w-full truncate text-left font-semibold">
+        <div className="w-full truncate text-start font-semibold">
           {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
         </div>
 
@@ -69,7 +69,7 @@ export const DataTableHeader = <T,>({
           onTouchStart={header.getResizeHandler()}
           data-testid="column-resize-handle"
           className={cn(
-            "absolute right-0 top-0 hidden h-full w-1 cursor-col-resize bg-slate-500",
+            "absolute end-0 top-0 hidden h-full w-1 cursor-col-resize bg-slate-500",
             header.column.getIsResizing() ? "bg-black" : "bg-slate-500",
             !header.column.getCanResize() ? "hidden" : "group-hover:block"
           )}></button>

@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { WorkspaceTeam } from "@formbricks/database/prisma";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { WorkspaceTeam } from "@salamruby/database/prisma";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { getWorkspaceTeamsQuery } from "@/modules/api/v2/organizations/[organizationId]/workspace-teams/lib/utils";
 import {
   TGetWorkspaceTeamsFilter,

@@ -39,7 +39,7 @@ vi.mock("@/lib/common/utils", () => ({
 // Mock Config
 vi.mock("@/lib/common/config", () => {
   return {
-    JS_LOCAL_STORAGE_KEY: "formbricks-js",
+    JS_LOCAL_STORAGE_KEY: "salamruby-js",
     Config: {
       getInstance: vi.fn(() => ({
         get: vi.fn(),

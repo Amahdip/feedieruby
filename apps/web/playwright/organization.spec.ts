@@ -33,7 +33,7 @@ test.describe("Invite, accept and remove organization member", async () => {
 
       await page.waitForTimeout(5000);
 
-      // const successToast = await page.waitForSelector(".formbricks__toast__success");
+      // const successToast = await page.waitForSelector(".salamruby__toast__success");
       // expect(successToast).toBeTruthy();
     });
 

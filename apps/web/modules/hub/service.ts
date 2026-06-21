@@ -1,6 +1,6 @@
 import "server-only";
-import { createCacheKey } from "@formbricks/cache";
-import { logger } from "@formbricks/logger";
+import { createCacheKey } from "@salamruby/cache";
+import { logger } from "@salamruby/logger";
 import { cache } from "@/lib/cache";
 import { getHubClient } from "./hub-client";
 import type {

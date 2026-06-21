@@ -1,6 +1,6 @@
 import { Session } from "next-auth";
 import { describe, expect, test, vi } from "vitest";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import { responses } from "@/app/lib/api/response";
 import { hasUserWorkspaceAccessForAction } from "@/lib/workspace/auth";
 import { hasPermission } from "@/modules/organization/settings/api-keys/lib/utils";

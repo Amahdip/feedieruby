@@ -1,5 +1,5 @@
-import { OrganizationAccessType } from "@formbricks/types/api-key";
-import { TAPIKeyWorkspacePermission, TAuthenticationApiKey } from "@formbricks/types/auth";
+import { OrganizationAccessType } from "@salamruby/types/api-key";
+import { TAPIKeyWorkspacePermission, TAuthenticationApiKey } from "@salamruby/types/auth";
 
 // Permission level required for different HTTP methods
 const methodPermissionMap = {

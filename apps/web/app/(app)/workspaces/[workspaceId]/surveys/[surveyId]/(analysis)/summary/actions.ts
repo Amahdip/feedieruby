@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { ZId } from "@formbricks/types/common";
-import { InvalidInputError, OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { ZId } from "@salamruby/types/common";
+import { InvalidInputError, OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { getEmailTemplateHtml } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/emailTemplate";
 import {
   generateExampleResponseDataset,
@@ -307,7 +307,7 @@ export const generatePersonalLinksAction = authenticatedActionClient
 
     // Prepare CSV data with the specified headers and order
     const csvHeaders = [
-      "Formbricks Contact ID",
+      "SalamRuby Contact ID",
       "User ID",
       "First Name",
       "Last Name",
@@ -322,7 +322,7 @@ export const generatePersonalLinksAction = authenticatedActionClient
         }
         const attributes = contact.attributes ?? {};
         return {
-          "Formbricks Contact ID": contact.contactId,
+          "SalamRuby Contact ID": contact.contactId,
           "User ID": attributes.userId ?? "",
           "First Name": attributes.firstName ?? "",
           "Last Name": attributes.lastName ?? "",

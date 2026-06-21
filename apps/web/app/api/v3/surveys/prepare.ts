@@ -1,4 +1,4 @@
-import type { TSurvey as TInternalSurvey } from "@formbricks/types/surveys/types";
+import type { TSurvey as TInternalSurvey } from "@salamruby/types/surveys/types";
 import type { InvalidParam } from "@/app/api/v3/lib/response";
 import { getV3SurveyDefaultLanguage, getV3SurveyLanguages } from "./language";
 import { type TV3SurveyLanguageRequest, deriveV3SurveyLanguageRequests } from "./languages";

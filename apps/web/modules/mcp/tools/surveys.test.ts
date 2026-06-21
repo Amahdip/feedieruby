@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { ApiKeyPermission } from "@formbricks/database/prisma";
+import { ApiKeyPermission } from "@salamruby/database/prisma";
 import { buildV3AuditLog, queueV3AuditLog } from "@/app/api/v3/lib/audit";
 import {
   createdResponse,
@@ -33,7 +33,7 @@ vi.mock("@/app/api/v3/lib/audit", () => ({
   queueV3AuditLog: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     withContext: vi.fn(() => ({
       error: vi.fn(),
@@ -63,7 +63,7 @@ const authInfo = {
   clientId: "key_1",
   scopes: ["surveys:read", "surveys:write"],
   extra: {
-    formbricksAuthentication: apiKeyAuth,
+    salamrubyAuthentication: apiKeyAuth,
     requestId: "req_tool",
   },
 };

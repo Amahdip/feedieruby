@@ -17,10 +17,10 @@ import {
 } from "@opentelemetry/sdk-trace-base";
 import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION } from "@opentelemetry/semantic-conventions";
 import { PrismaInstrumentation } from "@prisma/instrumentation";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 
 // --- Configuration from environment ---
-const serviceName = process.env.OTEL_SERVICE_NAME || "formbricks";
+const serviceName = process.env.OTEL_SERVICE_NAME || "salamruby";
 const serviceVersion = process.env.npm_package_version || "0.0.0";
 const environment = process.env.ENVIRONMENT || process.env.NODE_ENV || "development";
 const otlpEndpoint = process.env.OTEL_EXPORTER_OTLP_ENDPOINT;

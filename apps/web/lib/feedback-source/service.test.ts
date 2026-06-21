@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   createFeedbackSourceWithMappings,
   deleteFeedbackSource,
@@ -11,7 +11,7 @@ import {
   updateFeedbackSourceWithMappings,
 } from "./service";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     feedbackSource: {
       findMany: vi.fn(),
@@ -20,7 +20,7 @@ vi.mock("@formbricks/database", () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
-    feedbackSourceFormbricksMapping: {
+    feedbackSourceSalamRubyMapping: {
       create: vi.fn(),
       deleteMany: vi.fn(),
     },
@@ -47,7 +47,7 @@ const mockFeedbackSource = {
   createdAt: NOW,
   updatedAt: NOW,
   name: "Test FeedbackSource",
-  type: "formbricks_survey" as const,
+  type: "salamruby_survey" as const,
   status: "active" as const,
   workspaceId: ENV_ID,
   lastSyncAt: null,
@@ -57,7 +57,7 @@ const mockFeedbackSource = {
 const mockFeedbackSourceWithMappingsFromDb = {
   ...mockFeedbackSource,
   creator: null,
-  formbricksMappings: [
+  salamrubyMappings: [
     {
       id: "mapping-1",
       createdAt: NOW,
@@ -75,7 +75,7 @@ const mockFeedbackSourceWithMappingsFromDb = {
 const mockFeedbackSourceWithMappings = {
   ...mockFeedbackSource,
   creatorName: null,
-  formbricksMappings: mockFeedbackSourceWithMappingsFromDb.formbricksMappings,
+  salamrubyMappings: mockFeedbackSourceWithMappingsFromDb.salamrubyMappings,
   fieldMappings: [],
 };
 
@@ -138,7 +138,7 @@ describe("getFeedbackSourcesBySurveyId", () => {
     vi.clearAllMocks();
   });
 
-  test("returns active formbricks feedbackSources linked to the survey", async () => {
+  test("returns active salamruby feedbackSources linked to the survey", async () => {
     vi.mocked(prisma.feedbackSource.findMany).mockResolvedValue([
       mockFeedbackSourceWithMappingsFromDb,
     ] as never);
@@ -148,9 +148,9 @@ describe("getFeedbackSourcesBySurveyId", () => {
     expect(prisma.feedbackSource.findMany).toHaveBeenCalledWith(
       expect.objectContaining({
         where: {
-          type: "formbricks_survey",
+          type: "salamruby_survey",
           status: "active",
-          formbricksMappings: { some: { surveyId: SURVEY_ID } },
+          salamrubyMappings: { some: { surveyId: SURVEY_ID } },
         },
       })
     );
@@ -291,7 +291,7 @@ describe("createFeedbackSourceWithMappings", () => {
         create: vi.fn(),
         findUniqueOrThrow: vi.fn(),
       },
-      feedbackSourceFormbricksMapping: {
+      feedbackSourceSalamRubyMapping: {
         create: vi.fn(),
       },
       feedbackSourceFieldMapping: {
@@ -313,7 +313,7 @@ describe("createFeedbackSourceWithMappings", () => {
 
     const result = await createFeedbackSourceWithMappings(ENV_ID, {
       name: "New",
-      type: "formbricks_survey",
+      type: "salamruby_survey",
       feedbackDirectoryId: FRD_ID,
     });
 
@@ -321,28 +321,28 @@ describe("createFeedbackSourceWithMappings", () => {
       expect.objectContaining({
         data: {
           name: "New",
-          type: "formbricks_survey",
+          type: "salamruby_survey",
           workspaceId: ENV_ID,
           feedbackDirectoryId: FRD_ID,
         },
       })
     );
-    expect(tx.feedbackSourceFormbricksMapping.create).not.toHaveBeenCalled();
+    expect(tx.feedbackSourceSalamRubyMapping.create).not.toHaveBeenCalled();
     expect(tx.feedbackSourceFieldMapping.create).not.toHaveBeenCalled();
     expect(result).toEqual(mockFeedbackSourceWithMappings);
   });
 
-  test("creates feedbackSource with formbricks mappings", async () => {
+  test("creates feedbackSource with salamruby mappings", async () => {
     const tx = setupTransaction();
     tx.feedbackSource.create.mockResolvedValue({ id: FEEDBACK_SOURCE_ID, workspaceId: ENV_ID });
-    tx.feedbackSourceFormbricksMapping.create.mockResolvedValue({});
+    tx.feedbackSourceSalamRubyMapping.create.mockResolvedValue({});
     tx.feedbackSource.findUniqueOrThrow.mockResolvedValue(mockFeedbackSourceWithMappingsFromDb);
 
     await createFeedbackSourceWithMappings(
       ENV_ID,
-      { name: "FB", type: "formbricks_survey", feedbackDirectoryId: FRD_ID },
+      { name: "FB", type: "salamruby_survey", feedbackDirectoryId: FRD_ID },
       {
-        type: "formbricks_survey",
+        type: "salamruby_survey",
         mappings: [
           { surveyId: SURVEY_ID, elementId: "el-1", hubFieldType: "text" },
           { surveyId: SURVEY_ID, elementId: "el-2", hubFieldType: "nps" },
@@ -350,8 +350,8 @@ describe("createFeedbackSourceWithMappings", () => {
       }
     );
 
-    expect(tx.feedbackSourceFormbricksMapping.create).toHaveBeenCalledTimes(2);
-    expect(tx.feedbackSourceFormbricksMapping.create).toHaveBeenCalledWith(
+    expect(tx.feedbackSourceSalamRubyMapping.create).toHaveBeenCalledTimes(2);
+    expect(tx.feedbackSourceSalamRubyMapping.create).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({
           feedbackSourceId: FEEDBACK_SOURCE_ID,
@@ -370,7 +370,7 @@ describe("createFeedbackSourceWithMappings", () => {
     tx.feedbackSourceFieldMapping.create.mockResolvedValue({});
     tx.feedbackSource.findUniqueOrThrow.mockResolvedValue({
       ...mockFeedbackSource,
-      formbricksMappings: [],
+      salamrubyMappings: [],
       fieldMappings: [],
     });
 
@@ -408,13 +408,13 @@ describe("createFeedbackSourceWithMappings", () => {
     await expect(
       createFeedbackSourceWithMappings(ENV_ID, {
         name: "Dup",
-        type: "formbricks_survey",
+        type: "salamruby_survey",
         feedbackDirectoryId: FRD_ID,
       })
     ).rejects.toThrow(new InvalidInputError("FEEDBACK_SOURCE_NAME_DUPLICATE"));
   });
 
-  test("throws FEEDBACK_SOURCE_FORMBRICKS_MAPPING_DUPLICATE on mapping unique violation", async () => {
+  test("throws FEEDBACK_SOURCE_SALAMRUBY_MAPPING_DUPLICATE on mapping unique violation", async () => {
     vi.mocked(prisma.$transaction).mockRejectedValue(
       new Prisma.PrismaClientKnownRequestError("Unique constraint", {
         code: "P2002",
@@ -426,10 +426,10 @@ describe("createFeedbackSourceWithMappings", () => {
     await expect(
       createFeedbackSourceWithMappings(ENV_ID, {
         name: "Dup mapping",
-        type: "formbricks_survey",
+        type: "salamruby_survey",
         feedbackDirectoryId: FRD_ID,
       })
-    ).rejects.toThrow(new InvalidInputError("FEEDBACK_SOURCE_FORMBRICKS_MAPPING_DUPLICATE"));
+    ).rejects.toThrow(new InvalidInputError("FEEDBACK_SOURCE_SALAMRUBY_MAPPING_DUPLICATE"));
   });
 
   test("throws FEEDBACK_SOURCE_FIELD_MAPPING_DUPLICATE on field mapping unique violation", async () => {
@@ -475,7 +475,7 @@ describe("updateFeedbackSourceWithMappings", () => {
         update: vi.fn(),
         findUniqueOrThrow: vi.fn(),
       },
-      feedbackSourceFormbricksMapping: {
+      feedbackSourceSalamRubyMapping: {
         create: vi.fn(),
         deleteMany: vi.fn(),
       },
@@ -505,16 +505,16 @@ describe("updateFeedbackSourceWithMappings", () => {
         data: expect.objectContaining({ name: "Updated" }),
       })
     );
-    expect(tx.feedbackSourceFormbricksMapping.deleteMany).not.toHaveBeenCalled();
+    expect(tx.feedbackSourceSalamRubyMapping.deleteMany).not.toHaveBeenCalled();
     expect(tx.feedbackSourceFieldMapping.deleteMany).not.toHaveBeenCalled();
     expect(result).toEqual(mockFeedbackSourceWithMappings);
   });
 
-  test("replaces formbricks mappings when provided", async () => {
+  test("replaces salamruby mappings when provided", async () => {
     const tx = setupTransaction();
     tx.feedbackSource.update.mockResolvedValue(undefined);
-    tx.feedbackSourceFormbricksMapping.deleteMany.mockResolvedValue({ count: 1 });
-    tx.feedbackSourceFormbricksMapping.create.mockResolvedValue({});
+    tx.feedbackSourceSalamRubyMapping.deleteMany.mockResolvedValue({ count: 1 });
+    tx.feedbackSourceSalamRubyMapping.create.mockResolvedValue({});
     tx.feedbackSource.findUniqueOrThrow.mockResolvedValue(mockFeedbackSourceWithMappingsFromDb);
 
     await updateFeedbackSourceWithMappings(
@@ -522,15 +522,15 @@ describe("updateFeedbackSourceWithMappings", () => {
       ENV_ID,
       { name: "Updated" },
       {
-        type: "formbricks_survey",
+        type: "salamruby_survey",
         mappings: [{ surveyId: SURVEY_ID, elementId: "el-new", hubFieldType: "nps" }],
       }
     );
 
-    expect(tx.feedbackSourceFormbricksMapping.deleteMany).toHaveBeenCalledWith({
+    expect(tx.feedbackSourceSalamRubyMapping.deleteMany).toHaveBeenCalledWith({
       where: { feedbackSourceId: FEEDBACK_SOURCE_ID, workspaceId: ENV_ID },
     });
-    expect(tx.feedbackSourceFormbricksMapping.create).toHaveBeenCalledTimes(1);
+    expect(tx.feedbackSourceSalamRubyMapping.create).toHaveBeenCalledTimes(1);
   });
 
   test("replaces field mappings when provided", async () => {
@@ -540,7 +540,7 @@ describe("updateFeedbackSourceWithMappings", () => {
     tx.feedbackSourceFieldMapping.create.mockResolvedValue({});
     tx.feedbackSource.findUniqueOrThrow.mockResolvedValue({
       ...mockFeedbackSource,
-      formbricksMappings: [],
+      salamrubyMappings: [],
       fieldMappings: [],
     });
 
@@ -587,7 +587,7 @@ describe("updateFeedbackSourceWithMappings", () => {
     ).rejects.toThrow(new InvalidInputError("FEEDBACK_SOURCE_NAME_DUPLICATE"));
   });
 
-  test("throws FEEDBACK_SOURCE_FORMBRICKS_MAPPING_DUPLICATE on formbricks mapping unique violation", async () => {
+  test("throws FEEDBACK_SOURCE_SALAMRUBY_MAPPING_DUPLICATE on salamruby mapping unique violation", async () => {
     vi.mocked(prisma.$transaction).mockRejectedValue(
       new Prisma.PrismaClientKnownRequestError("Unique constraint", {
         code: "P2002",
@@ -597,7 +597,7 @@ describe("updateFeedbackSourceWithMappings", () => {
     );
 
     await expect(updateFeedbackSourceWithMappings(FEEDBACK_SOURCE_ID, ENV_ID, { name: "x" })).rejects.toThrow(
-      new InvalidInputError("FEEDBACK_SOURCE_FORMBRICKS_MAPPING_DUPLICATE")
+      new InvalidInputError("FEEDBACK_SOURCE_SALAMRUBY_MAPPING_DUPLICATE")
     );
   });
 

@@ -1,5 +1,5 @@
 import { TFunction } from "i18next";
-import { TActionClassInput } from "@formbricks/types/action-classes";
+import { TActionClassInput } from "@salamruby/types/action-classes";
 
 export const buildActionObject = (data: TActionClassInput, workspaceId: string, t: TFunction) => {
   if (data.type === "noCode") {

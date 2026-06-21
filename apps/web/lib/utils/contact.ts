@@ -1,5 +1,5 @@
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
-import { TResponseContact } from "@formbricks/types/responses";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
+import { TResponseContact } from "@salamruby/types/responses";
 
 export const getContactIdentifier = (
   contact: TResponseContact | null,

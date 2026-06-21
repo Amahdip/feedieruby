@@ -4,8 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TLogo } from "@formbricks/types/styling";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TLogo } from "@salamruby/types/styling";
 import { cn } from "@/lib/cn";
 
 interface ClientLogoProps {

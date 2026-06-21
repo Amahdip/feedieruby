@@ -1,8 +1,8 @@
 import { useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { OpenText } from "@formbricks/survey-ui";
-import { type TResponseData, type TResponseTtc } from "@formbricks/types/responses";
-import type { TSurveyOpenTextElement } from "@formbricks/types/surveys/elements";
+import { OpenText } from "@salamruby/survey-ui";
+import { type TResponseData, type TResponseTtc } from "@salamruby/types/responses";
+import type { TSurveyOpenTextElement } from "@salamruby/types/surveys/elements";
 import { getLocalizedValue } from "@/lib/i18n";
 import { getUpdatedTtc, useTtc } from "@/lib/ttc";
 

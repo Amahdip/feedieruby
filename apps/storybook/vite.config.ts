@@ -11,7 +11,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@formbricks/survey-ui": path.resolve(__dirname, "../../packages/survey-ui/src"),
+      "@salamruby/survey-ui": path.resolve(__dirname, "../../packages/survey-ui/src"),
     },
   },
 });

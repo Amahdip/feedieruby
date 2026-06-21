@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AuthorizationError } from "@formbricks/types/errors";
+import { AuthorizationError } from "@salamruby/types/errors";
 import { checkFeedbackDirectoryAccess, checkWorkspaceAccess } from "./access";
 
 vi.mock("server-only", () => ({}));
@@ -12,7 +12,7 @@ const mocks = vi.hoisted(() => ({
   loggerWarn: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: mocks.loggerError,
     warn: mocks.loggerWarn,

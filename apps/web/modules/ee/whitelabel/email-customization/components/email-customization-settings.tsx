@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TAllowedFileExtension } from "@formbricks/types/storage";
-import { TUser } from "@formbricks/types/user";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TAllowedFileExtension } from "@salamruby/types/storage";
+import { TUser } from "@salamruby/types/user";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
 import { cn } from "@/lib/cn";
@@ -34,7 +34,7 @@ interface EmailCustomizationSettingsProps {
   hasWhiteLabelPermission: boolean;
   workspaceId: string;
   isReadOnly: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   user: TUser | null;
   fbLogoUrl: string;
   isStorageConfigured: boolean;
@@ -46,7 +46,7 @@ export const EmailCustomizationSettings = ({
   hasWhiteLabelPermission,
   workspaceId,
   isReadOnly,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   user,
   fbLogoUrl,
   isStorageConfigured,
@@ -187,16 +187,16 @@ export const EmailCustomizationSettings = ({
 
   const buttons: [ModalButton, ModalButton] = [
     {
-      text: isFormbricksCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
-      href: isFormbricksCloud
+      text: isSalamRubyCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
+      href: isSalamRubyCloud
         ? `${workspaceBasePath}/settings/organization/billing`
         : enterpriseLicenseRequestFormUrl,
     },
     {
       text: t("common.learn_more"),
-      href: isFormbricksCloud
+      href: isSalamRubyCloud
         ? `${workspaceBasePath}/settings/organization/billing`
-        : "https://formbricks.com/learn-more-self-hosting-license",
+        : "https://salamruby.com/learn-more-self-hosting-license",
     },
   ];
 

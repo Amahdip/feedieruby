@@ -4,90 +4,90 @@ export const mockUsers = {
   signup: [
     {
       name: "SignUp Flow User 1",
-      email: "signup1@formbricks.com",
+      email: "signup1@salamruby.com",
       password: MOCK_PASSWORD,
     },
   ],
   onboarding: [
     {
       name: "Onboarding User 1",
-      email: "onboarding1@formbricks.com",
+      email: "onboarding1@salamruby.com",
       password: MOCK_PASSWORD,
     },
     {
       name: "Onboarding User 2",
-      email: "onboarding2@formbricks.com",
+      email: "onboarding2@salamruby.com",
       password: MOCK_PASSWORD,
     },
     {
       name: "Onboarding User 3",
-      email: "onboarding3@formbricks.com",
+      email: "onboarding3@salamruby.com",
       password: MOCK_PASSWORD,
     },
   ],
   survey: [
     {
       name: "Survey User 1",
-      email: "survey1@formbricks.com",
+      email: "survey1@salamruby.com",
       password: MOCK_PASSWORD,
     },
     {
       name: "Survey User 2",
-      email: "survey2@formbricks.com",
+      email: "survey2@salamruby.com",
       password: MOCK_PASSWORD,
     },
     {
       name: "Survey User 3",
-      email: "survey3@formbricks.com",
+      email: "survey3@salamruby.com",
       password: MOCK_PASSWORD,
     },
     {
       name: "Survey User 4",
-      email: "survey4@formbricks.com",
+      email: "survey4@salamruby.com",
       password: MOCK_PASSWORD,
     },
   ],
   js: [
     {
       name: "JS User 1",
-      email: "js1@formbricks.com",
+      email: "js1@salamruby.com",
       password: MOCK_PASSWORD,
     },
   ],
   action: [
     {
       name: "Action User 1",
-      email: "action1@formbricks.com",
+      email: "action1@salamruby.com",
     },
     {
       name: "Action User 2",
-      email: "action2@formbricks.com",
+      email: "action2@salamruby.com",
     },
     {
       name: "Action User 3",
-      email: "action3@formbricks.com",
+      email: "action3@salamruby.com",
     },
     {
       name: "Action User 4",
-      email: "action4@formbricks.com",
+      email: "action4@salamruby.com",
     },
     {
       name: "Action User 5",
-      email: "action5@formbricks.com",
+      email: "action5@salamruby.com",
     },
     {
       name: "Action User 6",
-      email: "action6@formbricks.com",
+      email: "action6@salamruby.com",
     },
   ],
   organization: [
     {
       name: "Organization User 1",
-      email: "organization1@formbricks.com",
+      email: "organization1@salamruby.com",
     },
     {
       name: "Organization User 2",
-      email: "organization2@formbricks.com",
+      email: "organization2@salamruby.com",
     },
   ],
 };
@@ -413,6 +413,6 @@ export const actions = {
 export const invites = {
   addMember: {
     name: "Organization User 2",
-    email: "organization2@formbricks.com",
+    email: "organization2@salamruby.com",
   },
 };

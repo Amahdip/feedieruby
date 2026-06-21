@@ -1,7 +1,7 @@
 import type { TFunction } from "i18next";
-import type { TResponseData, TResponseDataValue } from "@formbricks/types/responses";
-import type { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+import type { TResponseData, TResponseDataValue } from "@salamruby/types/responses";
+import type { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
 import type {
   TAddressField,
   TContactInfoField,
@@ -9,7 +9,7 @@ import type {
   TValidationErrorMap,
   TValidationResult,
   TValidationRule,
-} from "@formbricks/types/surveys/validation-rules";
+} from "@salamruby/types/surveys/validation-rules";
 import { getLocalizedValue, getTranslations } from "@/lib/i18n";
 import { validators } from "./validators";
 

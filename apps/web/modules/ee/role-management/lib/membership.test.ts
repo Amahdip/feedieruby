@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { TOrganizationRole } from "@formbricks/types/memberships";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { TOrganizationRole } from "@salamruby/types/memberships";
 import { updateMembership } from "./membership";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     membership: {
       update: vi.fn(),

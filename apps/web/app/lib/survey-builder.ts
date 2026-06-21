@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import type { TFunction } from "i18next";
-import type { TSurveyBlock } from "@formbricks/types/surveys/blocks";
+import type { TSurveyBlock } from "@salamruby/types/surveys/blocks";
 import type {
   TSurveyEndScreenCard,
   TSurveyEnding,
@@ -8,8 +8,8 @@ import type {
   TSurveyLanguage,
   TSurveyLogic,
   TSurveyWelcomeCard,
-} from "@formbricks/types/surveys/types";
-import type { TTemplate, TTemplateRole } from "@formbricks/types/templates";
+} from "@salamruby/types/surveys/types";
+import type { TTemplate, TTemplateRole } from "@salamruby/types/templates";
 import { createI18nString, extractLanguageCodes } from "@/lib/i18n/utils";
 
 // Helper function to create standard jump logic based on operator
@@ -83,8 +83,6 @@ export const getDefaultEndingCard = (languages: TSurveyLanguage[], t: TFunction)
     type: "endScreen",
     headline: createI18nString(t("templates.default_ending_card_headline"), languageCodes),
     subheader: createI18nString(t("templates.default_ending_card_subheader"), languageCodes),
-    buttonLabel: createI18nString(t("templates.default_ending_card_button_label"), languageCodes),
-    buttonLink: "https://formbricks.com",
   };
 };
 
@@ -93,12 +91,12 @@ export const hiddenFieldsDefault: TSurveyHiddenFields = {
   fieldIds: [],
 };
 
-export const getDefaultWelcomeCard = (t: TFunction): TSurveyWelcomeCard => {
+export const getDefaultWelcomeCard = (t: TFunction, languageCode = "default"): TSurveyWelcomeCard => {
   return {
     enabled: false,
-    headline: createI18nString(t("templates.default_welcome_card_headline"), []),
-    subheader: createI18nString(t("templates.default_welcome_card_html"), []),
-    buttonLabel: createI18nString(t("templates.default_welcome_card_button_label"), []),
+    headline: createI18nString(t("templates.default_welcome_card_headline"), [], languageCode),
+    subheader: createI18nString(t("templates.default_welcome_card_html"), [], languageCode),
+    buttonLabel: createI18nString(t("templates.default_welcome_card_button_label"), [], languageCode),
     timeToFinish: false,
     showResponseCount: false,
   };

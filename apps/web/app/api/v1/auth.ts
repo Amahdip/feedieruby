@@ -1,11 +1,11 @@
 import { NextRequest } from "next/server";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   UniqueConstraintError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import { responses } from "@/app/lib/api/response";
 import {
   type AuthenticateApiKeyOptions,

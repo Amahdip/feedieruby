@@ -5,7 +5,7 @@ import { Building2Icon, ChevronDownIcon, ChevronRightIcon, Loader2, SettingsIcon
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { getOrganizationsForSwitcherAction } from "@/app/(app)/workspaces/[workspaceId]/actions";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { BreadcrumbItem } from "@/modules/ui/components/breadcrumb";
@@ -14,6 +14,8 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/modules/ui/components/dropdown-menu";
@@ -121,17 +123,17 @@ export const OrganizationBreadcrumb = ({
             {isOrganizationDropdownOpen ? (
               <ChevronDownIcon className="size-3" strokeWidth={1.5} />
             ) : (
-              <ChevronRightIcon className="size-3" strokeWidth={1.5} />
+              <ChevronRightIcon className="size-3 rtl:rotate-180" strokeWidth={1.5} />
             )}
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="mt-2">
           {showOrganizationDropdown && (
             <>
-              <div className="px-2 py-1.5 text-sm font-medium text-slate-500">
-                <Building2Icon className="mr-2 inline size-4" />
+              <DropdownMenuLabel className="flex items-center gap-2 font-medium text-slate-500">
+                <Building2Icon className="size-4 shrink-0" />
                 {t("common.choose_organization")}
-              </div>
+              </DropdownMenuLabel>
               {isLoadingOrganizations && (
                 <div className="flex items-center justify-center py-2">
                   <Loader2 className="size-4 animate-spin" />
@@ -169,12 +171,12 @@ export const OrganizationBreadcrumb = ({
           {currentWorkspaceId && (
             <>
               {showOrganizationDropdown && <DropdownMenuSeparator />}
-              <DropdownMenuCheckboxItem
+              <DropdownMenuItem
                 onClick={() => handleSettingChange(`${workspaceBasePath}/settings/organization/general`)}
-                className="cursor-pointer">
-                <SettingsIcon className="mr-2 size-4" />
+                className="cursor-pointer"
+                icon={<SettingsIcon className="size-4 shrink-0" strokeWidth={1.5} />}>
                 {t("common.settings")}
-              </DropdownMenuCheckboxItem>
+              </DropdownMenuItem>
             </>
           )}
         </DropdownMenuContent>

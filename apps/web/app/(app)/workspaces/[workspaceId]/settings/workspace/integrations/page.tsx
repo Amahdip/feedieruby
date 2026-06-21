@@ -1,7 +1,7 @@
 import { TFunction } from "i18next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { TIntegrationType } from "@formbricks/types/integration";
+import { TIntegrationType } from "@salamruby/types/integration";
 import { getWebhookCountBySource } from "@/app/(app)/workspaces/[workspaceId]/settings/workspace/integrations/lib/webhook";
 import ActivePiecesLogo from "@/images/activepieces.webp";
 import AirtableLogo from "@/images/airtableLogo.svg";
@@ -13,7 +13,8 @@ import notionLogo from "@/images/notion.png";
 import SlackLogo from "@/images/slacklogo.png";
 import WebhookLogo from "@/images/webhook.png";
 import ZapierLogo from "@/images/zapier-small.png";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { HIDE_APP_SURVEY_TYPE } from "@/lib/brand-color";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getIntegrations } from "@/lib/integration/service";
 import { getBillingFallbackPath } from "@/lib/membership/navigation";
 import { getTranslate } from "@/lingodotdev/server";
@@ -54,7 +55,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
     integrations.some((integration) => integration.type === type);
 
   if (isBilling) {
-    return redirect(getBillingFallbackPath(params.workspaceId, IS_FORMBRICKS_CLOUD));
+    return redirect(getBillingFallbackPath(params.workspaceId, IS_SALAMRUBY_CLOUD));
   }
 
   const isGoogleSheetsIntegrationConnected = isIntegrationConnected("googleSheets");
@@ -66,10 +67,10 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
   const appSetupCompleted = !!workspace.appSetupCompleted;
   const integrationCards = [
     {
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/zapier",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/zapier",
       docsText: t("common.docs"),
       docsNewTab: true,
-      connectHref: "https://zapier.com/apps/formbricks/integrations",
+      connectHref: "https://zapier.com/apps/salamruby/integrations",
       connectText: t("common.connect"),
       connectNewTab: true,
       label: "Zapier",
@@ -83,7 +84,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       connectHref: `/workspaces/${params.workspaceId}/settings/workspace/integrations/webhooks`,
       connectText: t("workspace.integrations.manage_webhooks"),
       connectNewTab: false,
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/webhooks",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/webhooks",
       docsText: t("common.docs"),
       docsNewTab: true,
       label: "Webhooks",
@@ -97,7 +98,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       connectHref: `/workspaces/${params.workspaceId}/settings/workspace/integrations/google-sheets`,
       connectText: `${isGoogleSheetsIntegrationConnected ? t("common.manage") : t("common.connect")}`,
       connectNewTab: false,
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/google-sheets",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/google-sheets",
       docsText: t("common.docs"),
       docsNewTab: true,
       label: "Google Sheets",
@@ -111,7 +112,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       connectHref: `/workspaces/${params.workspaceId}/settings/workspace/integrations/airtable`,
       connectText: `${isAirtableIntegrationConnected ? t("common.manage") : t("common.connect")}`,
       connectNewTab: false,
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/airtable",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/airtable",
       docsText: t("common.docs"),
       docsNewTab: true,
       label: "Airtable",
@@ -125,7 +126,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       connectHref: `/workspaces/${params.workspaceId}/settings/workspace/integrations/slack`,
       connectText: `${isSlackIntegrationConnected ? t("common.manage") : t("common.connect")}`,
       connectNewTab: false,
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/slack",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/slack",
       docsText: t("common.docs"),
       docsNewTab: true,
       label: "Slack",
@@ -136,7 +137,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       disabled: isReadOnly,
     },
     {
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/n8n",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/n8n",
       connectText: `${isN8nIntegrationConnected ? t("common.manage") : t("common.connect")}`,
       docsText: t("common.docs"),
       docsNewTab: true,
@@ -150,10 +151,10 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       disabled: isReadOnly,
     },
     {
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/make",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/make",
       docsText: t("common.docs"),
       docsNewTab: true,
-      connectHref: "https://www.make.com/en/integrations/formbricks",
+      connectHref: "https://www.make.com/en/integrations/salamruby",
       connectText: t("common.connect"),
       connectNewTab: true,
       label: "Make.com",
@@ -167,7 +168,7 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       connectHref: `/workspaces/${params.workspaceId}/settings/workspace/integrations/notion`,
       connectText: `${isNotionIntegrationConnected ? t("common.manage") : t("common.connect")}`,
       connectNewTab: false,
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/notion",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/notion",
       docsText: t("common.docs"),
       docsNewTab: true,
       label: "Notion",
@@ -178,10 +179,10 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
       disabled: isReadOnly,
     },
     {
-      docsHref: "https://formbricks.com/docs/xm-and-surveys/core-features/integrations/activepieces",
+      docsHref: "https://salamruby.com/docs/xm-and-surveys/core-features/integrations/activepieces",
       docsText: t("common.docs"),
       docsNewTab: true,
-      connectHref: "https://www.activepieces.com/pieces/formbricks",
+      connectHref: "https://www.activepieces.com/pieces/salamruby",
       connectText: t("common.connect"),
       connectNewTab: true,
       label: "Activepieces",
@@ -193,20 +194,22 @@ const Page = async (props: { params: Promise<{ workspaceId: string }> }) => {
     },
   ];
 
-  integrationCards.unshift({
-    docsHref: "https://formbricks.com/docs/app-surveys/quickstart",
-    docsText: t("common.docs"),
-    docsNewTab: true,
-    connectHref: `/workspaces/${params.workspaceId}/settings/workspace/app-connection`,
-    connectText: t("common.connect"),
-    connectNewTab: false,
-    label: "Javascript SDK",
-    description: t("workspace.integrations.website_or_app_integration_description"),
-    icon: <Image src={JsLogo} alt="Javascript Logo" />,
-    connected: appSetupCompleted,
-    statusText: appSetupCompleted ? t("common.connected") : t("common.not_connected"),
-    disabled: false,
-  });
+  if (!HIDE_APP_SURVEY_TYPE) {
+    integrationCards.unshift({
+      docsHref: "https://salamruby.com/docs/app-surveys/quickstart",
+      docsText: t("common.docs"),
+      docsNewTab: true,
+      connectHref: `/workspaces/${params.workspaceId}/settings/workspace/app-connection`,
+      connectText: t("common.connect"),
+      connectNewTab: false,
+      label: "Javascript SDK",
+      description: t("workspace.integrations.website_or_app_integration_description"),
+      icon: <Image src={JsLogo} alt="Javascript Logo" />,
+      connected: appSetupCompleted,
+      statusText: appSetupCompleted ? t("common.connected") : t("common.not_connected"),
+      disabled: false,
+    });
+  }
 
   return (
     <PageContentWrapper>

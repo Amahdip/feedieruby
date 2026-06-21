@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import type { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import type { TSurvey } from "@salamruby/types/surveys/types";
 import { getOrganizationByWorkspaceId } from "@/lib/organization/service";
 import { createSurvey } from "@/lib/survey/service";
 import { getExternalUrlsPermission } from "@/modules/survey/lib/permission";
@@ -10,7 +10,7 @@ import { ZV3CreateSurveyBody } from "./schemas";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     language: {
       upsert: vi.fn(),
@@ -30,7 +30,7 @@ vi.mock("@/modules/survey/lib/permission", () => ({
   getExternalUrlsPermission: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     withContext: vi.fn(() => ({
       error: vi.fn(),

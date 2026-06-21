@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "IRANSansXFaNum";
+  src: url("/fonts/iran-sans-x-fa-num/IRANSansXFaNum-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansXFaNum";
+  src: url("/fonts/iran-sans-x-fa-num/IRANSansXFaNum-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansXFaNum";
+  src: url("/fonts/iran-sans-x-fa-num/IRANSansXFaNum-DemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansXFaNum";
+  src: url("/fonts/iran-sans-x-fa-num/IRANSansXFaNum-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-IRANSansX), IRANSansX, IRANSansXFaNum, ui-sans-serif, sans-serif;
+  font-feature-settings: "ss02";
+  font-variation-settings: "wght" 400;
+  text-align: right;
+}
+
+html[dir="rtl"] body * {
+  font-family: inherit;
+}
+
+@supports (font-variation-settings: normal) {
+  html[dir="rtl"] body {
+    font-family: var(--font-IRANSansX), IRANSansX, IRANSansXFaNum, ui-sans-serif, sans-serif;
+  }
+}

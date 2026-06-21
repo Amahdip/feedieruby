@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { TContactAttributeKeyType } from "@formbricks/types/contact-attribute-key";
-import { DatabaseError, InvalidInputError, OperationNotAllowedError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { TContactAttributeKeyType } from "@salamruby/types/contact-attribute-key";
+import { DatabaseError, InvalidInputError, OperationNotAllowedError } from "@salamruby/types/errors";
 import { MAX_ATTRIBUTE_CLASSES_PER_ENVIRONMENT } from "@/lib/constants";
 import { TContactAttributeKeyCreateInput } from "@/modules/ee/contacts/api/v1/management/contact-attribute-keys/[contactAttributeKeyId]/types/contact-attribute-keys";
 import { createContactAttributeKey, getContactAttributeKeys } from "./contact-attribute-keys";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     contactAttributeKey: {
       findMany: vi.fn(),

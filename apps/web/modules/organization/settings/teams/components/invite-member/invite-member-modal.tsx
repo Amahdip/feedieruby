@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
+import { TOrganizationRole } from "@salamruby/types/memberships";
 import { TOrganizationTeam } from "@/modules/ee/teams/team-list/types/team";
 import { TInvitee } from "@/modules/organization/settings/teams/types/invites";
 import {
@@ -23,7 +23,7 @@ interface InviteMemberModalProps {
   onSubmit: (data: TInvitee[]) => void;
   teams: TOrganizationTeam[];
   isAccessControlAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   membershipRole?: TOrganizationRole;
   isStorageConfigured: boolean;
   isOwnerOrManager: boolean;
@@ -38,7 +38,7 @@ export const InviteMemberModal = ({
   onSubmit,
   teams,
   isAccessControlAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   membershipRole,
   isStorageConfigured,
   isOwnerOrManager,
@@ -63,7 +63,7 @@ export const InviteMemberModal = ({
         setOpen={setOpen}
         onSubmit={onSubmit}
         isAccessControlAllowed={isAccessControlAllowed}
-        isFormbricksCloud={isFormbricksCloud}
+        isSalamRubyCloud={isSalamRubyCloud}
         teams={filteredTeams}
         membershipRole={membershipRole}
         showTeamAdminRestrictions={showTeamAdminRestrictions}
@@ -75,7 +75,7 @@ export const InviteMemberModal = ({
         setOpen={setOpen}
         onSubmit={onSubmit}
         isAccessControlAllowed={isAccessControlAllowed}
-        isFormbricksCloud={isFormbricksCloud}
+        isSalamRubyCloud={isSalamRubyCloud}
         isStorageConfigured={isStorageConfigured}
       />
     ),

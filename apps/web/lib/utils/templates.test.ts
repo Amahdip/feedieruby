@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import type { TSurveyElement } from "@formbricks/types/surveys/elements";
-import type { TTemplate } from "@formbricks/types/templates";
-import { type TWorkspace } from "@formbricks/types/workspace";
+import type { TSurveyElement } from "@salamruby/types/surveys/elements";
+import type { TTemplate } from "@salamruby/types/templates";
+import { type TWorkspace } from "@salamruby/types/workspace";
 import * as i18nUtils from "@/lib/i18n/utils";
 import { structuredClone } from "@/lib/pollyfills/structuredClone";
 import { replaceElementPresetPlaceholders, replacePresetPlaceholders } from "./templates";

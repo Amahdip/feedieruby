@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
+import { ZId } from "@salamruby/types/common";
 import { assertOrganizationAIConfigured, getOrganizationAIConfig } from "@/lib/ai/service";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";

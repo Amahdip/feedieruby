@@ -1,4 +1,4 @@
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import { parseApiKeyV2 } from "@/lib/crypto";
 import { getApiKeyWithPermissions } from "@/modules/organization/settings/api-keys/lib/api-key";
 

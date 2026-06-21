@@ -1,5 +1,5 @@
-import { logger } from "@formbricks/logger";
-import { TIntegrationNotionInput } from "@formbricks/types/integration/notion";
+import { logger } from "@salamruby/logger";
+import { TIntegrationNotionInput } from "@salamruby/types/integration/notion";
 import { responses } from "@/app/lib/api/response";
 import { withV1ApiWrapper } from "@/app/lib/api/with-api-logging";
 import {

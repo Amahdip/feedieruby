@@ -1,6 +1,7 @@
-import { TWorkspace } from "@formbricks/types/workspace";
+import { TWorkspace } from "@salamruby/types/workspace";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
-import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { shouldRenderEnterpriseSection } from "@/lib/brand-color";
+import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getTranslate } from "@/lingodotdev/server";
 import { EditBranding } from "@/modules/ee/whitelabel/remove-branding/components/edit-branding";
 import { Alert, AlertDescription } from "@/modules/ui/components/alert";
@@ -18,25 +19,30 @@ export const BrandingSettingsCard = async ({
   isReadOnly,
 }: BrandingSettingsCardProps) => {
   const t = await getTranslate();
+
+  if (!shouldRenderEnterpriseSection(canRemoveBranding)) {
+    return null;
+  }
+
   const workspaceBasePath = `/workspaces/${workspace.id}`;
 
   const buttons: [ModalButton, ModalButton] = [
     {
-      text: IS_FORMBRICKS_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
-      href: IS_FORMBRICKS_CLOUD
+      text: IS_SALAMRUBY_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
+      href: IS_SALAMRUBY_CLOUD
         ? `${workspaceBasePath}/settings/organization/billing`
         : ENTERPRISE_LICENSE_REQUEST_FORM_URL,
     },
     {
       text: t("common.learn_more"),
-      href: "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/hide-powered-by-formbricks",
+      href: "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/hide-powered-by-salamruby",
     },
   ];
 
   return (
     <SettingsCard
-      title={t("workspace.look.formbricks_branding")}
-      description={t("workspace.look.formbricks_branding_settings_description")}>
+      title={t("workspace.look.salamruby_branding")}
+      description={t("workspace.look.salamruby_branding_settings_description")}>
       {canRemoveBranding ? (
         <div className="space-y-4">
           <EditBranding

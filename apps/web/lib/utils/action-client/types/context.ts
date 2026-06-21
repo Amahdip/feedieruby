@@ -1,4 +1,4 @@
-import { TUser } from "@formbricks/types/user";
+import { TUser } from "@salamruby/types/user";
 
 export type AuditLoggingCtx = {
   organizationId?: string;

@@ -1,6 +1,6 @@
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { getWorkspaceState } from "@/app/api/v1/client/[workspaceId]/environment/lib/environmentState";
 import { responses } from "@/app/lib/api/response";
 import { THandlerParams, withV1ApiWrapper } from "@/app/lib/api/with-api-logging";

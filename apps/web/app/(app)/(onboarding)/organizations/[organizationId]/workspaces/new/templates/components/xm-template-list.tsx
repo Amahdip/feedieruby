@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TUserLocale } from "@formbricks/types/user";
+import type { TUserLocale } from "@salamruby/types/user";
 import { OnboardingOptionsContainer } from "@/app/(app)/(onboarding)/organizations/components/OnboardingOptionsContainer";
 import { type TXMTemplateId, XM_TEMPLATE_IDS } from "@/app/lib/xm-template-ids";
 import { getV3ApiErrorMessage } from "@/modules/api/lib/v3-client";

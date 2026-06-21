@@ -1,7 +1,7 @@
-import { prisma } from "@formbricks/database";
-import { Prisma, Webhook } from "@formbricks/database/prisma";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
-import { InvalidInputError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma, Webhook } from "@salamruby/database/prisma";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
+import { InvalidInputError } from "@salamruby/types/errors";
 import { generateWebhookSecret } from "@/lib/crypto";
 import { validateWebhookUrl } from "@/lib/utils/validate-webhook-url";
 import { getWebhooksQuery } from "@/modules/api/v2/management/webhooks/lib/utils";

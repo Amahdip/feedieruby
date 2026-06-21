@@ -1,4 +1,4 @@
-import { InvalidInputError } from "@formbricks/types/errors";
+import { InvalidInputError } from "@salamruby/types/errors";
 
 interface TriggerActionClass {
   id: string;

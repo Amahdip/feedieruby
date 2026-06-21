@@ -6,9 +6,9 @@ import {
   generateObject,
   generateText,
   isAiConfigured,
-} from "@formbricks/ai";
-import { logger } from "@formbricks/logger";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
+} from "@salamruby/ai";
+import { logger } from "@salamruby/logger";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { env } from "@/lib/env";
 import { getOrganization } from "@/lib/organization/service";
 import { getIsAISmartToolsEnabled } from "@/modules/ee/license-check/lib/utils";

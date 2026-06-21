@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
-import { type TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey, TSurveyLanguage } from "@formbricks/types/surveys/types";
-import { TTag } from "@formbricks/types/tags";
-import { TLanguage } from "@formbricks/types/workspace";
+import { type TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey, TSurveyLanguage } from "@salamruby/types/surveys/types";
+import { TTag } from "@salamruby/types/tags";
+import { TLanguage } from "@salamruby/types/workspace";
 import {
   DateRange,
   SelectedFilterValue,
@@ -985,7 +985,7 @@ describe("surveys", () => {
         filter: [
           {
             elementType: { type: "Meta", label: "url", id: "url" },
-            filterType: { filterValue: "Contains", filterComboBoxValue: "formbricks.com" },
+            filterType: { filterValue: "Contains", filterComboBoxValue: "salamruby.com" },
           },
           {
             elementType: { type: "Meta", label: "source", id: "source" },
@@ -996,7 +996,7 @@ describe("surveys", () => {
 
       const result = getFormattedFilters(survey, selectedFilter, dateRange);
 
-      expect(result.meta?.url).toEqual({ op: "contains", value: "formbricks.com" });
+      expect(result.meta?.url).toEqual({ op: "contains", value: "salamruby.com" });
       expect(result.meta?.source).toEqual({ op: "equals", value: "newsletter" });
     });
 

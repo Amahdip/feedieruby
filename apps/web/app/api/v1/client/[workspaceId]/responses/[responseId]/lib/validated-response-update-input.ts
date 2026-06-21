@@ -1,4 +1,4 @@
-import { TResponseUpdateInput, ZResponseUpdateInput } from "@formbricks/types/responses";
+import { TResponseUpdateInput, ZResponseUpdateInput } from "@salamruby/types/responses";
 import {
   TParseAndValidateJsonBodyResult,
   parseAndValidateJsonBody,

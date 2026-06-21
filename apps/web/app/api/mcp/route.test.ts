@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { ApiKeyPermission } from "@formbricks/database/prisma";
+import { ApiKeyPermission } from "@salamruby/database/prisma";
 import {
   createdResponse,
   problemBadRequest,
@@ -39,7 +39,7 @@ vi.mock("@/app/api/v3/lib/audit", () => ({
   queueV3AuditLog: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     withContext: vi.fn(() => ({
       error: vi.fn(),

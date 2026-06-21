@@ -1,4 +1,4 @@
-import { InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TDisplayCreateInputV2,
   ZDisplayCreateInputV2,

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
+import { ZId } from "@salamruby/types/common";
 
 export const ZFeedbackDirectory = z.object({
   id: ZId,

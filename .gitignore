@@ -61,7 +61,7 @@ branch.json
 # IntelliJ IDEA
 /.idea/
 /*.iml
-packages/ios/FormbricksSDK/FormbricksSDK.xcodeproj/project.xcworkspace/xcuserdata
+packages/ios/SalamRubySDK/SalamRubySDK.xcodeproj/project.xcworkspace/xcuserdata
 .cursorrules
 i18n.cache
 stats.html

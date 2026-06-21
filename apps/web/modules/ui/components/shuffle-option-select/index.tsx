@@ -5,8 +5,8 @@ import {
   TSurveyMatrixElement,
   TSurveyMultipleChoiceElement,
   TSurveyRankingElement,
-} from "@formbricks/types/surveys/elements";
-import { TShuffleOption } from "@formbricks/types/surveys/types";
+} from "@salamruby/types/surveys/elements";
+import { TShuffleOption } from "@salamruby/types/surveys/types";
 import {
   Select,
   SelectContent,

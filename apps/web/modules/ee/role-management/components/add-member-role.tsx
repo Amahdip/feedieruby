@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { type Control, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
+import { TOrganizationRole } from "@salamruby/types/memberships";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { Label } from "@/modules/ui/components/label";
 import {
@@ -19,14 +19,14 @@ import { Muted, P } from "@/modules/ui/components/typography";
 interface AddMemberRoleProps {
   control: Control<{ name: string; email: string; role: TOrganizationRole; teamIds: string[] }>;
   isAccessControlAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   membershipRole?: TOrganizationRole;
 }
 
 export function AddMemberRole({
   control,
   isAccessControlAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   membershipRole,
 }: AddMemberRoleProps) {
   const { isMember, isOwner } = getAccessFlags(membershipRole);
@@ -38,12 +38,12 @@ export function AddMemberRole({
 
     if (isOwner) {
       rolesArray.push("manager", "owner");
-      if (isFormbricksCloud) {
+      if (isSalamRubyCloud) {
         rolesArray.push("billing");
       }
     }
     return rolesArray;
-  }, [isOwner, isFormbricksCloud]);
+  }, [isOwner, isSalamRubyCloud]);
 
   if (isMember) return null;
 

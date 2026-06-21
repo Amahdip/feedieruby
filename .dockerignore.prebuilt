@@ -1,0 +1,28 @@
+# Context for apps/web/Dockerfile.prebuilt (host-built artifacts + runtime deps)
+
+.git
+.turbo
+**/.DS_Store
+**/coverage
+**/out
+/test-results
+/playwright-report
+/playwright/.cache/
+apps/web/playwright
+packages/lib/uploads
+branch.json
+**/.env*
+!apps/web/.env
+!packages/database/.env
+
+# Ignore source dist outputs except runtime-required builds
+apps/*/dist/
+packages/*/dist/
+!packages/database/dist/
+!packages/database/migrations/
+!node_modules/**/dist/
+
+# Ignore dev caches but keep production Next output
+**/.next/
+!apps/web/.next/standalone/
+!apps/web/.next/static/

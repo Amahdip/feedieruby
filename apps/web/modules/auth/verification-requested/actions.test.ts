@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { verifySsoRelinkIntent } from "@/lib/jwt";
 import { getUserByEmail } from "@/modules/auth/lib/user";
 // Import mocked functions

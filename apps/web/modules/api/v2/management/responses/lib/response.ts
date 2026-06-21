@@ -1,9 +1,9 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma, Response } from "@formbricks/database/prisma";
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { prisma } from "@salamruby/database";
+import { Prisma, Response } from "@salamruby/database/prisma";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { calculateTtcTotal } from "@/lib/response/utils";
 import { getContactByUserId } from "@/modules/api/v2/management/responses/lib/contact";
 import {
@@ -133,7 +133,7 @@ export const createResponse = async (
       data: prismaData,
     });
 
-    if (IS_FORMBRICKS_CLOUD) {
+    if (IS_SALAMRUBY_CLOUD) {
       const responsesCountResult = await getMonthlyOrganizationResponseCount(organizationIdResult.data);
       if (!responsesCountResult.ok) {
         return err(responsesCountResult.error as ApiErrorResponseV2);

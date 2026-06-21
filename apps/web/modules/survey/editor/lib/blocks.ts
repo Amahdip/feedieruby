@@ -1,9 +1,9 @@
 import { createId } from "@paralleldrive/cuid2";
 import { TFunction } from "i18next";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { createI18nString } from "@/lib/i18n/utils";
 
 // ============================================
@@ -52,16 +52,46 @@ export const findElementLocation = (
 // BLOCK OPERATIONS
 // ============================================
 
+const SEQUENTIAL_BLOCK_NAME_KEYS: Record<number, string> = {
+  1: "templates.block_1",
+  2: "templates.block_2",
+  3: "templates.block_3",
+  4: "templates.block_4",
+  5: "templates.block_5",
+  6: "templates.block_6",
+  7: "templates.block_7",
+  8: "templates.block_8",
+  9: "templates.block_9",
+  10: "templates.block_10",
+};
+
+export const getSequentialBlockName = (blockNumber: number, t: TFunction): string => {
+  const key = SEQUENTIAL_BLOCK_NAME_KEYS[blockNumber];
+  if (key) {
+    return t(key);
+  }
+
+  return t("templates.block_number", { number: blockNumber });
+};
+
+const resolveBlockName = (blockNumber: number, t?: TFunction): string => {
+  if (t) {
+    return getSequentialBlockName(blockNumber, t);
+  }
+
+  return `Block ${blockNumber}`;
+};
+
 /**
  * Renumbers all blocks sequentially (Block 1, Block 2, Block 3, etc.)
  * This ensures block names stay in sync with their positions
  * @param blocks - Array of blocks to renumber
  * @returns Array of blocks with updated sequential names
  */
-export const renumberBlocks = (blocks: TSurveyBlock[]): TSurveyBlock[] => {
+export const renumberBlocks = (blocks: TSurveyBlock[], t?: TFunction): TSurveyBlock[] => {
   return blocks.map((block, index) => ({
     ...block,
-    name: `Block ${index + 1}`,
+    name: resolveBlockName(index + 1, t),
   }));
 };
 
@@ -101,7 +131,7 @@ export const addBlock = (
   }
 
   // Renumber blocks sequentially after adding
-  const renumberedBlocks = renumberBlocks(blocks);
+  const renumberedBlocks = renumberBlocks(blocks, t);
 
   updatedSurvey.blocks = renumberedBlocks;
   return ok(updatedSurvey);
@@ -148,7 +178,7 @@ export const updateBlock = (
  * @param blockId - The CUID of the block to delete
  * @returns Result with updated survey or Error
  */
-export const deleteBlock = (survey: TSurvey, blockId: string): Result<TSurvey, Error> => {
+export const deleteBlock = (survey: TSurvey, blockId: string, t?: TFunction): Result<TSurvey, Error> => {
   // Prevent deleting the last block
   if (survey.blocks?.length === 1) {
     return err(new Error("Cannot delete the last block in the survey"));
@@ -161,7 +191,7 @@ export const deleteBlock = (survey: TSurvey, blockId: string): Result<TSurvey, E
   }
 
   // Renumber blocks sequentially after deletion
-  const renumberedBlocks = renumberBlocks(filteredBlocks);
+  const renumberedBlocks = renumberBlocks(filteredBlocks, t);
 
   return ok({
     ...survey,
@@ -177,7 +207,7 @@ export const deleteBlock = (survey: TSurvey, blockId: string): Result<TSurvey, E
  * @param blockId - The CUID of the block to duplicate
  * @returns Result with updated survey or Error
  */
-export const duplicateBlock = (survey: TSurvey, blockId: string): Result<TSurvey, Error> => {
+export const duplicateBlock = (survey: TSurvey, blockId: string, t?: TFunction): Result<TSurvey, Error> => {
   const blocks = survey.blocks || [];
   const blockIndex = blocks.findIndex((b) => b.id === blockId);
 
@@ -210,7 +240,7 @@ export const duplicateBlock = (survey: TSurvey, blockId: string): Result<TSurvey
   updatedBlocks.splice(blockIndex + 1, 0, duplicatedBlock);
 
   // Renumber blocks sequentially after duplication
-  const renumberedBlocks = renumberBlocks(updatedBlocks);
+  const renumberedBlocks = renumberBlocks(updatedBlocks, t);
 
   return ok({
     ...survey,
@@ -228,7 +258,8 @@ export const duplicateBlock = (survey: TSurvey, blockId: string): Result<TSurvey
 export const moveBlock = (
   survey: TSurvey,
   blockId: string,
-  direction: "up" | "down"
+  direction: "up" | "down",
+  t?: TFunction
 ): Result<TSurvey, Error> => {
   const blocks = [...(survey.blocks || [])];
   const blockIndex = blocks.findIndex((b) => b.id === blockId);
@@ -251,7 +282,7 @@ export const moveBlock = (
   [blocks[blockIndex], blocks[targetIndex]] = [blocks[targetIndex], blocks[blockIndex]];
 
   // Renumber blocks sequentially after reordering
-  const renumberedBlocks = renumberBlocks(blocks);
+  const renumberedBlocks = renumberBlocks(blocks, t);
 
   return ok({
     ...survey,

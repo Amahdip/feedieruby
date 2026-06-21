@@ -1,6 +1,6 @@
-import { Prisma } from "@formbricks/database/prisma";
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
-import { TResponseInput } from "@formbricks/types/responses";
+import { Prisma } from "@salamruby/database/prisma";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
+import { TResponseInput } from "@salamruby/types/responses";
 
 export const buildPrismaResponseData = (
   responseInput: TResponseInput,

@@ -1,6 +1,6 @@
 import { type Locale, formatDistance } from "date-fns";
-import { de, enUS, es, fr, hu, ja, nl, pt, ptBR, ro, ru, sv, tr, zhCN, zhTW } from "date-fns/locale";
-import { TUserLocale } from "@formbricks/types/user";
+import { de, enUS, es, faIR, fr, hu, ja, nl, pt, ptBR, ro, ru, sv, tr, zhCN, zhTW } from "date-fns/locale";
+import { TUserLocale } from "@salamruby/types/user";
 import { formatDateForDisplay } from "./utils/datetime";
 
 const DEFAULT_LOCALE: TUserLocale = "en-US";
@@ -8,6 +8,7 @@ const TIME_SINCE_LOCALES: Record<TUserLocale, Locale> = {
   "de-DE": de,
   "en-US": enUS,
   "es-ES": es,
+  "fa-IR": faIR,
   "fr-FR": fr,
   "hu-HU": hu,
   "ja-JP": ja,

@@ -1,11 +1,11 @@
 import "server-only";
 import { createHash } from "node:crypto";
-import { prisma } from "@formbricks/database";
-import { PipelineTriggers, Prisma, type Webhook } from "@formbricks/database/prisma";
-import { type JobHandler, type TResponsePipelineJobData, UnrecoverableError } from "@formbricks/jobs";
-import { logger } from "@formbricks/logger";
-import { DatabaseError } from "@formbricks/types/errors";
-import { type TUserLocale, ZUserLocale } from "@formbricks/types/user";
+import { prisma } from "@salamruby/database";
+import { PipelineTriggers, Prisma, type Webhook } from "@salamruby/database/prisma";
+import { type JobHandler, type TResponsePipelineJobData, UnrecoverableError } from "@salamruby/jobs";
+import { logger } from "@salamruby/logger";
+import { DatabaseError } from "@salamruby/types/errors";
+import { type TUserLocale, ZUserLocale } from "@salamruby/types/user";
 import { DANGEROUSLY_ALLOW_WEBHOOK_INTERNAL_URLS, POSTHOG_KEY } from "@/lib/constants";
 import { generateStandardWebhookSignature } from "@/lib/crypto";
 import { handleFeedbackSourcePipeline } from "@/lib/feedback-source/pipeline-handler";

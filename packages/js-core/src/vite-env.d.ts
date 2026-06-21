@@ -2,8 +2,8 @@
 
 declare global {
   interface Window {
-    __formbricksNonce?: string;
-    formbricksSurveys?: {
+    __salamrubyNonce?: string;
+    salamrubySurveys?: {
       renderSurvey: (options: unknown) => void;
       setNonce: (nonce: string | undefined) => void;
     };

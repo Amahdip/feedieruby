@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TChartQuery } from "@formbricks/types/analysis";
+import type { TChartQuery } from "@salamruby/types/analysis";
 import { AdvancedChartPreview } from "@/modules/ee/analysis/charts/components/advanced-chart-preview";
 import { ChartTypeSelector } from "@/modules/ee/analysis/charts/components/chart-type-selector";
 import { DimensionsPanel } from "@/modules/ee/analysis/charts/components/dimensions-panel";

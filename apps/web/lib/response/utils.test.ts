@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { Prisma } from "@formbricks/database/prisma";
-import { TResponse } from "@formbricks/types/responses";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { Prisma } from "@salamruby/database/prisma";
+import { TResponse } from "@salamruby/types/responses";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import {
   calculateTtcTotal,
   extracMetadataKeys,
@@ -803,7 +803,7 @@ describe("Response Utils", () => {
           data: {},
           meta: {
             userAgent: { browser: "Chrome", device: "desktop" },
-            url: "https://formbricks.com/dashboard",
+            url: "https://salamruby.com/dashboard",
             country: "US",
           },
         },
@@ -812,7 +812,7 @@ describe("Response Utils", () => {
           data: {},
           meta: {
             userAgent: { browser: "Safari", device: "mobile" },
-            url: "https://formbricks.com/surveys/123",
+            url: "https://salamruby.com/surveys/123",
             country: "UK",
           },
         },

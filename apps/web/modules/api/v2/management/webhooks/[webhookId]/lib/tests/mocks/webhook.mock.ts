@@ -1,5 +1,5 @@
-import { Prisma, WebhookSource } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
+import { Prisma, WebhookSource } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
 
 export const mockedPrismaWebhookUpdateReturn = {
   id: "123",

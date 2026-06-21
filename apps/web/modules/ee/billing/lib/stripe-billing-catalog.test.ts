@@ -59,9 +59,9 @@ const createPrice = ({
   unit_amount: kind === "responses" ? 0 : interval === "monthly" ? 1000 : 10000,
   ...(kind === "responses" ? { tiers: RESPONSE_PRICE_TIERS, tiers_mode: tiersMode } : {}),
   metadata: {
-    formbricks_plan: plan,
-    formbricks_price_kind: kind,
-    formbricks_interval: interval,
+    salamruby_plan: plan,
+    salamruby_price_kind: kind,
+    salamruby_interval: interval,
   },
   recurring: {
     usage_type: kind === "base" ? "licensed" : "metered",
@@ -71,7 +71,7 @@ const createPrice = ({
     id: `prod_${plan}`,
     active: true,
     metadata: {
-      formbricks_plan: plan,
+      salamruby_plan: plan,
     },
   },
 });

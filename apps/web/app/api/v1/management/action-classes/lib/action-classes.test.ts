@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { DatabaseError } from "@salamruby/types/errors";
 import { getActionClasses } from "./action-classes";
 
 // Mock the prisma client
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     actionClass: {
       findMany: vi.fn(),

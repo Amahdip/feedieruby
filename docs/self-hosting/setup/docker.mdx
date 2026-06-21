@@ -1,6 +1,6 @@
 ---
 title: "Docker Setup"
-description: "Set up Formbricks quickly using our ready-to-use Docker image."
+description: "Set up SalamRuby quickly using our ready-to-use Docker image."
 icon: "docker"
 ---
 
@@ -16,7 +16,7 @@ Make sure Docker and Docker Compose are installed on your system. These are usua
 </Note>
 
 <Info>
-  Starting with Formbricks v5, the production Docker Compose stack includes Formbricks Hub and Cube as part of
+  Starting with SalamRuby v5, the production Docker Compose stack includes SalamRuby Hub and Cube as part of
   the baseline. Generate `HUB_API_KEY` and `CUBEJS_API_SECRET` during setup, keep `HUB_API_URL` at its
   internal default unless Hub runs elsewhere, and use the [migration
   guide](/self-hosting/advanced/migration#v5) when upgrading an existing 4.x instance.
@@ -24,12 +24,12 @@ Make sure Docker and Docker Compose are installed on your system. These are usua
 
 ## Start
 
-1. **Create a New Directory for Formbricks**
+1. **Create a New Directory for SalamRuby**
 
-   Open a terminal and run the following commands to create and enter a new directory for Formbricks:
+   Open a terminal and run the following commands to create and enter a new directory for SalamRuby:
 
    ```bash
-   mkdir formbricks-quickstart && cd formbricks-quickstart
+   mkdir salamruby-quickstart && cd salamruby-quickstart
    ```
 
 1. **Download the Docker Files**
@@ -38,21 +38,21 @@ Make sure Docker and Docker Compose are installed on your system. These are usua
 
    ```bash
    mkdir -p cube/schema
-   curl -o docker-compose.yml https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/docker-compose.yml
-   curl -o cube/cube.js https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/cube/cube.js
-   curl -o cube/schema/FeedbackRecords.js https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/cube/schema/FeedbackRecords.js
+   curl -o docker-compose.yml https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/docker-compose.yml
+   curl -o cube/cube.js https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/cube/cube.js
+   curl -o cube/schema/FeedbackRecords.js https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/cube/schema/FeedbackRecords.js
    ```
 
 1. **Generate Hub and Cube Secrets**
 
-   Formbricks Hub and Cube each require a shared secret. Create `.env` with both:
+   SalamRuby Hub and Cube each require a shared secret. Create `.env` with both:
 
    ```bash
    cat <<EOF > .env
    HUB_API_KEY=$(openssl rand -hex 32)
    CUBEJS_API_SECRET=$(openssl rand -hex 32)
-   CUBEJS_JWT_ISSUER=formbricks-web
-   CUBEJS_JWT_AUDIENCE=formbricks-cube
+   CUBEJS_JWT_ISSUER=salamruby-web
+   CUBEJS_JWT_AUDIENCE=salamruby-cube
    EOF
    ```
 
@@ -116,7 +116,7 @@ Make sure Docker and Docker Compose are installed on your system. These are usua
 
 1. **Generate Hub API Key**
 
-   Formbricks v5 requires a Hub API key for the bundled Hub service.
+   SalamRuby v5 requires a Hub API key for the bundled Hub service.
 
    For Linux:
 
@@ -132,15 +132,15 @@ Make sure Docker and Docker Compose are installed on your system. These are usua
 
    <Info>
      The bundled production stack already sets <code>HUB_API_URL</code> to <code>http://hub:8080</code>. Only
-     change that value if your Formbricks app needs to reach Hub at a different address. If your deployment
+     change that value if your SalamRuby app needs to reach Hub at a different address. If your deployment
      also resolves Compose variables from a shell environment or <code>.env</code> file, keep the same
      <code>HUB_API_KEY</code> available there as well.
    </Info>
 
 1. **Start the Docker Setup**
 
-   Now, you're ready to run Formbricks with Docker. Use the command below to start Formbricks together with
-   PostgreSQL, Redis, Formbricks Hub, and Cube.
+   Now, you're ready to run SalamRuby with Docker. Use the command below to start SalamRuby together with
+   PostgreSQL, Redis, SalamRuby Hub, and Cube.
 
    ```bash
    docker compose up -d
@@ -148,45 +148,45 @@ Make sure Docker and Docker Compose are installed on your system. These are usua
 
    The `-d` flag runs the containers in the background, so they keep running even after you close the terminal.
 
-1. **Open Formbricks in Your Browser**
+1. **Open SalamRuby in Your Browser**
 
-   Once the setup is running, open [**http://localhost:3000**](http://localhost:3000) in your browser to access Formbricks. The first time you visit, you'll see a setup wizard. Follow the steps to create your first user and start using Formbricks.
+   Once the setup is running, open [**http://localhost:3000**](http://localhost:3000) in your browser to access SalamRuby. The first time you visit, you'll see a setup wizard. Follow the steps to create your first user and start using SalamRuby.
 
 <Note>
-  The bundled Docker stack keeps Formbricks Hub and Cube internal to the compose network. The app reaches them
+  The bundled Docker stack keeps SalamRuby Hub and Cube internal to the compose network. The app reaches them
   through `http://hub:8080` and `http://cube:4000`.
 </Note>
 
 <Info>
-  If you use the one-click Traefik setup, FeedbackRecords are available on the Formbricks origin at
+  If you use the one-click Traefik setup, FeedbackRecords are available on the SalamRuby origin at
   `/api/v3/feedbackRecords` and `/v1/feedback-records`. Custom Docker reverse proxies need equivalent wiring:
-  run gateway auth against the Formbricks app, rewrite `/api/v3/feedbackRecords` to Hub's
+  run gateway auth against the SalamRuby app, rewrite `/api/v3/feedbackRecords` to Hub's
   `/v1/feedback-records`, and inject `Authorization: Bearer <HUB_API_KEY>` only on the Hub-bound hop.
 </Info>
 
 ## Update
 
-Please take a look at our [migration guide](/self-hosting/advanced/migration) for version specific steps to update Formbricks.
+Please take a look at our [migration guide](/self-hosting/advanced/migration) for version specific steps to update SalamRuby.
 
 <Info>
-  For a major migration such as Formbricks 4.x to 5.0, update your compose structure and configuration first.
+  For a major migration such as SalamRuby 4.x to 5.0, update your compose structure and configuration first.
   Pulling images alone is not enough if your stack does not yet include Hub (`HUB_API_KEY`), Cube (`cube/`
   config files plus `CUBEJS_API_SECRET`), or the new edge rate-limiting setup.
 </Info>
 
-1. Pull the latest Formbricks image
+1. Pull the latest SalamRuby image
 
    ```bash
    docker compose pull
    ```
 
-1. Stop the Formbricks stack
+1. Stop the SalamRuby stack
 
    ```bash
    docker compose down
    ```
 
-1. Re-start the Formbricks stack with the updated image
+1. Re-start the SalamRuby stack with the updated image
 
    ```bash
    docker compose up -d
@@ -194,8 +194,8 @@ Please take a look at our [migration guide](/self-hosting/advanced/migration) fo
 
 ## Optional: Adding RustFS for File Storage
 
-RustFS provides S3-compatible object storage for file uploads in Formbricks. If you want to enable features
-like image uploads, survey file uploads, or custom logos, you can run RustFS alongside Formbricks while
+RustFS provides S3-compatible object storage for file uploads in SalamRuby. If you want to enable features
+like image uploads, survey file uploads, or custom logos, you can run RustFS alongside SalamRuby while
 keeping the existing `S3_*` environment variables.
 
 <Note>
@@ -220,7 +220,7 @@ keeping the existing `S3_*` environment variables.
 ### Quick Start: Using docker-compose.dev.yml
 
 The fastest way to test file uploads locally is to use the included `docker-compose.dev.yml`, which already
-starts RustFS and auto-creates the `formbricks` bucket.
+starts RustFS and auto-creates the `salamruby` bucket.
 
 1. **Start the local stack**
 
@@ -231,7 +231,7 @@ starts RustFS and auto-creates the `formbricks` bucket.
    ```
 
    This starts PostgreSQL, Valkey (Redis), Mailhog, RustFS, a permissions helper, a one-time bucket
-   bootstrap job, Formbricks Hub, and a local Cube instance for analytics testing.
+   bootstrap job, SalamRuby Hub, and a local Cube instance for analytics testing.
 
 2. **Access the RustFS console**
 
@@ -239,7 +239,7 @@ starts RustFS and auto-creates the `formbricks` bucket.
    - Username: `devrustfs`
    - Password: `devrustfs123`
 
-3. **Configure Formbricks**
+3. **Configure SalamRuby**
 
    Update your `.env` file or environment variables:
 
@@ -247,14 +247,14 @@ starts RustFS and auto-creates the `formbricks` bucket.
    S3_ACCESS_KEY="devrustfs"
    S3_SECRET_KEY="devrustfs123"
    S3_REGION="us-east-1"
-   S3_BUCKET_NAME="formbricks"
+   S3_BUCKET_NAME="salamruby"
    S3_ENDPOINT_URL="http://localhost:9000"
    S3_FORCE_PATH_STYLE="1"
    ```
 
 4. **Verify uploads**
 
-   After uploading a file in Formbricks, open http://localhost:9001 and navigate to **Buckets → formbricks**
+   After uploading a file in SalamRuby, open http://localhost:9001 and navigate to **Buckets → salamruby**
    to confirm the object was stored successfully.
 
 <Note>
@@ -288,12 +288,12 @@ services:
         condition: service_completed_successfully
     command: /data
     environment:
-      RUSTFS_ACCESS_KEY: "${FORMBRICKS_RUSTFS_ADMIN_USER}"
-      RUSTFS_SECRET_KEY: "${FORMBRICKS_RUSTFS_ADMIN_PASSWORD}"
+      RUSTFS_ACCESS_KEY: "${SALAMRUBY_RUSTFS_ADMIN_USER}"
+      RUSTFS_SECRET_KEY: "${SALAMRUBY_RUSTFS_ADMIN_PASSWORD}"
       RUSTFS_ADDRESS: ":9000"
       RUSTFS_CONSOLE_ENABLE: "true"
       RUSTFS_CONSOLE_ADDRESS: ":9001"
-      # CORS for browser uploads: set to your Formbricks origin(s), comma-separated.
+      # CORS for browser uploads: set to your SalamRuby origin(s), comma-separated.
       # Unset = allow all origins; a value is treated as an allow-list. See the File Uploads guide.
       RUSTFS_CORS_ALLOWED_ORIGINS: "https://app.yourdomain.com"
     ports:
@@ -307,12 +307,12 @@ services:
     depends_on:
       - rustfs
     environment:
-      RUSTFS_ADMIN_USER: "${FORMBRICKS_RUSTFS_ADMIN_USER}"
-      RUSTFS_ADMIN_PASSWORD: "${FORMBRICKS_RUSTFS_ADMIN_PASSWORD}"
-      RUSTFS_SERVICE_USER: "${FORMBRICKS_RUSTFS_SERVICE_USER}"
-      RUSTFS_SERVICE_PASSWORD: "${FORMBRICKS_RUSTFS_SERVICE_PASSWORD}"
-      RUSTFS_BUCKET_NAME: "${FORMBRICKS_RUSTFS_BUCKET_NAME}"
-      RUSTFS_POLICY_NAME: "${FORMBRICKS_RUSTFS_POLICY_NAME}"
+      RUSTFS_ADMIN_USER: "${SALAMRUBY_RUSTFS_ADMIN_USER}"
+      RUSTFS_ADMIN_PASSWORD: "${SALAMRUBY_RUSTFS_ADMIN_PASSWORD}"
+      RUSTFS_SERVICE_USER: "${SALAMRUBY_RUSTFS_SERVICE_USER}"
+      RUSTFS_SERVICE_PASSWORD: "${SALAMRUBY_RUSTFS_SERVICE_PASSWORD}"
+      RUSTFS_BUCKET_NAME: "${SALAMRUBY_RUSTFS_BUCKET_NAME}"
+      RUSTFS_POLICY_NAME: "${SALAMRUBY_RUSTFS_POLICY_NAME}"
     entrypoint:
       - /bin/sh
       - -c
@@ -323,7 +323,7 @@ services:
           sleep 2
         done
         mc mb rustfs/"$RUSTFS_BUCKET_NAME" --ignore-existing
-        cat > /tmp/formbricks-policy.json << EOF
+        cat > /tmp/salamruby-policy.json << EOF
         {
           "Version": "2012-10-17",
           "Statement": [
@@ -341,8 +341,8 @@ services:
         }
         EOF
         if ! mc admin policy info rustfs "$RUSTFS_POLICY_NAME" >/dev/null 2>&1; then
-          mc admin policy create rustfs "$RUSTFS_POLICY_NAME" /tmp/formbricks-policy.json || \
-            mc admin policy add rustfs "$RUSTFS_POLICY_NAME" /tmp/formbricks-policy.json
+          mc admin policy create rustfs "$RUSTFS_POLICY_NAME" /tmp/salamruby-policy.json || \
+            mc admin policy add rustfs "$RUSTFS_POLICY_NAME" /tmp/salamruby-policy.json
         fi
         if ! mc admin user info rustfs "$RUSTFS_SERVICE_USER" >/dev/null 2>&1; then
           mc admin user add rustfs "$RUSTFS_SERVICE_USER" "$RUSTFS_SERVICE_PASSWORD"
@@ -362,22 +362,22 @@ Store the generated RustFS credentials in a local `.env` file next to your `dock
 hardcoding them in Compose:
 
 ```bash
-FORMBRICKS_RUSTFS_ADMIN_USER=formbricks-root
-FORMBRICKS_RUSTFS_ADMIN_PASSWORD=change-this-secure-password
-FORMBRICKS_RUSTFS_SERVICE_USER=formbricks-service
-FORMBRICKS_RUSTFS_SERVICE_PASSWORD=change-this-service-password
-FORMBRICKS_RUSTFS_BUCKET_NAME=formbricks
-FORMBRICKS_RUSTFS_POLICY_NAME=formbricks-policy
-FORMBRICKS_RUSTFS_REGION=us-east-1
+SALAMRUBY_RUSTFS_ADMIN_USER=salamruby-root
+SALAMRUBY_RUSTFS_ADMIN_PASSWORD=change-this-secure-password
+SALAMRUBY_RUSTFS_SERVICE_USER=salamruby-service
+SALAMRUBY_RUSTFS_SERVICE_PASSWORD=change-this-service-password
+SALAMRUBY_RUSTFS_BUCKET_NAME=salamruby
+SALAMRUBY_RUSTFS_POLICY_NAME=salamruby-policy
+SALAMRUBY_RUSTFS_REGION=us-east-1
 ```
 
-Then configure Formbricks to use the RustFS service credentials:
+Then configure SalamRuby to use the RustFS service credentials:
 
 ```bash
-S3_ACCESS_KEY="${FORMBRICKS_RUSTFS_SERVICE_USER}"
-S3_SECRET_KEY="${FORMBRICKS_RUSTFS_SERVICE_PASSWORD}"
-S3_REGION="${FORMBRICKS_RUSTFS_REGION}"
-S3_BUCKET_NAME="${FORMBRICKS_RUSTFS_BUCKET_NAME}"
+S3_ACCESS_KEY="${SALAMRUBY_RUSTFS_SERVICE_USER}"
+S3_SECRET_KEY="${SALAMRUBY_RUSTFS_SERVICE_PASSWORD}"
+S3_REGION="${SALAMRUBY_RUSTFS_REGION}"
+S3_BUCKET_NAME="${SALAMRUBY_RUSTFS_BUCKET_NAME}"
 S3_ENDPOINT_URL="http://rustfs:9000"
 S3_FORCE_PATH_STYLE="1"
 ```
@@ -403,7 +403,7 @@ The bucket and service account are created automatically by the `rustfs-init` jo
 - **Storage medium matters**: Prefer local SSD or NVMe storage for `rustfs-data`, use XFS on dedicated
   host-managed disks where possible, and avoid NFS or other network filesystems for RustFS data.
 - **Connection refused**: Ensure the `rustfs` container is running and port `9000` is reachable from the
-  Formbricks container.
+  SalamRuby container.
 - **Bucket not found**: Confirm that `rustfs-init` completed successfully or create the bucket manually with
   `mc`.
 - **Auth failed**: Confirm that `S3_ACCESS_KEY` and `S3_SECRET_KEY` match the RustFS credentials configured on
@@ -411,10 +411,10 @@ The bucket and service account are created automatically by the `rustfs-init` jo
 - **Backups**: Back up the `rustfs-data` volume regularly, especially for single-server deployments.
 - **Console exposure**: Do not expose the RustFS console port publicly in production. Keep it on a private
   network or behind admin-only controls.
-- **Health check**: From the Formbricks container:
+- **Health check**: From the SalamRuby container:
 
   ```bash
-  docker compose exec formbricks sh -c 'wget -O- http://rustfs:9000/health'
+  docker compose exec salamruby sh -c 'wget -O- http://rustfs:9000/health'
   ```
 
 ### Production Setup with Traefik
@@ -424,18 +424,18 @@ automatically configures:
 
 - RustFS behind Traefik on a dedicated `files.yourdomain.com` subdomain
 - Automatic SSL certificate generation via Let's Encrypt
-- CORS configuration scoped to your Formbricks domain
+- CORS configuration scoped to your SalamRuby domain
 - Rate limiting middleware
-- Separate RustFS admin and Formbricks service credentials
+- Separate RustFS admin and SalamRuby service credentials
 - A `rustfs-init` job that creates the bucket and access policy
 
-The production setup from [formbricks.sh](https://github.com/formbricks/formbricks/blob/main/docker/formbricks.sh)
+The production setup from [salamruby.sh](https://github.com/salamruby/salamruby/blob/main/docker/salamruby.sh)
 adds the reverse proxy wiring and bootstrap automation needed for long-lived deployments.
 
 <Note>
   Even in the one-click flow, bundled RustFS remains a convenience-oriented single-server deployment. For
   higher availability, stricter operational requirements, or larger storage footprints, prefer external object
-  storage or a dedicated RustFS deployment managed separately from Formbricks.
+  storage or a dedicated RustFS deployment managed separately from SalamRuby.
 </Note>
 
 ## Debug
@@ -450,7 +450,7 @@ In an ideal case, you should see this:
 
 ```bash
 [+] Running 9/16
-⠹ formbricks 15 layers [⣿⣤⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀] 29.78MB/47.76MB Pulling                                                           13.3s
+⠹ salamruby 15 layers [⣿⣤⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀] 29.78MB/47.76MB Pulling                                                           13.3s
 ✔ 7264a8db6415 Already exists                                                                                                 0.0s
 ⠋ 751194035c36 Downloading    [===============================>                   ]  29.78MB/47.76...                         8.1s
 ✔ eff5dce73b38 Download complete                                                                                              1.7s
@@ -468,17 +468,17 @@ In an ideal case, you should see this:
 ⠋ 6fd8358dca47 Pulling fs layer                                                                                               8.1s
 
 [+] Running 2/2
-✔ Container formbricks-quickstart-postgres-1    Created                                                                       0.0s
-✔ Container formbricks-quickstart-formbricks-1  Created                                                                       0.0s
+✔ Container salamruby-quickstart-postgres-1    Created                                                                       0.0s
+✔ Container salamruby-quickstart-salamruby-1  Created                                                                       0.0s
 ```
 
 And at the tail of the output, you should see this:
 
 ```bash
-formbricks-quickstart-formbricks-1  | All migrations have been successfully applied.
-formbricks-quickstart-formbricks-1  |
-formbricks-quickstart-formbricks-1  | - info Loaded env from /home/nextjs/apps/web/.env
-formbricks-quickstart-formbricks-1  | Listening on port 3000 url: http://<random-string>:3000
+salamruby-quickstart-salamruby-1  | All migrations have been successfully applied.
+salamruby-quickstart-salamruby-1  |
+salamruby-quickstart-salamruby-1  | - info Loaded env from /home/nextjs/apps/web/.env
+salamruby-quickstart-salamruby-1  | Listening on port 3000 url: http://<random-string>:3000
 ```
 
 You can close the logs again by hitting `CTRL + C`.
@@ -490,4 +490,4 @@ To edit any of the available environment variables, check out our [Configuration
 
 </Note>
 
-If you have any questions or require help, feel free to reach out to us on [**GitHub Discussions**](https://github.com/formbricks/formbricks/discussions). 😃
+If you have any questions or require help, feel free to reach out to us on [**GitHub Discussions**](https://github.com/salamruby/salamruby/discussions). 😃

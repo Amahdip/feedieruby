@@ -35,7 +35,7 @@ const baseLoggerConfig: LoggerOptions = {
   },
   useOnlyCustomLevels: true,
   timestamp: true,
-  name: "formbricks",
+  name: "salamruby",
 };
 
 /**
@@ -50,7 +50,7 @@ const buildTransport = (): LoggerOptions["transport"] => {
   const hasOtelEndpoint =
     process.env.NEXT_RUNTIME === "nodejs" && Boolean(process.env.OTEL_EXPORTER_OTLP_ENDPOINT);
 
-  const serviceName = process.env.OTEL_SERVICE_NAME ?? "formbricks";
+  const serviceName = process.env.OTEL_SERVICE_NAME ?? "salamruby";
   const serviceVersion = process.env.npm_package_version ?? "0.0.0";
 
   const otelTarget = {

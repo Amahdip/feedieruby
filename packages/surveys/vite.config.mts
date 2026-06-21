@@ -40,7 +40,7 @@ const config = ({ mode }) => {
         emptyOutDir: false,
         lib: {
           entry: resolve(__dirname, "src/index.ts"),
-          name: "formbricksSurveys",
+          name: "salamrubySurveys",
           formats: ["umd"],
           fileName: () => "index.umd.cjs",
         },
@@ -89,7 +89,7 @@ const config = ({ mode }) => {
       },
       rollupOptions: {
         // Externalize node-html-parser to keep bundle size small (~53KB)
-        // It's pulled in via @formbricks/types but not used in browser runtime
+        // It's pulled in via @salamruby/types but not used in browser runtime
         external: ["node-html-parser"],
         output: {
           entryFileNames: "[name].js",

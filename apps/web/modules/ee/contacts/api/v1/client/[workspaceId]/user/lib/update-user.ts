@@ -1,6 +1,6 @@
-import { prisma } from "@formbricks/database";
-import { TContactAttributesInput } from "@formbricks/types/contact-attribute";
-import { TJsPersonState } from "@formbricks/types/js";
+import { prisma } from "@salamruby/database";
+import { TContactAttributesInput } from "@salamruby/types/contact-attribute";
+import { TJsPersonState } from "@salamruby/types/js";
 import { formatAttributeMessage, updateAttributes } from "@/modules/ee/contacts/lib/attributes";
 import { getPersonSegmentIds } from "./segments";
 

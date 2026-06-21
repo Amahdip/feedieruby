@@ -1,53 +1,55 @@
+@import "./iran-sans-fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   /* Brand Colors */
-  --formbricks-brand: #038178;
+  --salamruby-brand: #038178;
 
   /* Fill Colors */
-  --formbricks-fill-primary: #fefefe;
-  --formbricks-fill-secondary: #0f172a;
-  --formbricks-fill-disabled: #e0e0e0;
+  --salamruby-fill-primary: #fefefe;
+  --salamruby-fill-secondary: #0f172a;
+  --salamruby-fill-disabled: #e0e0e0;
 
   /* Label Colors */
-  --formbricks-label-primary: #0f172a;
-  --formbricks-label-secondary: #384258;
-  --formbricks-label-disabled: #bdbdbd;
+  --salamruby-label-primary: #0f172a;
+  --salamruby-label-secondary: #384258;
+  --salamruby-label-disabled: #bdbdbd;
 
   /* Border Colors */
-  --formbricks-border-primary: #e0e0e0;
-  --formbricks-border-secondary: #0f172a;
-  --formbricks-border-disabled: #ececec;
+  --salamruby-border-primary: #e0e0e0;
+  --salamruby-border-secondary: #0f172a;
+  --salamruby-border-disabled: #ececec;
 
   /* Functional Colors */
-  --formbricks-focus: #1982fc;
-  --formbricks-error: #d13a3a;
+  --salamruby-focus: #1982fc;
+  --salamruby-error: #d13a3a;
 }
 
 .dark {
   /* Brand Colors */
-  --formbricks-brand: #038178;
+  --salamruby-brand: #038178;
 
   /* Fill Colors */
-  --formbricks-fill-primary: #0f172a;
-  --formbricks-fill-secondary: #e0e0e0;
-  --formbricks-fill-disabled: #394258;
+  --salamruby-fill-primary: #0f172a;
+  --salamruby-fill-secondary: #e0e0e0;
+  --salamruby-fill-disabled: #394258;
 
   /* Label Colors */
-  --formbricks-label-primary: #fefefe;
-  --formbricks-label-secondary: #f2f2f2;
-  --formbricks-label-disabled: #bdbdbd;
+  --salamruby-label-primary: #fefefe;
+  --salamruby-label-secondary: #f2f2f2;
+  --salamruby-label-disabled: #bdbdbd;
 
   /* Border Colors */
-  --formbricks-border-primary: #394258;
-  --formbricks-border-secondary: #e0e0e0;
-  --formbricks-border-disabled: #394258;
+  --salamruby-border-primary: #394258;
+  --salamruby-border-secondary: #e0e0e0;
+  --salamruby-border-disabled: #394258;
 
   /* Functional Colors */
-  --formbricks-focus: #1982fc;
-  --formbricks-error: #d13a3a;
+  --salamruby-focus: #1982fc;
+  --salamruby-error: #d13a3a;
 }
 
 @layer base {
@@ -121,12 +123,18 @@ input[type="search"]::-ms-reveal {
 }
 
 .surveyFilterDropdown[data-state="open"] {
-  background-color: #0f172a;
-  color: white;
+  background-color: #f8fafc;
+  color: #334155;
 }
 .surveyFilterDropdown:hover * {
-  background-color: #0f172a;
-  color: white;
+  color: inherit;
+}
+
+html[dir="rtl"] [role="menu"],
+html[dir="rtl"] [role="menuitem"],
+html[dir="rtl"] [role="menuitemradio"],
+html[dir="rtl"] [role="menuitemcheckbox"] {
+  text-align: start;
 }
 
 input[type="range"]::-webkit-slider-thumb {

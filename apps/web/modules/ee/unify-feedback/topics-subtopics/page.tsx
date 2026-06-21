@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getTranslate } from "@/lingodotdev/server";
 import { NoFeedbackDirectoryEmptyState } from "@/modules/ee/feedback-directory/components/no-feedback-directory-empty-state";
 import { getFeedbackDirectoriesByWorkspaceId } from "@/modules/ee/feedback-directory/lib/feedback-directory";
@@ -43,16 +43,16 @@ export const UnifyTopicsSubtopicsPage = async (
             feature="feedback-directories"
             buttons={[
               {
-                text: IS_FORMBRICKS_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
-                href: IS_FORMBRICKS_CLOUD
+                text: IS_SALAMRUBY_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                href: IS_SALAMRUBY_CLOUD
                   ? `/workspaces/${params.workspaceId}/settings/organization/billing`
                   : ENTERPRISE_LICENSE_REQUEST_FORM_URL,
               },
               {
                 text: t("common.learn_more"),
-                href: IS_FORMBRICKS_CLOUD
+                href: IS_SALAMRUBY_CLOUD
                   ? `/workspaces/${params.workspaceId}/settings/organization/billing`
-                  : "https://formbricks.com/learn-more-self-hosting-license",
+                  : "https://salamruby.com/learn-more-self-hosting-license",
               },
             ]}
           />

@@ -11,7 +11,7 @@ vi.mock("@/lib/constants", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/constants")>();
   return {
     ...actual,
-    get IS_FORMBRICKS_CLOUD() {
+    get IS_SALAMRUBY_CLOUD() {
       return mocks.isCloud;
     },
   };

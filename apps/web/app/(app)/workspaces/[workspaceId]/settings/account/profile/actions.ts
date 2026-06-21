@@ -1,11 +1,11 @@
 "use server";
 
-import { AuthenticationError, AuthorizationError, OperationNotAllowedError } from "@formbricks/types/errors";
+import { AuthenticationError, AuthorizationError, OperationNotAllowedError } from "@salamruby/types/errors";
 import {
   TUserPersonalInfoUpdateInput,
   TUserUpdateInput,
   ZUserPersonalInfoUpdateInput,
-} from "@formbricks/types/user";
+} from "@salamruby/types/user";
 import { getIsEmailUnique } from "@/app/(app)/workspaces/[workspaceId]/settings/account/profile/lib/user";
 import { EMAIL_VERIFICATION_DISABLED, PASSWORD_RESET_DISABLED } from "@/lib/constants";
 import { verifyUserPassword } from "@/lib/user/password";

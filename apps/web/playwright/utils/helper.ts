@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { Page } from "playwright";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { CreateSurveyParams, CreateSurveyWithLogicParams } from "@/playwright/utils/mock";
 
 const MOCK_STORAGE_UPLOAD_PATH = "/__playwright__/mock-storage-upload";
@@ -363,8 +363,8 @@ export const isWorkspaceStorageConfigured = async (page: Page, workspaceId: stri
 export const uploadFileForFileUploadQuestion = async (page: Page) => {
   try {
     const fileInput = page.locator('input[type="file"]');
-    const response1 = await fetch("https://formbricks-cdn.s3.eu-central-1.amazonaws.com/puppy-1-small.jpg");
-    const response2 = await fetch("https://formbricks-cdn.s3.eu-central-1.amazonaws.com/puppy-2-small.jpg");
+    const response1 = await fetch("https://salamruby-cdn.s3.eu-central-1.amazonaws.com/puppy-1-small.jpg");
+    const response2 = await fetch("https://salamruby-cdn.s3.eu-central-1.amazonaws.com/puppy-2-small.jpg");
     const buffer1 = Buffer.from(await response1.arrayBuffer());
     const buffer2 = Buffer.from(await response2.arrayBuffer());
 

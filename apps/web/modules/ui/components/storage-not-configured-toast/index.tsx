@@ -18,7 +18,7 @@ export const StorageNotConfiguredToast = ({ variant = "notConfigured" }: Storage
       </span>
       <a
         className="text-slate-900 underline"
-        href="https://formbricks.com/docs/self-hosting/configuration/file-uploads"
+        href="https://salamruby.com/docs/self-hosting/configuration/file-uploads"
         target="_blank"
         rel="noopener noreferrer">
         {t("common.learn_more")}

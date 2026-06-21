@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { verifySsoRelinkIntent } from "@/lib/jwt";
 import { deleteSessionBySessionToken } from "@/modules/auth/lib/auth-session-repository";
 import { authOptions } from "@/modules/auth/lib/authOptions";

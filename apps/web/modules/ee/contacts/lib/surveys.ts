@@ -1,8 +1,8 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
 
 export interface PublishedLinkSurvey {
   id: string;

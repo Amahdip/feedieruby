@@ -1,13 +1,13 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZId, ZOptionalNumber } from "@formbricks/types/common";
-import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { ZSegmentFilters } from "@formbricks/types/segment";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurvey, TSurveyCreateInput, ZSurvey, ZSurveyCreateInput } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZId, ZOptionalNumber } from "@salamruby/types/common";
+import { DatabaseError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { ZSegmentFilters } from "@salamruby/types/segment";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurvey, TSurveyCreateInput, ZSurvey, ZSurveyCreateInput } from "@salamruby/types/surveys/types";
 import {
   getOrganizationByWorkspaceId,
   subscribeOrganizationMembersToSurveyResponses,

@@ -6,9 +6,9 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
-import { TIntegrationType } from "@formbricks/types/integration";
+import { TIntegrationType } from "@salamruby/types/integration";
 import { Button } from "@/modules/ui/components/button";
-import { FormbricksLogo } from "@/modules/ui/components/formbricks-logo";
+import { FeedieRubyMark } from "@/modules/ui/components/feedieruby-brand";
 import { getIntegrationDetails } from "./lib/utils";
 
 interface ConnectIntegrationProps {
@@ -51,7 +51,7 @@ export const ConnectIntegration = ({
       <div className="flex w-1/2 flex-col items-center justify-center rounded-lg bg-white p-8 shadow">
         <div className="flex w-1/2 justify-center -space-x-4">
           <div className="flex size-32 items-center justify-center rounded-full bg-white p-6 shadow-md">
-            <FormbricksLogo />
+            <FeedieRubyMark className="max-w-[4rem]" />
           </div>
           <div className="flex size-32 items-center justify-center rounded-full bg-white p-4 shadow-md">
             <Image className="w-1/2" src={integrationLogoSrc} alt="logo" />

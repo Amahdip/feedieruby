@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
 import { cn } from "@/lib/cn";
 import { IS_STORAGE_CONFIGURED, SURVEY_BG_COLORS, UNSPLASH_ACCESS_KEY } from "@/lib/constants";

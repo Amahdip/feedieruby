@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TSurveyQuota, TSurveyQuotaInput } from "@formbricks/types/quota";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TSurveyQuota, TSurveyQuotaInput } from "@salamruby/types/quota";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import {
@@ -27,7 +27,7 @@ import { QuotaModal } from "./quota-modal";
 interface QuotasCardProps {
   localSurvey: TSurvey;
   isQuotasAllowed: boolean;
-  isFormbricksCloud?: boolean;
+  isSalamRubyCloud?: boolean;
   quotas: TSurveyQuota[];
   hasResponses: boolean;
   enterpriseLicenseRequestFormUrl: string;
@@ -66,7 +66,7 @@ const AddQuotaButton = ({
 export const QuotasCard = ({
   localSurvey,
   isQuotasAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   quotas,
   hasResponses,
   enterpriseLicenseRequestFormUrl,
@@ -178,16 +178,16 @@ export const QuotasCard = ({
                 feature="quotas"
                 buttons={[
                   {
-                    text: isFormbricksCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
-                    href: isFormbricksCloud
+                    text: isSalamRubyCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                    href: isSalamRubyCloud
                       ? `${workspaceBasePath}/settings/organization/billing`
                       : enterpriseLicenseRequestFormUrl,
                   },
                   {
                     text: t("common.learn_more"),
-                    href: isFormbricksCloud
+                    href: isSalamRubyCloud
                       ? `${workspaceBasePath}/settings/organization/billing`
-                      : "https://formbricks.com/learn-more-self-hosting-license",
+                      : "https://salamruby.com/learn-more-self-hosting-license",
                   },
                 ]}
               />

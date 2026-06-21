@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ZContactAttributeKey } from "@formbricks/database/zod/contact-attribute-keys";
+import { ZContactAttributeKey } from "@salamruby/database/zod/contact-attribute-keys";
 import { isSafeIdentifier } from "@/lib/utils/safe-identifier";
 import { ZGetFilter } from "@/modules/api/v2/types/api-filter";
 import {

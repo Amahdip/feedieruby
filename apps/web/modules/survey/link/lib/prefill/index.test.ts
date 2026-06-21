@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom/vitest";
 import { describe, expect, test } from "vitest";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { FORBIDDEN_IDS } from "@formbricks/types/surveys/validation";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { FORBIDDEN_IDS } from "@salamruby/types/surveys/validation";
 import { getPrefillValue } from "./index";
 
 describe("prefill integration tests", () => {

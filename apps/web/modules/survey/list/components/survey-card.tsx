@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { TUserLocale } from "@formbricks/types/user";
+import { TUserLocale } from "@salamruby/types/user";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { cn } from "@/lib/cn";
 import { timeSince } from "@/lib/time";
@@ -53,7 +53,7 @@ export const SurveyCard = ({ survey, publicDomain, isReadOnly, deleteSurvey, loc
   const CardBody = (
     <div
       className={cn(
-        "grid w-full grid-cols-8 place-items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 pr-8 shadow-sm transition-colors ease-in-out",
+        "grid w-full grid-cols-8 place-items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 pe-8 shadow-sm transition-colors ease-in-out",
         !isDraftAndReadOnly && "hover:border-slate-400"
       )}>
       <div className="col-span-2 flex max-w-full items-center justify-self-start text-sm font-medium text-slate-900">
@@ -61,7 +61,7 @@ export const SurveyCard = ({ survey, publicDomain, isReadOnly, deleteSurvey, loc
       </div>
       <div
         className={cn(
-          "col-span-1 flex w-fit items-center gap-2 whitespace-nowrap rounded-full py-1 pl-1 pr-2 text-sm text-slate-800",
+          "col-span-1 flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-2 py-1 text-sm text-slate-800",
           survey.status === "inProgress" && "bg-emerald-50",
           survey.status === "completed" && "bg-slate-200",
           survey.status === "draft" && "bg-slate-100",
@@ -96,7 +96,7 @@ export const SurveyCard = ({ survey, publicDomain, isReadOnly, deleteSurvey, loc
           {CardBody}
         </Link>
       )}
-      <div className="absolute right-3 top-3.5">
+      <div className="absolute end-3 top-3.5">
         <SurveyDropDownMenu
           survey={survey}
           key={`surveys-${survey.id}`}

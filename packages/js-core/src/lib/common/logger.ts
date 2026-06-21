@@ -28,7 +28,7 @@ export class Logger {
     }
 
     const timestamp = new Date().toISOString();
-    const logMessage = `🧱 Formbricks - ${timestamp} [${level.toUpperCase()}] - ${message}`;
+    const logMessage = `🧱 SalamRuby - ${timestamp} [${level.toUpperCase()}] - ${message}`;
     if (level === "error") {
       console.error(logMessage);
     } else {

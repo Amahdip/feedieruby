@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { TSurveyStatus } from "@formbricks/types/surveys/types";
+import { TSurveyStatus } from "@salamruby/types/surveys/types";
 import { IdBadge } from "@/modules/ui/components/id-badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/modules/ui/components/table";
 
@@ -56,8 +56,9 @@ export const PrettyUrlsTable = ({ surveys }: PrettyUrlsTableProps) => {
         <TableBody className="[&_tr:last-child]:border-b">
           {surveys.length === 0 && (
             <TableRow className="hover:bg-transparent">
-              <TableCell colSpan={3} className="text-center text-slate-500">
-                {t("workspace.settings.domain.no_pretty_urls")}
+              <TableCell colSpan={3} className="space-y-1 py-8 text-center text-slate-500">
+                <p>{t("workspace.settings.domain.no_pretty_urls")}</p>
+                <p className="text-sm">{t("workspace.settings.domain.no_pretty_urls_hint")}</p>
               </TableCell>
             </TableRow>
           )}

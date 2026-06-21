@@ -1,5 +1,5 @@
-import { TActionClass } from "@formbricks/types/action-classes";
-import { TUserLocale } from "@formbricks/types/user";
+import { TActionClass } from "@salamruby/types/action-classes";
+import { TUserLocale } from "@salamruby/types/user";
 import { timeSince } from "@/lib/time";
 import { ACTION_TYPE_ICON_LOOKUP } from "@/modules/workspaces/settings/(setup)/app-connection/utils";
 

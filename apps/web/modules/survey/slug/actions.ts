@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { OperationNotAllowedError } from "@formbricks/types/errors";
-import { ZSurveySlug } from "@formbricks/types/surveys/types";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { OperationNotAllowedError } from "@salamruby/types/errors";
+import { ZSurveySlug } from "@salamruby/types/surveys/types";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";
 import { getOrganizationIdFromSurveyId, getWorkspaceIdFromSurveyId } from "@/lib/utils/helper";
@@ -17,7 +17,7 @@ const ZUpdateSurveySlugAction = z.object({
 export const updateSurveySlugAction = authenticatedActionClient
   .inputSchema(ZUpdateSurveySlugAction)
   .action(async ({ ctx, parsedInput }) => {
-    if (IS_FORMBRICKS_CLOUD) {
+    if (IS_SALAMRUBY_CLOUD) {
       throw new OperationNotAllowedError("Pretty URLs are only available on self-hosted instances");
     }
 
@@ -45,7 +45,7 @@ const ZRemoveSurveySlugAction = z.object({
 export const removeSurveySlugAction = authenticatedActionClient
   .inputSchema(ZRemoveSurveySlugAction)
   .action(async ({ ctx, parsedInput }) => {
-    if (IS_FORMBRICKS_CLOUD) {
+    if (IS_SALAMRUBY_CLOUD) {
       throw new OperationNotAllowedError("Pretty URLs are only available on self-hosted instances");
     }
 

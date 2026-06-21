@@ -1,7 +1,7 @@
 import "server-only";
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { requireV3WorkspaceAccess } from "@/app/api/v3/lib/auth";
 import {
   createdResponse,

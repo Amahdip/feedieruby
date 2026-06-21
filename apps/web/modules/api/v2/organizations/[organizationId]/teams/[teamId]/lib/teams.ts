@@ -1,9 +1,9 @@
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma, Team } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { Prisma, Team } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { ZTeamUpdateSchema } from "@/modules/api/v2/organizations/[organizationId]/teams/[teamId]/types/teams";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 

@@ -1,6 +1,6 @@
-# @formbricks/emails
+# @salamruby/emails
 
-Email templates for Formbricks with React Email preview server.
+Email templates for SalamRuby with React Email preview server.
 
 ## Purpose
 
@@ -46,7 +46,7 @@ import { mockT } from "@/src/lib/mock-translate";
 The web app imports render helper functions from this package:
 
 ```typescript
-import { renderVerificationEmail } from "@formbricks/email";
+import { renderVerificationEmail } from "@salamruby/email";
 
 // Pass real translation function and data
 const html = await renderVerificationEmail({
@@ -59,7 +59,7 @@ const html = await renderVerificationEmail({
 For complex emails with pre-processing:
 
 ```typescript
-import { renderResponseFinishedEmail } from "@formbricks/email";
+import { renderResponseFinishedEmail } from "@salamruby/email";
 import { getElementResponseMapping } from "@/lib/responses";
 
 // Pre-process data before rendering

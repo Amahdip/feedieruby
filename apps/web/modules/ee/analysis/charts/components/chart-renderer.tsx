@@ -3,7 +3,7 @@
 import { useId } from "react";
 import { useTranslation } from "react-i18next";
 import { Area, AreaChart, Bar, BarChart, Cell, Label, LabelList, Legend, Pie, PieChart } from "recharts";
-import type { TChartQuery } from "@formbricks/types/analysis";
+import type { TChartQuery } from "@salamruby/types/analysis";
 import { CartesianChart } from "@/modules/ee/analysis/charts/components/cartesian-chart";
 import { PolishedChartTooltip } from "@/modules/ee/analysis/charts/components/polished-tooltip";
 import {

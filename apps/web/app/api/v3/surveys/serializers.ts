@@ -1,4 +1,4 @@
-import type { TSurvey as TInternalSurvey } from "@formbricks/types/surveys/types";
+import type { TSurvey as TInternalSurvey } from "@salamruby/types/surveys/types";
 import type { TSurvey as TSurveyListRecord } from "@/modules/survey/list/types/surveys";
 import { isInternalI18nString, isPlainObject } from "./guards";
 import {

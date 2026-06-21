@@ -1,5 +1,5 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
+import { prisma } from "@salamruby/database";
 
 export const getContactByUserId = reactCache(
   async (

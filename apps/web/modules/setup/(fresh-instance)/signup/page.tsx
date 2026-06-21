@@ -5,7 +5,7 @@ import {
   EMAIL_VERIFICATION_DISABLED,
   GITHUB_OAUTH_ENABLED,
   GOOGLE_OAUTH_ENABLED,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   IS_TURNSTILE_CONFIGURED,
   OIDC_DISPLAY_NAME,
   OIDC_OAUTH_ENABLED,
@@ -58,7 +58,7 @@ export const SignupPage = async () => {
         samlTenant={SAML_TENANT}
         samlProduct={SAML_PRODUCT}
         turnstileSiteKey={TURNSTILE_SITE_KEY}
-        isFormbricksCloud={IS_FORMBRICKS_CLOUD}
+        isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
       />
     </div>
   );

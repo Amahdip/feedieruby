@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 import { getServerSession } from "next-auth";
-import { logger } from "@formbricks/logger";
-import { TIntegrationGoogleSheetsConfig } from "@formbricks/types/integration/google-sheet";
+import { logger } from "@salamruby/logger";
+import { TIntegrationGoogleSheetsConfig } from "@salamruby/types/integration/google-sheet";
 import { responses } from "@/app/lib/api/response";
 import {
   GOOGLE_SHEETS_CLIENT_ID,

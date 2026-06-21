@@ -4,21 +4,26 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { LockIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { shouldRenderEnterpriseSection } from "@/lib/brand-color";
 import { UpgradePrompt } from "@/modules/ui/components/upgrade-prompt";
 
 interface TargetingLockedCardProps {
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   workspaceId: string;
   enterpriseLicenseRequestFormUrl: string;
 }
 
 export const TargetingLockedCard = ({
-  isFormbricksCloud,
+  isSalamRubyCloud,
   workspaceId,
   enterpriseLicenseRequestFormUrl,
 }: TargetingLockedCardProps) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
+
+  if (!shouldRenderEnterpriseSection(false)) {
+    return null;
+  }
 
   const workspaceBasePath = `/workspaces/${workspaceId}`;
 
@@ -51,16 +56,16 @@ export const TargetingLockedCard = ({
             feature="targeting"
             buttons={[
               {
-                text: isFormbricksCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
-                href: isFormbricksCloud
+                text: isSalamRubyCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                href: isSalamRubyCloud
                   ? `${workspaceBasePath}/settings/organization/billing`
                   : enterpriseLicenseRequestFormUrl,
               },
               {
                 text: t("common.learn_more"),
-                href: isFormbricksCloud
+                href: isSalamRubyCloud
                   ? `${workspaceBasePath}/settings/organization/billing`
-                  : "https://formbricks.com/learn-more-self-hosting-license",
+                  : "https://salamruby.com/learn-more-self-hosting-license",
               },
             ]}
           />

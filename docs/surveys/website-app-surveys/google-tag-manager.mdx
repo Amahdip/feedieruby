@@ -1,14 +1,14 @@
 ---
 title: "Google Tag Manager"
-description: "Deploy Formbricks surveys through GTM without modifying your website code."
+description: "Deploy SalamRuby surveys through GTM without modifying your website code."
 icon: "tags"
 ---
 
 ## Prerequisites
 
 - [Google Tag Manager](https://tagmanager.google.com/) installed on your website
-- Your Formbricks **Workspace ID** (Settings > Connect Your App)
-- Your **App URL**: `https://app.formbricks.com` (or your self-hosted URL)
+- Your SalamRuby **Workspace ID** (Settings > Connect Your App)
+- Your **App URL**: `https://app.salamruby.com` (or your self-hosted URL)
 
 <Note>
  Use PUBLIC_URL for multi-domain setups, WEBAPP_URL for single-domain setups.
@@ -18,7 +18,7 @@ icon: "tags"
 
 <Steps>
   <Step title="Create a Custom HTML tag in GTM">
-    1. Create a new tag with preferred name e.g. "Formbricks Intercept Surveys"
+    1. Create a new tag with preferred name e.g. "SalamRuby Intercept Surveys"
     2. Tag Type: Custom HTML
     3. Paste the code from Step 2. Make sure to replace `<your-workspace-id>` and if you self-host, replace `<your-app-url>`
   </Step>
@@ -28,14 +28,14 @@ icon: "tags"
 ```html
 <script type="text/javascript">
 !function(){
-    var appUrl = "https://app.formbricks.com"; // REPLACE ONLY IF YOUR SELF-HOST
+    var appUrl = "https://app.salamruby.com"; // REPLACE ONLY IF YOUR SELF-HOST
     var workspaceId = "<your-workspace-id>"; // REPLACE
     var t=document.createElement("script");
     t.type="text/javascript";
     t.async=!0;
-    t.src=appUrl+"/js/formbricks.umd.cjs";
+    t.src=appUrl+"/js/salamruby.umd.cjs";
     t.onload=function(){
-        window.formbricks && window.formbricks.setup({
+        window.salamruby && window.salamruby.setup({
             workspaceId: workspaceId,
             appUrl: appUrl
         });
@@ -60,7 +60,7 @@ icon: "tags"
   <Step title="Test">
     1. Use GTM Preview mode
     2. Verify the tag fires
-    3. Add `?formbricksDebug=true` to the URL to see test logs in browser console (see [Debugging Mode](/xm-and-surveys/surveys/website-app-surveys/framework-guides#debugging-formbricks-integration) for more details)
+    3. Add `?salamrubyDebug=true` to the URL to see test logs in browser console (see [Debugging Mode](/xm-and-surveys/surveys/website-app-surveys/framework-guides#debugging-salamruby-integration) for more details)
   </Step>
 </Steps>
 
@@ -70,7 +70,7 @@ icon: "tags"
 Identify users to enable targeting and attributes. Learn more about [user identification](/xm-and-surveys/surveys/website-app-surveys/user-identification).
 
 <Note>
-  User identification is part of the Formbricks [Enterprise Edition](/self-hosting/advanced/license). 
+  User identification is part of the SalamRuby [Enterprise Edition](/self-hosting/advanced/license). 
 </Note>
 
 <Steps>
@@ -87,22 +87,22 @@ Identify users to enable targeting and attributes. Learn more about [user identi
   </Step>
 
   <Step title="Create identification tag">
-    New Custom HTML tag named "Formbricks - User":
+    New Custom HTML tag named "SalamRuby - User":
 
 ```html
 <script>
 (function() {
     var check = setInterval(function() {
-        if (window.formbricks && window.formbricks.setUserId) {
+        if (window.salamruby && window.salamruby.setUserId) {
             clearInterval(check);
             var userId = {{User ID}};
             if (userId) {
-                window.formbricks.setUserId(userId);
+                window.salamruby.setUserId(userId);
                 var attrs = {};
                 if ({{User Email}}) attrs.email = {{User Email}};
                 if ({{User Plan}}) attrs.plan = {{User Plan}};
                 if (Object.keys(attrs).length) {
-                    window.formbricks.setAttributes(attrs);
+                    window.salamruby.setAttributes(attrs);
                 }
             }
         }
@@ -118,7 +118,7 @@ Identify users to enable targeting and attributes. Learn more about [user identi
     1. Create a custom event trigger in GTM
     2. Trigger Type: Custom Event
     3. Event name: `user-login` (or your preferred event name)
-    4. Attach this trigger to your "Formbricks - User" tag
+    4. Attach this trigger to your "SalamRuby - User" tag
     5. Save and publish
 
     ![User Login Trigger](/images/xm-and-surveys/surveys/website-app-surveys/google-tag-manager/user-login-trigger.webp)
@@ -141,8 +141,8 @@ window.dataLayer.push({
 ## Track Custom Events
 
 <Steps>
-  <Step title="Create code action in Formbricks">
-    Add code action via Formbricks UI
+  <Step title="Create code action in SalamRuby">
+    Add code action via SalamRuby UI
 
     ![Add a code action to open source in app survey](/images/xm-and-surveys/surveys/website-app-surveys/actions/code-action.webp "Add a code action to open source in app survey")
   </Step>
@@ -164,8 +164,8 @@ window.dataLayer.push({
 
 ```html
 <script>
-if (window.formbricks && window.formbricks.track) {
-    window.formbricks.track({{Event Name}});
+if (window.salamruby && window.salamruby.track) {
+    window.salamruby.track({{Event Name}});
 }
 </script>
 ```
@@ -200,7 +200,7 @@ window.dataLayer.push({
 
 **Surveys not showing?**
 - Use GTM Preview mode to check tag firing
-- Add `?formbricksDebug=true` to your URL
+- Add `?salamrubyDebug=true` to your URL
 - Check browser console for errors
 - Wait 1 minute for the Server Cache to refresh
 
@@ -210,13 +210,13 @@ window.dataLayer.push({
 - Ensure user tag fires after initialization
 
 **Events not tracking?**
-- Confirm `window.formbricks` exists before calling track
-- Match event names exactly with Formbricks action names
-- Check timing - Formbricks must be initialized first
+- Confirm `window.salamruby` exists before calling track
+- Match event names exactly with SalamRuby action names
+- Check timing - SalamRuby must be initialized first
 
 ## Need Help?
 
-- [GitHub Discussions](https://github.com/formbricks/formbricks/discussions)
+- [GitHub Discussions](https://github.com/salamruby/salamruby/discussions)
 - [Framework Guides](/xm-and-surveys/surveys/website-app-surveys/framework-guides)
 - [Actions](/xm-and-surveys/surveys/website-app-surveys/actions)
 - [User Identification](/xm-and-surveys/surveys/website-app-surveys/user-identification)

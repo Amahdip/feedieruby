@@ -1,7 +1,7 @@
 import { type TFunction } from "i18next";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/constants";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/constants";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { isI18nObject } from "@/lib/i18n/utils";
 import type { TranslatableString, TranslationProgress } from "./types";
 

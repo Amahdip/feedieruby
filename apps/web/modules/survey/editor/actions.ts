@@ -2,10 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { ZActionClassInput } from "@formbricks/types/action-classes";
-import { ZId } from "@formbricks/types/common";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TSurvey, TSurveyVariable, ZSurvey } from "@formbricks/types/surveys/types";
+import { ZActionClassInput } from "@salamruby/types/action-classes";
+import { ZId } from "@salamruby/types/common";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TSurvey, TSurveyVariable, ZSurvey } from "@salamruby/types/surveys/types";
 import { POSTHOG_KEY, UNSPLASH_ACCESS_KEY, UNSPLASH_ALLOWED_DOMAINS } from "@/lib/constants";
 import { capturePostHogEvent } from "@/lib/posthog";
 import { actionClient, authenticatedActionClient } from "@/lib/utils/action-client";
@@ -419,7 +419,7 @@ export const getImagesFromUnsplashAction = actionClient
           id: result.id,
           alt_description: result.alt_description,
           urls: {
-            regularWithAttribution: `${result.urls.regular}&dpr=2&authorLink=${authorLink}&authorName=${authorName}&utm_source=formbricks&utm_medium=referral`,
+            regularWithAttribution: `${result.urls.regular}&dpr=2&authorLink=${authorLink}&authorName=${authorName}&utm_source=salamruby&utm_medium=referral`,
             download: result.links.download_location,
           },
         };

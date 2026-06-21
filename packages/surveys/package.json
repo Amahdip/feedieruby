@@ -1,14 +1,14 @@
 {
-  "name": "@formbricks/surveys",
+  "name": "@salamruby/surveys",
   "license": "MIT",
   "version": "1.0.0",
   "private": true,
-  "description": "Formbricks-surveys is a helper library to embed surveys into your application.",
-  "homepage": "https://formbricks.com",
+  "description": "SalamRuby-surveys is a helper library to embed surveys into your application.",
+  "homepage": "https://salamruby.com",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/formbricks/formbricks"
+    "url": "https://github.com/salamruby/salamruby"
   },
   "sideEffects": false,
   "source": "src/index.ts",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@calcom/embed-snippet": "1.3.3",
-    "@formbricks/survey-ui": "workspace:*",
+    "@salamruby/survey-ui": "workspace:*",
     "i18next": "25.8.20",
     "i18next-icu": "2.4.3",
     "isomorphic-dompurify": "3.9.0",
@@ -54,10 +54,10 @@
     "tailwind-merge": "3.5.0"
   },
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*",
-    "@formbricks/eslint-config": "workspace:*",
-    "@formbricks/i18n-utils": "workspace:*",
-    "@formbricks/types": "workspace:*",
+    "@salamruby/config-typescript": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
+    "@salamruby/i18n-utils": "workspace:*",
+    "@salamruby/types": "workspace:*",
     "@preact/preset-vite": "2.10.5",
     "@tailwindcss/postcss": "4.2.4",
     "@testing-library/preact": "3.2.4",

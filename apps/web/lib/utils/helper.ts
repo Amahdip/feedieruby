@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   getActionClass,
   getApiKey,

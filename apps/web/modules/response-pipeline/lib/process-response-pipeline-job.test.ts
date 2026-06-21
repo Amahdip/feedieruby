@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import type { TResponsePipelineJobData } from "@formbricks/jobs";
+import type { TResponsePipelineJobData } from "@salamruby/jobs";
 import { FollowUpSendError } from "@/modules/survey/follow-ups/types/follow-up";
 import { processResponsePipelineJob } from "./process-response-pipeline-job";
 
@@ -52,7 +52,7 @@ const {
   };
 });
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     organization: {
       findFirst: mockPrismaOrganizationFindFirst,
@@ -70,7 +70,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/jobs", () => ({
+vi.mock("@salamruby/jobs", () => ({
   UnrecoverableError: class UnrecoverableError extends Error {
     constructor(message: string) {
       super(message);
@@ -130,7 +130,7 @@ vi.mock("@/modules/survey/follow-ups/lib/follow-ups", () => ({
   sendFollowUpsForResponse: mockSendFollowUpsForResponse,
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     debug: vi.fn(),
     error: mockLoggerError,

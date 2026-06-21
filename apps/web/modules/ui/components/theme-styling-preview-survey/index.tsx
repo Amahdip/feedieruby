@@ -3,8 +3,8 @@
 import { MotionConfig, Variants, motion } from "framer-motion";
 import { Fragment, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurvey, TSurveyType } from "@formbricks/types/surveys/types";
-import { TWorkspace } from "@formbricks/types/workspace";
+import { TSurvey, TSurveyType } from "@salamruby/types/surveys/types";
+import { TWorkspace } from "@salamruby/types/workspace";
 import { cn } from "@/lib/cn";
 import { toJsWorkspaceStateSurvey } from "@/lib/survey/client-utils";
 import { ClientLogo } from "@/modules/ui/components/client-logo";

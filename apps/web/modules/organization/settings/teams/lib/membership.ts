@@ -1,11 +1,11 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZOptionalNumber, ZString } from "@formbricks/types/common";
-import { DatabaseError, UnknownError } from "@formbricks/types/errors";
-import { TMember, TMembership } from "@formbricks/types/memberships";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZOptionalNumber, ZString } from "@salamruby/types/common";
+import { DatabaseError, UnknownError } from "@salamruby/types/errors";
+import { TMember, TMembership } from "@salamruby/types/memberships";
 import { ITEMS_PER_PAGE } from "@/lib/constants";
 import { validateInputs } from "@/lib/utils/validate";
 import { TOrganizationMember } from "@/modules/ee/teams/team-list/types/team";

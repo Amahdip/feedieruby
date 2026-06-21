@@ -25,7 +25,7 @@ vi.mock("@/lib/utils/action-client", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     warn: vi.fn(),

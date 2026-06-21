@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TResponseUpdateInput } from "@formbricks/types/responses";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TResponseUpdateInput } from "@salamruby/types/responses";
 import { updateResponse } from "./service";
 import { calculateTtcTotal } from "./utils";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     response: {
       findUnique: vi.fn(),

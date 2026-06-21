@@ -2,7 +2,7 @@
 
 import { type JSX, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TActionClass } from "@formbricks/types/action-classes";
+import { TActionClass } from "@salamruby/types/action-classes";
 import { ActionDetailModal } from "./ActionDetailModal";
 
 interface ActionClassesTableProps {

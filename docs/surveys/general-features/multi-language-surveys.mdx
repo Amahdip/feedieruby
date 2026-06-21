@@ -14,7 +14,7 @@ How to deliver a specific language depends on the survey type (app or link surve
   width="560"
   height="315"
   src="https://www.youtube-nocookie.com/embed/Vol5zjYIoos?si=bdP2y3uk8-xR0uSD&controls=0"
-  title="Formbricks Multi-language Surveys"
+  title="SalamRuby Multi-language Surveys"
   frameborder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
@@ -78,15 +78,15 @@ How to deliver a specific language depends on the survey type (app or link surve
 
 <Steps>
   <Step title="Set Up Language for Users">
-    After you setup the Formbricks SDK for your user, you can call the `setLanguage` function with the language code. This can be either the ISO identifier or the Alias you set when creating the language. The `language` attribute makes sure that this user only sees surveys with a translation in this specific language available.
+    After you setup the SalamRuby SDK for your user, you can call the `setLanguage` function with the language code. This can be either the ISO identifier or the Alias you set when creating the language. The `language` attribute makes sure that this user only sees surveys with a translation in this specific language available.
 
     ```js
-    Formbricks.setup({
+    SalamRuby.setup({
       workspaceId: "<workspace-id>",
       appUrl: "<app-url>", // use PUBLIC_URL if you are using multi-domain setup, otherwise use WEBAPP_URL
     });
 
-    Formbricks.setLanguage("de"); // ISO identifier or Alias set when creating language
+    SalamRuby.setLanguage("de"); // ISO identifier or Alias set when creating language
     ```
 
     <Note>
@@ -118,11 +118,11 @@ For link surveys, the translation delivery is dependent on the `lang` URL parame
 
     Here are two examples:
 
-    - English: [https://app.Formbricks.com/s/clptfos2i1pj516pvhxqyu3bn?lang=en](https://app.Formbricks.com/s/clptfos2i1pj516pvhxqyu3bn?lang=en)
+    - English: [https://app.SalamRuby.com/s/clptfos2i1pj516pvhxqyu3bn?lang=en](https://app.SalamRuby.com/s/clptfos2i1pj516pvhxqyu3bn?lang=en)
 
-    - German: [https://app.Formbricks.com/s/clptfos2i1pj516pvhxqyu3bn?lang=de](https://app.Formbricks.com/s/clptfos2i1pj516pvhxqyu3bn?lang=de)
+    - German: [https://app.SalamRuby.com/s/clptfos2i1pj516pvhxqyu3bn?lang=de](https://app.SalamRuby.com/s/clptfos2i1pj516pvhxqyu3bn?lang=de)
 
-    Without the `lang` parameter, Formbricks will show the survey in the default language you have set.
+    Without the `lang` parameter, SalamRuby will show the survey in the default language you have set.
   </Step>
 
   <Step title="Start Collecting Responses">
@@ -142,7 +142,7 @@ Translating every question, option, and label by hand can take a while. If your 
   </Step>
 
   <Step title="Click 'Translate with AI'">
-    The button is enabled when there are empty fields in the selected target language. Formbricks translates all empty headlines, descriptions, choices, and button labels from the default language into the target language.
+    The button is enabled when there are empty fields in the selected target language. SalamRuby translates all empty headlines, descriptions, choices, and button labels from the default language into the target language.
   </Step>
 
   <Step title="Review and edit">
@@ -158,7 +158,7 @@ Translating every question, option, and label by hand can take a while. If your 
 
 ## RTL Language Support
 
-Formbricks fully supports Right-to-Left (RTL) languages such as Arabic, Hebrew, Persian, and Urdu. When you add an RTL language to your survey, the survey interface automatically adjusts to display content from right to left.
+SalamRuby fully supports Right-to-Left (RTL) languages such as Arabic, Hebrew, Persian, and Urdu. When you add an RTL language to your survey, the survey interface automatically adjusts to display content from right to left.
 
 ### How RTL Support Works
 
@@ -187,4 +187,4 @@ Formbricks fully supports Right-to-Left (RTL) languages such as Arabic, Hebrew, 
 
 ---
 
-**Need help?** [Reach out in Github Discussions](https://github.com/formbricks/formbricks/discussions)
+**Need help?** [Reach out in Github Discussions](https://github.com/salamruby/salamruby/discussions)

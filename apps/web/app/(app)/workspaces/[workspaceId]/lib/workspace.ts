@@ -1,9 +1,9 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZId } from "@formbricks/types/common";
-import { DatabaseError } from "@formbricks/types/errors";
-import { TMembership, ZMembership } from "@formbricks/types/memberships";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZId } from "@salamruby/types/common";
+import { DatabaseError } from "@salamruby/types/errors";
+import { TMembership, ZMembership } from "@salamruby/types/memberships";
 import { validateInputs } from "@/lib/utils/validate";
 
 const findWorkspacesForMembership = async (

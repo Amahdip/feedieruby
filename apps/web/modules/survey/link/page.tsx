@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { findMatchingLocale } from "@/lib/utils/locale";
 import { getResponseCountBySurveyId } from "@/modules/survey/lib/response";
 import { SurveyInactive } from "@/modules/survey/link/components/survey-inactive";

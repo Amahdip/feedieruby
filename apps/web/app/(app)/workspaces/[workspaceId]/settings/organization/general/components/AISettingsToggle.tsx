@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
-import { TOrganization } from "@formbricks/types/organizations";
+import { TOrganizationRole } from "@salamruby/types/memberships";
+import { TOrganization } from "@salamruby/types/organizations";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { updateOrganizationAISettingsAction } from "@/app/(app)/workspaces/[workspaceId]/settings/organization/general/actions";
 import { getDisplayedOrganizationAISettingValue, getOrganizationAIEnablementState } from "@/lib/ai/utils";
@@ -20,7 +20,7 @@ interface AISettingsToggleProps {
   membershipRole?: TOrganizationRole;
   isInstanceAIConfigured: boolean;
   hasAIPermission: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   enterpriseLicenseRequestFormUrl: string;
 }
 
@@ -29,7 +29,7 @@ export const AISettingsToggle = ({
   membershipRole,
   isInstanceAIConfigured,
   hasAIPermission,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   enterpriseLicenseRequestFormUrl,
 }: Readonly<AISettingsToggleProps>) => {
   const { workspace } = useWorkspace();
@@ -79,14 +79,14 @@ export const AISettingsToggle = ({
 
   const upgradeButtons: [ModalButton, ModalButton] = [
     {
-      text: isFormbricksCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
-      href: isFormbricksCloud
+      text: isSalamRubyCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
+      href: isSalamRubyCloud
         ? `${workspaceBasePath}/settings/organization/billing`
         : enterpriseLicenseRequestFormUrl,
     },
     {
       text: t("common.learn_more"),
-      href: "https://formbricks.com/docs/platform/features/ai-features",
+      href: "https://salamruby.com/docs/platform/features/ai-features",
     },
   ];
 

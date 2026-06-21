@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import type { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import type { TSurvey } from "@salamruby/types/surveys/types";
 import { getOrganizationByWorkspaceId } from "@/lib/organization/service";
 import { getExternalUrlsPermission } from "@/modules/survey/lib/permission";
 import {
@@ -17,7 +17,7 @@ import { V3SurveyWritePermissionError } from "./write-permissions";
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     language: {
       upsert: vi.fn(),
@@ -49,7 +49,7 @@ vi.mock("@/modules/survey/scheduling/lib/survey-scheduling", () => ({
   reconcileDueSurveySchedules: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     withContext: vi.fn(() => ({
       error: vi.fn(),

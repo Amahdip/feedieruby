@@ -90,32 +90,32 @@ describe("Translation Scanner", () => {
 
     test("preserves URLs with // in them", () => {
       const content = `
-        const link = "https://formbricks.com";
+        const link = "https://salamruby.com";
         const link2 = "http://example.com";
         const text = t("valid.key");
       `;
       const result = stripComments(content);
-      expect(result).toContain("https://formbricks.com");
+      expect(result).toContain("https://salamruby.com");
       expect(result).toContain("http://example.com");
       expect(result).toContain('t("valid.key")');
     });
 
     test("preserves translation keys on same line as URLs", () => {
-      const content = `<Link href="https://formbricks.com">{t("s.create_your_own")}</Link>`;
+      const content = `<Link href="https://salamruby.com">{t("s.create_your_own")}</Link>`;
       const result = stripComments(content);
       expect(result).toContain('t("s.create_your_own")');
-      expect(result).toContain("https://formbricks.com");
+      expect(result).toContain("https://salamruby.com");
     });
 
     test("removes actual comments but preserves URLs", () => {
       const content = `
-        const url = "https://formbricks.com";
+        const url = "https://salamruby.com";
         // This is a real comment with t("comment.key")
         const text = t("valid.key");
         const api = "http://api.example.com"; // Comment after URL
       `;
       const result = stripComments(content);
-      expect(result).toContain("https://formbricks.com");
+      expect(result).toContain("https://salamruby.com");
       expect(result).toContain("http://api.example.com");
       expect(result).toContain('t("valid.key")');
       expect(result).not.toContain('t("comment.key")');
@@ -265,7 +265,7 @@ describe("Translation Scanner", () => {
     });
 
     test("extracts keys from lines containing URLs", () => {
-      const content = `<Link href="https://formbricks.com">{t("s.create_your_own")}</Link>`;
+      const content = `<Link href="https://salamruby.com">{t("s.create_your_own")}</Link>`;
       const keys = extractKeysFromContent(content);
       expect(keys).toContain("s.create_your_own");
       expect(keys).toHaveLength(1);
@@ -613,7 +613,7 @@ describe("Translation Scanner", () => {
               <Trans i18nKey="page.footer" />
               <Trans i18nKey={'page.header'} />
               <Trans i18nKey={"page.sidebar"} />
-              <Link href="https://formbricks.com">{t("page.link")}</Link>
+              <Link href="https://salamruby.com">{t("page.link")}</Link>
               {/* Inline comment t("inline.ignored") */}
             </div>
           );

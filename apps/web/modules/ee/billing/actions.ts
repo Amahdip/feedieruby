@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { ZCloudBillingInterval } from "@formbricks/types/organizations";
+import { ZId } from "@salamruby/types/common";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { ZCloudBillingInterval } from "@salamruby/types/organizations";
 import { WEBAPP_URL } from "@/lib/constants";
 import { getOrganization } from "@/lib/organization/service";
 import { capturePostHogEvent } from "@/lib/posthog";

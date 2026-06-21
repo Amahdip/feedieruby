@@ -1,8 +1,8 @@
 import "server-only";
 import { NextRequest } from "next/server";
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import { authenticateApiKeyFromHeaders, getApiKeyFromHeaders } from "@/modules/api/lib/api-key-auth";
 import { getProxySession } from "@/modules/auth/lib/proxy-session";
 

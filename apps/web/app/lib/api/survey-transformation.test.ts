@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { InvalidInputError } from "@formbricks/types/errors";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyCTAElement } from "@formbricks/types/surveys/elements";
-import { TSurveyQuestion, TSurveyQuestionTypeEnum } from "@formbricks/types/surveys/types";
+import { InvalidInputError } from "@salamruby/types/errors";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyCTAElement } from "@salamruby/types/surveys/elements";
+import { TSurveyQuestion, TSurveyQuestionTypeEnum } from "@salamruby/types/surveys/types";
 import {
   transformBlocksToQuestions,
   transformQuestionsToBlocks,

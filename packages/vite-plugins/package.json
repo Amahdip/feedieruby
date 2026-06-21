@@ -1,13 +1,13 @@
 {
-  "name": "@formbricks/vite-plugins",
+  "name": "@salamruby/vite-plugins",
   "license": "MIT",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "homepage": "https://formbricks.com",
+  "homepage": "https://salamruby.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/formbricks/formbricks"
+    "url": "https://github.com/salamruby/salamruby"
   },
   "sideEffects": false,
   "scripts": {
@@ -16,8 +16,8 @@
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx"
   },
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*",
-    "@formbricks/eslint-config": "workspace:*",
+    "@salamruby/config-typescript": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
     "vite": "7.3.3"
   }
 }

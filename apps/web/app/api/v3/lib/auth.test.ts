@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { ApiKeyPermission } from "@formbricks/database/prisma";
-import { AuthorizationError } from "@formbricks/types/errors";
+import { ApiKeyPermission } from "@salamruby/database/prisma";
+import { AuthorizationError } from "@salamruby/types/errors";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";
 import { getOrganizationIdFromWorkspaceId } from "@/lib/utils/helper";
 import { getWorkspace } from "@/lib/workspace/service";
 import { requireSessionWorkspaceAccess, requireV3WorkspaceAccess } from "./auth";
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     withContext: vi.fn(() => ({
       warn: vi.fn(),

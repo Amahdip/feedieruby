@@ -1,9 +1,10 @@
 import { redirectBillingRoleFromRestrictedSettings } from "@/app/(app)/workspaces/[workspaceId]/settings/lib/redirect-billing-role";
 import { isInstanceAIConfigured } from "@/lib/ai/service";
+import { APP_VERSION_I18N_KEY, getDisplayAppVersion, shouldRenderEnterpriseSection } from "@/lib/brand-color";
 import {
   ENTERPRISE_LICENSE_REQUEST_FORM_URL,
   FB_LOGO_URL,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   IS_STORAGE_CONFIGURED,
 } from "@/lib/constants";
 import { getUser } from "@/lib/user/service";
@@ -48,6 +49,7 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
   const currentUserRole = currentUserMembership?.role;
 
   const isOwnerOrManager = isManager || isOwner;
+  const displayAppVersion = getDisplayAppVersion(packageJson.version);
 
   return (
     <PageContentWrapper>
@@ -59,35 +61,39 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
           </Alert>
         </div>
       )}
-      {!IS_FORMBRICKS_CLOUD && <SecurityListTip />}
+      {!IS_SALAMRUBY_CLOUD && <SecurityListTip />}
       <SettingsCard
         title={t("workspace.settings.general.organization_name")}
         description={t("workspace.settings.general.organization_name_description")}>
         <EditOrganizationNameForm organization={organization} membershipRole={currentUserMembership?.role} />
       </SettingsCard>
-      <SettingsCard
-        title={t("workspace.settings.general.ai_enabled")}
-        description={t("workspace.settings.general.ai_enabled_description")}>
-        <AISettingsToggle
+      {shouldRenderEnterpriseSection(hasAIPermission) && (
+        <SettingsCard
+          title={t("workspace.settings.general.ai_enabled")}
+          description={t("workspace.settings.general.ai_enabled_description")}>
+          <AISettingsToggle
+            organization={organization}
+            membershipRole={currentUserMembership?.role}
+            isInstanceAIConfigured={isInstanceAIConfigured()}
+            hasAIPermission={hasAIPermission}
+            isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
+            enterpriseLicenseRequestFormUrl={ENTERPRISE_LICENSE_REQUEST_FORM_URL}
+          />
+        </SettingsCard>
+      )}
+      {shouldRenderEnterpriseSection(hasWhiteLabelPermission) && (
+        <EmailCustomizationSettings
           organization={organization}
-          membershipRole={currentUserMembership?.role}
-          isInstanceAIConfigured={isInstanceAIConfigured()}
-          hasAIPermission={hasAIPermission}
-          isFormbricksCloud={IS_FORMBRICKS_CLOUD}
+          hasWhiteLabelPermission={hasWhiteLabelPermission}
+          workspaceId={params.workspaceId}
+          isReadOnly={!isOwnerOrManager}
+          isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
+          fbLogoUrl={FB_LOGO_URL}
+          user={user}
+          isStorageConfigured={IS_STORAGE_CONFIGURED}
           enterpriseLicenseRequestFormUrl={ENTERPRISE_LICENSE_REQUEST_FORM_URL}
         />
-      </SettingsCard>
-      <EmailCustomizationSettings
-        organization={organization}
-        hasWhiteLabelPermission={hasWhiteLabelPermission}
-        workspaceId={params.workspaceId}
-        isReadOnly={!isOwnerOrManager}
-        isFormbricksCloud={IS_FORMBRICKS_CLOUD}
-        fbLogoUrl={FB_LOGO_URL}
-        user={user}
-        isStorageConfigured={IS_STORAGE_CONFIGURED}
-        enterpriseLicenseRequestFormUrl={ENTERPRISE_LICENSE_REQUEST_FORM_URL}
-      />
+      )}
       {isMultiOrgEnabled && (
         <>
           <SettingsCard
@@ -105,7 +111,9 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
 
       <div className="space-y-2">
         <IdBadge id={organization.id} label={t("common.organization_id")} variant="column" />
-        <IdBadge id={packageJson.version} label={t("common.formbricks_version")} variant="column" />
+        {displayAppVersion && (
+          <IdBadge id={displayAppVersion} label={t(APP_VERSION_I18N_KEY)} variant="column" />
+        )}
       </div>
     </PageContentWrapper>
   );

@@ -1,10 +1,10 @@
 import "server-only";
 import type { Account } from "next-auth";
-import { createCacheKey } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import type { IdentityProvider } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { AuthorizationError, InvalidInputError } from "@formbricks/types/errors";
+import { createCacheKey } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import type { IdentityProvider } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { AuthorizationError, InvalidInputError } from "@salamruby/types/errors";
 import { cache } from "@/lib/cache";
 import { SAML_PRODUCT, SAML_TENANT, WEBAPP_URL } from "@/lib/constants";
 import { createAccountDeletionSsoReauthIntent, verifyAccountDeletionSsoReauthIntent } from "@/lib/jwt";

@@ -1,16 +1,16 @@
 ---
 title: "One-Click Setup"
-description: "How to set up Formbricks instance with a one-click script"
+description: "How to set up SalamRuby instance with a one-click script"
 icon: "rocket"
 ---
 
 <Note>This only works with an Ubuntu machine, so ensure the underlying OS is verified beforehand!</Note>
 
-If you’re looking to quickly set up a production instance of Formbricks on an Ubuntu server, this guide is for you. Using a convenient shell script, you can install everything—including Docker, Postgres DB, and an SSL certificate—in just a few steps. The script takes care of all the dependencies and configuration for your server, making the process smooth and simple.
+If you’re looking to quickly set up a production instance of SalamRuby on an Ubuntu server, this guide is for you. Using a convenient shell script, you can install everything—including Docker, Postgres DB, and an SSL certificate—in just a few steps. The script takes care of all the dependencies and configuration for your server, making the process smooth and simple.
 
 <Note>
   This setup uses **Traefik** as a **reverse proxy**, essential for directing incoming traffic to the correct
-  container and enabling secure internet access to Formbricks. Traefik is chosen for its simplicity and
+  container and enabling secure internet access to SalamRuby. Traefik is chosen for its simplicity and
   automatic SSL management via Let’s Encrypt.
 </Note>
 
@@ -18,12 +18,12 @@ If you’re looking to quickly set up a production instance of Formbricks on an 
   The bundled RustFS option in this one-click setup is designed for convenience on a single server. It is a
   good fit for small-scale or low-complexity self-hosted deployments, but it is not the ideal RustFS
   architecture for high-availability or larger production environments. For stricter production requirements,
-  use external object storage or run a dedicated RustFS deployment separately from the Formbricks one-click
+  use external object storage or run a dedicated RustFS deployment separately from the SalamRuby one-click
   stack.
 </Warning>
 
 <Note>
-  When bundled RustFS is enabled, the installer stores the generated RustFS credentials in `./formbricks/.env`
+  When bundled RustFS is enabled, the installer stores the generated RustFS credentials in `./salamruby/.env`
   and restricts the file to `0600`. Keep that file private, include it in your server backup plan, and avoid
   checking it into source control or copying it to shared locations.
 </Note>
@@ -49,20 +49,20 @@ For other operating systems or a more customized installation, please refer to t
 Run this command in your terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/formbricks/formbricks/stable/docker/formbricks.sh -o formbricks.sh && chmod +x formbricks.sh && ./formbricks.sh install
+curl -fsSL https://raw.githubusercontent.com/salamruby/salamruby/stable/docker/salamruby.sh -o salamruby.sh && chmod +x salamruby.sh && ./salamruby.sh install
 ```
 
 <Info>
-  The current v5 one-click stack is based on the production Docker Compose file and includes Formbricks Hub
-  and Cube as part of the baseline (Cube configuration lives under `formbricks/cube/`). Ensure your generated
-  `formbricks/docker-compose.yml` contains a non-empty `HUB_API_KEY` and that `formbricks/.env` contains
+  The current v5 one-click stack is based on the production Docker Compose file and includes SalamRuby Hub
+  and Cube as part of the baseline (Cube configuration lives under `salamruby/cube/`). Ensure your generated
+  `salamruby/docker-compose.yml` contains a non-empty `HUB_API_KEY` and that `salamruby/.env` contains
   `CUBEJS_API_SECRET` before treating the v5 stack as ready. If either value is missing after the script
   finishes, add it manually. `HUB_API_URL` should normally stay at `http://hub:8080`.
 </Info>
 
 <Info>
-  The v5 one-click Traefik setup also exposes Hub-backed FeedbackRecords through Formbricks at
-  `/api/v3/feedbackRecords` and `/v1/feedback-records`. Traefik calls the internal Formbricks gateway auth
+  The v5 one-click Traefik setup also exposes Hub-backed FeedbackRecords through SalamRuby at
+  `/api/v3/feedbackRecords` and `/v1/feedback-records`. Traefik calls the internal SalamRuby gateway auth
   endpoint first, then forwards allowed requests to Hub with the generated `HUB_API_KEY`. Browser callers should
   request short-lived gateway tokens from `/api/v3/gateway/token` with `{ "service": "feedbackRecords" }`.
 </Info>
@@ -75,10 +75,10 @@ During installation, the script will prompt you to provide some details:
   If Docker GPG keys already exist, the script will ask whether you want to overwrite them.
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -88,13 +88,13 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N)
 ```
 
 - **Domain Name**:
-  Enter the domain name where you’ll host Formbricks. The domain will be used to generate an SSL certificate. Do not include the protocol (http/https).
+  Enter the domain name where you’ll host SalamRuby. The domain will be used to generate an SSL certificate. Do not include the protocol (http/https).
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -106,8 +106,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 ```
 
@@ -115,10 +115,10 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
   The script will ask if you’d like to create an HTTPS certificate for your domain. Enter `Y` to proceed (highly recommended for secure access).
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -130,8 +130,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 my.hosted.url.com
 🔗 Do you want us to set up an HTTPS certificate for you? [Y/n]
@@ -140,10 +140,10 @@ my.hosted.url.com
 - **DNS Setup Prompt**: Ensure that your domain's DNS is correctly configured and ports 80 and 443 are open. Confirm this by entering `Y`. This step is crucial for proper SSL certificate issuance and secure server access.
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -155,8 +155,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 my.hosted.url.com
 🔗 Do you want us to set up an HTTPS certificate for you? [Y/n]
@@ -168,10 +168,10 @@ Y
   Provide an email address to register the SSL certificate. Notifications regarding the certificate will be sent to this address.
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -183,8 +183,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 my.hosted.url.com
 🔗 Do you want us to set up an HTTPS certificate for you? [Y/n]
@@ -198,10 +198,10 @@ Y
   Enabling HTTP Strict Transport Security (HSTS) ensures all communication with your server is encrypted. It’s a recommended best practice. Enter `Y` to enforce HTTPS.
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -213,8 +213,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 my.hosted.url.com
 🔗 Do you want us to set up an HTTPS certificate for you? [Y/n]
@@ -222,17 +222,17 @@ Y
 🔗 Please make sure that the domain points to the server's IP address and that ports 80 & 443 are open in your server's firewall. Is everything set up? [Y/n]
 Y
 💡 Please enter your email address for the SSL certificate:
-docs@formbricks.com
+docs@salamruby.com
 🔗 Do you want to enforce HTTPS (HSTS)? [Y/n]
 ```
 
-- **Email Service Setup Prompt**: The script will ask if you want to set up the email service. Enter `Y` to proceed.(default is `N`). You can skip this step if you don't want to set up the email service. You will still be able to use Formbricks without setting up the email service.
+- **Email Service Setup Prompt**: The script will ask if you want to set up the email service. Enter `Y` to proceed.(default is `N`). You can skip this step if you don't want to set up the email service. You will still be able to use SalamRuby without setting up the email service.
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -244,8 +244,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 my.hosted.url.com
 🔗 Do you want us to set up an HTTPS certificate for you? [Y/n]
@@ -253,7 +253,7 @@ Y
 🔗 Please make sure that the domain points to the server's IP address and that ports 80 & 443 are open in your server's firewall. Is everything set up? [Y/n]
 Y
 💡 Please enter your email address for the SSL certificate:
-docs@formbricks.com
+docs@salamruby.com
 🔗 Do you want to enforce HTTPS (HSTS)? [Y/n]
 Y
 🚗 Configuring Traefik...
@@ -263,13 +263,13 @@ Y
 
 ```
 
-**That's it**! After running the command and providing the required information, visit the domain name you entered, and you should see the Formbricks home wizard!
+**That's it**! After running the command and providing the required information, visit the domain name you entered, and you should see the SalamRuby home wizard!
 
 ```
-🚀 Executing default step of installing Formbricks
-🧱 Welcome to the Formbricks Setup Script
+🚀 Executing default step of installing SalamRuby
+🧱 Welcome to the SalamRuby Setup Script
 
-🛸 Fasten your seatbelts! We're setting up your Formbricks environment on your Ubuntu 24.04 LTS server.
+🛸 Fasten your seatbelts! We're setting up your SalamRuby environment on your Ubuntu 24.04 LTS server.
 
 🧹 Time to sweep away any old Docker installations.
 🔄 Updating your package list.
@@ -281,8 +281,8 @@ File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y
 🚀 Testing your Docker installation.
 🎉 Docker is installed!
 🐳 Adding your user to the Docker group to avoid using sudo with docker commands.
-🎉 Hooray! Docker is all set and ready to go. You're now ready to run your Formbricks instance!
-📁 Created Formbricks Quickstart directory at ./formbricks.
+🎉 Hooray! Docker is all set and ready to go. You're now ready to run your SalamRuby instance!
+📁 Created SalamRuby Quickstart directory at ./salamruby.
 🔗 Please enter your domain name for the SSL certificate (🚨 do NOT enter the protocol (http/https/etc)):
 my.hosted.url.com
 🔗 Do you want us to set up an HTTPS certificate for you? [Y/n]
@@ -290,14 +290,14 @@ Y
 🔗 Please make sure that the domain points to the server's IP address and that ports 80 & 443 are open in your server's firewall. Is everything set up? [Y/n]
 Y
 💡 Please enter your email address for the SSL certificate:
-docs@formbricks.com
+docs@salamruby.com
 🔗 Do you want to enforce HTTPS (HSTS)? [Y/n]
 Y
 🚗 Configuring Traefik...
 💡 Created traefik.yaml and traefik-dynamic.yaml file.
 💡 Created acme.json file with correct permissions.
 📧 Do you want to set up the email service? You will need SMTP credentials for the same! [y/N] N
-📥 Downloading docker-compose.yml from Formbricks GitHub repository...
+📥 Downloading docker-compose.yml from SalamRuby GitHub repository...
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  6632  100  6632    0     0  24280      0 --:--:-- --:--:-- --:--:-- 24382
@@ -307,29 +307,29 @@ Y
 🚗 CRON_SECRET updated successfully!
 
 [+] Running 4/4
- ✔ Network formbricks_default         Created                                                                                                                                                    0.2s
- ✔ Container formbricks-postgres-1    Started                                                                                                                                                    1.0s
- ✔ Container formbricks-formbricks-1  Started                                                                                                                                                    1.6s
+ ✔ Network salamruby_default         Created                                                                                                                                                    0.2s
+ ✔ Container salamruby-postgres-1    Started                                                                                                                                                    1.0s
+ ✔ Container salamruby-salamruby-1  Started                                                                                                                                                    1.6s
  ✔ Container traefik                  Started                                                                                                                                                    2.8s
-🔗 To edit more variables and deeper config, go to the formbricks/docker-compose.yml, edit the file, and restart the container!
+🔗 To edit more variables and deeper config, go to the salamruby/docker-compose.yml, edit the file, and restart the container!
 🚨 Make sure you have set up the DNS records as well as inbound rules for the domain name and IP address of this instance.
 
-🎉 All done! Please setup your Formbricks instance by visiting your domain at https://my.hosted.url.com. You can check the status of Formbricks & Traefik with 'cd formbricks && sudo docker compose ps.'
+🎉 All done! Please setup your SalamRuby instance by visiting your domain at https://my.hosted.url.com. You can check the status of SalamRuby & Traefik with 'cd salamruby && sudo docker compose ps.'
 ```
 
 ## Update
 
-To update Formbricks for a minor or patch release, run:
+To update SalamRuby for a minor or patch release, run:
 
 ```
-./formbricks.sh update
+./salamruby.sh update
 ```
 
 The script pulls the latest images, stops the running containers, and starts the stack again.
 
 <Warning>
-  `./formbricks.sh update` does **not** rewrite your existing `formbricks/docker-compose.yml`. For a major
-  migration such as Formbricks 4.x to 5.0, follow the [migration guide](/self-hosting/advanced/migration#v5)
+  `./salamruby.sh update` does **not** rewrite your existing `salamruby/docker-compose.yml`. For a major
+  migration such as SalamRuby 4.x to 5.0, follow the [migration guide](/self-hosting/advanced/migration#v5)
   first, merge the current v5 Compose changes into your existing deployment, confirm `HUB_API_KEY` is set, and
   only then run the update command. If your older one-click install also uses bundled MinIO for file uploads,
   review that storage path separately before the first v5 restart; newer self-hosting updates move the bundled
@@ -338,23 +338,23 @@ The script pulls the latest images, stops the running containers, and starts the
 
 ## Stop
 
-To stop Formbricks, simply run the following command:
+To stop SalamRuby, simply run the following command:
 
 ```
-./formbricks.sh stop
+./salamruby.sh stop
 ```
 
-The script will automatically stop all the Formbricks related containers and brings the entire stack down.
+The script will automatically stop all the SalamRuby related containers and brings the entire stack down.
 
 ## Restart
 
-To restart Formbricks, simply run the following command:
+To restart SalamRuby, simply run the following command:
 
 ```
-./formbricks.sh restart
+./salamruby.sh restart
 ```
 
-The script will automatically restart all the Formbricks related containers and brings the entire stack up with the previous configuration.
+The script will automatically restart all the SalamRuby related containers and brings the entire stack up with the previous configuration.
 
 ## Cleanup RustFS init (optional)
 
@@ -365,30 +365,30 @@ configuration exists.
 If you prefer to remove the `rustfs-init` service and its references after a successful setup, run:
 
 ```
-./formbricks.sh cleanup-rustfs-init
+./salamruby.sh cleanup-rustfs-init
 ```
 
-`./formbricks.sh cleanup-minio-init` is still available as a backward-compatible alias.
+`./salamruby.sh cleanup-minio-init` is still available as a backward-compatible alias.
 
 This only removes the init job and its Compose references; it does not delete any data or affect your RustFS
 configuration.
 
 ## Uninstall
 
-To uninstall Formbricks, simply run the following command, but keep in mind that this will delete all your data!
+To uninstall SalamRuby, simply run the following command, but keep in mind that this will delete all your data!
 
 ```
-./formbricks.sh uninstall
+./salamruby.sh uninstall
 ```
 
-The script will automatically stop all the Formbricks related containers, remove the Formbricks directory, and delete the Docker network.
+The script will automatically stop all the SalamRuby related containers, remove the SalamRuby directory, and delete the Docker network.
 
 ## Debug
 
 If you encounter any issues, you can check the logs of the containers with:
 
 ```
-./formbricks.sh logs
+./salamruby.sh logs
 ```
 
 ## Troubleshooting
@@ -401,7 +401,7 @@ If you encounter any issues, consider the following steps:
 
 - **Check Docker Instances**: Run `docker ps` to check the status of the Docker instances.
 
-- **Check Formbricks Logs**: Run `cd formbricks && docker compose logs` to check the logs of the Formbricks stack.
+- **Check SalamRuby Logs**: Run `cd salamruby && docker compose logs` to check the logs of the SalamRuby stack.
 
-If you have any questions or require help, feel free to reach out to us on [**GitHub Discussions**](https://github.com/formbricks/formbricks/discussions). 😃[
-](https://formbricks.com/docs/developer-docs/rest-api)
+If you have any questions or require help, feel free to reach out to us on [**GitHub Discussions**](https://github.com/salamruby/salamruby/discussions). 😃[
+](https://salamruby.com/docs/developer-docs/rest-api)

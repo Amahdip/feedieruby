@@ -1,13 +1,13 @@
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Invite, Prisma } from "@formbricks/database/prisma";
+import { prisma } from "@salamruby/database";
+import { Invite, Prisma } from "@salamruby/database/prisma";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   ValidationError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import { ITEMS_PER_PAGE } from "@/lib/constants";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { validateInputs } from "@/lib/utils/validate";

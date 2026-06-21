@@ -1,11 +1,11 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ZId, ZOptionalNumber, ZString } from "@formbricks/types/common";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
-import { TTag } from "@formbricks/types/tags";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ZId, ZOptionalNumber, ZString } from "@salamruby/types/common";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
+import { TTag } from "@salamruby/types/tags";
 import { TagError } from "../../modules/workspaces/settings/types/tag";
 import { ITEMS_PER_PAGE } from "../constants";
 import { validateInputs } from "../utils/validate";

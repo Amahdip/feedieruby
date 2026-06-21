@@ -4,7 +4,7 @@ import { SparklesIcon } from "lucide-react";
 import Link from "next/link";
 import { type KeyboardEvent, type ReactNode, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import type { TUserLocale } from "@formbricks/types/user";
+import type { TUserLocale } from "@salamruby/types/user";
 import { getAIUnavailableAction } from "@/lib/ai/availability";
 import type { TAIUnavailableReason } from "@/lib/ai/service";
 import { useCreateSurveyWithAI } from "@/modules/survey/components/template-list/hooks/use-create-survey-with-ai";

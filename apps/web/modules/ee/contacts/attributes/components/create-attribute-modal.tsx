@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TContactAttributeDataType } from "@formbricks/types/contact-attribute-key";
+import { TContactAttributeDataType } from "@salamruby/types/contact-attribute-key";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { formatSnakeCaseToTitleCase, isSafeIdentifier, toSafeIdentifier } from "@/lib/utils/safe-identifier";
 import {

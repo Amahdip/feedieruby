@@ -1,18 +1,18 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { getCacheService } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import { IntegrationType } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
+import { getCacheService } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import { IntegrationType } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
 import { sendTelemetryEvents } from "./telemetry";
 
 // Mock dependencies
-vi.mock("@formbricks/cache", () => ({
+vi.mock("@salamruby/cache", () => ({
   getCacheService: vi.fn(),
   createCacheKey: {
     custom: vi.fn((_namespace: string, key: string) => key),
   },
 }));
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     organization: {
       findFirst: vi.fn(),
@@ -34,7 +34,7 @@ vi.mock("@formbricks/database", () => ({
     $queryRaw: vi.fn(),
   },
 }));
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),
@@ -50,7 +50,7 @@ vi.mock("@/lib/env", () => ({
     RECAPTCHA_SITE_KEY: "site-key",
     RECAPTCHA_SECRET_KEY: "secret-key",
     GITHUB_ID: "github-id",
-    SAML_DATABASE_URL: "postgresql://saml.example.com/formbricks",
+    SAML_DATABASE_URL: "postgresql://saml.example.com/salamruby",
     ENTERPRISE_LICENSE_KEY: "test-license-key",
   },
 }));

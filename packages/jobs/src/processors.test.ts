@@ -9,7 +9,7 @@ const { mockDebug, mockError } = vi.hoisted(() => ({
   mockError: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: mockError,
     info: vi.fn(),
@@ -18,7 +18,7 @@ vi.mock("@formbricks/logger", () => ({
   },
 }));
 
-describe("@formbricks/jobs processor registry", () => {
+describe("@salamruby/jobs processor registry", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

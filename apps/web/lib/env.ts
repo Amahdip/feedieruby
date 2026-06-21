@@ -1,6 +1,7 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
-import { AI_PROVIDERS } from "@formbricks/types/ai";
+import { AI_PROVIDERS } from "@salamruby/types/ai";
+import { DISABLE_CUBE_ANALYTICS } from "./brand-color";
 import { throwEnvValidationError } from "./env-validation-error";
 
 const ZActiveAIProvider = z.enum(AI_PROVIDERS);
@@ -222,7 +223,7 @@ const parsedEnv = createEnv({
     DANGEROUSLY_ALLOW_WEBHOOK_INTERNAL_URLS: z.enum(["1", "0"]).optional(),
     DEBUG_SHOW_RESET_LINK: z.enum(["1", "0"]).optional(),
     // DEBUG is a common ambient env var in CI/tooling, so we accept arbitrary strings here
-    // and only treat "1" as enabling Formbricks-specific debug behavior downstream.
+    // and only treat "1" as enabling SalamRuby-specific debug behavior downstream.
     DEBUG: z.string().optional(),
     AUTH_DEFAULT_TEAM_ID: z.string().optional(),
     AUTH_SKIP_INVITE_FOR_SSO: z.enum(["1", "0"]).optional(),
@@ -261,8 +262,8 @@ const parsedEnv = createEnv({
     AI_OPENAI_COMPATIBLE_SUPPORTS_STRUCTURED_OUTPUTS: z.string().optional(),
     AI_OPENAI_COMPATIBLE_HEADERS_JSON: z.string().optional(),
     AI_OPENAI_COMPATIBLE_QUERY_PARAMS_JSON: z.string().optional(),
-    CUBEJS_API_SECRET: z.string().trim().min(1),
-    CUBEJS_API_URL: z.url(),
+    CUBEJS_API_SECRET: ZOptionalNonEmptyString,
+    CUBEJS_API_URL: z.preprocess(emptyStringToUndefined, z.url().optional()),
     CUBEJS_JWT_AUDIENCE: ZOptionalNonEmptyString,
     CUBEJS_JWT_ISSUER: ZOptionalNonEmptyString,
     HTTP_PROXY: z.url().optional(),
@@ -277,7 +278,7 @@ const parsedEnv = createEnv({
     INVITE_DISABLED: z.enum(["1", "0"]).optional(),
     CHATWOOT_WEBSITE_TOKEN: z.string().optional(),
     CHATWOOT_BASE_URL: z.url().optional(),
-    IS_FORMBRICKS_CLOUD: z.enum(["1", "0"]).optional(),
+    IS_SALAMRUBY_CLOUD: z.enum(["1", "0"]).optional(),
     POSTHOG_KEY: z.string().optional(),
     LOG_LEVEL: z.enum(["debug", "info", "warn", "error", "fatal"]).optional(),
     MAIL_FROM: z.email().optional(),
@@ -363,7 +364,7 @@ const parsedEnv = createEnv({
     SENTRY_ENVIRONMENT: z.string().optional(),
   },
   client: {
-    NEXT_PUBLIC_SURVEY_SCHEDULING_TIME_ZONE: ZSurveySchedulingTimeZone.optional().default("Europe/Berlin"),
+    NEXT_PUBLIC_SURVEY_SCHEDULING_TIME_ZONE: ZSurveySchedulingTimeZone.optional().default("Asia/Tehran"),
     NEXT_PUBLIC_SURVEY_SCHEDULING_LOCAL_HOUR: ZSurveySchedulingLocalHour.optional().default(0),
     NEXT_PUBLIC_SURVEY_SCHEDULING_LOCAL_MINUTE: ZSurveySchedulingLocalMinute.optional().default(0),
   },
@@ -440,7 +441,7 @@ const parsedEnv = createEnv({
     INVITE_DISABLED: process.env.INVITE_DISABLED,
     CHATWOOT_WEBSITE_TOKEN: process.env.CHATWOOT_WEBSITE_TOKEN,
     CHATWOOT_BASE_URL: process.env.CHATWOOT_BASE_URL,
-    IS_FORMBRICKS_CLOUD: process.env.IS_FORMBRICKS_CLOUD,
+    IS_SALAMRUBY_CLOUD: process.env.IS_SALAMRUBY_CLOUD,
     POSTHOG_KEY: process.env.POSTHOG_KEY,
     LOG_LEVEL: process.env.LOG_LEVEL,
     MAIL_FROM: process.env.MAIL_FROM,
@@ -501,6 +502,34 @@ const parsedEnv = createEnv({
     SENTRY_ENVIRONMENT: process.env.SENTRY_ENVIRONMENT,
   },
 });
+
+const validateCubeEnvConfiguration = (): void => {
+  if (DISABLE_CUBE_ANALYTICS) {
+    return;
+  }
+
+  const issues: Array<{ path: string[]; message: string }> = [];
+
+  if (!parsedEnv.CUBEJS_API_SECRET) {
+    issues.push({
+      path: ["CUBEJS_API_SECRET"],
+      message: "CUBEJS_API_SECRET is required when Cube analytics is enabled",
+    });
+  }
+
+  if (!parsedEnv.CUBEJS_API_URL) {
+    issues.push({
+      path: ["CUBEJS_API_URL"],
+      message: "CUBEJS_API_URL is required when Cube analytics is enabled",
+    });
+  }
+
+  if (issues.length > 0) {
+    throwEnvValidationError(issues);
+  }
+};
+
+validateCubeEnvConfiguration();
 
 export const env = ZAIConfigurationEnv.superRefine(validateActiveAIProviderConfiguration)
   .transform(() => parsedEnv)

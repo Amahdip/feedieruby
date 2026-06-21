@@ -1,10 +1,10 @@
 "use server";
 
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { AuthorizationError, InvalidInputError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { AuthorizationError, InvalidInputError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TFeedbackSourceWithMappings,
   THubFieldType,
@@ -12,7 +12,7 @@ import {
   ZFeedbackSourceFieldMappingCreateInput,
   ZFeedbackSourceUpdateInput,
   getHubFieldTypeFromElementType,
-} from "@formbricks/types/feedback-source";
+} from "@salamruby/types/feedback-source";
 import { getResponseCountBySurveyId } from "@/lib/response/service";
 import { getSurvey } from "@/lib/survey/service";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
@@ -114,7 +114,7 @@ const resolveSurveyMappings = async (
   });
 };
 
-const resolveFormbricksMappingsInput = async (
+const resolveSalamRubyMappingsInput = async (
   entries: { surveyId: string; elementIds: string[] }[]
 ): Promise<TMappingsInput> => {
   const allMappings = await Promise.all(
@@ -125,10 +125,10 @@ const resolveFormbricksMappingsInput = async (
     throw new InvalidInputError("No supported survey questions selected for feedbackSource mapping");
   }
 
-  return { type: "formbricks_survey", mappings: flattenedMappings };
+  return { type: "salamruby_survey", mappings: flattenedMappings };
 };
 
-const ZFormbricksSurveyMapping = z.object({
+const ZSalamRubySurveyMapping = z.object({
   surveyId: ZId,
   elementIds: z.array(z.string()).min(1),
 });
@@ -150,16 +150,16 @@ const ZCreateFeedbackSourceWithMappingsAction = z
   .object({
     workspaceId: ZId,
     feedbackSourceInput: ZFeedbackSourceCreateInput,
-    formbricksMappings: z.array(ZFormbricksSurveyMapping).optional(),
+    salamrubyMappings: z.array(ZSalamRubySurveyMapping).optional(),
     fieldMappings: z.array(ZFeedbackSourceFieldMappingCreateInput).optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.feedbackSourceInput.type === "formbricks_survey") {
-      if (!data.formbricksMappings?.length) {
+    if (data.feedbackSourceInput.type === "salamruby_survey") {
+      if (!data.salamrubyMappings?.length) {
         ctx.addIssue({
           code: "custom",
-          path: ["formbricksMappings"],
-          message: "At least one survey mapping is required for Formbricks feedbackSources",
+          path: ["salamrubyMappings"],
+          message: "At least one survey mapping is required for SalamRuby feedbackSources",
         });
       }
     } else if (data.feedbackSourceInput.type === "csv") {
@@ -204,11 +204,11 @@ export const createFeedbackSourceWithMappingsAction = authenticatedActionClient
 
     let mappingsInput: TMappingsInput | undefined;
 
-    const { formbricksMappings, fieldMappings } = parsedInput;
+    const { salamrubyMappings, fieldMappings } = parsedInput;
 
-    if (formbricksMappings?.length) {
+    if (salamrubyMappings?.length) {
       await Promise.all(
-        formbricksMappings.map(async ({ surveyId }) => {
+        salamrubyMappings.map(async ({ surveyId }) => {
           const orgId = await getOrganizationIdFromSurveyId(surveyId);
           if (orgId !== organizationId) {
             throw new AuthorizationError("You are not authorized to access this survey");
@@ -216,7 +216,7 @@ export const createFeedbackSourceWithMappingsAction = authenticatedActionClient
         })
       );
 
-      mappingsInput = await resolveFormbricksMappingsInput(formbricksMappings);
+      mappingsInput = await resolveSalamRubyMappingsInput(salamrubyMappings);
     } else if (fieldMappings?.length) {
       mappingsInput = {
         type: "field",
@@ -238,7 +238,7 @@ const ZUpdateFeedbackSourceWithMappingsAction = z.object({
   feedbackSourceId: ZId,
   workspaceId: ZId,
   feedbackSourceInput: ZFeedbackSourceUpdateInput,
-  formbricksMappings: z.array(ZFormbricksSurveyMapping).min(1).optional(),
+  salamrubyMappings: z.array(ZSalamRubySurveyMapping).min(1).optional(),
   fieldMappings: z.array(ZFeedbackSourceFieldMappingCreateInput).optional(),
 });
 
@@ -271,9 +271,9 @@ export const updateFeedbackSourceWithMappingsAction = authenticatedActionClient
 
       let mappingsInput: TMappingsInput | undefined;
 
-      if (parsedInput.formbricksMappings?.length) {
+      if (parsedInput.salamrubyMappings?.length) {
         await Promise.all(
-          parsedInput.formbricksMappings.map(async ({ surveyId }) => {
+          parsedInput.salamrubyMappings.map(async ({ surveyId }) => {
             const orgId = await getOrganizationIdFromSurveyId(surveyId);
             if (orgId !== organizationId) {
               throw new AuthorizationError("You are not authorized to access this survey");
@@ -281,7 +281,7 @@ export const updateFeedbackSourceWithMappingsAction = authenticatedActionClient
           })
         );
 
-        mappingsInput = await resolveFormbricksMappingsInput(parsedInput.formbricksMappings);
+        mappingsInput = await resolveSalamRubyMappingsInput(parsedInput.salamrubyMappings);
       } else if (parsedInput.fieldMappings && parsedInput.fieldMappings.length > 0) {
         const feedbackSource = await prisma.feedbackSource.findUnique({
           where: { id: parsedInput.feedbackSourceId, workspaceId: parsedInput.workspaceId },
@@ -351,10 +351,10 @@ export const duplicateFeedbackSourceAction = authenticatedActionClient
 
       let mappingsInput: TMappingsInput | undefined;
 
-      if (source.type === "formbricks_survey" && source.formbricksMappings.length > 0) {
+      if (source.type === "salamruby_survey" && source.salamrubyMappings.length > 0) {
         mappingsInput = {
-          type: "formbricks_survey",
-          mappings: source.formbricksMappings.map((m) => ({
+          type: "salamruby_survey",
+          mappings: source.salamrubyMappings.map((m) => ({
             surveyId: m.surveyId,
             elementId: m.elementId,
             hubFieldType: m.hubFieldType,

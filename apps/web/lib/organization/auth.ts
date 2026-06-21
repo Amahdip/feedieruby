@@ -1,5 +1,5 @@
 import "server-only";
-import { ZId } from "@formbricks/types/common";
+import { ZId } from "@salamruby/types/common";
 import { getMembershipByUserIdOrganizationId } from "../membership/service";
 import { getAccessFlags } from "../membership/utils";
 import { validateInputs } from "../utils/validate";

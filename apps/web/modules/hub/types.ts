@@ -1,14 +1,14 @@
-import type FormbricksHub from "@formbricks/hub";
+import type SalamRubyHub from "@salamruby/hub";
 
-export type FeedbackRecordCreateParams = FormbricksHub.FeedbackRecordCreateParams;
-export type FeedbackRecordData = FormbricksHub.FeedbackRecordData;
-export type FeedbackRecordListParams = FormbricksHub.FeedbackRecordListParams;
-export type FeedbackRecordListResponse = FormbricksHub.FeedbackRecordListResponse;
-export type FeedbackRecordUpdateParams = FormbricksHub.FeedbackRecordUpdateParams;
+export type FeedbackRecordCreateParams = SalamRubyHub.FeedbackRecordCreateParams;
+export type FeedbackRecordData = SalamRubyHub.FeedbackRecordData;
+export type FeedbackRecordListParams = SalamRubyHub.FeedbackRecordListParams;
+export type FeedbackRecordListResponse = SalamRubyHub.FeedbackRecordListResponse;
+export type FeedbackRecordUpdateParams = SalamRubyHub.FeedbackRecordUpdateParams;
 
-export type SemanticSearchInput = FormbricksHub.FeedbackRecords.SearchPerformSemanticSearchParams;
-export type SemanticSearchResponse = FormbricksHub.FeedbackRecords.SearchPerformSemanticSearchResponse;
-export type SemanticSearchResultItem = FormbricksHub.FeedbackRecords.SearchPerformSemanticSearchResponse.Data;
+export type SemanticSearchInput = SalamRubyHub.FeedbackRecords.SearchPerformSemanticSearchParams;
+export type SemanticSearchResponse = SalamRubyHub.FeedbackRecords.SearchPerformSemanticSearchResponse;
+export type SemanticSearchResultItem = SalamRubyHub.FeedbackRecords.SearchPerformSemanticSearchResponse.Data;
 
 export type TaxonomyScope = {
   tenant_id: string;

@@ -4,10 +4,10 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyBlock, TSurveyBlockLogic } from "@formbricks/types/surveys/blocks";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyBlock, TSurveyBlockLogic } from "@salamruby/types/surveys/blocks";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { addMultiLanguageLabels, extractLanguageCodes } from "@/lib/i18n/utils";
 import { ElementFormInput } from "@/modules/survey/components/element-form-input";
 import { ConditionalLogic } from "@/modules/survey/editor/components/conditional-logic";
@@ -68,12 +68,18 @@ export const BlockSettings = ({
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen} className="w-full rounded-lg">
       <Collapsible.CollapsibleTrigger
-        className="flex items-center text-sm text-slate-700"
+        className="flex w-full items-center gap-2 text-sm text-slate-700"
         aria-label="Toggle advanced settings">
-        {open ? <ChevronDownIcon className="mr-1 h-4 w-3" /> : <ChevronRightIcon className="mr-2 h-4 w-3" />}
-        {open
-          ? t("workspace.surveys.edit.hide_block_settings")
-          : t("workspace.surveys.edit.show_block_settings")}
+        <span className="text-start">
+          {open
+            ? t("workspace.surveys.edit.hide_block_settings")
+            : t("workspace.surveys.edit.show_block_settings")}
+        </span>
+        {open ? (
+          <ChevronDownIcon className="h-4 w-3 shrink-0" />
+        ) : (
+          <ChevronRightIcon className="h-4 w-3 shrink-0 rtl:rotate-180" />
+        )}
       </Collapsible.CollapsibleTrigger>
       <Collapsible.CollapsibleContent>
         <div className="mt-2 space-y-4">

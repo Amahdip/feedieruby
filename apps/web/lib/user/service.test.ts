@@ -1,15 +1,15 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { IdentityProvider, Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TUserLocale, TUserUpdateInput } from "@formbricks/types/user";
+import { prisma } from "@salamruby/database";
+import { IdentityProvider, Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TUserLocale, TUserUpdateInput } from "@salamruby/types/user";
 import { deleteOrganization, getOrganizationsWhereUserIsSingleOwner } from "@/lib/organization/service";
 import { publicUserSelect } from "./public-user";
 import { deleteUser, getUser, getUserByEmail, getUsersWithOrganization, updateUser } from "./service";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     user: {
       findUnique: vi.fn(),

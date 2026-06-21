@@ -343,4 +343,4 @@ export const evaluateNoCodeConfigClick = (
   return true;
 };
 
-export const getIsDebug = (): boolean => window.location.search.includes("formbricksDebug=true");
+export const getIsDebug = (): boolean => window.location.search.includes("salamrubyDebug=true");

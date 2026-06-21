@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { logger } from "@formbricks/logger";
-import type { TChartQuery } from "@formbricks/types/analysis";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import type { TChartQuery } from "@salamruby/types/analysis";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { getAISmartToolsUnavailableReason, getOrganizationAIConfig } from "@/lib/ai/service";
-import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getTranslate } from "@/lingodotdev/server";
 import { executeTenantScopedQuery } from "@/modules/ee/analysis/api/lib/cube-client";
 import { AnalysisPageLayout } from "@/modules/ee/analysis/components/analysis-page-layout";
@@ -79,14 +79,14 @@ export async function DashboardDetailPage({
             feature="dashboards"
             buttons={[
               {
-                text: IS_FORMBRICKS_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
-                href: IS_FORMBRICKS_CLOUD
+                text: IS_SALAMRUBY_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                href: IS_SALAMRUBY_CLOUD
                   ? `/workspaces/${workspaceId}/settings/organization/billing`
                   : ENTERPRISE_LICENSE_REQUEST_FORM_URL,
               },
               {
                 text: t("common.learn_more"),
-                href: "https://formbricks.com/docs/unify-feedback/features/dashboards-and-charts",
+                href: "https://salamruby.com/docs/unify-feedback/features/dashboards-and-charts",
               },
             ]}
           />

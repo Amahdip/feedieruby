@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AuthorizationError, OperationNotAllowedError } from "@formbricks/types/errors";
+import { AuthorizationError, OperationNotAllowedError } from "@salamruby/types/errors";
 import { updateOrganizationAISettingsAction } from "./actions";
 import { ZOrganizationAISettingsInput } from "./schemas";
 

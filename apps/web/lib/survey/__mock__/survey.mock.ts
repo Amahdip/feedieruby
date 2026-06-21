@@ -1,16 +1,16 @@
-import { Prisma } from "@formbricks/database/prisma";
-import { TActionClass } from "@formbricks/types/action-classes";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+import { Prisma } from "@salamruby/database/prisma";
+import { TActionClass } from "@salamruby/types/action-classes";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
 import {
   TSurvey,
   TSurveyCreateInput,
   TSurveyLanguage,
   TSurveyWelcomeCard,
-} from "@formbricks/types/surveys/types";
-import { TUser } from "@formbricks/types/user";
-import { TWorkspace } from "@formbricks/types/workspace";
+} from "@salamruby/types/surveys/types";
+import { TUser } from "@salamruby/types/user";
+import { TWorkspace } from "@salamruby/types/workspace";
 import { selectSurvey } from "../service";
 
 const selectContact = {
@@ -196,7 +196,7 @@ const baseSurveyProperties = {
   autoComplete: 7,
   publishOn: null,
   closeOn: null,
-  redirectUrl: "https://github.com/formbricks/formbricks",
+  redirectUrl: "https://github.com/salamruby/salamruby",
   recontactDays: 3,
   displayLimit: 3,
   welcomeCard: mockWelcomeCard,

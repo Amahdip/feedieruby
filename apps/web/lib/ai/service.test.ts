@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { OperationNotAllowedError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   assertOrganizationAIConfigured,
   generateOrganizationAIObject,
@@ -20,7 +20,7 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@formbricks/ai", () => ({
+vi.mock("@salamruby/ai", () => ({
   AIConfigurationError: class AIConfigurationError extends Error {
     code: string;
 
@@ -34,7 +34,7 @@ vi.mock("@formbricks/ai", () => ({
   isAiConfigured: mocks.isAiConfigured,
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: mocks.loggerError,
   },

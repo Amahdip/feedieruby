@@ -1,5 +1,5 @@
 {
-  "name": "@formbricks/types",
+  "name": "@salamruby/types",
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
@@ -20,6 +20,6 @@
     "node-html-parser": "7.1.0"
   },
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*"
+    "@salamruby/config-typescript": "workspace:*"
   }
 }

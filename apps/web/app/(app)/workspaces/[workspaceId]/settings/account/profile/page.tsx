@@ -1,13 +1,14 @@
-import { AuthenticationError } from "@formbricks/types/errors";
+import { AuthenticationError } from "@salamruby/types/errors";
 import { AccountSecurity } from "@/app/(app)/workspaces/[workspaceId]/settings/account/profile/components/AccountSecurity";
 import { DeleteAccount } from "@/app/(app)/workspaces/[workspaceId]/settings/account/profile/components/DeleteAccount";
 import { EditProfileDetailsForm } from "@/app/(app)/workspaces/[workspaceId]/settings/account/profile/components/EditProfileDetailsForm";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
+import { shouldRenderEnterpriseSection } from "@/lib/brand-color";
 import {
   DISABLE_ACCOUNT_DELETION_SSO_CONFIRMATION,
   EMAIL_VERIFICATION_DISABLED,
   ENTERPRISE_LICENSE_REQUEST_FORM_URL,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   PASSWORD_RESET_DISABLED,
 } from "@/lib/constants";
 import { getOrganizationsWhereUserIsSingleOwner } from "@/lib/organization/service";
@@ -57,7 +58,7 @@ const Page = async (props: {
               isPasswordResetEnabled={isPasswordResetEnabled}
             />
           </SettingsCard>
-          {user.identityProvider === "email" && (
+          {user.identityProvider === "email" && shouldRenderEnterpriseSection(isTwoFactorAuthEnabled) && (
             <SettingsCard
               title={t("common.security")}
               description={t("workspace.settings.profile.security_description")}>
@@ -67,18 +68,16 @@ const Page = async (props: {
                   description={t("workspace.settings.profile.two_factor_authentication_description")}
                   buttons={[
                     {
-                      text: IS_FORMBRICKS_CLOUD
-                        ? t("common.upgrade_plan")
-                        : t("common.request_trial_license"),
-                      href: IS_FORMBRICKS_CLOUD
+                      text: IS_SALAMRUBY_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                      href: IS_SALAMRUBY_CLOUD
                         ? `/workspaces/${params.workspaceId}/settings/organization/billing`
                         : ENTERPRISE_LICENSE_REQUEST_FORM_URL,
                     },
                     {
                       text: t("common.learn_more"),
-                      href: IS_FORMBRICKS_CLOUD
+                      href: IS_SALAMRUBY_CLOUD
                         ? `/workspaces/${params.workspaceId}/settings/organization/billing`
-                        : "https://formbricks.com/learn-more-self-hosting-license",
+                        : "https://salamruby.com/learn-more-self-hosting-license",
                     },
                   ]}
                 />
@@ -93,7 +92,7 @@ const Page = async (props: {
             description={t("workspace.settings.profile.confirm_delete_account")}>
             <DeleteAccount
               session={session}
-              IS_FORMBRICKS_CLOUD={IS_FORMBRICKS_CLOUD}
+              IS_SALAMRUBY_CLOUD={IS_SALAMRUBY_CLOUD}
               user={user}
               organizationsWithSingleOwner={organizationsWithSingleOwner}
               isMultiOrgEnabled={isMultiOrgEnabled}

@@ -1,4 +1,4 @@
-import type { IdentityProvider } from "@formbricks/database/prisma";
+import type { IdentityProvider } from "@salamruby/database/prisma";
 
 const SSO_PROVIDER_MAP = {
   google: "google",

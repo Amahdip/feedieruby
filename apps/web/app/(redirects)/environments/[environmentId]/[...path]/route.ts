@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { notFound, redirect } from "next/navigation";
-import { AuthenticationError, AuthorizationError } from "@formbricks/types/errors";
+import { AuthenticationError, AuthorizationError } from "@salamruby/types/errors";
 import { findWorkspaceByIdOrLegacyEnvId } from "@/lib/utils/resolve-client-id";
 import { hasUserWorkspaceAccess } from "@/lib/workspace/auth";
 import { authOptions } from "@/modules/auth/lib/authOptions";

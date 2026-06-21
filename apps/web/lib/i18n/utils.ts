@@ -1,7 +1,7 @@
-import { iso639Languages } from "@formbricks/i18n-utils/src/utils";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyLanguage } from "@formbricks/types/surveys/types";
-import { TLanguage } from "@formbricks/types/workspace";
+import { iso639Languages } from "@salamruby/i18n-utils/src/utils";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyLanguage } from "@salamruby/types/surveys/types";
+import { TLanguage } from "@salamruby/types/workspace";
 import { structuredClone } from "@/lib/pollyfills/structuredClone";
 
 // Helper function to create an i18nString from a regular string.
@@ -54,17 +54,37 @@ export const isLabelValidForAllLanguages = (label: TI18nString, languages: strin
   return languages.every((language) => label[language] && label[language].trim() !== "");
 };
 
+const isTranslatableStringMap = (value: unknown): value is Record<string, string> => {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    Object.values(value).every((entry) => typeof entry === "string")
+  );
+};
+
 export const getLocalizedValue = (value: TI18nString | undefined, languageId: string): string => {
-  if (!value) {
+  if (!value || !isTranslatableStringMap(value)) {
     return "";
   }
-  if (isI18nObject(value)) {
-    if (value[languageId]) {
-      return value[languageId];
+
+  const direct = value[languageId];
+  if (typeof direct === "string" && direct.trim() !== "") {
+    return direct;
+  }
+
+  if (languageId !== "default" && value.default?.trim()) {
+    return value.default;
+  }
+
+  // Surveys created via the v3 API store copy under locale codes (e.g. fa-IR) instead of "default".
+  if (languageId === "default") {
+    const fallback = Object.entries(value).find(([key, entry]) => key !== "default" && entry.trim() !== "");
+    if (fallback) {
+      return fallback[1];
     }
-    return "";
   }
-  return "";
+
+  return direct ?? "";
 };
 
 export const extractLanguageCodes = (surveyLanguages: TSurveyLanguage[]): string[] => {
@@ -148,6 +168,13 @@ export const appLanguages = [
     label: {
       "en-US": "Spanish",
       native: "Español",
+    },
+  },
+  {
+    code: "fa-IR",
+    label: {
+      "en-US": "Persian (Farsi)",
+      native: "فارسی",
     },
   },
   {

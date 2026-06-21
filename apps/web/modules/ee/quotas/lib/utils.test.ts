@@ -1,18 +1,18 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { TSurveyQuota } from "@formbricks/types/quota";
-import { TResponseData, TResponseVariables } from "@formbricks/types/responses";
-import { TSurveyQuestionTypeEnum } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { TSurveyQuota } from "@salamruby/types/quota";
+import { TResponseData, TResponseVariables } from "@salamruby/types/responses";
+import { TSurveyQuestionTypeEnum } from "@salamruby/types/surveys/types";
 import { updateResponse } from "@/lib/response/service";
 import { evaluateLogic } from "@/lib/surveyLogic/utils";
 import { validateInputs } from "@/lib/utils/validate";
 import { evaluateQuotas, handleQuotas, upsertResponseQuotaLinks } from "./utils";
 
 // Mock dependencies
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     $transaction: vi.fn(),
     responseQuotaLink: {
@@ -37,7 +37,7 @@ vi.mock("@/lib/utils/validate", () => ({
   validateInputs: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

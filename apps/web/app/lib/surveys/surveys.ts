@@ -1,14 +1,14 @@
-import { TSurveyQuota } from "@formbricks/types/quota";
+import { TSurveyQuota } from "@salamruby/types/quota";
 import {
   TResponseFilterCriteria,
   TResponseHiddenFieldsFilter,
   TSurveyContactAttributes,
   TSurveyMetaFieldFilter,
-} from "@formbricks/types/responses";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
-import { TTag } from "@formbricks/types/tags";
+} from "@salamruby/types/responses";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
+import { TTag } from "@salamruby/types/tags";
 import {
   DateRange,
   FilterValue,

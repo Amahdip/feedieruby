@@ -1,10 +1,11 @@
 import "server-only";
-import { TUserLocale } from "@formbricks/types/user";
+import { TUserLocale } from "@salamruby/types/user";
+import { RTL_LOCALES, isRtlLocale } from "@/lib/i18n/rtl";
 import { env } from "./env";
 
 export { DEFAULT_BRAND_COLOR } from "./brand-color";
 
-export const IS_FORMBRICKS_CLOUD = env.IS_FORMBRICKS_CLOUD === "1";
+export const IS_SALAMRUBY_CLOUD = env.IS_SALAMRUBY_CLOUD === "1";
 
 export const IS_PRODUCTION = env.NODE_ENV === "production";
 
@@ -60,12 +61,12 @@ export const OIDC_DISPLAY_NAME = env.OIDC_DISPLAY_NAME;
 export const OIDC_SIGNING_ALGORITHM = env.OIDC_SIGNING_ALGORITHM;
 
 export const SAML_DATABASE_URL = env.SAML_DATABASE_URL;
-export const SAML_TENANT = "formbricks.com";
-export const SAML_PRODUCT = "formbricks";
-export const SAML_AUDIENCE = "https://saml.formbricks.com";
+export const SAML_TENANT = "salamruby.com";
+export const SAML_PRODUCT = "salamruby";
+export const SAML_AUDIENCE = "https://saml.salamruby.com";
 export const SAML_PATH = "/api/auth/saml/callback";
 
-export const SIGNUP_ENABLED = IS_FORMBRICKS_CLOUD || IS_DEVELOPMENT || E2E_TESTING;
+export const SIGNUP_ENABLED = IS_SALAMRUBY_CLOUD || IS_DEVELOPMENT || E2E_TESTING;
 export const EMAIL_AUTH_ENABLED = env.EMAIL_AUTH_DISABLED !== "1";
 export const INVITE_DISABLED = env.INVITE_DISABLED === "1";
 
@@ -159,7 +160,7 @@ export const DEBUG = env.DEBUG === "1";
 export const ENTERPRISE_LICENSE_KEY = env.ENTERPRISE_LICENSE_KEY;
 
 export const ENTERPRISE_LICENSE_REQUEST_FORM_URL =
-  "https://app.formbricks.com/s/trvp8tzy5uvsps9rc9qi9l9w?delivery=onpremise&source=ce";
+  "https://app.salamruby.com/s/trvp8tzy5uvsps9rc9qi9l9w?delivery=onpremise&source=ce";
 
 export const REDIS_URL = env.REDIS_URL;
 export const RATE_LIMITING_DISABLED = env.RATE_LIMITING_DISABLED === "1";
@@ -176,11 +177,14 @@ export const STRIPE_API_VERSION = "2026-02-25.clover";
 // Maximum number of attribute classes allowed:
 export const MAX_ATTRIBUTE_CLASSES_PER_ENVIRONMENT = 150;
 
-export const DEFAULT_LOCALE = "en-US";
+export const DEFAULT_LOCALE = "fa-IR";
+export { RTL_LOCALES, isRtlLocale };
+
 export const AVAILABLE_LOCALES: TUserLocale[] = [
   "de-DE",
   "en-US",
   "es-ES",
+  "fa-IR",
   "fr-FR",
   "hu-HU",
   "ja-JP",

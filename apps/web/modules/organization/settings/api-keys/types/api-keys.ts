@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { type ApiKey } from "@formbricks/database/prisma";
-import { ZOrganizationAccess } from "@formbricks/types/api-key";
-import { ZApiKeyPermission } from "@formbricks/types/auth";
-import { ZWorkspace } from "@formbricks/types/workspace";
+import { type ApiKey } from "@salamruby/database/prisma";
+import { ZOrganizationAccess } from "@salamruby/types/api-key";
+import { ZApiKeyPermission } from "@salamruby/types/auth";
+import { ZWorkspace } from "@salamruby/types/workspace";
 
 export const ZApiKeyWorkspacePermission = z.object({
   workspaceId: z.string(),

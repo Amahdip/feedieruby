@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { describe, expect, test, vi } from "vitest";
-import { err, ok } from "@formbricks/types/error-handlers";
+import { err, ok } from "@salamruby/types/error-handlers";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 import { getWorkspaceId, getWorkspaceIdFromSurveyIds } from "../helper";
 import { fetchWorkspaceId, fetchWorkspaceIdFromSurveyIds } from "../services";

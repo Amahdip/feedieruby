@@ -1,8 +1,8 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { buildCommonFilterQuery, pickCommonFilter } from "@/modules/api/v2/management/lib/utils";
 import { TGetWorkspaceTeamsFilter } from "@/modules/api/v2/organizations/[organizationId]/workspace-teams/types/workspace-teams";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";

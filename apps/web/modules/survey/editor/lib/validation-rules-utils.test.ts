@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TValidationRule } from "@formbricks/types/surveys/validation-rules";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TValidationRule } from "@salamruby/types/surveys/validation-rules";
 import { createRuleParams, getAvailableRuleTypes, getRuleValue } from "./validation-rules-utils";
 
 describe("getAvailableRuleTypes", () => {

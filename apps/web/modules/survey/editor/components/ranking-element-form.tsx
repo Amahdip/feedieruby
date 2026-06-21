@@ -11,9 +11,9 @@ import type {
   TSurveyElement,
   TSurveyElementChoice,
   TSurveyRankingElement,
-} from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+} from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { createI18nString, extractLanguageCodes } from "@/lib/i18n/utils";
 import { ElementFormInput } from "@/modules/survey/components/element-form-input";
 import { ElementOptionChoice } from "@/modules/survey/editor/components/element-option-choice";

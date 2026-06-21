@@ -1,10 +1,10 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZId, ZOptionalNumber, ZString } from "@formbricks/types/common";
-import { DatabaseError, ValidationError } from "@formbricks/types/errors";
-import type { TWorkspace } from "@formbricks/types/workspace";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZId, ZOptionalNumber, ZString } from "@salamruby/types/common";
+import { DatabaseError, ValidationError } from "@salamruby/types/errors";
+import type { TWorkspace } from "@salamruby/types/workspace";
 import { ITEMS_PER_PAGE } from "../constants";
 import { validateInputs } from "../utils/validate";
 

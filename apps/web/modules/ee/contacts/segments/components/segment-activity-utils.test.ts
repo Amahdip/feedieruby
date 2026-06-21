@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { TBaseFilters, TSegment, TSegmentWithSurveyRefs } from "@formbricks/types/segment";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TBaseFilters, TSegment, TSegmentWithSurveyRefs } from "@salamruby/types/segment";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import {
   buildSegmentActivitySummary,
   buildSegmentActivitySummaryFromSegments,

@@ -6,7 +6,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
+import { Workspace } from "@salamruby/database/prisma-browser";
 import { cn } from "@/lib/cn";
 import {
   getCXElementTypes,
@@ -37,11 +37,11 @@ export const AddElementButton = ({ addElement, workspace, isCxMode }: AddElement
         "group w-full space-y-2 rounded-lg border border-slate-300 bg-white duration-200 hover:cursor-pointer hover:bg-slate-50"
       )}>
       <Collapsible.CollapsibleTrigger asChild className="group h-full w-full">
-        <div className="inline-flex">
-          <div className="flex w-10 items-center justify-center rounded-l-lg bg-brand-dark group-aria-expanded:rounded-bl-none group-aria-expanded:rounded-br">
+        <div className="flex w-full">
+          <div className="flex w-10 shrink-0 items-center justify-center rounded-s-lg bg-brand-dark group-aria-expanded:rounded-es-none">
             <PlusIcon className="size-5 text-white" />
           </div>
-          <div className="px-4 py-3">
+          <div className="flex-1 px-4 py-3 text-start">
             <p className="text-sm font-semibold">{t("workspace.surveys.edit.add_block")}</p>
             <p className="mt-1 text-xs text-slate-500">
               {t("workspace.surveys.edit.choose_the_first_question_on_your_block")}
@@ -49,12 +49,12 @@ export const AddElementButton = ({ addElement, workspace, isCxMode }: AddElement
           </div>
         </div>
       </Collapsible.CollapsibleTrigger>
-      <Collapsible.CollapsibleContent className="justify-left flex flex-col" ref={parent}>
+      <Collapsible.CollapsibleContent className="flex flex-col gap-0.5 px-2 pb-2" ref={parent}>
         {availableElementTypes.map((elementType) => (
           <button
             type="button"
             key={elementType.id}
-            className="group relative mx-2 inline-flex items-center justify-between rounded p-0.5 px-4 py-2 text-sm font-medium text-slate-700 last:mb-2 hover:bg-slate-100 hover:text-slate-800"
+            className="w-full rounded px-2 py-2 text-start hover:bg-slate-100"
             onClick={() => {
               addElement({
                 ...universalElementPresets,
@@ -66,16 +66,15 @@ export const AddElementButton = ({ addElement, workspace, isCxMode }: AddElement
             }}
             onMouseEnter={() => setHoveredElementId(elementType.id)}
             onMouseLeave={() => setHoveredElementId(null)}>
-            <div className="flex items-center">
-              <elementType.icon className="-ml-0.5 mr-2 size-4 text-brand-dark" aria-hidden="true" />
-              {elementType.label}
+            <div className="flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-slate-800">
+              <elementType.icon className="size-4 shrink-0 text-brand-dark" aria-hidden="true" />
+              <span>{elementType.label}</span>
             </div>
-            <div
-              className={`absolute right-4 text-xs font-light text-slate-500 transition-opacity duration-200 ${
-                hoveredElementId === elementType.id ? "opacity-100" : "opacity-0"
-              }`}>
-              {elementType.description}
-            </div>
+            {hoveredElementId === elementType.id && (
+              <p className="mt-1 ps-6 text-xs font-light leading-snug text-slate-500">
+                {elementType.description}
+              </p>
+            )}
           </button>
         ))}
       </Collapsible.CollapsibleContent>

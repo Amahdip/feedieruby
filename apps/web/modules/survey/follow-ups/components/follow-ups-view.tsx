@@ -3,9 +3,9 @@
 import { MailIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurveyFollowUp } from "@formbricks/types/surveys/follow-up";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TSurveyFollowUp } from "@salamruby/types/surveys/follow-up";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { TFollowUpEmailToUser } from "@/modules/survey/editor/types/survey-follow-up";
 import { FollowUpItem } from "@/modules/survey/follow-ups/components/follow-up-item";
@@ -19,7 +19,7 @@ interface FollowUpsViewProps {
   selectedLanguageCode: string;
   mailFrom: string;
   isSurveyFollowUpsAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   userEmail: string;
   teamMemberDetails: TFollowUpEmailToUser[];
   locale: TUserLocale;
@@ -32,7 +32,7 @@ export const FollowUpsView = ({
   selectedLanguageCode,
   mailFrom,
   isSurveyFollowUpsAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   userEmail,
   teamMemberDetails,
   locale,
@@ -54,16 +54,16 @@ export const FollowUpsView = ({
           feature="follow_ups"
           buttons={[
             {
-              text: isFormbricksCloud
+              text: isSalamRubyCloud
                 ? t("workspace.settings.billing.upgrade")
                 : t("common.request_trial_license"),
-              href: isFormbricksCloud
+              href: isSalamRubyCloud
                 ? `${workspaceBasePath}/settings/organization/billing`
                 : enterpriseLicenseRequestFormUrl,
             },
             {
               text: t("common.learn_more"),
-              href: "https://formbricks.com/docs/xm-and-surveys/surveys/general-features/email-followups",
+              href: "https://salamruby.com/docs/xm-and-surveys/surveys/general-features/email-followups",
             },
           ]}
         />

@@ -1,4 +1,4 @@
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { PrismaClient } from "../prisma";
 import { createPrismaPgAdapter } from "../prisma-adapter";
 

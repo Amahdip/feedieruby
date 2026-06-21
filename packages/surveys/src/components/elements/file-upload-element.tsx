@@ -1,10 +1,10 @@
 import { useCallback, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { FileUpload, type UploadedFile } from "@formbricks/survey-ui";
-import { FILE_UPLOAD_ERROR_NAMES } from "@formbricks/types/errors";
-import { type TResponseData, type TResponseTtc } from "@formbricks/types/responses";
-import type { TAllowedFileExtension } from "@formbricks/types/storage";
-import type { TSurveyFileUploadElement } from "@formbricks/types/surveys/elements";
+import { FileUpload, type UploadedFile } from "@salamruby/survey-ui";
+import { FILE_UPLOAD_ERROR_NAMES } from "@salamruby/types/errors";
+import { type TResponseData, type TResponseTtc } from "@salamruby/types/responses";
+import type { TAllowedFileExtension } from "@salamruby/types/storage";
+import type { TSurveyFileUploadElement } from "@salamruby/types/surveys/elements";
 import { getLocalizedValue } from "@/lib/i18n";
 import { getUpdatedTtc, useTtc } from "@/lib/ttc";
 
@@ -70,7 +70,7 @@ export function FileUploadElement({
         console.error(`Error decoding file name: ${e}`);
       }
 
-      // Clean up Formbricks storage pattern: name--fid--uuid.ext
+      // Clean up SalamRuby storage pattern: name--fid--uuid.ext
       if (fileName.includes("--fid--")) {
         const parts = fileName.split("--fid--");
         const extension = fileName.split(".").pop();

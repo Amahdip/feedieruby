@@ -15,8 +15,8 @@ import {
   TextNode,
 } from "lexical";
 import { useCallback, useEffect, useState } from "react";
-import { logger } from "@formbricks/logger";
-import { TSurvey, TSurveyRecallItem } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { TSurvey, TSurveyRecallItem } from "@salamruby/types/surveys/types";
 import { getFallbackValues, getRecallItemLabel, getRecallItems } from "@/lib/utils/recall";
 import { RecallItemSelect } from "@/modules/survey/components/element-form-input/components/recall-item-select";
 import { $createRecallNode, RecallNode } from "./recall-node";

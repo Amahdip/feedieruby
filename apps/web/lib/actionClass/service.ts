@@ -2,12 +2,12 @@
 
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { ActionClass, Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { TActionClass, TActionClassInput, ZActionClassInput } from "@formbricks/types/action-classes";
-import { ZId, ZOptionalNumber, ZString } from "@formbricks/types/common";
-import { DatabaseError, ResourceNotFoundError, UniqueConstraintError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { ActionClass, Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { TActionClass, TActionClassInput, ZActionClassInput } from "@salamruby/types/action-classes";
+import { ZId, ZOptionalNumber, ZString } from "@salamruby/types/common";
+import { DatabaseError, ResourceNotFoundError, UniqueConstraintError } from "@salamruby/types/errors";
 import { ITEMS_PER_PAGE } from "../constants";
 import { validateInputs } from "../utils/validate";
 

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { requestPasswordReset } from "@/modules/auth/forgot-password/lib/password-reset-service";
 import { getUserByEmail } from "@/modules/auth/lib/user";
 // Import mocked functions
@@ -34,7 +34,7 @@ vi.mock("@/modules/auth/forgot-password/lib/password-reset-service", () => ({
   requestPasswordReset: vi.fn(),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

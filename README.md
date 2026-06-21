@@ -4,28 +4,28 @@
 
 <p align="center">
 
-<a href="https://formbricks.com">
+<a href="https://salamruby.com">
 
-<img width="120" alt="Open Source Privacy First Experience Management Solution Qualtrics Alternative Logo" src="https://github.com/formbricks/formbricks/assets/72809645/0086704f-bee7-4d38-9cc8-fa42ee59e004">
+<img width="120" alt="Open Source Privacy First Experience Management Solution Qualtrics Alternative Logo" src="https://github.com/salamruby/salamruby/assets/72809645/0086704f-bee7-4d38-9cc8-fa42ee59e004">
 
 </a>
 
-<h3 align="center">Formbricks</h3>
+<h3 align="center">SalamRuby</h3>
 
 <p align="center">
 The Open Source Qualtrics Alternative
 <br />
-<a href="https://formbricks.com/">Website</a>
+<a href="https://salamruby.com/">Website</a>
 </p>
 </p>
 
 <p align="center">
-<a href="https://github.com/formbricks/formbricks/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-AGPL-purple" alt="License"></a> <a href="https://github.com/formbricks/formbricks/stargazers"><img src="https://img.shields.io/github/stars/formbricks/formbricks?logo=github" alt="Github Stars"></a>
-<a href="https://insights.linuxfoundation.org/project/formbricks"><img src="https://insights.linuxfoundation.org/api/badge/health-score?project=formbricks"></a>
+<a href="https://github.com/salamruby/salamruby/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-AGPL-purple" alt="License"></a> <a href="https://github.com/salamruby/salamruby/stargazers"><img src="https://img.shields.io/github/stars/salamruby/salamruby?logo=github" alt="Github Stars"></a>
+<a href="https://insights.linuxfoundation.org/project/salamruby"><img src="https://insights.linuxfoundation.org/api/badge/health-score?project=salamruby"></a>
 <a href="https://news.ycombinator.com/item?id=32303986"><img src="https://img.shields.io/badge/Hacker%20News-122-%23FF6600" alt="Hacker News"></a>
-<a href="[https://www.producthunt.com/products/formbricks](https://www.producthunt.com/posts/formbricks)"><img src="https://img.shields.io/badge/Product%20Hunt-455-orange?logo=producthunt&logoColor=%23fff" alt="Product Hunt"></a>
+<a href="[https://www.producthunt.com/products/salamruby](https://www.producthunt.com/posts/salamruby)"><img src="https://img.shields.io/badge/Product%20Hunt-455-orange?logo=producthunt&logoColor=%23fff" alt="Product Hunt"></a>
 <a href="https://github.blog/2023-04-12-github-accelerator-our-first-cohort-and-whats-next/"><img src="https://img.shields.io/badge/2023-blue?logo=github&label=Github%20Accelerator" alt="Github Accelerator"></a>
-<a href="https://github.com/formbricks/formbricks/issues?q=is:issue+is:open+label:%22%F0%9F%99%8B%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8Fhelp+wanted%22"><img src="https://img.shields.io/badge/Help%20Wanted-Contribute-blue"></a>
+<a href="https://github.com/salamruby/salamruby/issues?q=is:issue+is:open+label:%22%F0%9F%99%8B%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8Fhelp+wanted%22"><img src="https://img.shields.io/badge/Help%20Wanted-Contribute-blue"></a>
 </p>
 
 <br/>
@@ -33,25 +33,25 @@ The Open Source Qualtrics Alternative
 <div style="background-color:#f8fafc; border-radius:5px;">
 <p align="center">
 <i>Trusted by</i><br/>
-  <img width="867" alt="clients-hi-res" src="https://github.com/formbricks/formbricks/assets/72809645/924d3693-f66a-4063-bb31-6e5789a8175a">
+  <img width="867" alt="clients-hi-res" src="https://github.com/salamruby/salamruby/assets/72809645/924d3693-f66a-4063-bb31-6e5789a8175a">
 </p>
 <div>
 
 <p align="center">
-<a href="https://trendshift.io/repositories/2570" target="_blank"><img src="https://trendshift.io/api/badge/repositories/2570" alt="Trendshift Badge for formbricks/formbricks" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+<a href="https://trendshift.io/repositories/2570" target="_blank"><img src="https://trendshift.io/api/badge/repositories/2570" alt="Trendshift Badge for salamruby/salamruby" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 </p>
 
-## ✨ About Formbricks
+## ✨ About SalamRuby
 
-<img width="1527" alt="formbricks-sneak" src="https://github-production-user-asset-6210df.s3.amazonaws.com/675065/249441967-ccb89ea3-82b4-4bf2-8d2c-528721ec313b.png">
+<img width="1527" alt="salamruby-sneak" src="https://github-production-user-asset-6210df.s3.amazonaws.com/675065/249441967-ccb89ea3-82b4-4bf2-8d2c-528721ec313b.png">
 
-Formbricks provides a free and open source surveying platform. Gather feedback at every point in the user journey with beautiful in-app, website, link and email surveys. Build on top of Formbricks or leverage prebuilt data analysis capabilities.
+SalamRuby provides a free and open source surveying platform. Gather feedback at every point in the user journey with beautiful in-app, website, link and email surveys. Build on top of SalamRuby or leverage prebuilt data analysis capabilities.
 
-**Try it out in the cloud at [formbricks.com](https://app.formbricks.com/auth/signup)**
+**Try it out in the cloud at [salamruby.com](https://app.salamruby.com/auth/signup)**
 
 ## 💪 Mission: Empower your team, craft an irresistible experience.
 
-Formbricks is both a free and open source survey platform - and a privacy-first experience management platform. Use in-app, website, link and email surveys to gather user and customer insights at every point of their journey. Leverage Formbricks Insight Platform or build your own. Life's too short for mediocre UX.
+SalamRuby is both a free and open source survey platform - and a privacy-first experience management platform. Use in-app, website, link and email surveys to gather user and customer insights at every point of their journey. Leverage SalamRuby Insight Platform or build your own. Life's too short for mediocre UX.
 
 ### Table of Contents
 
@@ -87,7 +87,7 @@ Formbricks is both a free and open source survey platform - and a privacy-first 
 
 - 👨‍👩‍👦 Invite your organization members to **collaborate** on your surveys.
 
-- 🔌 Integrate Formbricks with **Slack, Notion, Zapier, n8n and more**.
+- 🔌 Integrate SalamRuby with **Slack, Notion, Zapier, n8n and more**.
 
 - 🔒 All **open source**, transparent and self-hostable.
 
@@ -113,29 +113,50 @@ Formbricks is both a free and open source survey platform - and a privacy-first 
 
 ## 🚀 Getting started
 
-We've got several options depending on your need to help you quickly get started with Formbricks.
+We've got several options depending on your need to help you quickly get started with SalamRuby.
 
 <a id="cloud-version"></a>
 
 ### ☁️ Cloud Version
 
-Formbricks has a hosted cloud offering with a generous free plan to get you up and running as quickly as possible. To get started, please visit [formbricks.com](https://app.formbricks.com/auth/signup).
+SalamRuby has a hosted cloud offering with a generous free plan to get you up and running as quickly as possible. To get started, please visit [salamruby.com](https://app.salamruby.com/auth/signup).
 
 <a id="self-hosted-version"></a>
 
-### 🐳 Self-hosting Formbricks
+### 🐳 Self-hosting SalamRuby
 
-Formbricks is available Open-Source under AGPLv3 license. You can host Formbricks on your own servers using Docker without a subscription.
+SalamRuby is available Open-Source under AGPLv3 license. You can host SalamRuby on your own servers using Docker without a subscription.
 
 #### Docker
 
-To get started with self-hosting with Docker, take a look at our [self-hosting docs](https://formbricks.com/docs/self-hosting/deployment).
+To get started with self-hosting with Docker, take a look at our [self-hosting docs](https://salamruby.com/docs/self-hosting/deployment).
+
+#### SalamRuby production image (survey.salamruby.ir)
+
+This fork ships scripts for building and deploying a **custom** app image. Do not run the upstream Formbricks image in production if you need SalamRuby branding, Farsi (fa-IR), or RTL fixes.
+
+**Docker Hub:** [amirmpa/salamruby-survey](https://hub.docker.com/r/amirmpa/salamruby-survey)
+
+| Step | Command |
+|------|---------|
+| Build (on Mac; avoids Docker OOM) | `./scripts/build-salamruby-image-from-host.sh` |
+| Push to Docker Hub | `docker login -u amirmpa` then `./scripts/push-salamruby-image-dockerhub.sh` |
+| Build + push | `PUSH_TO_DOCKERHUB=true ./scripts/build-salamruby-image-from-host.sh` |
+| Deploy on survey VPS | `sudo docker pull amirmpa/salamruby-survey:latest && sudo docker compose up -d salamruby` |
+
+Details, server paths, mirrors, and troubleshooting: see **Production Docker Image** in [AGENTS.md](./AGENTS.md).
+
+**Live instance:** https://survey.salamruby.ir — admin login uses the email/password from first-time setup (e.g. `amir@salamruby.ir`).
+
+**Survey server scripts:** `scripts/survey-server-bootstrap.sh` (first install), `scripts/survey-server-finish-deploy.sh` (pull image + start stack).
+
+<a id="development"></a>
 
 ## 👨‍💻 Development
 
 ### Prerequisites
 
-Here is what you need to be able to run Formbricks:
+Here is what you need to be able to run SalamRuby:
 
 - [Node.js](https://nodejs.org/en) (Version: >=18.x)
 
@@ -145,7 +166,7 @@ Here is what you need to be able to run Formbricks:
 
 ### Local Setup
 
-To get started locally, we've got a [guide to help you](https://formbricks.com/docs/developer-docs/contributing/get-started#local-machine-setup).
+To get started locally, we've got a [guide to help you](https://salamruby.com/docs/developer-docs/contributing/get-started#local-machine-setup).
 
 ### Gitpod Setup
 
@@ -153,13 +174,13 @@ To get started locally, we've got a [guide to help you](https://formbricks.com/d
 
 2. This will open a fully configured workspace in your browser with all the necessary dependencies already installed.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/formbricks/formbricks)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/salamruby/salamruby)
 
 <a id="contribution"></a>
 
 ## ✍️ Contribution
 
-We are very happy if you are interested in contributing to Formbricks 🤗
+We are very happy if you are interested in contributing to SalamRuby 🤗
 
 Here are a few options:
 
@@ -173,15 +194,15 @@ Here are a few options:
 
 ## All Thanks To Our Contributors
 
-<a href="https://github.com/formbricks/formbricks/graphs/contributors">
+<a href="https://github.com/salamruby/salamruby/graphs/contributors">
 
-<img src="https://contrib.rocks/image?repo=formbricks/formbricks" />
+<img src="https://contrib.rocks/image?repo=salamruby/salamruby" />
 
 </a>
 
 ## Thanks
 
-Formbricks is supported by the following companies who provide us with their tools for free as part of their open-source support:
+SalamRuby is supported by the following companies who provide us with their tools for free as part of their open-source support:
 
 <a href="https://www.chromatic.com/"><img src="https://user-images.githubusercontent.com/321738/84662277-e3db4f80-af1b-11ea-88f5-91d67a5e59f6.png" width="153" height="30" alt="Chromatic" /></a>
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -201,26 +222,26 @@ Let's have a chat about your survey needs and get you started.
 
 ## 🔒 Security
 
-We take security very seriously. If you come across any security vulnerabilities, please disclose them by sending an email to security@formbricks.com. We appreciate your help in making our platform as secure as possible and are committed to working with you to resolve any issues quickly and efficiently. See [`SECURITY.md`](./SECURITY.md) for more information.
+We take security very seriously. If you come across any security vulnerabilities, please disclose them by sending an email to security@salamruby.com. We appreciate your help in making our platform as secure as possible and are committed to working with you to resolve any issues quickly and efficiently. See [`SECURITY.md`](./SECURITY.md) for more information.
 
 <a id="license"></a>
 
 ## 👩‍⚖️ License
 
-### The AGPL Formbricks Core
+### The AGPL SalamRuby Core
 
-The Formbricks core application is licensed under the [AGPLv3 Open Source License](https://github.com/formbricks/formbricks/blob/main/LICENSE). The core application is fully functional and includes everything you need to design & run link surveys, website surveys and in-app surveys. You can use the software for free for personal and commercial use. You're also allowed to create and distribute modified versions as long as you document the changes you make incl. date. The AGPL license requires you to publish your modified version under the AGPLv3 license as well.
+The SalamRuby core application is licensed under the [AGPLv3 Open Source License](https://github.com/salamruby/salamruby/blob/main/LICENSE). The core application is fully functional and includes everything you need to design & run link surveys, website surveys and in-app surveys. You can use the software for free for personal and commercial use. You're also allowed to create and distribute modified versions as long as you document the changes you make incl. date. The AGPL license requires you to publish your modified version under the AGPLv3 license as well.
 
 ### The Enterprise Edition
 
-Additional to the AGPL licensed Formbricks core, this repository contains code licensed under an Enterprise license. The [code](https://github.com/formbricks/formbricks/tree/main/apps/web/modules/ee) and [license](https://github.com/formbricks/formbricks/blob/main/apps/web/modules/ee/LICENSE) for the enterprise functionality can be found in the `/apps/web/modules/ee` folder of this repository. This additional functionality is not part of the AGPLv3 licensed Formbricks core and is designed to meet the needs of larger teams and enterprises. This advanced functionality is already included in the Docker images, but you need an [Enterprise License Key](https://formbricks.com/docs/self-hosting/enterprise) to unlock it.
+Additional to the AGPL licensed SalamRuby core, this repository contains code licensed under an Enterprise license. The [code](https://github.com/salamruby/salamruby/tree/main/apps/web/modules/ee) and [license](https://github.com/salamruby/salamruby/blob/main/apps/web/modules/ee/LICENSE) for the enterprise functionality can be found in the `/apps/web/modules/ee` folder of this repository. This additional functionality is not part of the AGPLv3 licensed SalamRuby core and is designed to meet the needs of larger teams and enterprises. This advanced functionality is already included in the Docker images, but you need an [Enterprise License Key](https://salamruby.com/docs/self-hosting/enterprise) to unlock it.
 
-### White-Labeling Formbricks and Other Licensing Needs
+### White-Labeling SalamRuby and Other Licensing Needs
 
-We currently do not offer Formbricks white-labeled. That means that we don't sell a license which let's other companies resell Formbricks to third parties under their name nor take parts (like the survey editor) out of Formbricks to add to their own software products. Any other needs? [Send us an email](mailto:hola@formbricks.com).
+We currently do not offer SalamRuby white-labeled. That means that we don't sell a license which let's other companies resell SalamRuby to third parties under their name nor take parts (like the survey editor) out of SalamRuby to add to their own software products. Any other needs? [Send us an email](mailto:hola@salamruby.com).
 
 ### Why charge for Enterprise Features?
 
-The Enterprise Edition allows us to fund the development of Formbricks sustainably. It guarantees that the free and open-source surveying infrastructure we're building will be around for decades to come.
+The Enterprise Edition allows us to fund the development of SalamRuby sustainably. It guarantees that the free and open-source surveying infrastructure we're building will be around for decades to come.
 
 <a id="readme-de"></a>

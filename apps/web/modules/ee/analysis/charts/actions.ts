@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { ZChartQuery } from "@formbricks/types/analysis";
-import { ZId } from "@formbricks/types/common";
-import { OperationNotAllowedError } from "@formbricks/types/errors";
+import { ZChartQuery } from "@salamruby/types/analysis";
+import { ZId } from "@salamruby/types/common";
+import { OperationNotAllowedError } from "@salamruby/types/errors";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { AuthenticatedActionClientCtx } from "@/lib/utils/action-client/types/context";
 import { executeTenantScopedQuery } from "@/modules/ee/analysis/api/lib/cube-client";

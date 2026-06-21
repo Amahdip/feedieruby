@@ -1,4 +1,4 @@
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { deleteWebhook, getWebhook } from "@/app/api/v1/webhooks/[webhookId]/lib/webhook";
 import { responses } from "@/app/lib/api/response";
 import { THandlerParams, withV1ApiWrapper } from "@/app/lib/api/with-api-logging";

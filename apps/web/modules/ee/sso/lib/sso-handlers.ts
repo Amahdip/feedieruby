@@ -1,8 +1,8 @@
 import type { Account } from "next-auth";
-import { prisma } from "@formbricks/database";
-import type { IdentityProvider, Organization } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import type { TUser, TUserNotificationSettings } from "@formbricks/types/user";
+import { prisma } from "@salamruby/database";
+import type { IdentityProvider, Organization } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import type { TUser, TUserNotificationSettings } from "@salamruby/types/user";
 import { DEFAULT_TEAM_ID, SKIP_INVITE_FOR_SSO } from "@/lib/constants";
 import { getIsFreshInstance } from "@/lib/instance/service";
 import { verifyInviteToken } from "@/lib/jwt";
@@ -477,7 +477,7 @@ export const handleSsoCallback = async ({
 }): Promise<boolean | string> => {
   const contextLogger = logger.withContext({
     correlationId: crypto.randomUUID(),
-    name: "formbricks",
+    name: "salamruby",
   });
 
   contextLogger.debug(

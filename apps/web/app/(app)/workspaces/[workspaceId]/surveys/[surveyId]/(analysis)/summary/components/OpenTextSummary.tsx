@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurvey, TSurveyElementSummaryOpenText } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TSurvey, TSurveyElementSummaryOpenText } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { timeSince } from "@/lib/time";
 import { getContactIdentifier } from "@/lib/utils/contact";

@@ -1,8 +1,8 @@
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   DEFAULT_LOCALE,
   ENTERPRISE_LICENSE_REQUEST_FORM_URL,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   IS_STORAGE_CONFIGURED,
   MAIL_FROM,
   SURVEY_BG_COLORS,
@@ -125,11 +125,11 @@ export const SurveyEditorPage = async (props: {
       isUserTargetingAllowed={isUserTargetingAllowed}
       isSpamProtectionAllowed={isSpamProtectionAllowed}
       workspaceLanguages={workspaceLanguages}
-      isFormbricksCloud={IS_FORMBRICKS_CLOUD}
+      isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
       isUnsplashConfigured={!!UNSPLASH_ACCESS_KEY}
       isCxMode={isCxMode}
       locale={locale ?? DEFAULT_LOCALE}
-      mailFrom={MAIL_FROM ?? "hola@formbricks.com"}
+      mailFrom={MAIL_FROM ?? "hola@salamruby.com"}
       isSurveyFollowUpsAllowed={isSurveyFollowUpsAllowed}
       userEmail={userEmail}
       teamMemberDetails={teamMemberDetails}

@@ -1,10 +1,10 @@
-import { type TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { type TResponseData, type TResponseVariables } from "@formbricks/types/responses";
-import { type TActionCalculate, type TSurveyBlockLogicAction } from "@formbricks/types/surveys/blocks";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/constants";
-import type { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { type TConditionGroup, type TSingleCondition } from "@formbricks/types/surveys/logic";
-import { type TSurveyVariable } from "@formbricks/types/surveys/types";
+import { type TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { type TResponseData, type TResponseVariables } from "@salamruby/types/responses";
+import { type TActionCalculate, type TSurveyBlockLogicAction } from "@salamruby/types/surveys/blocks";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/constants";
+import type { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { type TConditionGroup, type TSingleCondition } from "@salamruby/types/surveys/logic";
+import { type TSurveyVariable } from "@salamruby/types/surveys/types";
 import { getLocalizedValue } from "@/lib/i18n";
 import { getElementsFromSurveyBlocks } from "./utils";
 

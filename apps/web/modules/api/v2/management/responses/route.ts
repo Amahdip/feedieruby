@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { Response } from "@formbricks/database/prisma";
+import { Response } from "@salamruby/database/prisma";
 import { sendToPipeline } from "@/app/lib/pipelines";
 import { formatValidationErrorsForV2Api, validateResponseData } from "@/modules/api/lib/validation";
 import { authenticatedApiClient } from "@/modules/api/v2/auth/authenticated-api-client";

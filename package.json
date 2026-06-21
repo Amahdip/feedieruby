@@ -1,5 +1,5 @@
 {
-  "name": "formbricks",
+  "name": "salamruby",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -34,11 +34,11 @@
     "test-e2e:azure": "pnpm test:e2e -c playwright.service.config.ts --workers=10",
     "prepare": "husky install",
     "storybook": "turbo run storybook",
-    "fb-migrate-dev": "pnpm --filter @formbricks/database create-migration && pnpm --filter @formbricks/database generate",
-    "i18n:surveys:generate": "pnpm --filter @formbricks/surveys i18n:generate",
-    "i18n:web:generate": "pnpm --filter @formbricks/web i18n:generate",
+    "fb-migrate-dev": "pnpm --filter @salamruby/database create-migration && pnpm --filter @salamruby/database generate",
+    "i18n:surveys:generate": "pnpm --filter @salamruby/surveys i18n:generate",
+    "i18n:web:generate": "pnpm --filter @salamruby/web i18n:generate",
     "generate-translations": "pnpm i18n:web:generate && pnpm i18n:surveys:generate",
-    "scan-translations": "pnpm --filter @formbricks/i18n-utils scan-translations",
+    "scan-translations": "pnpm --filter @salamruby/i18n-utils scan-translations",
     "i18n": "pnpm generate-translations && pnpm scan-translations",
     "i18n:validate": "pnpm scan-translations",
     "dev:setup": "bash scripts/setup-dev-env.sh"
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@azure/playwright": "1.1.5",
-    "@formbricks/eslint-config": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
     "@playwright/test": "1.58.2",
     "dotenv": "17.3.1",
     "eslint": "8.57.1",

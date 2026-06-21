@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { ZWidgetLayout } from "@formbricks/types/analysis";
-import { ZId } from "@formbricks/types/common";
-import { OperationNotAllowedError } from "@formbricks/types/errors";
+import { ZWidgetLayout } from "@salamruby/types/analysis";
+import { ZId } from "@salamruby/types/common";
+import { OperationNotAllowedError } from "@salamruby/types/errors";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { AuthenticatedActionClientCtx } from "@/lib/utils/action-client/types/context";
 import { checkWorkspaceAccess } from "@/modules/ee/analysis/lib/access";

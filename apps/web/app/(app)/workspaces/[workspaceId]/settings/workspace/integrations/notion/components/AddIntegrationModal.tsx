@@ -6,16 +6,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
-import { TIntegrationInput } from "@formbricks/types/integration";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
+import { TIntegrationInput } from "@salamruby/types/integration";
 import {
   TIntegrationNotion,
   TIntegrationNotionConfigData,
   TIntegrationNotionDatabase,
-} from "@formbricks/types/integration/notion";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+} from "@salamruby/types/integration/notion";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { createOrUpdateIntegrationAction } from "@/app/(app)/workspaces/[workspaceId]/settings/workspace/integrations/actions";
 import {
   MappingRow,
@@ -347,7 +347,7 @@ export const AddIntegrationModal = ({
                 {selectedDatabase && selectedSurvey && (
                   <div>
                     <Label>
-                      {t("workspace.integrations.notion.map_formbricks_fields_to_notion_property")}
+                      {t("workspace.integrations.notion.map_salamruby_fields_to_notion_property")}
                     </Label>
                     <div className="mt-1 space-y-2 overflow-y-auto">
                       {mapping.map((m, idx) => (

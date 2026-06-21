@@ -3,7 +3,7 @@
 import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TFeedbackSourceType, THubFieldType, ZHubFieldType } from "@formbricks/types/feedback-source";
+import { TFeedbackSourceType, THubFieldType, ZHubFieldType } from "@salamruby/types/feedback-source";
 import { routeResponseValueTarget } from "@/lib/feedback-source/utils";
 import { CSV_FIELD_GROUPS, CSV_TARGET_FIELDS, TFieldMapping, TSourceField, TTargetField } from "../types";
 import { TMappingConfidence } from "../utils";

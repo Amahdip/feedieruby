@@ -1,4 +1,4 @@
-import { TContactAttributeDataType } from "@formbricks/types/contact-attribute-key";
+import { TContactAttributeDataType } from "@salamruby/types/contact-attribute-key";
 import { formatDateForDisplay } from "@/lib/utils/datetime";
 
 /**

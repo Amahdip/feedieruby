@@ -1,8 +1,8 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma, Response } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { TSurveyQuota } from "@formbricks/types/quota";
+import { prisma } from "@salamruby/database";
+import { Prisma, Response } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { TSurveyQuota } from "@salamruby/types/quota";
 import { toJsWorkspaceStateSurvey } from "@/lib/survey/client-utils";
 import { getSurvey } from "@/lib/survey/service";
 import { getQuotas } from "./quotas";

@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, InvalidInputError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, InvalidInputError } from "@salamruby/types/errors";
 import { buildWhereClause } from "@/modules/survey/lib/utils";
 import { decodeSurveyListPageCursor, encodeSurveyListPageCursor, getSurveyListPage } from "./survey-page";
 
@@ -12,7 +12,7 @@ vi.mock("@/modules/survey/lib/utils", () => ({
   buildWhereClause: vi.fn(() => ({ AND: [] })),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     survey: {
       findMany: vi.fn(),
@@ -23,7 +23,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },

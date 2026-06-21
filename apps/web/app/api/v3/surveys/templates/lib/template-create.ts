@@ -1,9 +1,9 @@
 import "server-only";
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { ZSurveyType } from "@formbricks/types/surveys/types";
-import type { TTemplate } from "@formbricks/types/templates";
-import { ZUserLocale } from "@formbricks/types/user";
+import { logger } from "@salamruby/logger";
+import { ZSurveyType } from "@salamruby/types/surveys/types";
+import type { TTemplate } from "@salamruby/types/templates";
+import { ZUserLocale } from "@salamruby/types/user";
 import { requireV3WorkspaceAccess } from "@/app/api/v3/lib/auth";
 import { problemBadRequest, problemInternalError } from "@/app/api/v3/lib/response";
 import type { TV3AuditLog, TV3Authentication } from "@/app/api/v3/lib/types";

@@ -1,6 +1,6 @@
 ---
 title: "Code Formatting"
-description: "Standards for consistent code formatting across the Formbricks codebase"
+description: "Standards for consistent code formatting across the SalamRuby codebase"
 icon: code
 ---
 
@@ -8,7 +8,7 @@ icon: code
 ## Core Configuration
 
 ### Prettier Config
-Formbricks uses a standardized Prettier configuration defined in `@formbricks/config-prettier`:
+SalamRuby uses a standardized Prettier configuration defined in `@salamruby/config-prettier`:
 ```javascript
 module.exports = {
   bracketSpacing: true,
@@ -24,7 +24,7 @@ module.exports = {
     "(.*)/__mocks__/(.*)",
     "server-only",
     "<THIRD_PARTY_MODULES>",
-    "^@formbricks/(.*)$",
+    "^@salamruby/(.*)$",
     "^~/(.*)$",
     "^[./]",
   ],
@@ -45,13 +45,13 @@ All imports follow a strict ordering:
 1. Mocks (for testing)
 2. Server-only imports
 3. Third-party modules
-4. Internal `@formbricks/*` modules
+4. Internal `@salamruby/*` modules
 5. Local aliases (`~/*)
 6. Relative imports
 
 ### TypeScript Config
 - Strict TypeScript checking enabled
-- Consistent use of `tsconfig.json` extending from `@formbricks/config-typescript`
+- Consistent use of `tsconfig.json` extending from `@salamruby/config-typescript`
 - Example configuration:
 
 ```json
@@ -63,7 +63,7 @@ All imports follow a strict ordering:
     "resolveJsonModule": true,
     "strict": true
   },
-  "extends": "@formbricks/config-typescript/js-library.json",
+  "extends": "@salamruby/config-typescript/js-library.json",
   "include": ["src", "package.json"]
 }
 ```
@@ -130,7 +130,7 @@ Using Husky and lint-staged for automated checks:
 ```
 
 ### ESLint Configuration
-Each package extends from `@formbricks/eslint-config` with specific presets:
+Each package extends from `@salamruby/eslint-config` with specific presets:
 - `library.js` for packages
 - `next.js` for Next.js applications
 - `react.js` for React applications
@@ -181,4 +181,4 @@ Each package extends from `@formbricks/eslint-config` with specific presets:
    - Use JSDoc for public APIs
    - Keep comments current with code changes
 
-These standards ensure consistency across the Formbricks codebase while maintaining high code quality and developer productivity.
+These standards ensure consistency across the SalamRuby codebase while maintaining high code quality and developer productivity.

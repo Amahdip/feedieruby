@@ -1,10 +1,10 @@
-# @formbricks/database
+# @salamruby/database
 
-The database package for the Formbricks monorepo, providing centralized database schema management, migration handling, and type definitions for the entire platform.
+The database package for the SalamRuby monorepo, providing centralized database schema management, migration handling, and type definitions for the entire platform.
 
 ## Overview
 
-This package serves as the central database layer for Formbricks, containing:
+This package serves as the central database layer for SalamRuby, containing:
 
 - **Prisma Schema**: Complete database schema definition with PostgreSQL support
 - **Migration System**: Custom migration management for both schema and data migrations
@@ -75,7 +75,7 @@ Each subdirectory under `packages/database/migration` represents a single migrat
 
 ### Root Level Commands
 
-Run these commands from the root directory of the Formbricks monorepo:
+Run these commands from the root directory of the SalamRuby monorepo:
 
 - **`pnpm fb-migrate-dev`**: Create and apply schema migrations
   - Prompts for migration name
@@ -137,8 +137,8 @@ The `pnpm db:seed` script:
 
 1. **Infrastructure**: Upserts a default organization and workspace.
 2. **Users**: Creates default users with the following credentials (passwords are hashed):
-   - **Admin**: `admin@formbricks.com` / `password123`
-   - **Manager**: `manager@formbricks.com` / `password123`
+   - **Admin**: `admin@salamruby.com` / `password123`
+   - **Manager**: `manager@salamruby.com` / `password123`
 3. **Surveys**: Creates complex sample surveys (Kitchen Sink, CSAT, Draft, etc.) in the **Production** workspace.
 4. **Responses**: Generates ~50 realistic responses and displays for each survey.
 
@@ -170,8 +170,8 @@ By default, the seed script uses `upsert` to ensure it can be run multiple times
 
 ```typescript
 import { createId } from "@paralleldrive/cuid2";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
 import type { MigrationScript } from "../../src/scripts/migration-runner";
 
 export const myDataMigration: MigrationScript = {
@@ -275,4 +275,4 @@ When making changes to the database schema:
 4. Test migrations thoroughly in development before applying to production
 5. Document any breaking changes or special considerations
 
-For more information about the Formbricks project structure, see the main repository README.
+For more information about the SalamRuby project structure, see the main repository README.

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
+import { prisma } from "@salamruby/database";
 import * as crypto from "@/lib/crypto";
 import {
   createAccountDeletionSsoReauthIntent,
@@ -89,7 +89,7 @@ vi.mock("@/lib/constants", () => ({
 }));
 
 // Mock prisma
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     user: {
       findUnique: vi.fn(),
@@ -98,7 +98,7 @@ vi.mock("@formbricks/database", () => ({
 }));
 
 // Mock logger
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     warn: vi.fn(),
@@ -398,7 +398,7 @@ describe("JWT Functions - Comprehensive Security Tests", () => {
       expect(result).toBeNull();
 
       // Verify error logging
-      const { logger } = await import("@formbricks/logger");
+      const { logger } = await import("@salamruby/logger");
       expect(logger.error).toHaveBeenCalledWith(expect.any(Error), "Survey link token verification failed");
     });
 
@@ -495,7 +495,7 @@ describe("JWT Functions - Comprehensive Security Tests", () => {
       await expect(verifyToken(invalidToken)).rejects.toThrow("Invalid token");
 
       // Verify both methods were attempted
-      const { logger } = await import("@formbricks/logger");
+      const { logger } = await import("@salamruby/logger");
       expect(logger.error).toHaveBeenCalledWith(
         expect.any(Error),
         "Token verification failed with new method"

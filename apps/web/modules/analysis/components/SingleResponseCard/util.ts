@@ -1,4 +1,4 @@
-import { TResponseDataValue } from "@formbricks/types/responses";
+import { TResponseDataValue } from "@salamruby/types/responses";
 
 export const isValidValue = (value: TResponseDataValue) => {
   return (

@@ -1,4 +1,4 @@
-import { TUserNotificationSettings } from "@formbricks/types/user";
+import { TUserNotificationSettings } from "@salamruby/types/user";
 
 export interface Membership {
   organization: {

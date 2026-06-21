@@ -4,7 +4,7 @@ import { SparklesIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type ReactNode, useRef, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import type { TUserLocale } from "@formbricks/types/user";
+import type { TUserLocale } from "@salamruby/types/user";
 import type { TAIUnavailableReason } from "@/lib/ai/service";
 import { CreateWithAIForm } from "@/modules/survey/components/template-list/components/create-with-ai-form";
 import { Button } from "@/modules/ui/components/button";

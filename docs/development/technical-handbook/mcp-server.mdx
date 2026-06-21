@@ -1,13 +1,13 @@
 ---
 title: "MCP Server"
-description: "Configure and use the Formbricks v3 Surveys MCP server"
+description: "Configure and use the SalamRuby v3 Surveys MCP server"
 icon: "robot"
 ---
 
 ## Overview
 
-The Formbricks MCP server exposes a small v3 Surveys tool surface for AI agents. It runs inside the
-Formbricks web app at `/api/mcp` and reuses the same v3 Surveys API authentication, authorization,
+The SalamRuby MCP server exposes a small v3 Surveys tool surface for AI agents. It runs inside the
+SalamRuby web app at `/api/mcp` and reuses the same v3 Surveys API authentication, authorization,
 rate limiting, response handling, and audit logging paths as the REST routes.
 
 <Note>
@@ -17,10 +17,10 @@ rate limiting, response handling, and audit logging paths as the REST routes.
 
 ## Endpoint
 
-Use the streamable HTTP MCP endpoint on the Formbricks app:
+Use the streamable HTTP MCP endpoint on the SalamRuby app:
 
 ```text
-https://app.formbricks.com/api/mcp
+https://app.salamruby.com/api/mcp
 ```
 
 For local development:
@@ -30,11 +30,11 @@ http://localhost:3000/api/mcp
 ```
 
 The route supports `POST` requests, runs with the Next.js Node.js runtime, and sets private no-store
-response headers. Browser-origin MCP requests must come from the configured public Formbricks origin.
+response headers. Browser-origin MCP requests must come from the configured public SalamRuby origin.
 
 ## Authentication
 
-Authenticate with a Formbricks API key in a request header:
+Authenticate with a SalamRuby API key in a request header:
 
 ```http
 Authorization: Bearer fbk_...
@@ -67,26 +67,26 @@ API key permissions are enforced through the same workspace access checks as the
 
 ## Local Setup
 
-Start Formbricks and prepare the database:
+Start SalamRuby and prepare the database:
 
 ```bash
 pnpm db:up
 pnpm db:migrate:dev
-pnpm --filter @formbricks/web dev
+pnpm --filter @salamruby/web dev
 ```
 
-Create an API key in the Formbricks app with access to the target workspace. Use the least privileged
+Create an API key in the SalamRuby app with access to the target workspace. Use the least privileged
 permission needed by the agent workflow.
 
 Verify that the MCP endpoint can list tools:
 
 ```bash
-export FORMBRICKS_MCP_API_KEY="fbk_..."
+export SALAMRUBY_MCP_API_KEY="fbk_..."
 
 curl -sS -X POST http://localhost:3000/api/mcp \
   -H "Accept: application/json, text/event-stream" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $FORMBRICKS_MCP_API_KEY" \
+  -H "Authorization: Bearer $SALAMRUBY_MCP_API_KEY" \
   --data '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
 ```
 
@@ -95,42 +95,42 @@ curl -sS -X POST http://localhost:3000/api/mcp \
 Store the API key in the shell environment:
 
 ```bash
-export FORMBRICKS_MCP_API_KEY="fbk_..."
+export SALAMRUBY_MCP_API_KEY="fbk_..."
 ```
 
 For Codex Desktop on macOS, persist the value in the launch environment and restart Codex Desktop:
 
 ```bash
-launchctl setenv FORMBRICKS_MCP_API_KEY "fbk_..."
+launchctl setenv SALAMRUBY_MCP_API_KEY "fbk_..."
 ```
 
 Register the local MCP server:
 
 ```bash
-codex mcp add formbricks-local \
+codex mcp add salamruby-local \
   --url http://localhost:3000/api/mcp \
-  --bearer-token-env-var FORMBRICKS_MCP_API_KEY
+  --bearer-token-env-var SALAMRUBY_MCP_API_KEY
 ```
 
 Equivalent Codex config:
 
 ```toml
-[mcp_servers.formbricks-local]
+[mcp_servers.salamruby-local]
 url = "http://localhost:3000/api/mcp"
-bearer_token_env_var = "FORMBRICKS_MCP_API_KEY"
+bearer_token_env_var = "SALAMRUBY_MCP_API_KEY"
 ```
 
 Verify the registration:
 
 ```bash
 codex mcp list
-codex mcp get formbricks-local
+codex mcp get salamruby-local
 ```
 
 Then ask Codex to use the configured server:
 
 ```text
-Use the formbricks-local MCP server to list surveys for workspace clxx1234567890123456789012.
+Use the salamruby-local MCP server to list surveys for workspace clxx1234567890123456789012.
 ```
 
 ## Claude Configuration
@@ -140,21 +140,21 @@ Use the formbricks-local MCP server to list surveys for workspace clxx1234567890
 Set the API key:
 
 ```bash
-export FORMBRICKS_MCP_API_KEY="fbk_..."
+export SALAMRUBY_MCP_API_KEY="fbk_..."
 ```
 
 Add the HTTP MCP server:
 
 ```bash
-claude mcp add --transport http formbricks-local http://localhost:3000/api/mcp \
-  --header "Authorization: Bearer $FORMBRICKS_MCP_API_KEY"
+claude mcp add --transport http salamruby-local http://localhost:3000/api/mcp \
+  --header "Authorization: Bearer $SALAMRUBY_MCP_API_KEY"
 ```
 
 Verify it:
 
 ```bash
 claude mcp list
-claude mcp get formbricks-local
+claude mcp get salamruby-local
 ```
 
 For a project-shared Claude Code configuration, use `.mcp.json` and keep the API key outside git:
@@ -162,9 +162,9 @@ For a project-shared Claude Code configuration, use `.mcp.json` and keep the API
 ```json
 {
   "mcpServers": {
-    "formbricks-local": {
+    "salamruby-local": {
       "headers": {
-        "Authorization": "Bearer ${FORMBRICKS_MCP_API_KEY}"
+        "Authorization": "Bearer ${SALAMRUBY_MCP_API_KEY}"
       },
       "type": "http",
       "url": "http://localhost:3000/api/mcp"
@@ -173,7 +173,7 @@ For a project-shared Claude Code configuration, use `.mcp.json` and keep the API
 }
 ```
 
-Claude Code will fail to parse this config if `FORMBRICKS_MCP_API_KEY` is not set.
+Claude Code will fail to parse this config if `SALAMRUBY_MCP_API_KEY` is not set.
 
 ### Claude Desktop
 
@@ -191,9 +191,9 @@ Example config:
 ```json
 {
   "mcpServers": {
-    "formbricks-local": {
+    "salamruby-local": {
       "headers": {
-        "Authorization": "Bearer ${FORMBRICKS_MCP_API_KEY}"
+        "Authorization": "Bearer ${SALAMRUBY_MCP_API_KEY}"
       },
       "type": "http",
       "url": "http://localhost:3000/api/mcp"
@@ -205,7 +205,7 @@ Example config:
 Set the API key in the Desktop launch environment before opening Claude Desktop:
 
 ```bash
-launchctl setenv FORMBRICKS_MCP_API_KEY "fbk_..."
+launchctl setenv SALAMRUBY_MCP_API_KEY "fbk_..."
 ```
 
 If a Claude Desktop version only supports stdio MCP servers, use Claude Code for the HTTP endpoint or

@@ -1,8 +1,9 @@
 import { CalendarClockIcon, CheckCircle2Icon, HelpCircleIcon, PauseCircleIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TSurveyClosedMessage } from "@formbricks/types/surveys/types";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TSurveyClosedMessage } from "@salamruby/types/surveys/types";
+import { HIDE_SALAMRUBY_EXTERNAL_LINKS } from "@/lib/brand-color";
 import { getTranslate } from "@/lingodotdev/server";
 import { Button } from "@/modules/ui/components/button";
 import footerLogo from "../lib/footerlogo.svg";
@@ -63,15 +64,15 @@ export const SurveyInactive = async ({
         {icons[status]}
         <h1 className="text-4xl font-bold text-slate-800">{title}</h1>
         <p className="text-lg leading-10 text-slate-500">{description}</p>
-        {showCTA && (
+        {showCTA && !HIDE_SALAMRUBY_EXTERNAL_LINKS && (
           <Button className="mt-2" asChild>
-            <Link href="https://formbricks.com">{t("s.create_your_own")}</Link>
+            <Link href="https://salamruby.com">{t("s.create_your_own")}</Link>
           </Button>
         )}
       </div>
-      {(!workspace || workspace.linkSurveyBranding) && (
+      {!HIDE_SALAMRUBY_EXTERNAL_LINKS && (!workspace || workspace.linkSurveyBranding) && (
         <div>
-          <Link href="https://formbricks.com">
+          <Link href="https://salamruby.com">
             <Image src={footerLogo} alt="Brand logo" className="mx-auto w-40" />
           </Link>
         </div>

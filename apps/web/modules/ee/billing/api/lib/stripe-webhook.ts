@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import {
   applyPendingUpgradeFromSetupCheckout,
   findOrganizationIdByStripeCustomerId,

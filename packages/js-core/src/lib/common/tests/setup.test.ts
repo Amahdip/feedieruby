@@ -16,7 +16,7 @@ const setItemMock = localStorage.setItem as unknown as Mock;
 
 // 2) Mock Config
 vi.mock("@/lib/common/config", () => ({
-  JS_LOCAL_STORAGE_KEY: "formbricks-js",
+  JS_LOCAL_STORAGE_KEY: "salamruby-js",
   Config: {
     getInstance: vi.fn(() => ({
       get: vi.fn(),
@@ -243,7 +243,7 @@ describe("setup.ts", () => {
       const result = await setup({ workspaceId: "ws_123", appUrl: "https://my.url" });
       expect(result.ok).toBe(true);
       expect(mockLogger.debug).toHaveBeenCalledWith(
-        "Formbricks is in error state, but debug mode is active. Resetting config and continuing."
+        "SalamRuby is in error state, but debug mode is active. Resetting config and continuing."
       );
     });
 
@@ -420,7 +420,7 @@ describe("setup.ts", () => {
       });
 
       await expect(setup({ workspaceId: "ws_123", appUrl: "https://urlX" })).rejects.toThrow(
-        "Could not set up formbricks"
+        "Could not set up salamruby"
       );
     });
 
@@ -481,7 +481,7 @@ describe("setup.ts", () => {
 
       await expect(async () => {
         await handleErrorOnFirstSetup(errorObj);
-      }).rejects.toThrow("Could not set up formbricks");
+      }).rejects.toThrow("Could not set up salamruby");
 
       expect(setItemMock).toHaveBeenCalledWith(
         JS_LOCAL_STORAGE_KEY,

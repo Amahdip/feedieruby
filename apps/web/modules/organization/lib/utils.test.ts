@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import { describe, expect, test, vi } from "vitest";
-import { AuthenticationError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TMembership } from "@formbricks/types/memberships";
-import { TOrganization } from "@formbricks/types/organizations";
+import { AuthenticationError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TMembership } from "@salamruby/types/memberships";
+import { TOrganization } from "@salamruby/types/organizations";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getOrganization } from "@/lib/organization/service";
 import { getOrganizationAuth } from "./utils";

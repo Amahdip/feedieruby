@@ -1,11 +1,11 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
-import { TMembership } from "@formbricks/types/memberships";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
+import { TMembership } from "@salamruby/types/memberships";
 import { getWorkspacesByUserId, getWritableWorkspacesByUserId } from "./workspace";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     workspace: {
       findMany: vi.fn(),

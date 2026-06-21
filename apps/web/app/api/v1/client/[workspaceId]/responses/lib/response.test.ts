@@ -1,14 +1,14 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   UniqueConstraintError,
-} from "@formbricks/types/errors";
-import { TSurveyQuota } from "@formbricks/types/quota";
-import { TResponseInput } from "@formbricks/types/responses";
+} from "@salamruby/types/errors";
+import { TSurveyQuota } from "@salamruby/types/quota";
+import { TResponseInput } from "@salamruby/types/responses";
 import { getOrganization } from "@/lib/organization/service";
 import { calculateTtcTotal } from "@/lib/response/utils";
 import { getOrganizationIdFromWorkspaceId } from "@/lib/utils/helper";
@@ -17,11 +17,11 @@ import { createResponse, createResponseWithQuotaEvaluation } from "./response";
 
 vi.mock("server-only", () => ({}));
 
-let mockIsFormbricksCloud = false;
+let mockIsSalamRubyCloud = false;
 
 vi.mock("@/lib/constants", () => ({
-  get IS_FORMBRICKS_CLOUD() {
-    return mockIsFormbricksCloud;
+  get IS_SALAMRUBY_CLOUD() {
+    return mockIsSalamRubyCloud;
   },
   ENCRYPTION_KEY: "test",
 }));
@@ -42,7 +42,7 @@ vi.mock("@/lib/utils/validate", () => ({
   validateInputs: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     response: {
       create: vi.fn(),
@@ -51,7 +51,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },
@@ -122,7 +122,7 @@ describe("createResponse", () => {
   });
 
   afterEach(() => {
-    mockIsFormbricksCloud = false;
+    mockIsSalamRubyCloud = false;
   });
 
   test("should handle finished response and calculate TTC", async () => {
@@ -193,7 +193,7 @@ describe("createResponseWithQuotaEvaluation", () => {
   });
 
   afterEach(() => {
-    mockIsFormbricksCloud = false;
+    mockIsSalamRubyCloud = false;
   });
 
   test("should return response without quotaFull when no quota violations", async () => {

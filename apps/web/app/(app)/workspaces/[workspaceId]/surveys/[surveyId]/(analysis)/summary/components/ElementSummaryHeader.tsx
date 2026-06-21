@@ -3,8 +3,8 @@
 import { InboxIcon } from "lucide-react";
 import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurvey, TSurveyElementSummary } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+import { TSurvey, TSurveyElementSummary } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { recallToHeadline } from "@/lib/utils/recall";
 import { formatTextWithSlashes } from "@/modules/survey/editor/lib/utils";
 import { getElementTypes } from "@/modules/survey/lib/elements";
@@ -40,14 +40,14 @@ export const ElementSummaryHeader = ({
         </h3>
       </div>
       <div className="flex gap-x-2 text-xs font-semibold text-slate-600 md:text-sm">
-        <div className="flex items-center rounded-lg bg-slate-100 p-2">
-          {elementType && <elementType.icon className="mr-2 size-4" />}
+        <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+          {elementType && <elementType.icon className="size-4 shrink-0" />}
           {elementType ? elementType.label : t("workspace.surveys.summary.unknown_question_type")}{" "}
           {t("common.question")}
         </div>
         {showResponses && (
-          <div className="flex items-center rounded-lg bg-slate-100 p-2">
-            <InboxIcon className="mr-2 size-4" />
+          <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+            <InboxIcon className="size-4 shrink-0" />
             {t("common.count_responses", { count: elementSummary.responseCount })}
           </div>
         )}

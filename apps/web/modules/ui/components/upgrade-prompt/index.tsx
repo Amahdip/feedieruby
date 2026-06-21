@@ -3,6 +3,7 @@
 import { KeyIcon } from "lucide-react";
 import Link from "next/link";
 import posthog from "posthog-js";
+import { HIDE_ENTERPRISE_UPSELL } from "@/lib/brand-color";
 import { Button } from "@/modules/ui/components/button";
 
 export type ModalButton = {
@@ -19,6 +20,10 @@ interface UpgradePromptProps {
 }
 
 export const UpgradePrompt = ({ title, description, buttons, feature }: UpgradePromptProps) => {
+  if (HIDE_ENTERPRISE_UPSELL) {
+    return null;
+  }
+
   const [primaryButton, secondaryButton] = buttons;
 
   const handlePrimaryClick = () => {

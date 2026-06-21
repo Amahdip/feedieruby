@@ -2,7 +2,7 @@
 
 import { InboxIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { TSurvey, TSurveyElementSummaryCta } from "@formbricks/types/surveys/types";
+import { TSurvey, TSurveyElementSummaryCta } from "@salamruby/types/surveys/types";
 import { ProgressBar } from "@/modules/ui/components/progress-bar";
 import { convertFloatToNDecimal } from "../lib/utils";
 import { ElementSummaryHeader } from "./ElementSummaryHeader";
@@ -23,17 +23,17 @@ export const CTASummary = ({ elementSummary, survey }: CTASummaryProps) => {
         showResponses={false}
         additionalInfo={
           <>
-            <div className="flex items-center rounded-lg bg-slate-100 p-2">
-              <InboxIcon className="mr-2 size-4" />
+            <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+              <InboxIcon className="size-4 shrink-0" />
               {`${elementSummary.impressionCount} ${t("common.impressions")}`}
             </div>
-            <div className="flex items-center rounded-lg bg-slate-100 p-2">
-              <InboxIcon className="mr-2 size-4" />
+            <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+              <InboxIcon className="size-4 shrink-0" />
               {`${elementSummary.clickCount} ${t("common.clicks")}`}
             </div>
             {!elementSummary.element.required && (
-              <div className="flex items-center rounded-lg bg-slate-100 p-2">
-                <InboxIcon className="mr-2 size-4" />
+              <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+                <InboxIcon className="size-4 shrink-0" />
                 {`${elementSummary.skipCount} ${t("common.skips")}`}
               </div>
             )}

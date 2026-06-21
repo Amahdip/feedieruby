@@ -1,10 +1,10 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ZId, ZStorageUrl } from "@formbricks/types/common";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { TOrganizationWhitelabel } from "@formbricks/types/organizations";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ZId, ZStorageUrl } from "@salamruby/types/common";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { TOrganizationWhitelabel } from "@salamruby/types/organizations";
 import { validateInputs } from "@/lib/utils/validate";
 
 export const updateOrganizationFaviconUrl = async (

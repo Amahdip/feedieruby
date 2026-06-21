@@ -6,9 +6,9 @@ export const ToasterClient = () => {
   return (
     <Toaster
       toastOptions={{
-        success: { className: "formbricks__toast__success" },
+        success: { className: "salamruby__toast__success" },
         error: {
-          className: "formbricks__toast__error",
+          className: "salamruby__toast__error",
         },
       }}
     />

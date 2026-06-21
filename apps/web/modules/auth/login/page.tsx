@@ -31,7 +31,7 @@ import { LoginForm } from "./components/login-form";
 
 export const metadata: Metadata = {
   title: "Login",
-  description: "Open-source Experience Management. Free & open source.",
+  description: "Log in to salamruby",
 };
 
 export const LoginPage = async ({
@@ -60,7 +60,7 @@ export const LoginPage = async ({
   const samlSsoEnabled = isSamlSsoEnabled && SAML_OAUTH_ENABLED;
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-[#D9F6F4]">
+    <div className="flex min-h-screen w-full items-center justify-center bg-slate-50">
       <FormWrapper>
         <LoginForm
           emailAuthEnabled={EMAIL_AUTH_ENABLED}

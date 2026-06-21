@@ -5,13 +5,12 @@ import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TUserLocale } from "@formbricks/types/user";
+import type { TUserLocale } from "@salamruby/types/user";
 import { OnboardingOptionsContainer } from "@/app/(app)/(onboarding)/organizations/components/OnboardingOptionsContainer";
 import { CUSTOM_SURVEY_TEMPLATE_ID } from "@/app/lib/templates";
 import type { TAIUnavailableReason } from "@/lib/ai/service";
 import { getV3ApiErrorMessage } from "@/modules/api/lib/v3-client";
 import { useCreateSurveyFromTemplate } from "@/modules/survey/components/template-list/hooks/use-create-survey-from-template";
-import { getUnavailableMessageKey } from "@/modules/survey/components/template-list/lib/ai-create-utils";
 
 type TOnboardingSurveyPath = "scratch" | "template" | "ai";
 
@@ -28,7 +27,7 @@ export const CreateFirstSurvey = ({
   workspaceId,
   defaultLanguage,
   isAIAvailable,
-  aiUnavailableReason,
+  aiUnavailableReason: _aiUnavailableReason,
 }: Readonly<CreateFirstSurveyProps>) => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -60,20 +59,20 @@ export const CreateFirstSurvey = ({
     }
   };
 
-  const aiDisabledDescription = isAIAvailable ? undefined : t(getUnavailableMessageKey(aiUnavailableReason));
-
   const options = [
-    {
-      title: t("workspace.surveys.ai_create.create_with_ai"),
-      description: t("organizations.workspaces.new.survey.create_with_ai_description"),
-      icon: SparklesIcon,
-      disabled: !isAIAvailable,
-      disabledDescription: aiDisabledDescription,
-      onClick: () => {
-        trackPathSelected("ai");
-        router.push(`/organizations/${organizationId}/workspaces/new/ai`);
-      },
-    },
+    ...(isAIAvailable
+      ? [
+          {
+            title: t("workspace.surveys.ai_create.create_with_ai"),
+            description: t("organizations.workspaces.new.survey.create_with_ai_description"),
+            icon: SparklesIcon,
+            onClick: () => {
+              trackPathSelected("ai");
+              router.push(`/organizations/${organizationId}/workspaces/new/ai`);
+            },
+          },
+        ]
+      : []),
     {
       title: t("organizations.workspaces.new.survey.use_template"),
       description: t("organizations.workspaces.new.survey.use_template_description"),

@@ -1,17 +1,17 @@
 {
-  "name": "@formbricks/js-core",
+  "name": "@salamruby/js-core",
   "private": true,
   "type": "module",
   "license": "MIT",
   "version": "1.0.0",
-  "description": "Js core for Formbricks that contains the logic for executing the @formbricks/js library and is loaded asynchronously over the Formbricks API.",
-  "homepage": "https://formbricks.com",
+  "description": "Js core for SalamRuby that contains the logic for executing the @salamruby/js library and is loaded asynchronously over the SalamRuby API.",
+  "homepage": "https://salamruby.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/formbricks/formbricks"
+    "url": "https://github.com/salamruby/salamruby"
   },
   "keywords": [
-    "Formbricks",
+    "SalamRuby",
     "surveys",
     "experience management"
   ],
@@ -42,10 +42,10 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
-  "author": "Formbricks <hola@formbricks.com>",
+  "author": "SalamRuby <hola@salamruby.com>",
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*",
-    "@formbricks/eslint-config": "workspace:*",
+    "@salamruby/config-typescript": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
     "@vitest/coverage-v8": "4.1.6",
     "vite": "7.3.3",
     "vite-plugin-dts": "4.5.4",

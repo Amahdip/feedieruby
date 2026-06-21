@@ -5,9 +5,10 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { CheckIcon, LinkIcon, MonitorIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TSegment } from "@formbricks/types/segment";
-import { TSurvey, TSurveyType } from "@formbricks/types/surveys/types";
+import { TSegment } from "@salamruby/types/segment";
+import { TSurvey, TSurveyType } from "@salamruby/types/surveys/types";
 import { getDefaultEndingCard } from "@/app/lib/survey-builder";
+import { HIDE_APP_SURVEY_TYPE } from "@/lib/brand-color";
 import { cn } from "@/lib/cn";
 import { Alert, AlertButton, AlertDescription, AlertTitle } from "@/modules/ui/components/alert";
 import { Badge } from "@/modules/ui/components/badge";
@@ -22,6 +23,7 @@ interface HowToSendCardProps {
 
 export const HowToSendCard = ({ localSurvey, setLocalSurvey, appSetupCompleted }: HowToSendCardProps) => {
   const workspaceBasePath = `/workspaces/${localSurvey.workspaceId}`;
+  const appConnectionHref = `${workspaceBasePath}/settings/workspace/app-connection`;
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
 
@@ -82,6 +84,7 @@ export const HowToSendCard = ({ localSurvey, setLocalSurvey, appSetupCompleted }
       description: t("workspace.surveys.edit.app_survey_description"),
       comingSoon: false,
       alert: !appSetupCompleted,
+      hide: HIDE_APP_SURVEY_TYPE,
     },
   ];
 
@@ -175,16 +178,13 @@ export const HowToSendCard = ({ localSurvey, setLocalSurvey, appSetupCompleted }
                       {localSurvey.type === option.id && option.alert && (
                         <Alert variant="warning" className="mt-2">
                           <AlertTitle>
-                            {t("workspace.surveys.edit.formbricks_sdk_is_not_connected")}
+                            {t("workspace.surveys.edit.salamruby_sdk_is_not_connected")}
                           </AlertTitle>
                           <AlertDescription>
-                            {t("workspace.surveys.edit.connect_formbricks_and_launch_surveys")}
+                            {t("workspace.surveys.edit.connect_salamruby_and_launch_surveys")}
                           </AlertDescription>
-                          <AlertButton
-                            onClick={() =>
-                              window.open(`${workspaceBasePath}/${option.id}-connection`, "_blank")
-                            }>
-                            {t("common.connect_formbricks")}
+                          <AlertButton onClick={() => window.open(appConnectionHref, "_blank")}>
+                            {t("common.connect_salamruby")}
                           </AlertButton>
                         </Alert>
                       )}

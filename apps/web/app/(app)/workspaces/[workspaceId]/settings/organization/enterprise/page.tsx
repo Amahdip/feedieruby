@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { EnterpriseLicenseFeaturesTable } from "@/app/(app)/workspaces/[workspaceId]/settings/organization/enterprise/components/EnterpriseLicenseFeaturesTable";
 import { EnterpriseLicenseStatus } from "@/app/(app)/workspaces/[workspaceId]/settings/organization/enterprise/components/EnterpriseLicenseStatus";
-import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { HIDE_ENTERPRISE_SETTINGS } from "@/lib/brand-color";
+import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getBillingFallbackPath } from "@/lib/membership/navigation";
 import { getTranslate } from "@/lingodotdev/server";
 import { GRACE_PERIOD_MS, getEnterpriseLicense } from "@/modules/ee/license-check/lib/license";
@@ -17,11 +18,15 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
   const t = await getTranslate();
   const { isBilling, isMember } = await getWorkspaceAuth(params.workspaceId);
 
-  if (isBilling && IS_FORMBRICKS_CLOUD) {
-    redirect(getBillingFallbackPath(params.workspaceId, IS_FORMBRICKS_CLOUD));
+  if (HIDE_ENTERPRISE_SETTINGS) {
+    redirect(`/workspaces/${params.workspaceId}/settings/organization/general`);
   }
 
-  if (IS_FORMBRICKS_CLOUD) {
+  if (isBilling && IS_SALAMRUBY_CLOUD) {
+    redirect(getBillingFallbackPath(params.workspaceId, IS_SALAMRUBY_CLOUD));
+  }
+
+  if (IS_SALAMRUBY_CLOUD) {
     return notFound();
   }
 
@@ -35,7 +40,7 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
   const hasLicense = licenseState.status !== "no-license";
 
   const paidFeatures = [
-    t("workspace.settings.enterprise.hide_powered_by_formbricks"),
+    t("workspace.settings.enterprise.hide_powered_by_salamruby"),
     t("workspace.settings.enterprise.whitelabel_email_follow_ups"),
     t("workspace.settings.enterprise.teams_and_access_roles"),
     t("workspace.settings.enterprise.contacts_and_segments"),
@@ -93,7 +98,7 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
             </svg>
             <div className="mx-auto text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left">
               <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                {t("workspace.settings.enterprise.unlock_the_full_power_of_formbricks_free_for_30_days")}
+                {t("workspace.settings.enterprise.unlock_the_full_power_of_salamruby_free_for_30_days")}
               </h2>
               <p className="text-md mt-6 leading-8 text-slate-300">
                 {t("workspace.settings.enterprise.keep_full_control_over_your_data_privacy_and_security")}

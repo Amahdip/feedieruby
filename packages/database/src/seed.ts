@@ -1,7 +1,7 @@
 import { createId } from "@paralleldrive/cuid2";
 import bcryptjs from "bcryptjs";
-import { logger } from "@formbricks/logger";
-import { type TSurveyBlocks } from "@formbricks/types/surveys/blocks";
+import { logger } from "@salamruby/logger";
+import { type TSurveyBlocks } from "@salamruby/types/surveys/blocks";
 import { type Prisma, PrismaClient } from "./prisma";
 import { createPrismaPgAdapter } from "./prisma-adapter";
 import { SEED_CREDENTIALS, SEED_IDS } from "./seed/constants";
@@ -128,7 +128,7 @@ const KITCHEN_SINK_QUESTIONS: SurveyQuestion[] = [
   {
     id: createId(),
     type: "openText",
-    headline: { default: "What do you think of Formbricks?" },
+    headline: { default: "What do you think of SalamRuby?" },
     subheader: { default: "Please be honest!" },
     required: true,
     placeholder: { default: "Your feedback here..." },
@@ -137,7 +137,7 @@ const KITCHEN_SINK_QUESTIONS: SurveyQuestion[] = [
   {
     id: createId(),
     type: "multipleChoiceSingle",
-    headline: { default: "How often do you use Formbricks?" },
+    headline: { default: "How often do you use SalamRuby?" },
     required: true,
     choices: [
       { id: createId(), label: { default: "Daily" } },
@@ -161,7 +161,7 @@ const KITCHEN_SINK_QUESTIONS: SurveyQuestion[] = [
   {
     id: createId(),
     type: "nps",
-    headline: { default: "How likely are you to recommend Formbricks?" },
+    headline: { default: "How likely are you to recommend SalamRuby?" },
     required: true,
     lowerLabel: { default: "Not likely" },
     upperLabel: { default: "Very likely" },
@@ -172,7 +172,7 @@ const KITCHEN_SINK_QUESTIONS: SurveyQuestion[] = [
     headline: { default: "Check out our documentation!" },
     required: true,
     ctaButtonLabel: { default: "Go to Docs" },
-    buttonUrl: "https://formbricks.com/docs",
+    buttonUrl: "https://salamruby.com/docs",
     buttonExternal: true,
   },
   {
@@ -195,7 +195,7 @@ const KITCHEN_SINK_QUESTIONS: SurveyQuestion[] = [
   {
     id: createId(),
     type: "date",
-    headline: { default: "When did you start using Formbricks?" },
+    headline: { default: "When did you start using SalamRuby?" },
     required: true,
     format: "M-d-y",
   },
@@ -384,13 +384,14 @@ async function main(): Promise<void> {
 
   await prisma.user.upsert({
     where: { id: SEED_IDS.USER_ADMIN },
-    update: {},
+    update: { locale: "fa-IR" },
     create: {
       id: SEED_IDS.USER_ADMIN,
       name: "Admin User",
       email: SEED_CREDENTIALS.ADMIN.email,
       password: passwordHash,
       emailVerified: new Date(),
+      locale: "fa-IR",
       memberships: {
         create: {
           organizationId: organization.id,
@@ -403,13 +404,14 @@ async function main(): Promise<void> {
 
   await prisma.user.upsert({
     where: { id: SEED_IDS.USER_MANAGER },
-    update: {},
+    update: { locale: "fa-IR" },
     create: {
       id: SEED_IDS.USER_MANAGER,
       name: "Manager User",
       email: SEED_CREDENTIALS.MANAGER.email,
       password: passwordHash,
       emailVerified: new Date(),
+      locale: "fa-IR",
       memberships: {
         create: {
           organizationId: organization.id,
@@ -422,13 +424,14 @@ async function main(): Promise<void> {
 
   await prisma.user.upsert({
     where: { id: SEED_IDS.USER_MEMBER },
-    update: {},
+    update: { locale: "fa-IR" },
     create: {
       id: SEED_IDS.USER_MEMBER,
       name: "Member User",
       email: SEED_CREDENTIALS.MEMBER.email,
       password: passwordHash,
       emailVerified: new Date(),
+      locale: "fa-IR",
       memberships: {
         create: {
           organizationId: organization.id,
@@ -481,7 +484,7 @@ async function main(): Promise<void> {
     const blocks = [
       {
         id: createId(),
-        name: "Main Block",
+        name: "Block 1",
         elements: questions.map((question) => ({
           required: false,
           ...question,
@@ -533,7 +536,7 @@ async function main(): Promise<void> {
     {
       id: createId(),
       type: "openText",
-      headline: { default: "Coming soon..." },
+      headline: { default: "سؤال خود را بنویسید", "fa-IR": "سؤال خود را بنویسید" },
       required: false,
     },
   ]);

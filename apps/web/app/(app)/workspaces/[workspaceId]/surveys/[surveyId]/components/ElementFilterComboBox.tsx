@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
 import { OptionsType } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/components/ElementsComboBox";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 import { useClickOutside } from "@/lib/utils/hooks/useClickOutside";
@@ -137,8 +137,8 @@ export const ElementFilterComboBox = ({
   const renderFilterOptionsDropdown = () => {
     if (!filterOptions || filterOptions.length <= 1) {
       return (
-        <div className="flex h-9 max-w-fit items-center rounded-md rounded-r-none border-r border-slate-300 bg-white px-2 text-sm text-slate-600">
-          <p className="mr-1 max-w-[50px] truncate sm:max-w-[100px]">{filterValue}</p>
+        <div className="flex h-9 max-w-fit items-center rounded-md rounded-e-none border-e border-slate-300 bg-white px-2 text-sm text-slate-600">
+          <p className="max-w-[50px] truncate sm:max-w-[100px]">{filterValue}</p>
         </div>
       );
     }
@@ -150,7 +150,7 @@ export const ElementFilterComboBox = ({
         <DropdownMenuTrigger
           disabled={disabled}
           className={clsx(
-            "flex h-9 max-w-fit items-center justify-between gap-2 rounded-md rounded-r-none border-r border-slate-300 bg-white px-2 text-sm text-slate-600 focus:outline-transparent focus:ring-0",
+            "flex h-9 max-w-fit items-center gap-2 rounded-md rounded-e-none border-e border-slate-300 bg-white px-2 text-sm text-slate-600 focus:outline-transparent focus:ring-0",
             disabled ? "opacity-50" : "cursor-pointer hover:bg-slate-50"
           )}>
           {filterValue ? (
@@ -160,7 +160,7 @@ export const ElementFilterComboBox = ({
           )}
           {filterOptions.length > 1 && <ChevronIcon className="size-4 flex-shrink-0 opacity-50" />}
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-white">
+        <DropdownMenuContent align="start" className="bg-white">
           {filterOptions.map((o, index) => {
             const optionValue = getOptionValue(o);
             return (
@@ -248,7 +248,7 @@ export const ElementFilterComboBox = ({
           onChange={(e) => onChangeFilterComboBoxValue(e.target.value)}
           disabled={isComboBoxDisabled}
           placeholder={t("common.enter_url")}
-          className="h-9 rounded-l-none border-none bg-white text-sm focus:ring-offset-0"
+          className="h-9 rounded-s-none border-none bg-white text-sm focus:ring-offset-0"
         />
       ) : (
         <Command ref={commandRef} className="relative h-fit w-full min-w-0 overflow-visible bg-transparent">
@@ -257,7 +257,7 @@ export const ElementFilterComboBox = ({
             role="button"
             tabIndex={isComboBoxDisabled ? -1 : 0}
             className={clsx(
-              "flex min-w-0 items-center gap-2 rounded-md rounded-l-none bg-white pl-2",
+              "flex min-w-0 items-center gap-2 rounded-md rounded-s-none bg-white ps-2",
               isComboBoxDisabled ? "opacity-50" : "cursor-pointer hover:bg-slate-50"
             )}
             onClick={handleOpenDropdown}

@@ -20,7 +20,7 @@ vi.mock("ioredis", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: (context: unknown, message?: string): void => {
       mockLogger.error(context, message);
@@ -37,7 +37,7 @@ vi.mock("@formbricks/logger", () => ({
   },
 }));
 
-describe("@formbricks/jobs connection helpers", () => {
+describe("@salamruby/jobs connection helpers", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     delete process.env.REDIS_URL;
@@ -50,7 +50,7 @@ describe("@formbricks/jobs connection helpers", () => {
     expect(MockIORedis).toHaveBeenCalledWith(
       "redis://localhost:6379",
       expect.objectContaining({
-        connectionName: "formbricks-jobs-producer",
+        connectionName: "salamruby-jobs-producer",
         connectTimeout: 3000,
         enableOfflineQueue: false,
         maxRetriesPerRequest: 1,
@@ -65,7 +65,7 @@ describe("@formbricks/jobs connection helpers", () => {
     expect(MockIORedis).toHaveBeenCalledWith(
       "redis://localhost:6379",
       expect.objectContaining({
-        connectionName: "formbricks-jobs-worker",
+        connectionName: "salamruby-jobs-worker",
         connectTimeout: 3000,
         maxRetriesPerRequest: null,
       })

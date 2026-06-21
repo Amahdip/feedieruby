@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { TMember, TOrganizationRole } from "@formbricks/types/memberships";
-import { TOrganization } from "@formbricks/types/organizations";
+import { TMember, TOrganizationRole } from "@salamruby/types/memberships";
+import { TOrganization } from "@salamruby/types/organizations";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { formatDateWithOrdinal } from "@/lib/utils/datetime";
 import { EditMembershipRole } from "@/modules/ee/role-management/components/edit-membership-role";
@@ -19,7 +19,7 @@ interface MembersInfoProps {
   currentUserRole: TOrganizationRole;
   currentUserId: string;
   isAccessControlAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isUserManagementDisabledFromUi: boolean;
 }
 
@@ -35,7 +35,7 @@ export const MembersInfo = ({
   members,
   currentUserId,
   isAccessControlAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isUserManagementDisabledFromUi,
 }: MembersInfoProps) => {
   const allMembers = [...members, ...invites];
@@ -117,7 +117,7 @@ export const MembersInfo = ({
                 memberAccepted={!isInvitee(member) ? member.accepted : undefined}
                 inviteId={isInvitee(member) ? member.id : ""}
                 doesOrgHaveMoreThanOneOwner={doesOrgHaveMoreThanOneOwner}
-                isFormbricksCloud={isFormbricksCloud}
+                isSalamRubyCloud={isSalamRubyCloud}
                 isUserManagementDisabledFromUi={isUserManagementDisabledFromUi}
               />
             </div>

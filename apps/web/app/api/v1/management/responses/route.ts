@@ -1,6 +1,6 @@
-import { logger } from "@formbricks/logger";
-import { DatabaseError, InvalidInputError } from "@formbricks/types/errors";
-import { TResponse, TResponseInput, ZResponseInput } from "@formbricks/types/responses";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, InvalidInputError } from "@salamruby/types/errors";
+import { TResponse, TResponseInput, ZResponseInput } from "@salamruby/types/responses";
 import { resolveBodyIds } from "@/app/api/v1/management/lib/workspace-resolver";
 import { RequestBodyTooLargeError, parseJsonBodyWithLimit } from "@/app/lib/api/request-body";
 import { responses } from "@/app/lib/api/response";

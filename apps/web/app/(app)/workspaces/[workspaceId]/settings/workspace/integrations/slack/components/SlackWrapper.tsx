@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { TIntegrationItem } from "@formbricks/types/integration";
-import { TIntegrationSlack, TIntegrationSlackConfigData } from "@formbricks/types/integration/slack";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TIntegrationItem } from "@salamruby/types/integration";
+import { TIntegrationSlack, TIntegrationSlackConfigData } from "@salamruby/types/integration/slack";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { getSlackChannelsAction } from "@/app/(app)/workspaces/[workspaceId]/settings/workspace/integrations/slack/actions";
 import { AddChannelMappingModal } from "@/app/(app)/workspaces/[workspaceId]/settings/workspace/integrations/slack/components/AddChannelMappingModal";
 import { ManageIntegration } from "@/app/(app)/workspaces/[workspaceId]/settings/workspace/integrations/slack/components/ManageIntegration";

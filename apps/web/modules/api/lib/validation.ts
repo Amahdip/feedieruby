@@ -1,9 +1,9 @@
 import "server-only";
-import { validateBlockResponses } from "@formbricks/surveys/validation";
-import { TResponseData } from "@formbricks/types/responses";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyQuestion } from "@formbricks/types/surveys/types";
-import { TValidationErrorMap } from "@formbricks/types/surveys/validation-rules";
+import { validateBlockResponses } from "@salamruby/surveys/validation";
+import { TResponseData } from "@salamruby/types/responses";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyQuestion } from "@salamruby/types/surveys/types";
+import { TValidationErrorMap } from "@salamruby/types/surveys/validation-rules";
 import { transformQuestionsToBlocks } from "@/app/lib/api/survey-transformation";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
 import { ApiErrorDetails } from "@/modules/api/v2/types/api-error";

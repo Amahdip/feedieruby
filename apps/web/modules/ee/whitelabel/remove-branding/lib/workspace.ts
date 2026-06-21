@@ -1,9 +1,9 @@
 import "server-only";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { ValidationError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { ValidationError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { TWorkspaceUpdateBrandingInput, ZWorkspaceUpdateBrandingInput } from "../types/workspace";
 

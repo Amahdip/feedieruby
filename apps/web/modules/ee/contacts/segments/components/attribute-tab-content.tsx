@@ -1,7 +1,7 @@
 import { FingerprintIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { TContactAttributeDataType, TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
-import type { TBaseFilter } from "@formbricks/types/segment";
+import { TContactAttributeDataType, TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
+import type { TBaseFilter } from "@salamruby/types/segment";
 import { getContactAttributeDataTypeIcon } from "@/modules/ee/contacts/utils";
 import FilterButton from "./filter-button";
 

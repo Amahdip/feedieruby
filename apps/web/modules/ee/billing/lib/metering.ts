@@ -1,6 +1,6 @@
 import "server-only";
-import { logger } from "@formbricks/logger";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { logger } from "@salamruby/logger";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { stripeClient } from "./stripe-client";
 
 export const recordResponseCreatedMeterEvent = async (input: {
@@ -8,7 +8,7 @@ export const recordResponseCreatedMeterEvent = async (input: {
   responseId: string;
   createdAt?: Date | string | null;
 }): Promise<void> => {
-  if (IS_FORMBRICKS_CLOUD && stripeClient && input.stripeCustomerId) {
+  if (IS_SALAMRUBY_CLOUD && stripeClient && input.stripeCustomerId) {
     try {
       let createdAtSeconds: number | undefined;
 

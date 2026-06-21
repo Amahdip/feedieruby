@@ -1,15 +1,15 @@
 "use server";
 
 import { z } from "zod";
-import { ZId, ZUuid } from "@formbricks/types/common";
+import { ZId, ZUuid } from "@salamruby/types/common";
 import {
   AuthenticationError,
   OperationNotAllowedError,
   ResourceNotFoundError,
   ValidationError,
-} from "@formbricks/types/errors";
-import { ZMembershipUpdateInput } from "@formbricks/types/memberships";
-import { IS_FORMBRICKS_CLOUD, USER_MANAGEMENT_MINIMUM_ROLE } from "@/lib/constants";
+} from "@salamruby/types/errors";
+import { ZMembershipUpdateInput } from "@salamruby/types/memberships";
+import { IS_SALAMRUBY_CLOUD, USER_MANAGEMENT_MINIMUM_ROLE } from "@/lib/constants";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getUserManagementAccess } from "@/lib/membership/utils";
 import { getOrganization } from "@/lib/organization/service";
@@ -64,7 +64,7 @@ export const updateInviteAction = authenticatedActionClient.inputSchema(ZUpdateI
       ],
     });
 
-    if (!IS_FORMBRICKS_CLOUD && parsedInput.data.role === "billing") {
+    if (!IS_SALAMRUBY_CLOUD && parsedInput.data.role === "billing") {
       throw new ValidationError("Billing role is not allowed");
     }
 
@@ -122,7 +122,7 @@ export const updateMembershipAction = authenticatedActionClient.inputSchema(ZUpd
       ],
     });
 
-    if (!IS_FORMBRICKS_CLOUD && parsedInput.data.role === "billing") {
+    if (!IS_SALAMRUBY_CLOUD && parsedInput.data.role === "billing") {
       throw new ValidationError("Billing role is not allowed");
     }
 

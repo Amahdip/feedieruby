@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { createCacheKey } from "@formbricks/cache";
-import FormbricksHub from "@formbricks/hub";
+import { createCacheKey } from "@salamruby/cache";
+import SalamRubyHub from "@salamruby/hub";
 import {
   createFeedbackRecord,
   createFeedbackRecordsBatch,
@@ -23,11 +23,11 @@ import {
 } from "./service";
 import type { FeedbackRecordCreateParams } from "./types";
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: { warn: vi.fn(), error: vi.fn(), info: vi.fn() },
 }));
 
-vi.mock("@formbricks/hub", () => ({
+vi.mock("@salamruby/hub", () => ({
   default: {
     APIError: class APIError extends Error {
       status: number;
@@ -56,7 +56,7 @@ const { cache } = await import("@/lib/cache");
 const sampleInput: FeedbackRecordCreateParams = {
   field_id: "el-1",
   field_type: "rating",
-  source_type: "formbricks_survey",
+  source_type: "salamruby_survey",
   source_id: "survey-1",
   source_name: "Test Survey",
   field_label: "Question?",
@@ -68,7 +68,7 @@ const sampleInput: FeedbackRecordCreateParams = {
 
 const taxonomyScope = {
   tenant_id: "tenant-1",
-  source_type: "formbricks_survey",
+  source_type: "salamruby_survey",
   source_id: "survey-1",
   field_id: "question-1",
 };
@@ -116,7 +116,7 @@ describe("hub service", () => {
 
     test("reads status from a foreign error class (simulates dual module scope)", async () => {
       // Simulates the SDK being loaded into a different module scope under Next dev/Turbopack:
-      // the thrown error is NOT instanceof the FormbricksHub.APIError reference captured in service.ts.
+      // the thrown error is NOT instanceof the SalamRubyHub.APIError reference captured in service.ts.
       class ForeignConflictError extends Error {
         readonly status = 409;
       }
@@ -250,7 +250,7 @@ describe("hub service", () => {
     });
 
     test("returns error with status when client.search.performSemanticSearch throws APIError", async () => {
-      const apiError = new (FormbricksHub.APIError as any)("Embeddings are not configured", 503);
+      const apiError = new (SalamRubyHub.APIError as any)("Embeddings are not configured", 503);
       vi.mocked(getHubClient).mockReturnValue({
         feedbackRecords: {
           search: { performSemanticSearch: vi.fn().mockRejectedValue(apiError) },
@@ -338,7 +338,7 @@ describe("hub service", () => {
     });
 
     test("returns error when client.delete throws APIError", async () => {
-      const apiError = new (FormbricksHub as any).APIError("Forbidden", 403);
+      const apiError = new (SalamRubyHub as any).APIError("Forbidden", 403);
       vi.mocked(getHubClient).mockReturnValue({
         feedbackRecords: { delete: vi.fn().mockRejectedValue(apiError) },
       } as any);
@@ -587,12 +587,12 @@ describe("hub service", () => {
       });
       expect(get).toHaveBeenNthCalledWith(
         2,
-        "/v1/taxonomy/runs?tenant_id=tenant-1&source_type=formbricks_survey&source_id=survey-1&field_id=question-1&limit=5"
+        "/v1/taxonomy/runs?tenant_id=tenant-1&source_type=salamruby_survey&source_id=survey-1&field_id=question-1&limit=5"
       );
       expect(get).toHaveBeenNthCalledWith(3, "/v1/taxonomy/runs/run%201?tenant_id=tenant-1");
       expect(get).toHaveBeenNthCalledWith(
         4,
-        "/v1/taxonomy/runs/active/tree?tenant_id=tenant-1&source_type=formbricks_survey&source_id=survey-1&field_id=question-1"
+        "/v1/taxonomy/runs/active/tree?tenant_id=tenant-1&source_type=salamruby_survey&source_id=survey-1&field_id=question-1"
       );
       expect(get).toHaveBeenNthCalledWith(5, "/v1/taxonomy/runs/run%201/tree?tenant_id=tenant-1");
       expect(patch).toHaveBeenCalledWith("/v1/taxonomy/nodes/node%201", {
@@ -617,11 +617,11 @@ describe("hub service", () => {
       // "no source filter" instead of "the unattributed bucket". See Hub PR #88.
       expect(get).toHaveBeenNthCalledWith(
         1,
-        "/v1/taxonomy/runs/active/tree?tenant_id=tenant-1&source_type=formbricks_survey&source_id=&field_id=question-1"
+        "/v1/taxonomy/runs/active/tree?tenant_id=tenant-1&source_type=salamruby_survey&source_id=&field_id=question-1"
       );
       expect(get).toHaveBeenNthCalledWith(
         2,
-        "/v1/taxonomy/runs?tenant_id=tenant-1&source_type=formbricks_survey&source_id=&field_id=question-1&limit=5"
+        "/v1/taxonomy/runs?tenant_id=tenant-1&source_type=salamruby_survey&source_id=&field_id=question-1&limit=5"
       );
     });
 

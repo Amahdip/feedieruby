@@ -4,11 +4,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 import { CircleHelpIcon, EyeOffIcon, MailIcon, TagIcon } from "lucide-react";
 import Link from "next/link";
-import { TResponseTableData } from "@formbricks/types/responses";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
-import { TUserLocale } from "@formbricks/types/user";
+import { TResponseTableData } from "@salamruby/types/responses";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
+import { TUserLocale } from "@salamruby/types/user";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 import { extractChoiceIdsFromResponse } from "@/lib/response/utils";
 import { getContactIdentifier } from "@/lib/utils/contact";
@@ -292,11 +292,11 @@ export const generateResponseTableColumns = (
             <TooltipTrigger>
               <CircleHelpIcon className="size-3 text-slate-500" strokeWidth={1.5} />
             </TooltipTrigger>
-            <TooltipContent side="bottom" className="space-x-1 font-normal">
+            <TooltipContent side="bottom" className="flex gap-x-1 font-normal">
               <span>{t("workspace.surveys.responses.how_to_identify_users")}</span>
               <Link
                 className="underline underline-offset-2 hover:text-slate-900"
-                href="https://formbricks.com/docs/app-surveys/user-identification"
+                href="https://salamruby.com/docs/app-surveys/user-identification"
                 target="_blank"
                 rel="noopener noreferrer">
                 {t("common.app_survey")}

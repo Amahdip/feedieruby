@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ZSurveyStatus } from "@formbricks/types/surveys/types";
+import { ZSurveyStatus } from "@salamruby/types/surveys/types";
 
 export const ZSurveyOverviewType = z.enum(["link", "app"]);
 export const ZSurveyOverviewSort = z.enum(["createdAt", "updatedAt", "name", "relevance"]);

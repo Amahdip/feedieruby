@@ -1,13 +1,13 @@
 "use server";
 
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { InvalidInputError, UnknownError } from "@formbricks/types/errors";
-import { ZUser, ZUserEmail, ZUserLocale, ZUserName, ZUserPassword } from "@formbricks/types/user";
+import { logger } from "@salamruby/logger";
+import { InvalidInputError, UnknownError } from "@salamruby/types/errors";
+import { ZUser, ZUserEmail, ZUserLocale, ZUserName, ZUserPassword } from "@salamruby/types/user";
 import { hashPassword } from "@/lib/auth";
 import {
   EMAIL_VERIFICATION_DISABLED,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   IS_TURNSTILE_CONFIGURED,
   TURNSTILE_SECRET_KEY,
   WEBAPP_URL,
@@ -167,7 +167,7 @@ async function handleOrganizationCreation(ctx: ActionClientCtx, user: TCreatedUs
   });
 
   // Stripe setup must run AFTER membership is created so the owner email is available
-  if (IS_FORMBRICKS_CLOUD) {
+  if (IS_SALAMRUBY_CLOUD) {
     ensureCloudStripeSetupForOrganization(organization.id).catch((error) => {
       logger.error(
         { error, organizationId: organization.id },
@@ -263,7 +263,7 @@ export const createUserAction = actionClient.inputSchema(ZCreateUserAction).acti
 
       await subscribeUserToMailingList({
         email: user.email,
-        isFormbricksCloud: IS_FORMBRICKS_CLOUD,
+        isSalamRubyCloud: IS_SALAMRUBY_CLOUD,
         subscribeToSecurityUpdates: parsedInput.subscribeToSecurityUpdates,
         subscribeToProductUpdates: parsedInput.subscribeToProductUpdates,
       });

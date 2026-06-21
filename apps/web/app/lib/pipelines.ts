@@ -1,5 +1,5 @@
-import { TResponsePipelineJobData, getBackgroundJobProducer } from "@formbricks/jobs";
-import { logger } from "@formbricks/logger";
+import { TResponsePipelineJobData, getBackgroundJobProducer } from "@salamruby/jobs";
+import { logger } from "@salamruby/logger";
 import { getJobsQueueingConfig } from "@/lib/jobs/config";
 
 export const sendToPipeline = async (job: TResponsePipelineJobData): Promise<void> => {

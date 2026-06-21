@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TFeedbackSourceWithMappings } from "@formbricks/types/feedback-source";
+import { TFeedbackSourceWithMappings } from "@salamruby/types/feedback-source";
 import { Button } from "@/modules/ui/components/button";
 import {
   Dialog,
@@ -37,10 +37,10 @@ import {
   CSV_PROTECTED_TARGET_IDS,
   SAMPLE_CSV_COLUMNS,
   TFieldMapping,
-  TFormbricksFeedbackSourceForm,
+  TSalamRubyFeedbackSourceForm,
   TSourceField,
   TUnifySurvey,
-  ZFormbricksFeedbackSourceForm,
+  ZSalamRubyFeedbackSourceForm,
   getTranslatedFeedbackSourceError,
 } from "../types";
 import {
@@ -50,8 +50,8 @@ import {
   toggleQuestionId,
 } from "../utils";
 import { getFeedbackSourceIcon, getFeedbackSourceTypeLabelKey } from "./feedback-source-display";
-import { FormbricksQuestionList } from "./formbricks-question-list";
 import { MappingUI } from "./mapping-ui";
+import { SalamRubyQuestionList } from "./salamruby-question-list";
 
 interface EditFeedbackSourceModalProps {
   feedbackSource: TFeedbackSourceWithMappings | null;
@@ -84,8 +84,8 @@ export const EditFeedbackSourceModal = ({
   const [sourceFields, setSourceFields] = useState<TSourceField[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const formbricksForm = useForm<TFormbricksFeedbackSourceForm>({
-    resolver: zodResolver(ZFormbricksFeedbackSourceForm),
+  const salamrubyForm = useForm<TSalamRubyFeedbackSourceForm>({
+    resolver: zodResolver(ZSalamRubyFeedbackSourceForm),
     defaultValues: {
       sourceName: "",
       surveyId: "",
@@ -95,9 +95,9 @@ export const EditFeedbackSourceModal = ({
     mode: "onChange",
   });
 
-  const formbricksValues = formbricksForm.watch();
-  const selectedSurveyId = formbricksValues.surveyId;
-  const selectedQuestionIds = formbricksValues.selectedQuestionIds ?? [];
+  const salamrubyValues = salamrubyForm.watch();
+  const selectedSurveyId = salamrubyValues.surveyId;
+  const selectedQuestionIds = salamrubyValues.selectedQuestionIds ?? [];
   const selectedSurvey = useMemo(
     () => surveys.find((survey) => survey.id === selectedSurveyId) ?? null,
     [surveys, selectedSurveyId]
@@ -105,13 +105,13 @@ export const EditFeedbackSourceModal = ({
 
   useEffect(() => {
     if (feedbackSource) {
-      if (feedbackSource.type === "formbricks_survey") {
-        const mappedSurveyId = feedbackSource.formbricksMappings[0]?.surveyId ?? "";
-        const mappedQuestionIds = feedbackSource.formbricksMappings
+      if (feedbackSource.type === "salamruby_survey") {
+        const mappedSurveyId = feedbackSource.salamrubyMappings[0]?.surveyId ?? "";
+        const mappedQuestionIds = feedbackSource.salamrubyMappings
           .filter((mapping) => mapping.surveyId === mappedSurveyId)
           .map((mapping) => mapping.elementId);
 
-        formbricksForm.reset({
+        salamrubyForm.reset({
           sourceName: feedbackSource.name,
           surveyId: mappedSurveyId,
           selectedQuestionIds: mappedQuestionIds,
@@ -137,7 +137,7 @@ export const EditFeedbackSourceModal = ({
             staticValue: m.staticValue ?? undefined,
           }))
         );
-        formbricksForm.reset({
+        salamrubyForm.reset({
           sourceName: "",
           surveyId: "",
           selectedQuestionIds: [],
@@ -147,7 +147,7 @@ export const EditFeedbackSourceModal = ({
         setCsvFeedbackSourceName("");
         setSourceFields([]);
         setMappings([]);
-        formbricksForm.reset({
+        salamrubyForm.reset({
           sourceName: "",
           surveyId: "",
           selectedQuestionIds: [],
@@ -155,13 +155,13 @@ export const EditFeedbackSourceModal = ({
         });
       }
     }
-  }, [feedbackSource, formbricksForm]);
+  }, [feedbackSource, salamrubyForm]);
 
   const resetForm = () => {
     setCsvFeedbackSourceName("");
     setMappings([]);
     setSourceFields([]);
-    formbricksForm.reset({
+    salamrubyForm.reset({
       sourceName: "",
       surveyId: "",
       selectedQuestionIds: [],
@@ -177,8 +177,8 @@ export const EditFeedbackSourceModal = ({
     onOpenChange(newOpen);
   };
 
-  const handleUpdateFormbricksFeedbackSource = async (values: TFormbricksFeedbackSourceForm) => {
-    if (feedbackSource?.type !== "formbricks_survey") return;
+  const handleUpdateSalamRubyFeedbackSource = async (values: TSalamRubyFeedbackSourceForm) => {
+    if (feedbackSource?.type !== "salamruby_survey") return;
     setIsUpdating(true);
     const success = await onUpdateFeedbackSource({
       feedbackSourceId: feedbackSource.id,
@@ -223,9 +223,9 @@ export const EditFeedbackSourceModal = ({
     }
   };
 
-  const handleFormbricksQuestionToggle = (questionId: string) => {
-    const nextSelection = toggleQuestionId(formbricksForm.getValues("selectedQuestionIds"), questionId);
-    formbricksForm.setValue("selectedQuestionIds", nextSelection, {
+  const handleSalamRubyQuestionToggle = (questionId: string) => {
+    const nextSelection = toggleQuestionId(salamrubyForm.getValues("selectedQuestionIds"), questionId);
+    salamrubyForm.setValue("selectedQuestionIds", nextSelection, {
       shouldDirty: true,
       shouldValidate: true,
     });
@@ -235,11 +235,11 @@ export const EditFeedbackSourceModal = ({
     if (!feedbackSource) return true;
     if (isUpdating) return true;
 
-    if (feedbackSource.type === "formbricks_survey") {
+    if (feedbackSource.type === "salamruby_survey") {
       return (
-        !isFeedbackSourceNameValid(formbricksValues.sourceName ?? "") ||
-        !formbricksValues.surveyId ||
-        !formbricksValues.selectedQuestionIds?.length
+        !isFeedbackSourceNameValid(salamrubyValues.sourceName ?? "") ||
+        !salamrubyValues.surveyId ||
+        !salamrubyValues.selectedQuestionIds?.length
       );
     }
 
@@ -250,7 +250,7 @@ export const EditFeedbackSourceModal = ({
     }
 
     return true;
-  }, [feedbackSource, csvFeedbackSourceName, formbricksValues, isUpdating, mappings]);
+  }, [feedbackSource, csvFeedbackSourceName, salamrubyValues, isUpdating, mappings]);
 
   if (!feedbackSource) return null;
 
@@ -263,13 +263,13 @@ export const EditFeedbackSourceModal = ({
         </DialogHeader>
 
         <div className="space-y-4 py-4">
-          {feedbackSource.type === "formbricks_survey" ? (
-            <FormProvider {...formbricksForm}>
+          {feedbackSource.type === "salamruby_survey" ? (
+            <FormProvider {...salamrubyForm}>
               <form
                 className="space-y-4"
-                onSubmit={formbricksForm.handleSubmit(handleUpdateFormbricksFeedbackSource)}>
+                onSubmit={salamrubyForm.handleSubmit(handleUpdateSalamRubyFeedbackSource)}>
                 <FormField
-                  control={formbricksForm.control}
+                  control={salamrubyForm.control}
                   name="sourceName"
                   render={({ field, fieldState: { error } }) => (
                     <FormItem>
@@ -290,7 +290,7 @@ export const EditFeedbackSourceModal = ({
                 />
 
                 <FormField
-                  control={formbricksForm.control}
+                  control={salamrubyForm.control}
                   name="surveyId"
                   render={({ field, fieldState: { error } }) => (
                     <FormItem>
@@ -320,17 +320,17 @@ export const EditFeedbackSourceModal = ({
                 />
 
                 <FormField
-                  control={formbricksForm.control}
+                  control={salamrubyForm.control}
                   name="selectedQuestionIds"
                   render={({ fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{t("workspace.unify.select_questions")}</FormLabel>
                       <FormControl>
                         <fieldset className={isReadOnly ? "opacity-70" : undefined} disabled={isReadOnly}>
-                          <FormbricksQuestionList
+                          <SalamRubyQuestionList
                             survey={selectedSurvey}
                             selectedQuestionIds={selectedQuestionIds}
-                            onQuestionToggle={handleFormbricksQuestionToggle}
+                            onQuestionToggle={handleSalamRubyQuestionToggle}
                           />
                         </fieldset>
                       </FormControl>
@@ -402,8 +402,8 @@ export const EditFeedbackSourceModal = ({
               )}
               <Button
                 onClick={
-                  feedbackSource.type === "formbricks_survey"
-                    ? () => void formbricksForm.handleSubmit(handleUpdateFormbricksFeedbackSource)()
+                  feedbackSource.type === "salamruby_survey"
+                    ? () => void salamrubyForm.handleSubmit(handleUpdateSalamRubyFeedbackSource)()
                     : handleUpdateCsvFeedbackSource
                 }
                 disabled={saveChangesDisabled}>

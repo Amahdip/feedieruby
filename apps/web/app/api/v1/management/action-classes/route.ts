@@ -1,6 +1,6 @@
-import { logger } from "@formbricks/logger";
-import { TActionClass, ZActionClassInput } from "@formbricks/types/action-classes";
-import { DatabaseError, UniqueConstraintError } from "@formbricks/types/errors";
+import { logger } from "@salamruby/logger";
+import { TActionClass, ZActionClassInput } from "@salamruby/types/action-classes";
+import { DatabaseError, UniqueConstraintError } from "@salamruby/types/errors";
 import { resolveBodyIds } from "@/app/api/v1/management/lib/workspace-resolver";
 import { RequestBodyTooLargeError, parseJsonBodyWithLimit } from "@/app/lib/api/request-body";
 import { responses } from "@/app/lib/api/response";

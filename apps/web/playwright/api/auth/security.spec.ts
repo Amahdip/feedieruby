@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { test } from "../../lib/fixtures";
 
 // Authentication endpoints are hardcoded to avoid import issues

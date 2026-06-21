@@ -1,14 +1,16 @@
 "use client";
 
-import { type Dispatch, type SetStateAction, useCallback, useEffect, useRef, useState } from "react";
-import { ActionClass, Language, OrganizationRole, Workspace } from "@formbricks/database/prisma-browser";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
-import { TSurveyQuota } from "@formbricks/types/quota";
-import { TSegment } from "@formbricks/types/segment";
-import { TSurvey, TSurveyEditorTabs, TSurveyStyling } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ActionClass, Language, OrganizationRole, Workspace } from "@salamruby/database/prisma-browser";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
+import { TSurveyQuota } from "@salamruby/types/quota";
+import { TSegment } from "@salamruby/types/segment";
+import { TSurvey, TSurveyEditorTabs, TSurveyStyling } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { extractLanguageCodes, getEnabledLanguages } from "@/lib/i18n/utils";
 import { structuredClone } from "@/lib/pollyfills/structuredClone";
+import { migrateLegacySurveyContent } from "@/lib/survey/migrate-legacy-survey-content";
 import { useDocumentVisibility } from "@/lib/useDocumentVisibility";
 import { TTeamPermission } from "@/modules/ee/teams/workspace-teams/types/team";
 import { EditPublicSurveyAlertDialog } from "@/modules/survey/components/edit-public-survey-alert-dialog";
@@ -18,6 +20,7 @@ import { SettingsView } from "@/modules/survey/editor/components/settings-view";
 import { StylingView } from "@/modules/survey/editor/components/styling-view";
 import { SurveyEditorTabs } from "@/modules/survey/editor/components/survey-editor-tabs";
 import { SurveyMenuBar } from "@/modules/survey/editor/components/survey-menu-bar";
+import { getSequentialBlockName } from "@/modules/survey/editor/lib/blocks";
 import { TFollowUpEmailToUser } from "@/modules/survey/editor/types/survey-follow-up";
 import { FollowUpsView } from "@/modules/survey/follow-ups/components/follow-ups-view";
 import { LanguageView } from "@/modules/survey/multi-language-surveys/components/language-view";
@@ -35,7 +38,7 @@ interface SurveyEditorProps {
   colors: string[];
   isUserTargetingAllowed?: boolean;
   isSpamProtectionAllowed?: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isUnsplashConfigured: boolean;
   isQuotasAllowed: boolean;
   isCxMode: boolean;
@@ -65,7 +68,7 @@ export const SurveyEditor = ({
   colors,
   isUserTargetingAllowed = false,
   isSpamProtectionAllowed = false,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isUnsplashConfigured,
   isQuotasAllowed,
   isCxMode = false,
@@ -81,9 +84,18 @@ export const SurveyEditor = ({
   publicDomain,
   enterpriseLicenseRequestFormUrl,
 }: SurveyEditorProps) => {
+  const { t } = useTranslation();
+  const migratedSurvey = useMemo(
+    () =>
+      migrateLegacySurveyContent(structuredClone(survey), {
+        comingSoonHeadline: t("workspace.surveys.edit.default_draft_question_headline"),
+        getBlockName: (blockIndex) => getSequentialBlockName(blockIndex + 1, t),
+      }),
+    [survey, t]
+  );
   const [activeView, setActiveView] = useState<TSurveyEditorTabs>("elements");
   const [activeElementId, setActiveElementId] = useState<string | null>(null);
-  const [localSurvey, setLocalSurvey] = useState<TSurvey | null>(() => structuredClone(survey));
+  const [localSurvey, setLocalSurvey] = useState<TSurvey | null>(() => structuredClone(migratedSurvey));
   const [invalidElements, setInvalidElements] = useState<string[] | null>(null);
   const [hasIncompleteTranslations, setHasIncompleteTranslations] = useState(false);
 
@@ -118,7 +130,7 @@ export const SurveyEditor = ({
     if (survey) {
       if (localSurvey) return;
 
-      const surveyClone = structuredClone(survey);
+      const surveyClone = structuredClone(migratedSurvey);
       setLocalSurvey(surveyClone);
 
       // Set first element from first block
@@ -213,7 +225,7 @@ export const SurveyEditor = ({
               invalidElements={invalidElements}
               setInvalidElements={setInvalidElements}
               selectedLanguageCode={selectedLanguageCode || "default"}
-              isFormbricksCloud={isFormbricksCloud}
+              isSalamRubyCloud={isSalamRubyCloud}
               isCxMode={isCxMode}
               locale={locale}
               responseCount={responseCount}
@@ -263,7 +275,7 @@ export const SurveyEditor = ({
               isUserTargetingAllowed={isUserTargetingAllowed}
               isSpamProtectionAllowed={isSpamProtectionAllowed}
               workspacePermission={workspacePermission}
-              isFormbricksCloud={isFormbricksCloud}
+              isSalamRubyCloud={isSalamRubyCloud}
               isQuotasAllowed={isQuotasAllowed}
               quotas={quotas}
               locale={locale}
@@ -279,7 +291,7 @@ export const SurveyEditor = ({
               selectedLanguageCode={selectedLanguageCode}
               mailFrom={mailFrom}
               isSurveyFollowUpsAllowed={isSurveyFollowUpsAllowed}
-              isFormbricksCloud={isFormbricksCloud}
+              isSalamRubyCloud={isSalamRubyCloud}
               userEmail={userEmail}
               teamMemberDetails={teamMemberDetails}
               locale={locale}

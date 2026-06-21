@@ -8,13 +8,13 @@ const HTML_TEMPLATE = `<head>
   <script type="text/javascript">
     !(function () {
       var t = document.createElement("script");
-      (t.type = "text/javascript"), (t.async = !0), (t.src = "http://localhost:3000/js/formbricks.umd.cjs");
+      (t.type = "text/javascript"), (t.async = !0), (t.src = "http://localhost:3000/js/salamruby.umd.cjs");
       var e = document.getElementsByTagName("script")[0];
       t.onload = function(){
-        if (window.formbricks) {
-          window.formbricks.setup({workspaceId: "WORKSPACE_ID", appUrl: "http://localhost:3000"});
+        if (window.salamruby) {
+          window.salamruby.setup({workspaceId: "WORKSPACE_ID", appUrl: "http://localhost:3000"});
         } else {
-          console.error("Formbricks library failed to load properly. The formbricks object is not available.");
+          console.error("SalamRuby library failed to load properly. The salamruby object is not available.");
         }
       };
       e.parentNode.insertBefore(t, e);
@@ -23,7 +23,7 @@ const HTML_TEMPLATE = `<head>
 </head>
 
 <body style="background-color: #fff">
-  <p>This is my sample page using the Formbricks JS javascript widget</p>
+  <p>This is my sample page using the SalamRuby JS javascript widget</p>
 </body>
 `;
 
@@ -102,9 +102,9 @@ test.describe("JS Package Test", async () => {
     ]);
 
     await page.goto("http://localhost:3004");
-    await expect(page.locator("#formbricks-modal-container")).toHaveCount(1, { timeout: 120000 });
+    await expect(page.locator("#salamruby-modal-container")).toHaveCount(1, { timeout: 120000 });
     await expect(
-      page.locator("#questionCard-0").getByRole("link", { name: "Powered by Formbricks" })
+      page.locator("#questionCard-0").getByRole("link", { name: "Powered by salamruby" })
     ).toBeVisible();
 
     // Fill the survey

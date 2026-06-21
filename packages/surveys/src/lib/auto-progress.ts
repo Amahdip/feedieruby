@@ -1,5 +1,5 @@
-import { type TResponseData } from "@formbricks/types/responses";
-import { type TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+import { type TResponseData } from "@salamruby/types/responses";
+import { type TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
 
 const isAutoProgressElement = (element: TSurveyElement): boolean => {
   if (

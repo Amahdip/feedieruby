@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { authenticateRequest } from "@/app/api/v1/auth";
 import { hasUserWorkspaceAccessForAction } from "@/lib/workspace/auth";
 import { authOptions } from "@/modules/auth/lib/authOptions";

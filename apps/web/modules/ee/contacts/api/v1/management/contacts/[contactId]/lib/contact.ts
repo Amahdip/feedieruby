@@ -1,8 +1,8 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZId } from "@formbricks/types/common";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZId } from "@salamruby/types/common";
+import { DatabaseError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { TContact } from "@/modules/ee/contacts/types/contact";
 

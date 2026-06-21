@@ -8,9 +8,9 @@ import type {
   TSurveyElement,
   TSurveyOpenTextElement,
   TSurveyOpenTextElementInputType,
-} from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+} from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { createI18nString, extractLanguageCodes } from "@/lib/i18n/utils";
 import { ElementFormInput } from "@/modules/survey/components/element-form-input";
 import { ValidationRulesEditor } from "@/modules/survey/editor/components/validation-rules-editor";

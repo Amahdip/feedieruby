@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import { ZResponseFilterCriteria } from "@formbricks/types/responses";
+import { ZId } from "@salamruby/types/common";
+import { ZResponseFilterCriteria } from "@salamruby/types/responses";
 import { getDisplaysBySurveyIdWithContact } from "@/lib/display/service";
 import { getResponseCountBySurveyId, getResponses } from "@/lib/response/service";
 import { authenticatedActionClient } from "@/lib/utils/action-client";

@@ -1,5 +1,5 @@
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
-import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getTranslate } from "@/lingodotdev/server";
 import { FeedbackDirectoryView } from "@/modules/ee/feedback-directory/components/feedback-directory-view";
@@ -33,16 +33,16 @@ export const FeedbackDirectoriesPage = async (props: { params: Promise<{ workspa
             feature="feedback-directories"
             buttons={[
               {
-                text: IS_FORMBRICKS_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
-                href: IS_FORMBRICKS_CLOUD
+                text: IS_SALAMRUBY_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                href: IS_SALAMRUBY_CLOUD
                   ? `/workspaces/${params.workspaceId}/settings/organization/billing`
                   : ENTERPRISE_LICENSE_REQUEST_FORM_URL,
               },
               {
                 text: t("common.learn_more"),
-                href: IS_FORMBRICKS_CLOUD
+                href: IS_SALAMRUBY_CLOUD
                   ? `/workspaces/${params.workspaceId}/settings/organization/billing`
-                  : "https://formbricks.com/learn-more-self-hosting-license",
+                  : "https://salamruby.com/learn-more-self-hosting-license",
               },
             ]}
           />

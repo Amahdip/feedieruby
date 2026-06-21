@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TDateOperator, TSegmentFilterValue, TTimeUnit } from "@formbricks/types/segment";
+import { TDateOperator, TSegmentFilterValue, TTimeUnit } from "@salamruby/types/segment";
 import { cn } from "@/lib/cn";
 import { toUTCDateString } from "@/modules/ee/contacts/segments/lib/date-utils";
 import { Input } from "@/modules/ui/components/input";

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { ENTERPRISE_LICENSE_REQUEST_FORM_URL, IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getFeedbackSourcesWithMappings } from "@/lib/feedback-source/service";
 import { getTranslate } from "@/lingodotdev/server";
 import { NoFeedbackDirectoryEmptyState } from "@/modules/ee/feedback-directory/components/no-feedback-directory-empty-state";
@@ -48,14 +48,14 @@ export default async function UnifyFeedbackRecordsPage(
             feature="feedback-directories"
             buttons={[
               {
-                text: IS_FORMBRICKS_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
-                href: IS_FORMBRICKS_CLOUD
+                text: IS_SALAMRUBY_CLOUD ? t("common.upgrade_plan") : t("common.request_trial_license"),
+                href: IS_SALAMRUBY_CLOUD
                   ? `/workspaces/${params.workspaceId}/settings/organization/billing`
                   : ENTERPRISE_LICENSE_REQUEST_FORM_URL,
               },
               {
                 text: t("common.learn_more"),
-                href: "https://formbricks.com/docs/unify-feedback/overview",
+                href: "https://salamruby.com/docs/unify-feedback/overview",
               },
             ]}
           />

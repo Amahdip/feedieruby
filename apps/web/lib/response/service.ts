@@ -1,12 +1,12 @@
 import "server-only";
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { logger } from "@formbricks/logger";
-import { ZId, ZOptionalNumber, ZString } from "@formbricks/types/common";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { logger } from "@salamruby/logger";
+import { ZId, ZOptionalNumber, ZString } from "@salamruby/types/common";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TResponse,
   TResponseContact,
@@ -15,10 +15,10 @@ import {
   TResponseWithQuotas,
   ZResponseFilterCriteria,
   ZResponseUpdateInput,
-} from "@formbricks/types/responses";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TTag } from "@formbricks/types/tags";
+} from "@salamruby/types/responses";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TTag } from "@salamruby/types/tags";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
 import { getIsQuotasEnabled } from "@/modules/ee/license-check/lib/utils";
 import { reduceQuotaLimits } from "@/modules/ee/quotas/lib/quotas";
@@ -415,7 +415,7 @@ export const getResponseDownloadFile = async (
       "Finished",
       ...(isQuotasAllowed ? ["Quotas"] : []),
       "Survey ID",
-      "Formbricks ID (internal)",
+      "SalamRuby ID (internal)",
       "User ID",
       "Tags",
       ...metaDataFields,

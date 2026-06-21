@@ -25,7 +25,7 @@ const setup = async (setupConfig: TConfigInput): Promise<void> => {
     const isDebug = getIsDebug();
     if (isDebug) {
       // eslint-disable-next-line no-console -- legacy init
-      console.warn("🧱 Formbricks - Warning: Using legacy init");
+      console.warn("🧱 SalamRuby - Warning: Using legacy init");
     }
     await queue.add(Setup.setup, CommandType.Setup, false, {
       ...setupConfig,
@@ -89,14 +89,14 @@ const registerRouteChange = async (): Promise<void> => {
  */
 const setNonce = (nonce: string | undefined): void => {
   // Store nonce on window for access when surveys package loads
-  globalThis.window.__formbricksNonce = nonce;
+  globalThis.window.__salamrubyNonce = nonce;
 
   // Set nonce in surveys package if it's already loaded
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Runtime check for surveys package availability
-  globalThis.window.formbricksSurveys?.setNonce?.(nonce);
+  globalThis.window.salamrubySurveys?.setNonce?.(nonce);
 };
 
-const formbricks = {
+const salamruby = {
   /** @deprecated Use setup() instead. This method will be removed in a future version */
   init: (initConfig: TLegacyConfigInput) => setup(initConfig as unknown as TConfigInput),
   setup,
@@ -111,13 +111,13 @@ const formbricks = {
   setNonce,
 };
 
-// Explicitly assign to globalThis so the wrapper SDK (@formbricks/js) can
+// Explicitly assign to globalThis so the wrapper SDK (@salamruby/js) can
 // find us even when the UMD environment detection is fooled by a leaked
 // `exports` or `module` global on the page (e.g. from another UMD bundle,
 // a tag manager, or a browser extension).  This runs inside the UMD factory,
 // so it executes regardless of which branch the wrapper picks.
-(globalThis as unknown as Record<string, unknown>).formbricks = formbricks;
+(globalThis as unknown as Record<string, unknown>).salamruby = salamruby;
 
-type TFormbricks = typeof formbricks;
-export type { TFormbricks };
-export default formbricks;
+type TSalamRuby = typeof salamruby;
+export type { TSalamRuby };
+export default salamruby;

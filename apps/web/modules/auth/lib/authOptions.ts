@@ -1,9 +1,9 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
-import { prisma } from "@formbricks/database";
-import { logger } from "@formbricks/logger";
-import type { TUser } from "@formbricks/types/user";
+import { prisma } from "@salamruby/database";
+import { logger } from "@salamruby/logger";
+import type { TUser } from "@salamruby/types/user";
 import {
   CONTROL_HASH,
   EMAIL_VERIFICATION_DISABLED,

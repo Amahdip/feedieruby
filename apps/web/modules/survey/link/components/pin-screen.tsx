@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Response, Workspace } from "@formbricks/database/prisma-browser";
-import { TSurvey, TSurveyStyling } from "@formbricks/types/surveys/types";
-import { TWorkspaceStyling } from "@formbricks/types/workspace";
+import { Response, Workspace } from "@salamruby/database/prisma-browser";
+import { TSurvey, TSurveyStyling } from "@salamruby/types/surveys/types";
+import { TWorkspaceStyling } from "@salamruby/types/workspace";
 import { cn } from "@/lib/cn";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { validateSurveyPinAction } from "@/modules/survey/link/actions";
@@ -20,7 +20,7 @@ interface PinScreenProps {
   IMPRINT_URL?: string;
   PRIVACY_URL?: string;
   TERMS_URL?: string;
-  IS_FORMBRICKS_CLOUD: boolean;
+  IS_SALAMRUBY_CLOUD: boolean;
   verifiedEmail?: string;
   languageCode: string;
   isEmbed: boolean;
@@ -43,7 +43,7 @@ export const PinScreen = (props: PinScreenProps) => {
     IMPRINT_URL,
     PRIVACY_URL,
     TERMS_URL,
-    IS_FORMBRICKS_CLOUD,
+    IS_SALAMRUBY_CLOUD,
     verifiedEmail,
     languageCode,
     isEmbed,
@@ -140,7 +140,7 @@ export const PinScreen = (props: PinScreenProps) => {
       IMPRINT_URL={IMPRINT_URL}
       PRIVACY_URL={PRIVACY_URL}
       TERMS_URL={TERMS_URL}
-      IS_FORMBRICKS_CLOUD={IS_FORMBRICKS_CLOUD}
+      IS_SALAMRUBY_CLOUD={IS_SALAMRUBY_CLOUD}
     />
   );
 };

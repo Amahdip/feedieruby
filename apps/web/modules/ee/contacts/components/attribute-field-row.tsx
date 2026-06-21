@@ -1,7 +1,7 @@
 "use client";
 
 import { CalendarIcon, HashIcon, TagIcon, TrashIcon } from "lucide-react";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
 import { Button } from "@/modules/ui/components/button";
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@/modules/ui/components/form";
 import { Input } from "@/modules/ui/components/input";

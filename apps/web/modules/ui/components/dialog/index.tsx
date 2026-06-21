@@ -73,7 +73,7 @@ const DialogContent = React.forwardRef<
         <DialogPrimitive.Content
           ref={ref}
           className={cn(
-            "fixed z-50 flex max-h-[90dvh] w-full flex-col space-y-4 rounded-t-lg border bg-white p-4 shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:rounded-lg md:zoom-in-90 data-[state=open]:md:slide-in-from-bottom-0",
+            "fixed z-50 flex max-h-[90dvh] w-full flex-col space-y-4 rounded-t-lg border bg-white p-4 pt-10 shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:rounded-lg md:zoom-in-90 data-[state=open]:md:slide-in-from-bottom-0",
             !unconstrained && "md:overflow-hidden",
             widthClass,
             className
@@ -83,8 +83,8 @@ const DialogContent = React.forwardRef<
           {...props}>
           {children}
           {!hideCloseButton && (
-            <DialogPrimitive.Close className="ring-offset-background focus:ring-ring absolute right-3 top-[-0.25rem] z-10 rounded-sm bg-transparent transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-slate-500">
-              <X className="size-4 text-slate-500" />
+            <DialogPrimitive.Close className="ring-offset-background focus:ring-ring absolute end-3 top-3 z-20 inline-flex size-8 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none">
+              <X className="size-4" />
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>
           )}
@@ -104,8 +104,8 @@ type DialogHeaderProps = Omit<React.HTMLAttributes<HTMLDivElement>, "dangerously
 const DialogHeader = ({ className, ...props }: DialogHeaderProps) => (
   <div
     className={cn(
-      "sticky top-[-32px] z-10 flex flex-shrink-0 flex-col gap-y-1 bg-white text-left",
-      "[&>svg]:absolute [&>svg]:size-4 [&>svg]:text-primary [&>svg~*]:min-h-4 [&>svg~*]:items-center [&>svg~*]:pl-6 sm:[&>svg~*]:flex",
+      "sticky top-0 z-10 flex flex-shrink-0 flex-col gap-y-1 bg-white pe-10 text-start",
+      "[&>svg]:absolute [&>svg]:size-4 [&>svg]:text-primary [&>svg~*]:min-h-4 [&>svg~*]:items-center [&>svg~*]:ps-6 sm:[&>svg~*]:flex",
       className
     )}
     {...props}
@@ -150,7 +150,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-sm font-medium leading-none text-primary", className)}
+    className={cn("text-base font-semibold leading-none text-primary", className)}
     {...props}
   />
 ));

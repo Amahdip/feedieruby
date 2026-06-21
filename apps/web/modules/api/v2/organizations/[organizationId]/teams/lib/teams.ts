@@ -1,7 +1,7 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Team } from "@formbricks/database/prisma";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { Team } from "@salamruby/database/prisma";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { getTeamsQuery } from "@/modules/api/v2/organizations/[organizationId]/teams/lib/utils";
 import {
   TGetTeamsFilter,

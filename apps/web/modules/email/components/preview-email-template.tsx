@@ -19,14 +19,14 @@ import {
   Tailwind,
   Text,
   render,
-} from "@formbricks/email";
+} from "@salamruby/email";
 import {
   type TSurveyAddressElement,
   type TSurveyCTAElement,
   type TSurveyContactInfoElement,
   TSurveyElementTypeEnum,
-} from "@formbricks/types/surveys/elements";
-import { type TSurvey, type TSurveyStyling } from "@formbricks/types/surveys/types";
+} from "@salamruby/types/surveys/elements";
+import { type TSurvey, type TSurveyStyling } from "@salamruby/types/surveys/types";
 import { WEBAPP_URL } from "@/lib/constants";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
@@ -1043,10 +1043,10 @@ function EmailFooter({
     <Container className="mx-auto mt-8 text-center">
       <Link
         className="text-signature-color text-xs"
-        href="https://formbricks.com?utm_source=email_branding"
+        href={`${WEBAPP_URL}?utm_source=email_branding`}
         style={{ ...getForcedColorStyle(signatureColor), fontFamily }}
         target={PREVIEW_LINK_TARGET}>
-        {t("common.powered_by_formbricks")}
+        {t("common.powered_by_salamruby")}
       </Link>
     </Container>
   );

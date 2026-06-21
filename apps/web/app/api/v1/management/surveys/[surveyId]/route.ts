@@ -1,7 +1,7 @@
-import { logger } from "@formbricks/logger";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
-import { ZSurveyUpdateInput } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
+import { ZSurveyUpdateInput } from "@salamruby/types/surveys/types";
 import { handleErrorResponse } from "@/app/api/v1/auth";
 import { deleteSurvey } from "@/app/api/v1/management/surveys/[surveyId]/lib/surveys";
 import { checkFeaturePermissions } from "@/app/api/v1/management/surveys/lib/utils";

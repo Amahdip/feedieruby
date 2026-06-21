@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError, ValidationError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError, ValidationError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { getResponseIdByDisplayId } from "./response";
 
@@ -11,7 +11,7 @@ vi.mock("@/lib/utils/validate", () => ({
   ),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     display: {
       findFirst: vi.fn(),

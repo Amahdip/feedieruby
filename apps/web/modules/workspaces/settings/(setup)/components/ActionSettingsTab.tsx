@@ -7,7 +7,7 @@ import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TActionClass, TActionClassInput } from "@formbricks/types/action-classes";
+import { TActionClass, TActionClassInput } from "@salamruby/types/action-classes";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { buildActionObject } from "@/modules/survey/editor/lib/action-builder";
 import {
@@ -38,7 +38,7 @@ export const ActionSettingsTab = ({
   setOpen,
   isReadOnly,
 }: ActionSettingsTabProps) => {
-  const actionDocsHref = "https://formbricks.com/docs/xm-and-surveys/surveys/website-app-surveys/actions";
+  const actionDocsHref = "https://salamruby.com/docs/xm-and-surveys/surveys/website-app-surveys/actions";
   const { createdAt, updatedAt, id, ...restActionClass } = actionClass;
   const router = useRouter();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);

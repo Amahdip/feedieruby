@@ -82,7 +82,7 @@ const nextConfig = {
   },
   turbopack: {},
   experimental: {},
-  transpilePackages: ["@formbricks/database"],
+  transpilePackages: ["@salamruby/database"],
   images: {
     // Optimize image processing to reduce CPU time and prevent timeouts
     deviceSizes: [640, 750, 828, 1080, 1200, 1920], // Removed 3840 to avoid processing huge images
@@ -113,11 +113,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "app.formbricks.com",
+        hostname: "app.salamruby.com",
       },
       {
         protocol: "https",
-        hostname: "formbricks-cdn.s3.eu-central-1.amazonaws.com",
+        hostname: "salamruby-cdn.s3.eu-central-1.amazonaws.com",
       },
       {
         protocol: "https",
@@ -469,8 +469,8 @@ nextConfig.images.remotePatterns.push({
 const sentryOptions = {
   // For all available options, see:
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
-  project: "formbricks-cloud",
-  org: "formbricks",
+  project: "salamruby-cloud",
+  org: "salamruby",
 
   // Enable logging to debug sourcemap generation issues
   silent: false,

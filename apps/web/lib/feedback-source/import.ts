@@ -1,10 +1,10 @@
 import "server-only";
-import { InvalidInputError } from "@formbricks/types/errors";
+import { InvalidInputError } from "@salamruby/types/errors";
 import {
-  TFeedbackSourceFormbricksMapping,
+  TFeedbackSourceSalamRubyMapping,
   TFeedbackSourceWithMappings,
-} from "@formbricks/types/feedback-source";
-import { TSurvey } from "@formbricks/types/surveys/types";
+} from "@salamruby/types/feedback-source";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { createFeedbackRecordsBatch } from "@/modules/hub";
 import { getResponses } from "../response/service";
 import { transformResponseToFeedbackRecords } from "./transform";
@@ -16,7 +16,7 @@ export type TImportResult = { successes: number; failures: number; skipped: numb
 const processBatch = async (
   responses: Awaited<ReturnType<typeof getResponses>>,
   survey: TSurvey,
-  mappings: TFeedbackSourceFormbricksMapping[],
+  mappings: TFeedbackSourceSalamRubyMapping[],
   tenantId: string
 ): Promise<TImportResult> => {
   let successes = 0;
@@ -43,8 +43,8 @@ export const importHistoricalResponses = async (
   feedbackSource: TFeedbackSourceWithMappings,
   survey: TSurvey
 ): Promise<TImportResult> => {
-  if (feedbackSource.type !== "formbricks_survey") {
-    throw new InvalidInputError("Historical import is only supported for Formbricks feedbackSources");
+  if (feedbackSource.type !== "salamruby_survey") {
+    throw new InvalidInputError("Historical import is only supported for SalamRuby feedbackSources");
   }
 
   let successes = 0;
@@ -59,7 +59,7 @@ export const importHistoricalResponses = async (
     const batch = await processBatch(
       responses,
       survey,
-      feedbackSource.formbricksMappings,
+      feedbackSource.salamrubyMappings,
       feedbackSource.feedbackDirectoryId
     );
     successes += batch.successes;

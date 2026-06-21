@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { OperationNotAllowedError } from "@formbricks/types/errors";
+import { OperationNotAllowedError } from "@salamruby/types/errors";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";
 import {

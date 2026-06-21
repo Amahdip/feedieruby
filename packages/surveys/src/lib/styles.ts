@@ -1,9 +1,10 @@
 // Add this import for survey-ui CSS variables
-import surveyUiCss from "@formbricks/survey-ui/styles?inline";
-import { type TSurveyStyling } from "@formbricks/types/surveys/types";
-import { type TWorkspaceStyling } from "@formbricks/types/workspace";
+import surveyUiCss from "@salamruby/survey-ui/styles?inline";
+import { type TSurveyStyling } from "@salamruby/types/surveys/types";
+import { type TWorkspaceStyling } from "@salamruby/types/workspace";
 import { isLight, mixColor } from "@/lib/color";
 import global from "@/styles/global.css?inline";
+import iranSansFonts from "@/styles/iran-sans-fonts.css?inline";
 import preflight from "@/styles/preflight.css?inline";
 import editorCss from "../../../../apps/web/modules/ui/components/editor/styles-editor-frontend.css?inline";
 
@@ -18,12 +19,12 @@ export const setStyleNonce = (nonce: string | undefined): void => {
   styleNonce = nonce;
 
   // Update existing style elements if they exist
-  const existingStyleElement = document.getElementById("formbricks__css");
+  const existingStyleElement = document.getElementById("salamruby__css");
   if (existingStyleElement && nonce) {
     existingStyleElement.setAttribute("nonce", nonce);
   }
 
-  const existingCustomStyleElement = document.getElementById("formbricks__css__custom");
+  const existingCustomStyleElement = document.getElementById("salamruby__css__custom");
   if (existingCustomStyleElement && nonce) {
     existingCustomStyleElement.setAttribute("nonce", nonce);
   }
@@ -34,9 +35,9 @@ export const getStyleNonce = (): string | undefined => {
 };
 
 export const addStylesToDom = () => {
-  if (document.getElementById("formbricks__css") === null) {
+  if (document.getElementById("salamruby__css") === null) {
     const styleElement = document.createElement("style");
-    styleElement.id = "formbricks__css";
+    styleElement.id = "salamruby__css";
 
     // Apply nonce if available
     if (styleNonce) {
@@ -44,11 +45,11 @@ export const addStylesToDom = () => {
     }
 
     // Include survey-ui CSS variables before other styles
-    styleElement.innerHTML = preflight + global + editorCss + surveyUiCss;
+    styleElement.innerHTML = iranSansFonts + preflight + global + editorCss + surveyUiCss;
     document.head.appendChild(styleElement);
   } else {
     // If style element already exists, update its nonce if needed
-    const existingStyleElement = document.getElementById("formbricks__css");
+    const existingStyleElement = document.getElementById("salamruby__css");
     if (existingStyleElement && styleNonce && !existingStyleElement.getAttribute("nonce")) {
       existingStyleElement.setAttribute("nonce", styleNonce);
     }
@@ -57,7 +58,7 @@ export const addStylesToDom = () => {
 
 export const addCustomThemeToDom = ({ styling }: { styling: TWorkspaceStyling | TSurveyStyling }): void => {
   // Check if the style element already exists
-  let styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement | null;
+  let styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement | null;
 
   // If the style element exists, update nonce if needed
   if (styleElement) {
@@ -68,7 +69,7 @@ export const addCustomThemeToDom = ({ styling }: { styling: TWorkspaceStyling | 
   } else {
     // Create it and append to the head
     styleElement = document.createElement("style");
-    styleElement.id = "formbricks__css__custom";
+    styleElement.id = "salamruby__css__custom";
 
     // Apply nonce if available
     if (styleNonce) {

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { SurveyStatus, SurveyType } from "@formbricks/database/prisma";
-import type { TBaseFilters } from "@formbricks/types/segment";
+import { prisma } from "@salamruby/database";
+import { SurveyStatus, SurveyType } from "@salamruby/database/prisma";
+import type { TBaseFilters } from "@salamruby/types/segment";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 import { segmentFilterToPrismaQuery } from "@/modules/ee/contacts/segments/lib/filter/prisma-query";
 import { getContactsInSegment } from "../contact";
@@ -13,14 +13,14 @@ vi.mock("react", () => ({
   cache: vi.fn((fn: Function) => fn),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
   },
 }));
 
 // Mock dependencies
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     contact: {
       findMany: vi.fn(),

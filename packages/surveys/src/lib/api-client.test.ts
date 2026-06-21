@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { FILE_UPLOAD_ERROR_NAMES } from "@formbricks/types/errors";
-import { STORAGE_ERROR_CODES } from "@formbricks/types/storage";
+import { FILE_UPLOAD_ERROR_NAMES } from "@salamruby/types/errors";
+import { STORAGE_ERROR_CODES } from "@salamruby/types/storage";
 import { ApiClient } from "./api-client";
 
 describe("ApiClient", () => {

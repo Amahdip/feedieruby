@@ -1,10 +1,10 @@
 import "server-only";
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Organization, Prisma, PrismaClient, Team } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Organization, Prisma, PrismaClient, Team } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { DEFAULT_TEAM_ID } from "@/lib/constants";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { validateInputs } from "@/lib/utils/validate";

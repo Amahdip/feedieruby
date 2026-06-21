@@ -2,7 +2,7 @@
 
 import { Loader2Icon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { TFeedbackSourceWithMappings } from "@formbricks/types/feedback-source";
+import { TFeedbackSourceWithMappings } from "@salamruby/types/feedback-source";
 import { FeedbackSourcesTableRowsContainer } from "./feedback-sources-table-rows-container";
 
 interface FeedbackSourcesTableProps {

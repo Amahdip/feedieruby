@@ -1,8 +1,8 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { ContactAttributeKey, Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { ContactAttributeKey, Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import { formatSnakeCaseToTitleCase } from "@/lib/utils/safe-identifier";
 import { getContactAttributeKeysQuery } from "@/modules/api/v2/management/contact-attribute-keys/lib/utils";
 import {

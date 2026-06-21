@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
 import { TOrganizationWorkspace } from "../types/api-keys";
 import { getWorkspacesByOrganizationId } from "./workspaces";
 
@@ -17,7 +17,7 @@ const mockWorkspaces: TOrganizationWorkspace[] = [
   },
 ];
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     workspace: {
       findMany: vi.fn(),

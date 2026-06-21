@@ -1,4 +1,4 @@
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import type { JobHandler } from "@/src/contracts";
 import type { TSurveySchedulingJobData } from "@/src/types";
 

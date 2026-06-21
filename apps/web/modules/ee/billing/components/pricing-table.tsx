@@ -10,7 +10,7 @@ import {
   type TOrganization,
   type TOrganizationStripePendingChange,
   type TOrganizationStripeSubscriptionStatus,
-} from "@formbricks/types/organizations";
+} from "@salamruby/types/organizations";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
 import { cn } from "@/lib/cn";

@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto";
 import { Provider } from "next-auth/providers/index";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
+import { prisma } from "@salamruby/database";
 import { EMAIL_VERIFICATION_DISABLED } from "@/lib/constants";
 import { verifyToken } from "@/lib/jwt";
 import { capturePostHogEvent } from "@/lib/posthog";
@@ -120,7 +120,7 @@ const mockPassword = randomBytes(12).toString("hex");
 const mockHashedPassword = await hashPassword(mockPassword);
 const AUTH_OPTIONS_SLOW_TEST_TIMEOUT_MS = 20_000;
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     user: {
       create: vi.fn(),

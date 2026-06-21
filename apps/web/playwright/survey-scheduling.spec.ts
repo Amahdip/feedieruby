@@ -1,8 +1,5 @@
 import { type Page, expect } from "@playwright/test";
-import {
-  SURVEY_SCHEDULING_TIME_LABEL,
-  SURVEY_SCHEDULING_TIME_ZONE_LABEL,
-} from "@/modules/survey/scheduling/lib/constants";
+import { SURVEY_SCHEDULING_TIME_LABEL } from "@/modules/survey/scheduling/lib/constants";
 import { test } from "./lib/fixtures";
 import { createSurveyFromScratch } from "./utils/helper";
 
@@ -57,8 +54,8 @@ const createMinimalSurvey = async (page: Page) => {
   await createSurveyFromScratch(page);
 };
 
-const publishScheduleSummary = `Survey will be published at ${SURVEY_SCHEDULING_TIME_LABEL} in the ${SURVEY_SCHEDULING_TIME_ZONE_LABEL} timezone on the selected date`;
-const closeScheduleSummary = `Survey will be closed at ${SURVEY_SCHEDULING_TIME_LABEL} in the ${SURVEY_SCHEDULING_TIME_ZONE_LABEL} timezone on the selected date`;
+const publishScheduleSummary = `Survey will be published at ${SURVEY_SCHEDULING_TIME_LABEL} in the Tehran timezone on the selected date`;
+const closeScheduleSummary = `Survey will be closed at ${SURVEY_SCHEDULING_TIME_LABEL} in the Tehran timezone on the selected date`;
 
 const pickDateForToggle = async (page: Page, toggleTitle: string, dayOffset: number) => {
   const targetDate = new Date();

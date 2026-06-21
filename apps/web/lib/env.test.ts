@@ -8,10 +8,8 @@ const setTestEnv = (overrides: Record<string, string | undefined> = {}) => {
     NODE_ENV: "test",
     DATABASE_URL: "https://example.com/db",
     ENCRYPTION_KEY: "12345678901234567890123456789012",
-    HUB_API_URL: "https://hub.formbricks.local",
+    HUB_API_URL: "https://hub.salamruby.local",
     HUB_API_KEY: "test-hub-api-key",
-    CUBEJS_API_URL: "https://cube.formbricks.local",
-    CUBEJS_API_SECRET: "cube-secret",
     ...overrides,
   };
 };
@@ -208,56 +206,52 @@ describe("env", () => {
     await expect(import("./env")).rejects.toThrow("AI_OPENAI_COMPATIBLE_QUERY_PARAMS_JSON");
   });
 
-  test("uses the configured Cube environment variables", async () => {
-    setTestEnv();
+  test("uses the configured Cube environment variables when provided", async () => {
+    setTestEnv({
+      CUBEJS_API_URL: "https://cube.salamruby.local",
+      CUBEJS_API_SECRET: "cube-secret",
+    });
     const { env } = await import("./env");
 
-    expect(env.CUBEJS_API_URL).toBe("https://cube.formbricks.local");
+    expect(env.CUBEJS_API_URL).toBe("https://cube.salamruby.local");
     expect(env.CUBEJS_API_SECRET).toBe("cube-secret");
+  });
+
+  test("allows missing Cube env when Cube analytics is disabled", async () => {
+    setTestEnv({
+      CUBEJS_API_SECRET: undefined,
+      CUBEJS_API_URL: undefined,
+    });
+
+    const { env } = await import("./env");
+
+    expect(env.CUBEJS_API_URL).toBeUndefined();
+    expect(env.CUBEJS_API_SECRET).toBeUndefined();
   });
 
   test("accepts Cube JWT issuer and audience configuration", async () => {
     setTestEnv({
-      CUBEJS_JWT_AUDIENCE: "formbricks-cube",
-      CUBEJS_JWT_ISSUER: "formbricks-web",
+      CUBEJS_API_URL: "https://cube.salamruby.local",
+      CUBEJS_API_SECRET: "cube-secret",
+      CUBEJS_JWT_AUDIENCE: "salamruby-cube",
+      CUBEJS_JWT_ISSUER: "salamruby-web",
     });
 
     const { env } = await import("./env");
 
-    expect(env.CUBEJS_JWT_AUDIENCE).toBe("formbricks-cube");
-    expect(env.CUBEJS_JWT_ISSUER).toBe("formbricks-web");
+    expect(env.CUBEJS_JWT_AUDIENCE).toBe("salamruby-cube");
+    expect(env.CUBEJS_JWT_ISSUER).toBe("salamruby-web");
   });
 
-  test("fails to load when the Cube API secret is missing", async () => {
-    setTestEnv({
-      CUBEJS_API_SECRET: undefined,
-    });
-
-    await expect(import("./env")).rejects.toThrow("Invalid environment variables");
-  });
-
-  test("fails to load when the Cube API secret is empty", async () => {
-    setTestEnv({
-      CUBEJS_API_SECRET: "",
-    });
-
-    await expect(import("./env")).rejects.toThrow("Invalid environment variables");
-  });
-
-  test("fails to load when the Cube API URL is missing", async () => {
-    setTestEnv({
-      CUBEJS_API_URL: undefined,
-    });
-
-    await expect(import("./env")).rejects.toThrow("Invalid environment variables");
-  });
-
-  test("fails to load when the Cube API URL is empty", async () => {
+  test("treats empty Cube API URL as unset when Cube analytics is disabled", async () => {
     setTestEnv({
       CUBEJS_API_URL: "",
+      CUBEJS_API_SECRET: "cube-secret",
     });
 
-    await expect(import("./env")).rejects.toThrow("Invalid environment variables");
+    const { env } = await import("./env");
+
+    expect(env.CUBEJS_API_URL).toBeUndefined();
   });
 
   test("fails to load when the Cube API URL is invalid", async () => {
@@ -278,7 +272,7 @@ describe("env", () => {
 
     const { env } = await import("./env");
 
-    expect(env.NEXT_PUBLIC_SURVEY_SCHEDULING_TIME_ZONE).toBe("Europe/Berlin");
+    expect(env.NEXT_PUBLIC_SURVEY_SCHEDULING_TIME_ZONE).toBe("Asia/Tehran");
     expect(env.NEXT_PUBLIC_SURVEY_SCHEDULING_LOCAL_HOUR).toBe(0);
     expect(env.NEXT_PUBLIC_SURVEY_SCHEDULING_LOCAL_MINUTE).toBe(0);
   });

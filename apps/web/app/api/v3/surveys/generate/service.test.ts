@@ -155,7 +155,7 @@ describe("generateV3SurveyCreatePayloadFromPrompt", () => {
       expect.objectContaining({
         organizationId: "org_1",
         schema: ZGeneratedSurveyDraftForAI,
-        schemaName: "FormbricksSurveyDraft",
+        schemaName: "SalamRubySurveyDraft",
         temperature: 0.2,
         timeout: 45_000,
       })

@@ -47,8 +47,8 @@ describe("Survey Builder", () => {
         subheader: { default: "templates.default_ending_card_subheader" },
       });
       expect(endingCard.id).toBeDefined();
-      expect(endingCard).toHaveProperty("buttonLabel");
-      expect(endingCard).toHaveProperty("buttonLink");
+      expect(endingCard).not.toHaveProperty("buttonLabel");
+      expect(endingCard).not.toHaveProperty("buttonLink");
     });
 
     test("hiddenFieldsDefault has expected structure", () => {

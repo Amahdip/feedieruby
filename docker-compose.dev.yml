@@ -1,5 +1,5 @@
 services:
-  # PostgreSQL must load the vector library so Hub (and Formbricks) can use the pgvector extension.
+  # PostgreSQL must load the vector library so Hub (and SalamRuby) can use the pgvector extension.
   postgres:
     image: pgvector/pgvector:pg18
     volumes:
@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 5432:5432
+      - 5433:5432
     command: >
       postgres
       -c shared_preload_libraries=vector
@@ -66,8 +66,8 @@ services:
     environment:
       - RUSTFS_ADMIN_USER=devrustfs
       - RUSTFS_ADMIN_PASSWORD=devrustfs123
-      - RUSTFS_BUCKET_NAME=formbricks
-      - RUSTFS_POLICY_NAME=formbricks-policy
+      - RUSTFS_BUCKET_NAME=salamruby
+      - RUSTFS_POLICY_NAME=salamruby-policy
       - RUSTFS_SERVICE_USER=devrustfs-service
       - RUSTFS_SERVICE_PASSWORD=devrustfs-service123
       - RUSTFS_CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,http://localhost:3002,http://127.0.0.1:3002
@@ -97,7 +97,7 @@ services:
   # Keep hub, hub-migrate, and any future hub-worker on the same tag — they share one image and
   # drift breaks migrations or job processing.
   hub-migrate:
-    image: ghcr.io/formbricks/hub:${HUB_IMAGE_TAG:-0.5.0}
+    image: ghcr.io/salamruby/hub:${HUB_IMAGE_TAG:-0.5.0}
     restart: "no"
     entrypoint: ["sh", "-c"]
     command:
@@ -110,9 +110,9 @@ services:
       hub-db-create:
         condition: service_completed_successfully
 
-  # Formbricks Hub API (ghcr.io/formbricks/hub). Uses a dedicated local Hub database by default.
+  # SalamRuby Hub API (ghcr.io/salamruby/hub). Uses a dedicated local Hub database by default.
   hub:
-    image: ghcr.io/formbricks/hub:${HUB_IMAGE_TAG:-0.5.0}
+    image: ghcr.io/salamruby/hub:${HUB_IMAGE_TAG:-0.5.0}
     depends_on:
       hub-migrate:
         condition: service_completed_successfully
@@ -142,7 +142,7 @@ services:
 
   # Hub worker processes async jobs enqueued by the API, including embeddings.
   hub-worker:
-    image: ghcr.io/formbricks/hub:${HUB_IMAGE_TAG:-0.5.0}
+    image: ghcr.io/salamruby/hub:${HUB_IMAGE_TAG:-0.5.0}
     depends_on:
       hub-migrate:
         condition: service_completed_successfully
@@ -153,36 +153,6 @@ services:
       disable: true
     environment:
       <<: *hub-runtime-environment
-
-  cube:
-    image: cubejs/cube:v1.6.6
-    env_file:
-      - apps/web/.env
-    depends_on:
-      postgres:
-        condition: service_healthy
-      hub-migrate:
-        condition: service_completed_successfully
-    ports:
-      - 4000:4000
-      - 4001:4001 # Cube Playground UI (dev only)
-    environment:
-      CUBEJS_DB_TYPE: postgres
-      CUBEJS_DB_HOST: ${CUBEJS_DB_HOST:-postgres}
-      CUBEJS_DB_NAME: ${CUBEJS_DB_NAME:-postgres}
-      CUBEJS_DB_USER: ${CUBEJS_DB_USER:-postgres}
-      CUBEJS_DB_PASS: ${CUBEJS_DB_PASS:-postgres}
-      CUBEJS_DB_PORT: ${CUBEJS_DB_PORT:-5432}
-      CUBEJS_DEV_MODE: "true"
-      CUBEJS_API_SECRET: ${CUBEJS_API_SECRET:-}
-      CUBEJS_JWT_ISSUER: ${CUBEJS_JWT_ISSUER:-formbricks-web}
-      CUBEJS_JWT_AUDIENCE: ${CUBEJS_JWT_AUDIENCE:-formbricks-cube}
-      CUBEJS_DEFAULT_API_SCOPES: meta,data
-      CUBEJS_CACHE_AND_QUEUE_DRIVER: memory
-    volumes:
-      - ./docker/cube/cube.js:/cube/conf/cube.js:ro
-      - ./docker/cube/schema:/cube/conf/model:ro
-    restart: on-failure
 
 volumes:
   postgres:

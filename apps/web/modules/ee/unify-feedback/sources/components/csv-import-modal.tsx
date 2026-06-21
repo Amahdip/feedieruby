@@ -5,7 +5,7 @@ import { ArrowUpFromLineIcon, Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TFeedbackSourceFieldMapping } from "@formbricks/types/feedback-source";
+import type { TFeedbackSourceFieldMapping } from "@salamruby/types/feedback-source";
 import { importCsvDataAction } from "@/lib/feedback-source/actions";
 import {
   formatCsvMissingMappedSourceColumns,

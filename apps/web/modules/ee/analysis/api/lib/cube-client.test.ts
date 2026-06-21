@@ -18,7 +18,7 @@ vi.mock("@cubejs-client/core", () => ({
   })),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: mockLoggerError,
     warn: mockLoggerWarn,
@@ -54,14 +54,14 @@ describe("executeTenantScopedQuery", () => {
     vi.clearAllMocks();
     vi.resetModules();
     vi.stubEnv("NODE_ENV", "test");
-    vi.stubEnv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/formbricks?schema=public");
+    vi.stubEnv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/salamruby?schema=public");
     vi.stubEnv("ENCRYPTION_KEY", "12345678901234567890123456789012");
-    vi.stubEnv("HUB_API_URL", "https://hub.formbricks.local");
+    vi.stubEnv("HUB_API_URL", "https://hub.salamruby.local");
     vi.stubEnv("HUB_API_KEY", "test-hub-api-key");
     vi.stubEnv("CUBEJS_API_URL", "https://cube.example.com");
     vi.stubEnv("CUBEJS_API_SECRET", "cube-secret");
-    vi.stubEnv("CUBEJS_JWT_AUDIENCE", "formbricks-cube-test");
-    vi.stubEnv("CUBEJS_JWT_ISSUER", "formbricks-web-test");
+    vi.stubEnv("CUBEJS_JWT_AUDIENCE", "salamruby-cube-test");
+    vi.stubEnv("CUBEJS_JWT_ISSUER", "salamruby-web-test");
     mockLoad.mockResolvedValue({ tablePivot: mockTablePivot });
     mockQueueAuditEventWithoutRequest.mockResolvedValue(undefined);
     mockTablePivot.mockReturnValue([{ id: "1", count: 42 }]);
@@ -82,8 +82,8 @@ describe("executeTenantScopedQuery", () => {
     const cubejs = await getCubeJsMock();
     const token = cubejs.mock.calls[0][0] as string;
     const payload = jwt.verify(token, "cube-secret", {
-      audience: "formbricks-cube-test",
-      issuer: "formbricks-web-test",
+      audience: "salamruby-cube-test",
+      issuer: "salamruby-web-test",
     }) as jwt.JwtPayload;
 
     expect(cubejs).toHaveBeenCalledWith(expect.any(String), {
@@ -160,9 +160,9 @@ describe("executeTenantScopedQuery", () => {
   test("fails at env validation when Cube env is missing", async () => {
     vi.unstubAllEnvs();
     vi.stubEnv("NODE_ENV", "test");
-    vi.stubEnv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/formbricks?schema=public");
+    vi.stubEnv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/salamruby?schema=public");
     vi.stubEnv("ENCRYPTION_KEY", "12345678901234567890123456789012");
-    vi.stubEnv("HUB_API_URL", "https://hub.formbricks.local");
+    vi.stubEnv("HUB_API_URL", "https://hub.salamruby.local");
     vi.stubEnv("HUB_API_KEY", "test-hub-api-key");
     vi.stubEnv("CUBEJS_API_URL", undefined);
     vi.stubEnv("CUBEJS_API_SECRET", undefined);

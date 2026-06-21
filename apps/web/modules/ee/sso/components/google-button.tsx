@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { useTranslation } from "react-i18next";
-import { FORMBRICKS_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
+import { SALAMRUBY_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
 import { getSsoReturnToUrl } from "@/modules/ee/sso/lib/utils";
 import { Button } from "@/modules/ui/components/button";
 import { GoogleIcon } from "@/modules/ui/components/icons";
@@ -17,7 +17,7 @@ export const GoogleButton = ({ returnToUrl, lastUsed, source }: GoogleButtonProp
   const { t } = useTranslation();
   const handleLogin = async () => {
     if (typeof window !== "undefined") {
-      localStorage.setItem(FORMBRICKS_LOGGED_IN_WITH_LS, "Google");
+      localStorage.setItem(SALAMRUBY_LOGGED_IN_WITH_LS, "Google");
     }
     const returnToUrlWithSource = getSsoReturnToUrl(returnToUrl, source);
 

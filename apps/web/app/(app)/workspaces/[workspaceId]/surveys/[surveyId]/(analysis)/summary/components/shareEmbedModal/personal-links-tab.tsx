@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TSegment } from "@formbricks/types/segment";
+import { TSegment } from "@salamruby/types/segment";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { DocumentationLinks } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/components/shareEmbedModal/documentation-links";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
@@ -33,7 +33,7 @@ interface PersonalLinksTabProps {
   surveyId: string;
   segments: TSegment[];
   isContactsEnabled: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   enterpriseLicenseRequestFormUrl: string;
 }
 
@@ -73,7 +73,7 @@ export const PersonalLinksTab = ({
   segments,
   surveyId,
   isContactsEnabled,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   enterpriseLicenseRequestFormUrl,
 }: PersonalLinksTabProps) => {
   const { t } = useTranslation();
@@ -167,16 +167,16 @@ export const PersonalLinksTab = ({
         feature="personal_links"
         buttons={[
           {
-            text: isFormbricksCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
-            href: isFormbricksCloud
+            text: isSalamRubyCloud ? t("common.upgrade_plan") : t("common.request_trial_license"),
+            href: isSalamRubyCloud
               ? `/workspaces/${workspace?.id}/settings/organization/billing`
               : enterpriseLicenseRequestFormUrl,
           },
           {
             text: t("common.learn_more"),
-            href: isFormbricksCloud
+            href: isSalamRubyCloud
               ? `/workspaces/${workspace?.id}/settings/organization/billing`
-              : "https://formbricks.com/learn-more-self-hosting-license",
+              : "https://salamruby.com/learn-more-self-hosting-license",
           },
         ]}
       />
@@ -256,7 +256,7 @@ export const PersonalLinksTab = ({
         links={[
           {
             title: t("workspace.surveys.share.personal_links.work_with_segments"),
-            href: "https://formbricks.com/docs/xm-and-surveys/surveys/website-app-surveys/advanced-targeting#segment-configuration",
+            href: "https://salamruby.com/docs/xm-and-surveys/surveys/website-app-surveys/advanced-targeting#segment-configuration",
           },
         ]}
       />

@@ -1,7 +1,7 @@
 import { type ComponentChildren } from "preact";
 import { useEffect } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { type TOverlay, type TPlacement } from "@formbricks/types/common";
+import { type TOverlay, type TPlacement } from "@salamruby/types/common";
 import { useFocusTrap } from "@/lib/use-focus-trap";
 import { cn } from "@/lib/utils";
 
@@ -74,14 +74,14 @@ export function SurveyContainer({
 
   if (!isModal) {
     return (
-      <div id="fbjs" className="formbricks-form" style={{ height: "100%", width: "100%" }} dir={dir}>
+      <div id="fbjs" className="salamruby-form" style={{ height: "100%", width: "100%" }} dir={dir}>
         {children}
       </div>
     );
   }
 
   return (
-    <div id="fbjs" className="formbricks-form" dir={dir}>
+    <div id="fbjs" className="salamruby-form" dir={dir}>
       <div
         aria-live="assertive"
         className={cn(

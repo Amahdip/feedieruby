@@ -1,8 +1,8 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TOrganizationBilling } from "@formbricks/types/organizations";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TOrganizationBilling } from "@salamruby/types/organizations";
 
 export const getOrganizationIdFromWorkspaceId = reactCache(async (workspaceId: string): Promise<string> => {
   const workspace = await prisma.workspace.findUnique({

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { TFeedbackSourceWithMappings } from "@formbricks/types/feedback-source";
+import { TFeedbackSourceWithMappings } from "@salamruby/types/feedback-source";
 import { FeedbackSourcesTableDataRow } from "./feedback-sources-table-data-row";
 
 interface FeedbackSourcesTableRowsContainerProps {

@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import {
   addBlock,
   addElementToBlock,
@@ -22,7 +22,18 @@ vi.mock("@paralleldrive/cuid2", () => ({
   createId: vi.fn(() => "test-cuid-" + Math.random().toString(36).substring(7)),
 }));
 
-const mockT = ((key: string) => key) as never;
+const mockT = ((key: string, options?: { number?: number }) => {
+  if (key === "templates.block_number" && options?.number) {
+    return `Block ${options.number}`;
+  }
+
+  const match = key.match(/^templates\.block_(\d+)$/);
+  if (match) {
+    return `Block ${match[1]}`;
+  }
+
+  return key;
+}) as never;
 
 const createMockElement = (id: string): TSurveyElement => ({
   id,

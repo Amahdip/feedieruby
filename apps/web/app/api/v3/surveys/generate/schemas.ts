@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ZUserLocale } from "@formbricks/types/user";
+import { ZUserLocale } from "@salamruby/types/user";
 import { normalizeV3SurveyLanguageIdentifier } from "../language";
 import {
   GENERATED_SURVEY_ELEMENT_TYPES,

@@ -4,9 +4,9 @@ import { InboxIcon } from "lucide-react";
 import Link from "next/link";
 import { Fragment, type KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey, TSurveyElementSummaryMultipleChoice, TSurveyType } from "@formbricks/types/surveys/types";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey, TSurveyElementSummaryMultipleChoice, TSurveyType } from "@salamruby/types/surveys/types";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { getChoiceIdByValue } from "@/lib/response/utils";
 import { getContactIdentifier } from "@/lib/utils/contact";
@@ -96,8 +96,8 @@ export const MultipleChoiceSummary = ({
         survey={survey}
         additionalInfo={
           elementSummary.type === "multipleChoiceMulti" ? (
-            <div className="flex items-center rounded-lg bg-slate-100 p-2">
-              <InboxIcon className="mr-2 size-4" />
+            <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+              <InboxIcon className="size-4 shrink-0" />
               {t("common.count_selections", { count: elementSummary.selectionCount })}
             </div>
           ) : undefined

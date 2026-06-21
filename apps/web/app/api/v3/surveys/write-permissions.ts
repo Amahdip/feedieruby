@@ -1,6 +1,6 @@
 import "server-only";
-import type { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import type { TSurveyEnding } from "@formbricks/types/surveys/types";
+import type { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import type { TSurveyEnding } from "@salamruby/types/surveys/types";
 import { getOrganizationByWorkspaceId } from "@/lib/organization/service";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
 import { getExternalUrlsPermission } from "@/modules/survey/lib/permission";

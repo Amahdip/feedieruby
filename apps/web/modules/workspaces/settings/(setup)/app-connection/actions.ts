@@ -1,9 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { ZActionClassInput } from "@formbricks/types/action-classes";
-import { ZId } from "@formbricks/types/common";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ZActionClassInput } from "@salamruby/types/action-classes";
+import { ZId } from "@salamruby/types/common";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import { deleteActionClass, getActionClass, updateActionClass } from "@/lib/actionClass/service";
 import { getSurveysByActionClassId } from "@/lib/survey/service";
 import { actionClient, authenticatedActionClient } from "@/lib/utils/action-client";
@@ -115,7 +115,7 @@ export const getActiveInactiveSurveysAction = authenticatedActionClient
 
 const getLatestStableFbRelease = async (): Promise<string | null> => {
   try {
-    const res = await fetch("https://api.github.com/repos/formbricks/formbricks/releases/latest");
+    const res = await fetch("https://api.github.com/repos/salamruby/salamruby/releases/latest");
     const release = await res.json();
 
     if (release?.tag_name) {
@@ -124,7 +124,7 @@ const getLatestStableFbRelease = async (): Promise<string | null> => {
 
     return null;
   } catch (error) {
-    throw new Error("Failed to get latest stable Formbricks release", { cause: error });
+    throw new Error("Failed to get latest stable SalamRuby release", { cause: error });
   }
 };
 

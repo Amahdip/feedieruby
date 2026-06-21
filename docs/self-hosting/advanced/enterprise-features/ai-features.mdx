@@ -9,7 +9,7 @@ A single organization toggle unlocks AI-assisted survey translation and AI chart
 
 ## Kubernetes Helm
 
-The Formbricks Helm chart can deploy a bundled Qwen/vLLM runtime for Smart functionality. This path is disabled
+The SalamRuby Helm chart can deploy a bundled Qwen/vLLM runtime for Smart functionality. This path is disabled
 by default and requires GPU-capable Kubernetes nodes.
 
 ```yaml
@@ -18,7 +18,7 @@ llm:
 ```
 
 When `llm.enabled` is true, the chart deploys the vLLM router and Qwen serving engine. By default it also points
-the Formbricks app at the in-cluster OpenAI-compatible endpoint by injecting the required `AI_*` environment
+the SalamRuby app at the in-cluster OpenAI-compatible endpoint by injecting the required `AI_*` environment
 variables.
 
 Set `llm.autoConfigureApp=false` if you want the chart to deploy Qwen/vLLM but prefer to configure the app

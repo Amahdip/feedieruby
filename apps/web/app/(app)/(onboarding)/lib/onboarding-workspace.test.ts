@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AuthorizationError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { AuthorizationError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getOrganization, updateOrganization } from "@/lib/organization/service";

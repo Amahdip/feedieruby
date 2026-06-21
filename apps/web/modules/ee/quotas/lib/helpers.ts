@@ -1,4 +1,4 @@
-import { TSurveyQuota, TSurveyQuotaAction } from "@formbricks/types/quota";
+import { TSurveyQuota, TSurveyQuotaAction } from "@salamruby/types/quota";
 
 type QuotaFull =
   | {

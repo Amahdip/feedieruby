@@ -1,7 +1,7 @@
 import "server-only";
-import { logger } from "@formbricks/logger";
-import { TResponseInput } from "@formbricks/types/responses";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { TResponseInput } from "@salamruby/types/responses";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { responses } from "@/app/lib/api/response";
 import { ENCRYPTION_KEY } from "@/lib/constants";
 import { symmetricDecrypt } from "@/lib/crypto";

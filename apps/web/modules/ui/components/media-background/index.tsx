@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SurveyType } from "@formbricks/database/prisma-browser";
-import { TSurveyStyling } from "@formbricks/types/surveys/types";
-import { TWorkspaceStyling } from "@formbricks/types/workspace";
+import { SurveyType } from "@salamruby/database/prisma-browser";
+import { TSurveyStyling } from "@salamruby/types/surveys/types";
+import { TWorkspaceStyling } from "@salamruby/types/workspace";
 
 interface MediaBackgroundProps {
   children: React.ReactNode;
@@ -118,14 +118,14 @@ export const MediaBackground: React.FC<MediaBackgroundProps> = ({
                 <div className="absolute bottom-4 right-6 z-10 ml-auto hidden w-max text-xs text-slate-400 md:block">
                   <span>{t("common.photo_by")}</span>
                   <Link
-                    href={authorDetailsForUnsplash.authorURL + "?utm_source=formbricks&utm_medium=referral"}
+                    href={authorDetailsForUnsplash.authorURL + "?utm_source=salamruby&utm_medium=referral"}
                     target="_blank"
                     className="hover:underline">
                     {authorDetailsForUnsplash.authorName}
                   </Link>
                   <span> {t("common.on")} </span>
                   <Link
-                    href="https://unsplash.com/?utm_source=formbricks&utm_medium=referral"
+                    href="https://unsplash.com/?utm_source=salamruby&utm_medium=referral"
                     target="_blank"
                     className="hover:underline">
                     Unsplash

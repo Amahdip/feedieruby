@@ -14,14 +14,14 @@ import { createId } from "@paralleldrive/cuid2";
 import React, { SetStateAction, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyQuota } from "@formbricks/types/quota";
-import { TSurveyBlock, TSurveyBlockLogic, TSurveyBlockLogicAction } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { type TConditionGroup, type TSingleCondition } from "@formbricks/types/surveys/logic";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyQuota } from "@salamruby/types/quota";
+import { TSurveyBlock, TSurveyBlockLogic, TSurveyBlockLogicAction } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { type TConditionGroup, type TSingleCondition } from "@salamruby/types/surveys/logic";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { getDefaultEndingCard } from "@/app/lib/survey-builder";
 import { addMultiLanguageLabels, createI18nString, extractLanguageCodes } from "@/lib/i18n/utils";
 import { structuredClone } from "@/lib/pollyfills/structuredClone";
@@ -40,6 +40,7 @@ import {
   deleteElementFromBlock,
   duplicateBlock as duplicateBlockHelper,
   findElementLocation,
+  getSequentialBlockName,
   moveBlock as moveBlockHelper,
   moveElementInBlock,
   renumberBlocks,
@@ -65,7 +66,7 @@ interface ElementsViewProps {
   invalidElements: string[] | null;
   setInvalidElements: React.Dispatch<SetStateAction<string[] | null>>;
   selectedLanguageCode: string;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isCxMode: boolean;
   locale: TUserLocale;
   responseCount: number;
@@ -84,7 +85,7 @@ export const ElementsView = ({
   invalidElements,
   setInvalidElements,
   selectedLanguageCode,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isCxMode,
   locale,
   responseCount,
@@ -117,7 +118,7 @@ export const ElementsView = ({
   const surveyLanguages = localSurvey.languages;
 
   const getBlockName = (index: number): string => {
-    return `Block ${index + 1}`;
+    return getSequentialBlockName(index + 1, t);
   };
 
   const handleElementLogicChange = (survey: TSurvey, compareId: string, updatedId: string): TSurvey => {
@@ -416,7 +417,7 @@ export const ElementsView = ({
     const block = updatedSurvey.blocks[blockIndex];
     const result =
       block.elements.length === 1
-        ? deleteBlock(updatedSurvey, blockId)
+        ? deleteBlock(updatedSurvey, blockId, t)
         : deleteElementFromBlock(updatedSurvey, blockId, elementId);
 
     if (!result.ok) {
@@ -617,7 +618,7 @@ export const ElementsView = ({
 
     // Move the entire block
     const direction = up ? "up" : "down";
-    const result = moveBlockHelper(localSurvey, blockId, direction);
+    const result = moveBlockHelper(localSurvey, blockId, direction, t);
 
     if (!result.ok) {
       toast.error(result.error.message);
@@ -629,7 +630,7 @@ export const ElementsView = ({
 
   // Block-level operations
   const duplicateBlock = (blockId: string) => {
-    const result = duplicateBlockHelper(localSurvey, blockId);
+    const result = duplicateBlockHelper(localSurvey, blockId, t);
 
     if (!result.ok) {
       toast.error(result.error.message);
@@ -673,7 +674,7 @@ export const ElementsView = ({
 
     // Use functional update to ensure we work with the latest state
     setLocalSurvey((prevSurvey) => {
-      const result = deleteBlock(prevSurvey, blockId);
+      const result = deleteBlock(prevSurvey, blockId, t);
       if (!result.ok) {
         // Return unchanged if block not found (shouldn't happen but be safe)
         return prevSurvey;
@@ -710,7 +711,7 @@ export const ElementsView = ({
   };
 
   const moveBlockById = (blockId: string, direction: "up" | "down") => {
-    const result = moveBlockHelper(localSurvey, blockId, direction);
+    const result = moveBlockHelper(localSurvey, blockId, direction, t);
 
     if (!result.ok) {
       toast.error(result.error.message);
@@ -817,7 +818,7 @@ export const ElementsView = ({
       blocks.splice(destBlockIndex, 0, movedBlock);
 
       // Renumber blocks sequentially after drag-and-drop reordering
-      const renumberedBlocks = renumberBlocks(blocks);
+      const renumberedBlocks = renumberBlocks(blocks, t);
 
       setLocalSurvey({ ...localSurvey, blocks: renumberedBlocks });
     }
@@ -874,7 +875,7 @@ export const ElementsView = ({
           setActiveElementId={setActiveElementId}
           invalidElements={invalidElements}
           addElement={addElement}
-          isFormbricksCloud={isFormbricksCloud}
+          isSalamRubyCloud={isSalamRubyCloud}
           isCxMode={isCxMode}
           locale={locale}
           responseCount={responseCount}
@@ -909,7 +910,7 @@ export const ElementsView = ({
                   activeElementId={activeElementId}
                   isInvalid={invalidElements ? invalidElements.includes(ending.id) : false}
                   addEndingCard={addEndingCard}
-                  isFormbricksCloud={isFormbricksCloud}
+                  isSalamRubyCloud={isSalamRubyCloud}
                   locale={locale}
                   isStorageConfigured={isStorageConfigured}
                   quotas={quotas}

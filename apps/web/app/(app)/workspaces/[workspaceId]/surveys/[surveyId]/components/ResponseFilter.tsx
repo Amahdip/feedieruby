@@ -4,9 +4,9 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ChevronDown, ChevronUp, Plus, TrashIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import {
   SelectedFilterValue,
   TResponseStatus,
@@ -53,15 +53,13 @@ export const PopoverTriggerButton = React.forwardRef<HTMLButtonElement, PopoverT
       ref={ref}
       type="button"
       {...props}
-      className="flex min-w-[8rem] cursor-pointer items-center justify-between rounded-md border border-slate-300 bg-white p-2 hover:border-slate-400">
-      <span className="text-sm text-slate-700">{children}</span>
-      <div className="ml-3">
-        {isOpen ? (
-          <ChevronUp className="ml-2 size-4 opacity-50" />
-        ) : (
-          <ChevronDown className="ml-2 size-4 opacity-50" />
-        )}
-      </div>
+      className="flex min-w-[8rem] cursor-pointer items-center justify-between gap-2 rounded-md border border-slate-300 bg-white p-2 hover:border-slate-400">
+      <span className="truncate text-sm text-slate-700">{children}</span>
+      {isOpen ? (
+        <ChevronUp className="size-4 shrink-0 opacity-50" />
+      ) : (
+        <ChevronDown className="size-4 shrink-0 opacity-50" />
+      )}
     </button>
   )
 );
@@ -327,7 +325,7 @@ export const ResponseFilter = ({ survey }: ResponseFilterProps) => {
               </div>
               {i !== filterValue.filter.length - 1 && (
                 <div className="my-4 flex items-center">
-                  <p className="mr-4 font-semibold text-slate-800">{t("common.and")}</p>
+                  <p className="me-4 font-semibold text-slate-800">{t("common.and")}</p>
                   <hr className="w-full text-slate-600" />
                 </div>
               )}

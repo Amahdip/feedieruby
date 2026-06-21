@@ -1,5 +1,5 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { buildV3AuditLog, queueV3AuditLog } from "@/app/api/v3/lib/audit";
 import {
   createV3SurveyResponseFromRawInput,
@@ -65,7 +65,7 @@ export function registerSurveyTools(server: McpServer): void {
     "list_surveys",
     {
       title: "List surveys",
-      description: "List surveys in a Formbricks workspace using the v3 Surveys API contract.",
+      description: "List surveys in a SalamRuby workspace using the v3 Surveys API contract.",
       inputSchema: ZMcpListSurveysInput.shape,
       annotations: {
         readOnlyHint: true,
@@ -91,7 +91,7 @@ export function registerSurveyTools(server: McpServer): void {
     "get_survey",
     {
       title: "Get survey",
-      description: "Get one Formbricks survey using the v3 Surveys API contract.",
+      description: "Get one SalamRuby survey using the v3 Surveys API contract.",
       inputSchema: ZMcpGetSurveyInput.shape,
       annotations: {
         readOnlyHint: true,
@@ -118,7 +118,7 @@ export function registerSurveyTools(server: McpServer): void {
     "create_survey",
     {
       title: "Create survey",
-      description: "Create a Formbricks link survey using the v3 Surveys API contract.",
+      description: "Create a SalamRuby link survey using the v3 Surveys API contract.",
       inputSchema: ZMcpCreateSurveyInput.shape,
       annotations: {
         readOnlyHint: false,
@@ -194,7 +194,7 @@ export function registerSurveyTools(server: McpServer): void {
     {
       title: "Patch survey",
       description: [
-        "Update a Formbricks survey using the v3 Surveys API patch contract.",
+        "Update a SalamRuby survey using the v3 Surveys API patch contract.",
         "Provided top-level arrays and objects replace that whole subtree.",
       ].join(" "),
       inputSchema: ZMcpPatchSurveyInput.shape,
@@ -246,7 +246,7 @@ export function registerSurveyTools(server: McpServer): void {
     "delete_survey",
     {
       title: "Delete survey",
-      description: "Delete a Formbricks survey using the v3 Surveys API contract.",
+      description: "Delete a SalamRuby survey using the v3 Surveys API contract.",
       inputSchema: ZMcpDeleteSurveyInput.shape,
       annotations: {
         readOnlyHint: false,

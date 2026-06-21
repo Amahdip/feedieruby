@@ -1,10 +1,10 @@
 "use server";
 
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { OperationNotAllowedError } from "@formbricks/types/errors";
-import { TUserNotificationSettings } from "@formbricks/types/user";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { logger } from "@salamruby/logger";
+import { OperationNotAllowedError } from "@salamruby/types/errors";
+import { TUserNotificationSettings } from "@salamruby/types/user";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { createMembership } from "@/lib/membership/service";
 import { createOrganization } from "@/lib/organization/service";
 import { capturePostHogEvent, groupIdentifyPostHog } from "@/lib/posthog";
@@ -27,7 +27,7 @@ export const createOrganizationAction = authenticatedActionClient
       const isMultiOrgEnabled = await getIsMultiOrgEnabled();
       if (!isMultiOrgEnabled)
         throw new OperationNotAllowedError(
-          "Creating Multiple organization is restricted on your instance of Formbricks"
+          "Creating Multiple organization is restricted on your instance of SalamRuby"
         );
 
       const newOrganization = await createOrganization({
@@ -40,7 +40,7 @@ export const createOrganizationAction = authenticatedActionClient
       });
 
       // Stripe setup must run AFTER membership is created so the owner email is available
-      if (IS_FORMBRICKS_CLOUD) {
+      if (IS_SALAMRUBY_CLOUD) {
         ensureCloudStripeSetupForOrganization(newOrganization.id).catch((error) => {
           logger.error(
             { error, organizationId: newOrganization.id },

@@ -1,6 +1,6 @@
 "use server";
 
-import { TCloudBillingPlan } from "@formbricks/types/organizations";
+import { TCloudBillingPlan } from "@salamruby/types/organizations";
 import { getOrganizationsByUserId } from "@/lib/organization/service";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 

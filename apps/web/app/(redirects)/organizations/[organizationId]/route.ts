@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
-import { AuthenticationError, AuthorizationError } from "@formbricks/types/errors";
+import { AuthenticationError, AuthorizationError } from "@salamruby/types/errors";
 import { hasOrganizationAccess } from "@/lib/auth";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getAccessFlags } from "@/lib/membership/utils";

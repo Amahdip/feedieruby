@@ -5,7 +5,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "formbricksLogger",
+      name: "salamrubyLogger",
       fileName: "index",
       formats: ["es", "cjs"],
     },

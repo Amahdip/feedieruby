@@ -2,9 +2,10 @@
 
 import { useMemo, useTransition } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import type { TI18nString } from "@formbricks/types/i18n";
-import type { TSurvey } from "@formbricks/types/surveys/types";
-import { isValidHTML } from "@formbricks/types/surveys/validation";
+import type { TI18nString } from "@salamruby/types/i18n";
+import type { TSurvey } from "@salamruby/types/surveys/types";
+import { isValidHTML } from "@salamruby/types/surveys/validation";
+import { getLocalizedValue } from "@/lib/i18n/utils";
 import { md } from "@/lib/markdownIt";
 import { getElementsFromBlocks } from "@/modules/survey/lib/client-utils";
 import { Editor } from "@/modules/ui/components/editor";
@@ -56,7 +57,7 @@ export function LocalizedEditor({
         firstRender={firstRender}
         autoFocus={autoFocus}
         getText={() => {
-          const text = value ? (value[selectedLanguageCode] ?? "") : "";
+          const text = getLocalizedValue(value, selectedLanguageCode);
           let html = md.render(text);
 
           if (id === "headline" && text && !isValidHTML(text)) {

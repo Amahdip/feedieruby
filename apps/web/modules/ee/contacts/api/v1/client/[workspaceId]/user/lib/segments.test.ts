@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
-import { TBaseFilter } from "@formbricks/types/segment";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
+import { TBaseFilter } from "@salamruby/types/segment";
 import { validateInputs } from "@/lib/utils/validate";
 import { segmentFilterToPrismaQuery } from "@/modules/ee/contacts/segments/lib/filter/prisma-query";
 import { getPersonSegmentIds, getSegments } from "./segments";
@@ -21,7 +21,7 @@ vi.mock("@/modules/ee/contacts/segments/lib/filter/prisma-query", () => ({
   segmentFilterToPrismaQuery: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     segment: {
       findMany: vi.fn(),

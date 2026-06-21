@@ -2,7 +2,7 @@
 
 import { use } from "react";
 import { useTranslation } from "react-i18next";
-import { TChartQuery } from "@formbricks/types/analysis";
+import { TChartQuery } from "@salamruby/types/analysis";
 import { ChartRenderer } from "@/modules/ee/analysis/charts/components/chart-renderer";
 import type { TChartDataRow, TChartType } from "@/modules/ee/analysis/types/analysis";
 import type { TDashboardWidgetError } from "../lib/widget-errors";

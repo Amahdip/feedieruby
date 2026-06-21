@@ -4,7 +4,7 @@ import {
   InvalidInputError,
   OperationNotAllowedError,
   ResourceNotFoundError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import {
   DELETE_WORKSPACE_CONFIRMATION_REQUIRED_ERROR,
   deleteWorkspaceWithConfirmation,

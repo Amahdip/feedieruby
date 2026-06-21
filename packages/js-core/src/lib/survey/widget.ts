@@ -108,9 +108,9 @@ export const renderWidget = async (
   const placement = workspaceOverwrites.placement ?? settings.placement;
   const isBrandingEnabled = settings.inAppSurveyBranding;
 
-  let formbricksSurveys: TFormbricksSurveys;
+  let salamrubySurveys: TSalamRubySurveys;
   try {
-    formbricksSurveys = await loadFormbricksSurveysExternally();
+    salamrubySurveys = await loadSalamRubySurveysExternally();
   } catch (error) {
     logger.error(`Failed to load surveys library: ${String(error)}`);
     setIsSurveyRunning(false);
@@ -129,7 +129,7 @@ export const renderWidget = async (
   }
 
   const timeoutId = setTimeout(() => {
-    formbricksSurveys.renderSurvey({
+    salamrubySurveys.renderSurvey({
       appUrl: config.get().appUrl,
       workspaceId: config.get().workspaceId,
       contactId: config.get().user.data.contactId ?? undefined,
@@ -230,26 +230,26 @@ export const removeWidgetContainer = (): void => {
 const SURVEYS_LOAD_TIMEOUT_MS = 10000;
 const SURVEYS_POLL_INTERVAL_MS = 200;
 
-type TFormbricksSurveys = NonNullable<typeof globalThis.window.formbricksSurveys>;
+type TSalamRubySurveys = NonNullable<typeof globalThis.window.salamrubySurveys>;
 
-let surveysLoadPromise: Promise<TFormbricksSurveys> | null = null;
+let surveysLoadPromise: Promise<TSalamRubySurveys> | null = null;
 
-const waitForSurveysGlobal = (): Promise<TFormbricksSurveys> => {
+const waitForSurveysGlobal = (): Promise<TSalamRubySurveys> => {
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
 
     const check = (): void => {
-      if (globalThis.window.formbricksSurveys) {
-        const storedNonce = globalThis.window.__formbricksNonce;
+      if (globalThis.window.salamrubySurveys) {
+        const storedNonce = globalThis.window.__salamrubyNonce;
         if (storedNonce) {
-          globalThis.window.formbricksSurveys.setNonce(storedNonce);
+          globalThis.window.salamrubySurveys.setNonce(storedNonce);
         }
-        resolve(globalThis.window.formbricksSurveys);
+        resolve(globalThis.window.salamrubySurveys);
         return;
       }
 
       if (Date.now() - startTime >= SURVEYS_LOAD_TIMEOUT_MS) {
-        reject(new Error("Formbricks Surveys library did not become available within timeout"));
+        reject(new Error("SalamRuby Surveys library did not become available within timeout"));
         return;
       }
 
@@ -260,16 +260,16 @@ const waitForSurveysGlobal = (): Promise<TFormbricksSurveys> => {
   });
 };
 
-const loadFormbricksSurveysExternally = (): Promise<TFormbricksSurveys> => {
-  if (globalThis.window.formbricksSurveys) {
-    return Promise.resolve(globalThis.window.formbricksSurveys);
+const loadSalamRubySurveysExternally = (): Promise<TSalamRubySurveys> => {
+  if (globalThis.window.salamrubySurveys) {
+    return Promise.resolve(globalThis.window.salamrubySurveys);
   }
 
   if (surveysLoadPromise) {
     return surveysLoadPromise;
   }
 
-  surveysLoadPromise = new Promise<TFormbricksSurveys>((resolve, reject: (error: unknown) => void) => {
+  surveysLoadPromise = new Promise<TSalamRubySurveys>((resolve, reject: (error: unknown) => void) => {
     const config = Config.getInstance();
     const script = document.createElement("script");
     script.src = `${config.get().appUrl}/js/surveys.umd.cjs`;
@@ -279,14 +279,14 @@ const loadFormbricksSurveysExternally = (): Promise<TFormbricksSurveys> => {
         .then(resolve)
         .catch((error: unknown) => {
           surveysLoadPromise = null;
-          console.error("Failed to load Formbricks Surveys library:", error);
-          reject(new Error(`Failed to load Formbricks Surveys library`));
+          console.error("Failed to load SalamRuby Surveys library:", error);
+          reject(new Error(`Failed to load SalamRuby Surveys library`));
         });
     };
     script.onerror = (error) => {
       surveysLoadPromise = null;
-      console.error("Failed to load Formbricks Surveys library:", error);
-      reject(new Error(`Failed to load Formbricks Surveys library`));
+      console.error("Failed to load SalamRuby Surveys library:", error);
+      reject(new Error(`Failed to load SalamRuby Surveys library`));
     };
     document.head.appendChild(script);
   });
@@ -298,7 +298,7 @@ let isPreloaded = false;
 
 export const preloadSurveysScript = (appUrl: string): void => {
   // Don't preload if already loaded or already preloading
-  if (globalThis.window.formbricksSurveys) return;
+  if (globalThis.window.salamrubySurveys) return;
   if (isPreloaded) return;
 
   isPreloaded = true;

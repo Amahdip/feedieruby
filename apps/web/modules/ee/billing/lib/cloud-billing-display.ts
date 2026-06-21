@@ -1,10 +1,10 @@
 import "server-only";
-import { ResourceNotFoundError } from "@formbricks/types/errors";
+import { ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   type TCloudBillingInterval,
   type TOrganizationStripePendingChange,
   type TOrganizationStripeSubscriptionStatus,
-} from "@formbricks/types/organizations";
+} from "@salamruby/types/organizations";
 import { getBillingUsageCycleWindow } from "@/lib/utils/billing";
 import { getOrganizationBillingWithReadThroughSync } from "./organization-billing";
 

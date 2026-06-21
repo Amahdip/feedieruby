@@ -1,11 +1,11 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma, PrismaClient } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZString } from "@formbricks/types/common";
-import { DatabaseError, UnknownError } from "@formbricks/types/errors";
-import { TMembership, ZMembership } from "@formbricks/types/memberships";
+import { prisma } from "@salamruby/database";
+import { Prisma, PrismaClient } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZString } from "@salamruby/types/common";
+import { DatabaseError, UnknownError } from "@salamruby/types/errors";
+import { TMembership, ZMembership } from "@salamruby/types/memberships";
 import { validateInputs } from "../utils/validate";
 
 type TMembershipDbClient = PrismaClient | Prisma.TransactionClient;

@@ -1,4 +1,4 @@
-import { AuthenticationError } from "@formbricks/types/errors";
+import { AuthenticationError } from "@salamruby/types/errors";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
 import { getUser } from "@/lib/user/service";
 import { getTranslate } from "@/lingodotdev/server";

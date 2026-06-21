@@ -24,9 +24,9 @@ const windowMock = {
     key: vi.fn(),
   },
   location: {
-    search: "formbricksDebug=true",
+    search: "salamrubyDebug=true",
     protocol: "https:",
-    host: "formbricks.com",
+    host: "salamruby.com",
     pathname: "/",
   },
   setInterval: vi.fn(),

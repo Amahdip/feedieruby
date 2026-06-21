@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
 import { TGetUsersFilter } from "@/modules/api/v2/organizations/[organizationId]/users/types/users";
 import { createUser, getUsers, updateUser } from "../users";
 
@@ -22,7 +22,7 @@ const mockUser = {
   teamUsers: [{ team: { name: "Test Team", id: "team123", workspaceTeams: [{ workspaceId: "proj789" }] } }],
 };
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     user: {
       findMany: vi.fn(),

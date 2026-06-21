@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import { logger } from "@formbricks/logger";
-import { ZUserEmail } from "@formbricks/types/user";
+import { logger } from "@salamruby/logger";
+import { ZUserEmail } from "@salamruby/types/user";
 import { WEBAPP_URL } from "@/lib/constants";
 import { getEmailFromEmailToken } from "@/lib/jwt";
 import { getTranslate } from "@/lingodotdev/server";

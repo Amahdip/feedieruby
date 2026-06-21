@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { FORMBRICKS_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
+import { SALAMRUBY_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
 import { doesSamlConnectionExistAction } from "@/modules/ee/sso/actions";
 import { getSsoReturnToUrl } from "@/modules/ee/sso/lib/utils";
 import { Button } from "@/modules/ui/components/button";
@@ -24,7 +24,7 @@ export const SamlButton = ({ returnToUrl, lastUsed, samlTenant, samlProduct, sou
 
   const handleLogin = async () => {
     if (typeof window !== "undefined") {
-      localStorage.setItem(FORMBRICKS_LOGGED_IN_WITH_LS, "Saml");
+      localStorage.setItem(SALAMRUBY_LOGGED_IN_WITH_LS, "Saml");
     }
     setIsLoading(true);
     const doesSamlConnectionExist = await doesSamlConnectionExistAction();

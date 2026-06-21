@@ -1,0 +1,102 @@
+{{- if and .Values.hub.enabled .Values.hub.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "salamruby.hubname" . }}
+  labels:
+    helm.sh/chart: {{ include "salamruby.chart" . }}
+    app.kubernetes.io/name: {{ include "salamruby.hubname" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: hub
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: {{ .Values.partOfOverride | default (include "salamruby.name" .) }}
+    {{- with .Values.hub.autoscaling.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.hub.autoscaling.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "salamruby.hubname" . }}
+  minReplicas: {{ .Values.hub.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.hub.autoscaling.maxReplicas }}
+  metrics:
+    {{- toYaml .Values.hub.autoscaling.metrics | nindent 4 }}
+  {{- with .Values.hub.autoscaling.behavior }}
+  behavior:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- if and .Values.hub.enabled .Values.hub.worker.enabled .Values.hub.worker.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "salamruby.hubWorkerName" . }}
+  labels:
+    helm.sh/chart: {{ include "salamruby.chart" . }}
+    app.kubernetes.io/name: {{ include "salamruby.hubWorkerName" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: hub-worker
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: {{ .Values.partOfOverride | default (include "salamruby.name" .) }}
+    {{- with .Values.hub.worker.autoscaling.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.hub.worker.autoscaling.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "salamruby.hubWorkerName" . }}
+  minReplicas: {{ .Values.hub.worker.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.hub.worker.autoscaling.maxReplicas }}
+  metrics:
+    {{- toYaml .Values.hub.worker.autoscaling.metrics | nindent 4 }}
+  {{- with .Values.hub.worker.autoscaling.behavior }}
+  behavior:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- if and .Values.hub.enabled .Values.hub.embeddings.enabled .Values.hub.embeddings.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "salamruby.hubEmbeddingsName" . }}
+  labels:
+    helm.sh/chart: {{ include "salamruby.chart" . }}
+    app.kubernetes.io/name: {{ include "salamruby.hubEmbeddingsName" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: hub-embeddings
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: {{ .Values.partOfOverride | default (include "salamruby.name" .) }}
+    {{- with .Values.hub.embeddings.autoscaling.additionalLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.hub.embeddings.autoscaling.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "salamruby.hubEmbeddingsName" . }}
+  minReplicas: {{ .Values.hub.embeddings.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.hub.embeddings.autoscaling.maxReplicas }}
+  metrics:
+    {{- toYaml .Values.hub.embeddings.autoscaling.metrics | nindent 4 }}
+  {{- with .Values.hub.embeddings.autoscaling.behavior }}
+  behavior:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

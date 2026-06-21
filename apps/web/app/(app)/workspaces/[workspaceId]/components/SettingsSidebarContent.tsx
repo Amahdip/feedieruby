@@ -23,7 +23,8 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
+import { TOrganizationRole } from "@salamruby/types/memberships";
+import { HIDE_APP_SURVEY_TYPE, HIDE_ENTERPRISE_SETTINGS, HIDE_UNIFY_FEEDBACK } from "@/lib/brand-color";
 import { cn } from "@/lib/cn";
 import { getAccessFlags } from "@/lib/membership/utils";
 import {
@@ -42,7 +43,7 @@ interface SettingsSidebarContentProps {
   organizationId: string;
   organizationName: string;
   membershipRole?: TOrganizationRole;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isCollapsed: boolean;
   isTextVisible: boolean;
   // Workspace switcher
@@ -96,7 +97,7 @@ const SettingsNavLink = ({
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <li className={cn("rounded-l-md py-1.5 pl-2 text-sm", getStateClass())}>
+            <li className={cn("rounded-s-md py-1.5 ps-2 text-sm", getStateClass())}>
               {isDisabled ? (
                 <div className="flex items-center">{item.icon}</div>
               ) : (
@@ -116,14 +117,14 @@ const SettingsNavLink = ({
 
   if (isDisabled) {
     return (
-      <li className={cn("rounded-l-md py-1.5 pl-8 text-sm", disabledClass)}>
+      <li className={cn("rounded-s-md py-1.5 ps-8 text-sm", disabledClass)}>
         <Popover>
           <PopoverTrigger asChild>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               {item.icon}
               <span
                 className={cn(
-                  "ml-2 transition-opacity duration-100",
+                  "transition-opacity duration-100",
                   isTextVisible ? "opacity-0" : "opacity-100"
                 )}>
                 {item.label}
@@ -141,14 +142,13 @@ const SettingsNavLink = ({
   return (
     <li
       className={cn(
-        "rounded-l-md py-1.5 pl-8 text-sm",
+        "rounded-s-md py-1.5 ps-8 text-sm",
         isActive ? activeClass : inactiveClass,
         "text-slate-600 hover:text-slate-900"
       )}>
-      <Link href={item.href} className="flex items-center">
+      <Link href={item.href} className="flex items-center gap-2">
         {item.icon}
-        <span
-          className={cn("ml-2 transition-opacity duration-100", isTextVisible ? "opacity-0" : "opacity-100")}>
+        <span className={cn("transition-opacity duration-100", isTextVisible ? "opacity-0" : "opacity-100")}>
           {item.label}
         </span>
       </Link>
@@ -225,7 +225,7 @@ export const SettingsSidebarContent = ({
   organizationId,
   organizationName,
   membershipRole,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isCollapsed,
   isTextVisible,
   workspaces,
@@ -272,6 +272,7 @@ export const SettingsSidebarContent = ({
       label: t("common.connect_your_app"),
       href: `${basePath}/workspace/app-connection`,
       icon: <UnplugIcon className={iconClassName} />,
+      hidden: HIDE_APP_SURVEY_TYPE,
       disabled: isBilling,
     },
     {
@@ -279,6 +280,7 @@ export const SettingsSidebarContent = ({
       label: t("workspace.unify.feedback_sources"),
       href: `${basePath}/workspace/feedback-sources`,
       icon: <ShapesIcon className={iconClassName} />,
+      hidden: HIDE_UNIFY_FEEDBACK,
       disabled: isBilling,
     },
     {
@@ -331,7 +333,7 @@ export const SettingsSidebarContent = ({
       label: t("workspace.settings.feedback_directories.nav_label"),
       href: `${basePath}/organization/feedback-directories`,
       icon: <FoldersIcon className={iconClassName} />,
-      hidden: isMember,
+      hidden: isMember || HIDE_UNIFY_FEEDBACK,
       disabled: !isOwnerOrManager,
     },
     {
@@ -346,21 +348,21 @@ export const SettingsSidebarContent = ({
       label: t("common.domain"),
       href: `${basePath}/organization/domain`,
       icon: <GlobeIcon className={iconClassName} />,
-      hidden: isFormbricksCloud,
+      hidden: isSalamRubyCloud,
     },
     {
       id: "org-billing",
       label: t("common.billing"),
       href: `${basePath}/organization/billing`,
       icon: <CreditCardIcon className={iconClassName} />,
-      hidden: !isFormbricksCloud,
+      hidden: !isSalamRubyCloud,
     },
     {
       id: "org-enterprise",
       label: t("common.enterprise_license"),
       href: `${basePath}/organization/enterprise`,
       icon: <ShieldIcon className={iconClassName} />,
-      hidden: isFormbricksCloud,
+      hidden: isSalamRubyCloud || HIDE_ENTERPRISE_SETTINGS,
       disabled: isMember || isBilling,
     },
   ];

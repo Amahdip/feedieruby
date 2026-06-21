@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { ActionClass, Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { TActionClassInput } from "@formbricks/types/action-classes";
-import { DatabaseError, UniqueConstraintError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { ActionClass, Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { TActionClassInput } from "@salamruby/types/action-classes";
+import { DatabaseError, UniqueConstraintError } from "@salamruby/types/errors";
 import { createActionClass } from "./action-class";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     actionClass: {
       create: vi.fn(),

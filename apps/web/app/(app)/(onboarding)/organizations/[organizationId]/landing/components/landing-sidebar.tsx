@@ -1,23 +1,16 @@
 "use client";
 
-import {
-  ArrowUpRightIcon,
-  Building2Icon,
-  ChevronRightIcon,
-  Loader2,
-  LogOutIcon,
-  PlusIcon,
-} from "lucide-react";
-import Image from "next/image";
+import { ArrowUpRightIcon, Building2Icon, Loader2, LogOutIcon, PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TUser } from "@formbricks/types/user";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TUser } from "@salamruby/types/user";
 import { getOrganizationsForSwitcherAction } from "@/app/(app)/workspaces/[workspaceId]/actions";
-import FBLogo from "@/images/formbricks-wordmark.svg";
+import { HIDE_SALAMRUBY_EXTERNAL_LINKS } from "@/lib/brand-color";
 import { cn } from "@/lib/cn";
+import { getSidebarDropdownSide, isRtlLocale } from "@/lib/i18n/rtl";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { useSignOut } from "@/modules/auth/hooks/use-sign-out";
 import { CreateOrganizationModal } from "@/modules/organization/components/CreateOrganizationModal";
@@ -30,6 +23,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/modules/ui/components/dropdown-menu";
+import { FeedieRubyWordmark } from "@/modules/ui/components/feedieruby-brand";
+import { SidebarExpandChevron } from "@/modules/ui/components/sidebar-expand-chevron";
 
 interface LandingSidebarProps {
   user: TUser;
@@ -47,6 +42,8 @@ export const LandingSidebar = ({ user, organization, isMultiOrgEnabled }: Landin
   const router = useRouter();
 
   const { t } = useTranslation();
+  const isRtl = isRtlLocale(user.locale);
+  const sidebarDropdownSide = getSidebarDropdownSide(isRtl);
   const { signOut: signOutWithAudit } = useSignOut({ id: user.id, email: user.email });
 
   const loadOrganizations = useCallback(async () => {
@@ -93,14 +90,16 @@ export const LandingSidebar = ({ user, organization, isMultiOrgEnabled }: Landin
     });
   };
 
-  const dropdownNavigation = [
-    {
-      label: t("common.documentation"),
-      href: "https://formbricks.com/docs",
-      target: "_blank",
-      icon: ArrowUpRightIcon,
-    },
-  ];
+  const dropdownNavigation = HIDE_SALAMRUBY_EXTERNAL_LINKS
+    ? []
+    : [
+        {
+          label: t("common.documentation"),
+          href: "https://salamruby.com/docs",
+          target: "_blank",
+          icon: ArrowUpRightIcon,
+        },
+      ];
 
   const switcherTriggerClasses =
     "w-full border-t px-3 py-3 text-left transition-colors duration-200 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-inset";
@@ -112,7 +111,7 @@ export const LandingSidebar = ({ user, organization, isMultiOrgEnabled }: Landin
       className={cn(
         "z-40 flex w-sidebar-collapsed flex-col justify-between rounded-r-xl border-r border-slate-200 bg-white pt-3 shadow-md transition-all duration-100"
       )}>
-      <Image src={FBLogo} width={160} height={30} alt={t("workspace.formbricks_logo")} />
+      <FeedieRubyWordmark className="mx-3 h-7 max-w-[9rem]" priority />
 
       <div className="flex flex-col">
         {/* Organization Switcher */}
@@ -127,10 +126,10 @@ export const LandingSidebar = ({ user, organization, isMultiOrgEnabled }: Landin
                 <p className="text-sm text-slate-500">{t("common.organization")}</p>
               </div>
               {isPending && <Loader2 className="size-4 animate-spin text-slate-600" strokeWidth={1.5} />}
-              <ChevronRightIcon className="size-4 shrink-0 text-slate-600" strokeWidth={1.5} />
+              <SidebarExpandChevron isRtl={isRtl} />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="right" sideOffset={10} alignOffset={5} align="end">
+          <DropdownMenuContent side={sidebarDropdownSide} sideOffset={10} alignOffset={5} align="end">
             <div className="px-2 py-1.5 text-sm font-medium text-slate-500">
               <Building2Icon className="mr-2 inline size-4" strokeWidth={1.5} />
               {t("common.change_organization")}
@@ -198,11 +197,11 @@ export const LandingSidebar = ({ user, organization, isMultiOrgEnabled }: Landin
                 </p>
                 <p className="text-sm text-slate-500">{t("common.account")}</p>
               </div>
-              <ChevronRightIcon className="size-4 shrink-0 text-slate-600" strokeWidth={1.5} />
+              <SidebarExpandChevron isRtl={isRtl} />
             </button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent side="right" sideOffset={10} alignOffset={5} align="end">
+          <DropdownMenuContent side={sidebarDropdownSide} sideOffset={10} alignOffset={5} align="end">
             {dropdownNavigation.map((link) => (
               <Link
                 key={link.href}

@@ -3,15 +3,19 @@
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { Hand } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { TI18nString } from "@salamruby/types/i18n";
 import {
   TSurvey,
   TSurveyEndScreenCard,
   TSurveyRedirectUrlCard,
   TSurveyWelcomeCard,
-} from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+} from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
+import { getDefaultWelcomeCard } from "@/app/lib/survey-builder";
 import { cn } from "@/lib/cn";
+import { getLanguageCode } from "@/lib/i18n/utils";
 import { ElementFormInput } from "@/modules/survey/components/element-form-input";
 import { FileInput } from "@/modules/ui/components/file-input";
 import { Label } from "@/modules/ui/components/label";
@@ -67,6 +71,100 @@ export const EditWelcomeCard = ({
     });
   };
 
+  const isI18nFieldEmpty = (field?: TI18nString): boolean => {
+    if (!field) {
+      return true;
+    }
+
+    return !Object.values(field).some((entry) => typeof entry === "string" && entry.trim() !== "");
+  };
+
+  const welcomeTextKey = getLanguageCode(localSurvey.languages ?? [], locale);
+
+  const stripHtmlTags = (value: string): string =>
+    value
+      .replace(/<[^>]*>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .trim();
+
+  const legacyWelcomeSubheaderMarkers = ["از ارائه بازخوردتان متشکریم", "Thanks for providing your feedback"];
+
+  const isLegacyWelcomeSubheaderValue = (value: string): boolean => {
+    const plain = stripHtmlTags(value);
+    return legacyWelcomeSubheaderMarkers.some((marker) => plain.includes(marker));
+  };
+
+  const isLegacyWelcomeSubheader = (field?: TI18nString): boolean => {
+    if (!field) {
+      return false;
+    }
+
+    return Object.values(field).some(
+      (entry) => typeof entry === "string" && isLegacyWelcomeSubheaderValue(entry)
+    );
+  };
+
+  const needsWelcomeSubheaderDefault = (field?: TI18nString): boolean =>
+    isI18nFieldEmpty(field) || isLegacyWelcomeSubheader(field);
+
+  const migrateWelcomeSubheader = (field: TI18nString | undefined, newText: string): TI18nString => {
+    const next: TI18nString = { ...(field ?? {}) };
+
+    for (const [key, value] of Object.entries(next)) {
+      if (typeof value === "string" && isLegacyWelcomeSubheaderValue(value)) {
+        next[key] = newText;
+      }
+    }
+
+    next[welcomeTextKey] = newText;
+    return next;
+  };
+
+  const handleWelcomeToggle = (newEnabledState: boolean) => {
+    if (!newEnabledState) {
+      updateSurvey({ enabled: false });
+      return;
+    }
+
+    const defaults = getDefaultWelcomeCard(t, welcomeTextKey);
+    const defaultSubheaderText = defaults.subheader?.[welcomeTextKey] ?? "";
+
+    updateSurvey({
+      enabled: true,
+      ...(isI18nFieldEmpty(localSurvey.welcomeCard.headline) && { headline: defaults.headline }),
+      ...(needsWelcomeSubheaderDefault(localSurvey.welcomeCard.subheader) && {
+        subheader: migrateWelcomeSubheader(localSurvey.welcomeCard.subheader, defaultSubheaderText),
+      }),
+      ...(isI18nFieldEmpty(localSurvey.welcomeCard.buttonLabel) && { buttonLabel: defaults.buttonLabel }),
+    });
+  };
+
+  useEffect(() => {
+    if (!localSurvey.welcomeCard.enabled) {
+      return;
+    }
+
+    const defaults = getDefaultWelcomeCard(t, welcomeTextKey);
+    const defaultSubheaderText = defaults.subheader?.[welcomeTextKey] ?? "";
+    const patches: Partial<TSurveyWelcomeCard> = {};
+
+    if (isI18nFieldEmpty(localSurvey.welcomeCard.headline)) {
+      patches.headline = defaults.headline;
+    }
+    if (needsWelcomeSubheaderDefault(localSurvey.welcomeCard.subheader)) {
+      patches.subheader = migrateWelcomeSubheader(localSurvey.welcomeCard.subheader, defaultSubheaderText);
+    }
+    if (isI18nFieldEmpty(localSurvey.welcomeCard.buttonLabel)) {
+      patches.buttonLabel = defaults.buttonLabel;
+    }
+
+    if (Object.keys(patches).length === 0) {
+      return;
+    }
+
+    updateSurvey(patches);
+  }, [localSurvey.welcomeCard.enabled, localSurvey.welcomeCard.subheader, locale, t, welcomeTextKey]);
+
   return (
     <div className={cn(open ? "shadow-lg" : "shadow-md", "group flex flex-row rounded-lg bg-white")}>
       <div
@@ -107,7 +205,7 @@ export const EditWelcomeCard = ({
                 onClick={(e) => {
                   e.stopPropagation();
                   const newEnabledState = !localSurvey.welcomeCard?.enabled;
-                  updateSurvey({ enabled: newEnabledState });
+                  handleWelcomeToggle(newEnabledState);
                   if (newEnabledState && !open) {
                     setActiveElementId("start");
                   }

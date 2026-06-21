@@ -1,18 +1,18 @@
 {
-  "name": "@formbricks/storage",
+  "name": "@salamruby/storage",
   "private": true,
   "type": "module",
   "version": "0.1.0",
-  "homepage": "https://formbricks.com",
-  "description": "Storage Controller for Formbricks",
+  "homepage": "https://salamruby.com",
+  "description": "Storage Controller for SalamRuby",
   "main": "./dist/index.js",
   "types": "./dist/src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/formbricks/formbricks"
+    "url": "https://github.com/salamruby/salamruby"
   },
   "keywords": [
-    "Formbricks",
+    "SalamRuby",
     "storage",
     "storage controller"
   ],
@@ -35,16 +35,16 @@
     "test:coverage": "vitest run --coverage",
     "go": "vite build --watch --mode dev"
   },
-  "author": "Formbricks <hola@formbricks.com>",
+  "author": "SalamRuby <hola@salamruby.com>",
   "dependencies": {
     "@aws-sdk/client-s3": "3.1007.0",
     "@aws-sdk/s3-presigned-post": "3.1007.0",
     "@aws-sdk/s3-request-presigner": "3.1007.0",
-    "@formbricks/logger": "workspace:*"
+    "@salamruby/logger": "workspace:*"
   },
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*",
-    "@formbricks/eslint-config": "workspace:*",
+    "@salamruby/config-typescript": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
     "@vitest/coverage-v8": "4.1.6",
     "vite": "7.3.3",
     "vitest": "4.1.6"

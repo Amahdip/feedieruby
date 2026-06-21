@@ -1,11 +1,11 @@
 import "server-only";
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZId } from "@formbricks/types/common";
-import { TDisplay, TDisplayFilters, TDisplayWithContact, ZDisplayFilters } from "@formbricks/types/displays";
-import { DatabaseError, InvalidInputError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZId } from "@salamruby/types/common";
+import { TDisplay, TDisplayFilters, TDisplayWithContact, ZDisplayFilters } from "@salamruby/types/displays";
+import { DatabaseError, InvalidInputError } from "@salamruby/types/errors";
 import { validateInputs } from "../utils/validate";
 
 export const selectDisplay = {

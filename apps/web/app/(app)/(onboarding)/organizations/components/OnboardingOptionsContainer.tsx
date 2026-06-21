@@ -19,12 +19,14 @@ interface OnboardingOptionsContainerProps {
 
 export const OnboardingOptionsContainer = ({ options }: Readonly<OnboardingOptionsContainerProps>) => {
   return (
-    <div className="grid w-full max-w-5xl grid-cols-1 gap-8 text-center sm:grid-cols-2 lg:grid-cols-3">
+    <div className="flex w-full max-w-5xl flex-wrap justify-center gap-8 text-center">
       {options.map((option) => {
         const Icon = option.icon;
 
         return (
-          <div key={option.title} className="flex h-full flex-col items-center gap-2">
+          <div
+            key={option.title}
+            className="flex h-full w-full max-w-xs flex-col items-center gap-2 sm:w-auto">
             <OptionCard
               size="md"
               title={option.title}

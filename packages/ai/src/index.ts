@@ -9,7 +9,7 @@ export {
 } from "./provider";
 export { generateText } from "./text";
 export { generateObject } from "./object";
-export type { TAIProvider } from "@formbricks/types/ai";
+export type { TAIProvider } from "@salamruby/types/ai";
 export type {
   AIConfigurationStatus,
   AILanguageModel,

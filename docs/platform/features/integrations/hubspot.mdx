@@ -1,17 +1,17 @@
 ---
 title: "HubSpot"
-description: "Learn how to integrate Formbricks with HubSpot to automatically create or update contacts when survey responses are submitted."
+description: "Learn how to integrate SalamRuby with HubSpot to automatically create or update contacts when survey responses are submitted."
 ---
 
 <Note>
-  Formbricks doesn't have a native HubSpot integration yet. This guide shows you how to connect Formbricks with HubSpot using automation platforms (Make.com, n8n) or custom webhooks.
+  SalamRuby doesn't have a native HubSpot integration yet. This guide shows you how to connect SalamRuby with HubSpot using automation platforms (Make.com, n8n) or custom webhooks.
 </Note>
 
 ## Prerequisites
 
 Before setting up the integration, you'll need:
 
-1. **A Formbricks account** with at least one survey that collects email addresses
+1. **A SalamRuby account** with at least one survey that collects email addresses
 2. **A HubSpot account** with API access
 3. **HubSpot API credentials** (see authentication options below)
 4. **Automation service** like Make, n8n, or ActivePieces (for no-code methods)
@@ -35,7 +35,7 @@ To create a Legacy Private App:
     Go to your HubSpot account **Settings** and navigate to **Integrations** → **Private Apps**.
   </Step>
   <Step title="Create the App">
-    Click **Create a private app** and give it a name (e.g., "Formbricks Integration").
+    Click **Create a private app** and give it a name (e.g., "SalamRuby Integration").
   </Step>
   <Step title="Configure Scopes">
     Under **Scopes**, add `crm.objects.contacts.write` and `crm.objects.contacts.read`.
@@ -64,22 +64,22 @@ To create a Legacy Private App:
     ![Update Question ID](/images/xm-and-surveys/core-features/integrations/make/update-question-id.webp)
   </Step>
   <Step title="Create a New Make.com Scenario">
-    Go to [Make.com](https://make.com) and create a new scenario. Search for **Formbricks** and select it as your trigger, then choose **Response Finished** as the trigger event.
+    Go to [Make.com](https://make.com) and create a new scenario. Search for **SalamRuby** and select it as your trigger, then choose **Response Finished** as the trigger event.
 
-    ![Search Formbricks](/images/xm-and-surveys/core-features/integrations/make/search-formbricks.webp)
+    ![Search SalamRuby](/images/xm-and-surveys/core-features/integrations/make/search-salamruby.webp)
   </Step>
-  <Step title="Connect Formbricks to Make">
-    Click **Create a webhook**, enter your Formbricks API Host (default: `https://app.formbricks.com`), add your Formbricks API Key (see [API Key Setup](/api-reference/rest-api#how-to-generate-an-api-key)), and select the survey you want to connect.
+  <Step title="Connect SalamRuby to Make">
+    Click **Create a webhook**, enter your SalamRuby API Host (default: `https://app.salamruby.com`), add your SalamRuby API Key (see [API Key Setup](/api-reference/rest-api#how-to-generate-an-api-key)), and select the survey you want to connect.
 
     ![Enter API Key](/images/xm-and-surveys/core-features/integrations/make/enter-api-key-and-host.webp)
   </Step>
   <Step title="Add the HubSpot Module">
-    Click the **+** button after the Formbricks trigger, search for **HubSpot**, choose **Create or Update a Contact** as the action, and connect your HubSpot account.
+    Click the **+** button after the SalamRuby trigger, search for **HubSpot**, choose **Create or Update a Contact** as the action, and connect your HubSpot account.
   </Step>
-  <Step title="Map Formbricks Fields to HubSpot">
-    Map the Formbricks response fields to HubSpot contact properties:
+  <Step title="Map SalamRuby Fields to HubSpot">
+    Map the SalamRuby response fields to HubSpot contact properties:
 
-    | HubSpot Field | Formbricks Field |
+    | HubSpot Field | SalamRuby Field |
     | ------------- | ---------------- |
     | Email | `data.email` (your email question ID) |
     | First Name | `data.firstName` (if collected) |
@@ -89,7 +89,7 @@ To create a Legacy Private App:
     You can also map metadata: `meta.country`, `meta.userAgent.browser`, `survey.title`.
   </Step>
   <Step title="Test and Activate">
-    Submit a test response to your Formbricks survey, verify the contact appears in HubSpot, and turn on your Make scenario.
+    Submit a test response to your SalamRuby survey, verify the contact appears in HubSpot, and turn on your Make scenario.
   </Step>
 </Steps>
 
@@ -98,14 +98,14 @@ To create a Legacy Private App:
 ## Method 2: Using n8n (Self-Hosted Option)
 
 <Note>
-  The Formbricks n8n node is available as a community node. Install it via **Settings** → **Community Nodes** → install `@formbricks/n8n-nodes-formbricks`.
+  The SalamRuby n8n node is available as a community node. Install it via **Settings** → **Community Nodes** → install `@salamruby/n8n-nodes-salamruby`.
 </Note>
 
 <Steps>
-  <Step title="Set Up the Formbricks Trigger">
-    Create a new workflow in n8n, add the **Formbricks** trigger node, connect it with your Formbricks API Key and host, select **Response Finished** as the event, and choose your survey.
+  <Step title="Set Up the SalamRuby Trigger">
+    Create a new workflow in n8n, add the **SalamRuby** trigger node, connect it with your SalamRuby API Key and host, select **Response Finished** as the event, and choose your survey.
 
-    ![Add Formbricks Trigger](/images/xm-and-surveys/core-features/integrations/n8n/add-formbricks-trigger.webp)
+    ![Add SalamRuby Trigger](/images/xm-and-surveys/core-features/integrations/n8n/add-salamruby-trigger.webp)
   </Step>
   <Step title="Add the HubSpot Node">
     Add a new node and search for **HubSpot**, select **Create/Update Contact** as the operation, and connect your HubSpot account (n8n supports both OAuth and access token authentication).
@@ -122,7 +122,7 @@ To create a Legacy Private App:
     For custom HubSpot properties, use the **Additional Fields** section to add mappings like `survey_source`, `response_id`, and `submission_date`.
   </Step>
   <Step title="Test Your Workflow">
-    Click **Listen for event** in the Formbricks trigger, submit a test survey response, verify the data flows through to HubSpot, and activate your workflow.
+    Click **Listen for event** in the SalamRuby trigger, submit a test survey response, verify the data flows through to HubSpot, and activate your workflow.
   </Step>
 </Steps>
 
@@ -130,21 +130,21 @@ To create a Legacy Private App:
 
 ## Method 3: Using Webhooks (Custom Integration)
 
-For maximum flexibility, you can use Formbricks webhooks with a custom endpoint that calls the HubSpot API directly. This approach is ideal for developers who want full control.
+For maximum flexibility, you can use SalamRuby webhooks with a custom endpoint that calls the HubSpot API directly. This approach is ideal for developers who want full control.
 
 <Note>
   This method requires a HubSpot access token. You can use a Legacy Private App token (simplest) or implement OAuth 2.0 for production applications.
 </Note>
 
 <Steps>
-  <Step title="Create a Formbricks Webhook">
-    Go to **Configuration** → **Integrations** in Formbricks, click **Manage Webhooks** → **Add Webhook**, enter your endpoint URL, select **Response Finished** as the trigger, and choose the surveys to monitor.
+  <Step title="Create a SalamRuby Webhook">
+    Go to **Configuration** → **Integrations** in SalamRuby, click **Manage Webhooks** → **Add Webhook**, enter your endpoint URL, select **Response Finished** as the trigger, and choose the surveys to monitor.
 
     ![Integrations Tab](/images/xm-and-surveys/core-features/integrations/webhooks/integrations-tab.webp)
   </Step>
   <Step title="Build Your Webhook Handler">
     Your webhook handler needs to:
-    - **Receive the Formbricks webhook** - Accept POST requests with the survey response payload
+    - **Receive the SalamRuby webhook** - Accept POST requests with the survey response payload
     - **Extract contact data** - Parse the email and other fields from `data.data` (keyed by your `questionId` values)
     - **Call the HubSpot API** - Use the [HubSpot Contacts API](https://developers.hubspot.com/docs/api/crm/contacts) to create or update contacts
     - **Handle duplicates** - HubSpot returns a 409 error if a contact with that email exists; search and update instead
@@ -152,7 +152,7 @@ For maximum flexibility, you can use Formbricks webhooks with a custom endpoint 
     You can deploy using serverless functions (Vercel, AWS Lambda, Cloudflare Workers), traditional servers, or low-code platforms. For webhook signature verification, see the [Webhooks documentation](/xm-and-surveys/core-features/integrations/webhooks).
   </Step>
   <Step title="Deploy and Test">
-    Deploy your webhook handler to a publicly accessible URL, add the URL to your Formbricks webhook configuration, submit a test survey response, and verify the contact appears in HubSpot.
+    Deploy your webhook handler to a publicly accessible URL, add the URL to your SalamRuby webhook configuration, submit a test survey response, and verify the contact appears in HubSpot.
   </Step>
 </Steps>
 
@@ -180,4 +180,4 @@ For maximum flexibility, you can use Formbricks webhooks with a custom endpoint 
 
 ---
 
-Still struggling or something not working as expected? [Join our GitHub Discussions](https://github.com/formbricks/formbricks/discussions) and we're happy to help!
+Still struggling or something not working as expected? [Join our GitHub Discussions](https://github.com/salamruby/salamruby/discussions) and we're happy to help!

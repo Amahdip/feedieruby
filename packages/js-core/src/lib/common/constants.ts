@@ -1,5 +1,5 @@
-export const JS_LOCAL_STORAGE_KEY = "formbricks-js";
-export const LEGACY_JS_WEBSITE_LOCAL_STORAGE_KEY = "formbricks-js-website";
-export const LEGACY_JS_APP_LOCAL_STORAGE_KEY = "formbricks-js-app";
-export const CONTAINER_ID = "formbricks-modal-container";
-export const RECAPTCHA_SCRIPT_ID = "formbricks-recaptcha-script";
+export const JS_LOCAL_STORAGE_KEY = "salamruby-js";
+export const LEGACY_JS_WEBSITE_LOCAL_STORAGE_KEY = "salamruby-js-website";
+export const LEGACY_JS_APP_LOCAL_STORAGE_KEY = "salamruby-js-app";
+export const CONTAINER_ID = "salamruby-modal-container";
+export const RECAPTCHA_SCRIPT_ID = "salamruby-recaptcha-script";

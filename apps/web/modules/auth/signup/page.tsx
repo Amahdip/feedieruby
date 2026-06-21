@@ -5,7 +5,7 @@ import {
   EMAIL_VERIFICATION_DISABLED,
   GITHUB_OAUTH_ENABLED,
   GOOGLE_OAUTH_ENABLED,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   IS_TURNSTILE_CONFIGURED,
   OIDC_DISPLAY_NAME,
   OIDC_OAUTH_ENABLED,
@@ -60,7 +60,7 @@ export const SignupPage = async ({
   const emailFromSearchParams = searchParams["email"];
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-[#D9F6F4]">
+    <div className="flex min-h-screen w-full items-center justify-center bg-slate-50">
       <FormWrapper>
         <SignupForm
           webAppUrl={WEBAPP_URL}
@@ -81,7 +81,7 @@ export const SignupPage = async ({
           samlTenant={SAML_TENANT}
           samlProduct={SAML_PRODUCT}
           turnstileSiteKey={TURNSTILE_SITE_KEY}
-          isFormbricksCloud={IS_FORMBRICKS_CLOUD}
+          isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
         />
       </FormWrapper>
     </div>

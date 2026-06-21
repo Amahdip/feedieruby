@@ -1,9 +1,9 @@
 import { CheckCheckIcon, MousePointerClickIcon, PhoneIcon } from "lucide-react";
 import React from "react";
-import { TResponseDataValue } from "@formbricks/types/responses";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TResponseDataValue } from "@salamruby/types/responses";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { cn } from "@/lib/cn";
 import { getLanguageCode, getLocalizedValue } from "@/lib/i18n/utils";
 import { getChoiceIdByValue } from "@/lib/response/utils";

@@ -12,6 +12,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
+import { HIDE_APP_SURVEY_TYPE } from "@/lib/brand-color";
 import { SecondaryNavigation } from "@/modules/ui/components/secondary-navigation";
 
 interface WorkspaceConfigNavigationProps {
@@ -83,6 +84,10 @@ export const WorkspaceConfigNavigation = ({ activeId, loading }: WorkspaceConfig
       current: pathname?.includes("/tags"),
     },
   ];
+
+  if (HIDE_APP_SURVEY_TYPE) {
+    navigation = navigation.filter((item) => item.id !== "app-connection");
+  }
 
   return <SecondaryNavigation navigation={navigation} activeId={activeId} loading={loading} />;
 };

@@ -4,16 +4,16 @@ import { signIn } from "next-auth/react";
 import { Dispatch, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
 import { Trans, useTranslation } from "react-i18next";
-import { logger } from "@formbricks/logger";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TUser } from "@formbricks/types/user";
+import { logger } from "@salamruby/logger";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TUser } from "@salamruby/types/user";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import {
   ACCOUNT_DELETION_CONFIRMATION_REQUIRED_ERROR_CODE,
   ACCOUNT_DELETION_EMAIL_MISMATCH_ERROR_CODE,
   ACCOUNT_DELETION_SSO_REAUTH_REQUIRED_ERROR_CODE,
   DELETE_ACCOUNT_WRONG_PASSWORD_ERROR,
-  FORMBRICKS_CLOUD_ACCOUNT_DELETION_SURVEY_URL,
+  SALAMRUBY_CLOUD_ACCOUNT_DELETION_SURVEY_URL,
 } from "@/modules/account/constants";
 import { useSignOut } from "@/modules/auth/hooks/use-sign-out";
 import { DeleteDialog } from "@/modules/ui/components/delete-dialog";
@@ -26,7 +26,7 @@ interface DeleteAccountModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   user: TUser;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   organizationsWithSingleOwner: TOrganization[];
   isSsoIdentityConfirmationDisabled: boolean;
 }
@@ -36,7 +36,7 @@ export const DeleteAccountModal = ({
   setOpen,
   open,
   user,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   organizationsWithSingleOwner,
   isSsoIdentityConfirmationDisabled,
 }: Readonly<DeleteAccountModalProps>) => {
@@ -134,8 +134,8 @@ export const DeleteAccountModal = ({
         logger.error({ error }, "Failed to sign out after account deletion");
       }
 
-      if (isFormbricksCloud) {
-        globalThis.location.replace(FORMBRICKS_CLOUD_ACCOUNT_DELETION_SURVEY_URL);
+      if (isSalamRubyCloud) {
+        globalThis.location.replace(SALAMRUBY_CLOUD_ACCOUNT_DELETION_SURVEY_URL);
       } else {
         globalThis.location.replace("/auth/login");
       }

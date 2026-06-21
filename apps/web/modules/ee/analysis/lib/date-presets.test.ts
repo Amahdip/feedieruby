@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import type { TChartQuery } from "@formbricks/types/analysis";
+import type { TChartQuery } from "@salamruby/types/analysis";
 import { expandPresetDateRanges } from "./date-presets";
 
 const queryWithDateRange = (dateRange: string | [string, string]): TChartQuery => ({

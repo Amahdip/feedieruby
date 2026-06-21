@@ -1,20 +1,20 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { logger } from "@formbricks/logger";
-import { ZId, ZOptionalNumber, ZString } from "@formbricks/types/common";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { logger } from "@salamruby/logger";
+import { ZId, ZOptionalNumber, ZString } from "@salamruby/types/common";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TOrganization,
   TOrganizationBilling,
   TOrganizationCreateInput,
   TOrganizationUpdateInput,
   ZOrganizationCreateInput,
-} from "@formbricks/types/organizations";
-import { TUserNotificationSettings } from "@formbricks/types/user";
-import { IS_FORMBRICKS_CLOUD, ITEMS_PER_PAGE } from "@/lib/constants";
+} from "@salamruby/types/organizations";
+import { TUserNotificationSettings } from "@salamruby/types/user";
+import { IS_SALAMRUBY_CLOUD, ITEMS_PER_PAGE } from "@/lib/constants";
 import { updateUser } from "@/lib/user/service";
 import { getBillingUsageCycleWindow } from "@/lib/utils/billing";
 import { getWorkspaces } from "@/lib/workspace/service";
@@ -43,9 +43,9 @@ type TOrganizationWithBilling = Prisma.OrganizationGetPayload<{ select: typeof s
 
 const getDefaultOrganizationBilling = (): TOrganizationBilling => ({
   limits: {
-    workspaces: IS_FORMBRICKS_CLOUD ? 1 : 3,
+    workspaces: IS_SALAMRUBY_CLOUD ? 1 : 3,
     monthly: {
-      responses: IS_FORMBRICKS_CLOUD ? 250 : 1500,
+      responses: IS_SALAMRUBY_CLOUD ? 250 : 1500,
     },
   },
   stripeCustomerId: null,
@@ -302,7 +302,7 @@ export const deleteOrganization = async (organizationId: string) => {
     });
 
     const stripeCustomerId = deletedOrganization.billing?.stripeCustomerId;
-    if (IS_FORMBRICKS_CLOUD && stripeCustomerId) {
+    if (IS_SALAMRUBY_CLOUD && stripeCustomerId) {
       await cleanupStripeCustomer(stripeCustomerId);
     }
 

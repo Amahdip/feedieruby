@@ -1,7 +1,7 @@
 import { Session, getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
-import { logger } from "@formbricks/logger";
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { logger } from "@salamruby/logger";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import { authenticateRequest } from "@/app/api/v1/auth";
 import { reportApiError } from "@/app/lib/api/api-error-reporter";
 import { getRateLimitErrorResponse } from "@/app/lib/api/client-rate-limit";

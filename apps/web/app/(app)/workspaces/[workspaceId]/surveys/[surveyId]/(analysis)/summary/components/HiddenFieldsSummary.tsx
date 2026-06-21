@@ -3,8 +3,8 @@
 import { InboxIcon, Link, MessageSquareTextIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurveyElementSummaryHiddenFields } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TSurveyElementSummaryHiddenFields } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { useWorkspace } from "@/app/(app)/workspaces/[workspaceId]/context/workspace-context";
 import { timeSince } from "@/lib/time";
 import { getContactIdentifier } from "@/lib/utils/contact";
@@ -35,12 +35,12 @@ export const HiddenFieldsSummary = ({ elementSummary, locale }: HiddenFieldsSumm
         </div>
 
         <div className="flex gap-x-2 text-xs font-semibold text-slate-600 md:text-sm">
-          <div className="flex items-center rounded-lg bg-slate-100 p-2">
-            <MessageSquareTextIcon className="mr-2 size-4" />
+          <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+            <MessageSquareTextIcon className="size-4 shrink-0" />
             Hidden Field
           </div>
-          <div className="flex items-center rounded-lg bg-slate-100 p-2">
-            <InboxIcon className="mr-2 size-4" />
+          <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2">
+            <InboxIcon className="size-4 shrink-0" />
             {t("common.count_responses", { count: elementSummary.responseCount })}
           </div>
         </div>

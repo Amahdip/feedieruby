@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
+import { prisma } from "@salamruby/database";
 import { getContactByUserId } from "./contact";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     contact: {
       findFirst: vi.fn(),

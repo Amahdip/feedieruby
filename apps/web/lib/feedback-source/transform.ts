@@ -1,16 +1,16 @@
 import "server-only";
-import { TFeedbackSourceFormbricksMapping, THubFieldType } from "@formbricks/types/feedback-source";
-import { TResponse, TResponseData, TResponseDataValue } from "@formbricks/types/responses";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/constants";
+import { TFeedbackSourceSalamRubyMapping, THubFieldType } from "@salamruby/types/feedback-source";
+import { TResponse, TResponseData, TResponseDataValue } from "@salamruby/types/responses";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/constants";
 import type {
   TSurveyElement,
   TSurveyElementChoice,
   TSurveyMatrixElement,
   TSurveyMatrixElementChoice,
   TSurveyRankingElement,
-} from "@formbricks/types/surveys/elements";
-import type { TSurvey } from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+} from "@salamruby/types/surveys/elements";
+import type { TSurvey } from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
 import type { FeedbackRecordCreateParams } from "@/modules/hub";
@@ -127,7 +127,7 @@ const buildBaseFields = (
   tenantId: string
 ): BaseRecordFields => ({
   collected_at: getCollectedAt(response),
-  source_type: "formbricks_survey",
+  source_type: "salamruby_survey",
   submission_id: response.id,
   tenant_id: tenantId,
   source_id: survey.id,
@@ -138,7 +138,7 @@ const buildBaseFields = (
 
 const expandMatrixToRecords = (
   element: TSurveyMatrixElement,
-  mapping: TFeedbackSourceFormbricksMapping,
+  mapping: TFeedbackSourceSalamRubyMapping,
   value: TResponseDataValue,
   baseFields: BaseRecordFields
 ): FeedbackRecordCreateParams[] => {
@@ -173,7 +173,7 @@ const expandMatrixToRecords = (
 
 const expandRankingToRecords = (
   element: TSurveyRankingElement,
-  mapping: TFeedbackSourceFormbricksMapping,
+  mapping: TFeedbackSourceSalamRubyMapping,
   value: TResponseDataValue,
   baseFields: BaseRecordFields
 ): FeedbackRecordCreateParams[] => {
@@ -205,7 +205,7 @@ const expandRankingToRecords = (
 };
 
 /**
- * Transform a Formbricks survey response into FeedbackRecord payloads.
+ * Transform a SalamRuby survey response into FeedbackRecord payloads.
  * Called from the pipeline handler when a response is created/finished.
  *
  * Matrix and ranking questions expand into one record per row/item, sharing a
@@ -214,7 +214,7 @@ const expandRankingToRecords = (
 export function transformResponseToFeedbackRecords(
   response: TResponse,
   survey: Pick<TSurvey, "id" | "name" | "blocks">,
-  mappings: TFeedbackSourceFormbricksMapping[],
+  mappings: TFeedbackSourceSalamRubyMapping[],
   tenantId: string
 ): FeedbackRecordCreateParams[] {
   const responseData = response.data;

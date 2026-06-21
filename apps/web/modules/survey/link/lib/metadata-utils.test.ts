@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { TSurvey, TSurveyWelcomeCard } from "@formbricks/types/surveys/types";
+import { TSurvey, TSurveyWelcomeCard } from "@salamruby/types/surveys/types";
 import { getPublicDomain } from "@/lib/getPublicUrl";
 import { COLOR_DEFAULTS } from "@/lib/styling/constants";
 import { getSurvey } from "@/modules/survey/lib/survey";
@@ -23,8 +23,8 @@ vi.mock("@/modules/survey/link/lib/workspace", () => ({
 
 // Mock constants
 vi.mock("@/lib/constants", () => ({
-  IS_FORMBRICKS_CLOUD: false,
-  WEBAPP_URL: "https://test.formbricks.com",
+  IS_SALAMRUBY_CLOUD: false,
+  WEBAPP_URL: "https://test.salamruby.com",
 }));
 
 vi.mock("@/lib/styling/constants", () => ({
@@ -39,7 +39,7 @@ vi.mock("@/lib/utils/recall", () => ({
 }));
 
 // Mock text content extraction
-vi.mock("@formbricks/types/surveys/validation", () => ({
+vi.mock("@salamruby/types/surveys/validation", () => ({
   getTextContent: vi.fn((text) => text),
 }));
 
@@ -150,11 +150,11 @@ describe("Metadata Utils", () => {
       });
     });
 
-    test("adds Formbricks to title when IS_FORMBRICKS_CLOUD is true", async () => {
+    test("adds SalamRuby to title when IS_SALAMRUBY_CLOUD is true", async () => {
       // Temporarily modify the mocked module
       vi.doMock("@/lib/constants", () => ({
-        IS_FORMBRICKS_CLOUD: true,
-        WEBAPP_URL: "https://test.formbricks.com",
+        IS_SALAMRUBY_CLOUD: true,
+        WEBAPP_URL: "https://test.salamruby.com",
       }));
 
       // Re-import the function to use the updated mock
@@ -175,17 +175,17 @@ describe("Metadata Utils", () => {
 
       const result = await getBasicSurveyMetadataWithCloudMock(mockSurveyId);
 
-      expect(result.title).toBe("Test Survey | Formbricks");
+      expect(result.title).toBe("Test Survey | SalamRuby");
 
       // Reset the mock
       vi.doMock("@/lib/constants", () => ({
-        IS_FORMBRICKS_CLOUD: false,
-        WEBAPP_URL: "https://test.formbricks.com",
+        IS_SALAMRUBY_CLOUD: false,
+        WEBAPP_URL: "https://test.salamruby.com",
       }));
     });
 
     test("handles welcome card headline with HTML content", async () => {
-      const { getTextContent } = await import("@formbricks/types/surveys/validation");
+      const { getTextContent } = await import("@salamruby/types/surveys/validation");
 
       const mockSurvey = {
         id: mockSurveyId,

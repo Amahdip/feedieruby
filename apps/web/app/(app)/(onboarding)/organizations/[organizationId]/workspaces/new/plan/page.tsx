@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { TCloudBillingPlan } from "@formbricks/types/organizations";
+import { TCloudBillingPlan } from "@salamruby/types/organizations";
 import { getOnboardingWorkspace } from "@/app/(app)/(onboarding)/lib/onboarding-workspace";
 import { redirectIfOnboardingComplete } from "@/app/(app)/(onboarding)/lib/redirect-if-onboarding-complete";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getPostHogFeatureFlag } from "@/lib/posthog/get-feature-flag";
 import { getOrganizationBillingWithReadThroughSync } from "@/modules/ee/billing/lib/organization-billing";
 import { getOrganizationAuth } from "@/modules/organization/lib/utils";
@@ -19,7 +19,7 @@ interface PlanPageProps {
 const Page = async (props: PlanPageProps) => {
   const params = await props.params;
 
-  if (!IS_FORMBRICKS_CLOUD) {
+  if (!IS_SALAMRUBY_CLOUD) {
     return redirect(`/organizations/${params.organizationId}/workspaces/new/survey`);
   }
 

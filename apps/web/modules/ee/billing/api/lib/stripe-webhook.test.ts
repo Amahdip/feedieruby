@@ -35,7 +35,7 @@ vi.mock("@/modules/ee/billing/lib/organization-billing", () => ({
   syncOrganizationBillingFromStripe: mocks.syncOrganizationBillingFromStripe,
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: mocks.loggerError,
     warn: mocks.loggerWarn,

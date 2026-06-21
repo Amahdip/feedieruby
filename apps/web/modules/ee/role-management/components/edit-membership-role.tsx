@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TOrganizationRole } from "@formbricks/types/memberships";
+import type { TOrganizationRole } from "@salamruby/types/memberships";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { Badge } from "@/modules/ui/components/badge";
@@ -28,7 +28,7 @@ interface Role {
   memberAccepted?: boolean;
   inviteId?: string;
   doesOrgHaveMoreThanOneOwner?: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isUserManagementDisabledFromUi: boolean;
 }
 
@@ -41,7 +41,7 @@ export function EditMembershipRole({
   memberAccepted,
   inviteId,
   doesOrgHaveMoreThanOneOwner,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isUserManagementDisabledFromUi,
 }: Role) {
   const { t } = useTranslation();
@@ -96,7 +96,7 @@ export function EditMembershipRole({
     if (isOwner) {
       roles.push("manager", "owner");
 
-      if (isFormbricksCloud) {
+      if (isSalamRubyCloud) {
         roles.push("billing");
       }
     }

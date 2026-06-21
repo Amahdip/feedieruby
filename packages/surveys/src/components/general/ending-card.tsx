@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { type TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { type TResponseData, type TResponseVariables } from "@formbricks/types/responses";
-import { type TSurveyEndScreenCard, type TSurveyRedirectUrlCard } from "@formbricks/types/surveys/types";
+import { type TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { type TResponseData, type TResponseVariables } from "@salamruby/types/responses";
+import { type TSurveyEndScreenCard, type TSurveyRedirectUrlCard } from "@salamruby/types/surveys/types";
 import { SubmitButton } from "@/components/buttons/submit-button";
 import { ElementMedia } from "@/components/general/element-media";
 import { Headline } from "@/components/general/headline";

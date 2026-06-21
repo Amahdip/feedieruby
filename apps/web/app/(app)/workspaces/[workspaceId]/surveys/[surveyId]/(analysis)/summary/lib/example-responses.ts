@@ -1,10 +1,10 @@
 import "server-only";
 import { randomInt } from "node:crypto";
 import { z } from "zod";
-import { logger } from "@formbricks/logger";
-import { type TResponseData, type TResponseInput, type TResponseTtc } from "@formbricks/types/responses";
-import { type TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { type TSurvey } from "@formbricks/types/surveys/types";
+import { logger } from "@salamruby/logger";
+import { type TResponseData, type TResponseInput, type TResponseTtc } from "@salamruby/types/responses";
+import { type TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { type TSurvey } from "@salamruby/types/surveys/types";
 import { generateOrganizationAIObject } from "@/lib/ai/service";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 

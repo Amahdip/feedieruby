@@ -1,10 +1,11 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { ActionClass, OrganizationRole } from "@formbricks/database/prisma-browser";
-import { TContactAttributeKey } from "@formbricks/types/contact-attribute-key";
-import { TSurveyQuota } from "@formbricks/types/quota";
-import { TSegment } from "@formbricks/types/segment";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { ActionClass, OrganizationRole } from "@salamruby/database/prisma-browser";
+import { TContactAttributeKey } from "@salamruby/types/contact-attribute-key";
+import { TSurveyQuota } from "@salamruby/types/quota";
+import { TSegment } from "@salamruby/types/segment";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
+import { HIDE_QUOTAS_FEATURE } from "@/lib/brand-color";
 import { TargetingCard } from "@/modules/ee/contacts/segments/components/targeting-card";
 import { QuotasCard } from "@/modules/ee/quotas/components/quotas-card";
 import { TTeamPermission } from "@/modules/ee/teams/workspace-teams/types/team";
@@ -26,7 +27,7 @@ interface SettingsViewProps {
   isUserTargetingAllowed?: boolean;
   isSpamProtectionAllowed: boolean;
   workspacePermission: TTeamPermission | null;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isQuotasAllowed: boolean;
   quotas: TSurveyQuota[];
   locale: TUserLocale;
@@ -46,7 +47,7 @@ export const SettingsView = ({
   isSpamProtectionAllowed,
   isQuotasAllowed,
   workspacePermission,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   quotas,
   locale,
   appSetupCompleted,
@@ -79,7 +80,7 @@ export const SettingsView = ({
             </div>
           ) : (
             <TargetingLockedCard
-              isFormbricksCloud={isFormbricksCloud}
+              isSalamRubyCloud={isSalamRubyCloud}
               workspaceId={localSurvey.workspaceId}
               enterpriseLicenseRequestFormUrl={enterpriseLicenseRequestFormUrl}
             />
@@ -95,14 +96,16 @@ export const SettingsView = ({
         membershipRole={membershipRole}
         workspacePermission={workspacePermission}
       />
-      <QuotasCard
-        localSurvey={localSurvey}
-        isQuotasAllowed={isQuotasAllowed}
-        isFormbricksCloud={isFormbricksCloud}
-        quotas={quotas}
-        hasResponses={responseCount > 0}
-        enterpriseLicenseRequestFormUrl={enterpriseLicenseRequestFormUrl}
-      />
+      {isQuotasAllowed && !HIDE_QUOTAS_FEATURE && (
+        <QuotasCard
+          localSurvey={localSurvey}
+          isQuotasAllowed={isQuotasAllowed}
+          isSalamRubyCloud={isSalamRubyCloud}
+          quotas={quotas}
+          hasResponses={responseCount > 0}
+          enterpriseLicenseRequestFormUrl={enterpriseLicenseRequestFormUrl}
+        />
+      )}
 
       <ResponseOptionsCard
         localSurvey={localSurvey}

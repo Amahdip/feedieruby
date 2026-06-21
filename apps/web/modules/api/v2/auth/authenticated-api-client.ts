@@ -1,4 +1,4 @@
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
 import { buildAuditLogBaseObject } from "@/app/lib/api/with-api-logging";
 import { handleApiError, logApiRequest } from "@/modules/api/v2/lib/utils";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";

@@ -1,10 +1,10 @@
 import "server-only";
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError, ResourceNotFoundError, ValidationError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError, ResourceNotFoundError, ValidationError } from "@salamruby/types/errors";
 import { validateInputs } from "@/lib/utils/validate";
 import { TWorkspaceWithLanguages } from "@/modules/survey/list/types/surveys";
 import { TUserWorkspace } from "@/modules/survey/list/types/workspaces";

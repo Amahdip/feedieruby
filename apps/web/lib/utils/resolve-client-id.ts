@@ -1,6 +1,6 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
+import { prisma } from "@salamruby/database";
 
 export type TResolvedClientIds = {
   workspaceId: string;

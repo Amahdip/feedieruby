@@ -3,21 +3,19 @@ import { createPrismaPgAdapter } from "./prisma-adapter";
 
 const prismaClientSingleton = (): PrismaClient => {
   const { adapter } = createPrismaPgAdapter();
-
   return new PrismaClient({
     adapter,
-    ...(process.env.DEBUG === "1" && {
-      log: ["query", "info"],
-    }),
+    ...(process.env.DEBUG === "1" && { log: ["query", "info"] }),
   });
 };
 
-type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
+}
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClientSingleton | undefined;
-};
+export const prisma = globalThis.prisma ?? prismaClientSingleton();
 
-export const prisma: PrismaClient = globalForPrisma.prisma ?? prismaClientSingleton();
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") {
+  globalThis.prisma = prisma;
+}

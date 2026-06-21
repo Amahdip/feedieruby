@@ -1,6 +1,6 @@
 ## Overview
 
-The `@formbricks/surveys` package provides a complete survey rendering system built with Preact/React. It features automated translation management through Lingo.dev.
+The `@salamruby/surveys` package provides a complete survey rendering system built with Preact/React. It features automated translation management through Lingo.dev.
 
 ## Features
 
@@ -46,12 +46,12 @@ packages/surveys/
 ### Prerequisites
 
 - [Lingo.dev](https://Lingo.dev) API key
-- Access to the Formbricks team on Lingo.dev
+- Access to the SalamRuby team on Lingo.dev
 
 ### Step-by-Step Setup
 
-1. **Join the Formbricks Team**
-   - Join the Formbricks team on Lingo.dev
+1. **Join the SalamRuby Team**
+   - Join the SalamRuby team on Lingo.dev
 
 2. **Get Your API Key**
    - In the sidebar, go to **Workspaces** and open the default workspace

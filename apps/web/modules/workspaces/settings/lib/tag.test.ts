@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { ok } from "@formbricks/types/error-handlers";
-import { TTag } from "@formbricks/types/tags";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { ok } from "@salamruby/types/error-handlers";
+import { TTag } from "@salamruby/types/tags";
 import { TagError } from "@/modules/workspaces/settings/types/tag";
 import { deleteTag, mergeTags, updateTagName } from "./tag";
 
@@ -21,7 +21,7 @@ const newTag: TTag = {
   name: "Tag2",
 };
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     tag: {
       delete: vi.fn(),
@@ -41,7 +41,7 @@ vi.mock("@formbricks/database", () => ({
   },
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: vi.fn(),
     info: vi.fn(),

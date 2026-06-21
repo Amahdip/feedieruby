@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { afterAll, beforeAll, beforeEach, describe, expect, test, vi } from "vitest";
-import { err, ok } from "@formbricks/types/error-handlers";
-import { TResponseUpdate } from "@formbricks/types/responses";
+import { err, ok } from "@salamruby/types/error-handlers";
+import { TResponseUpdate } from "@salamruby/types/responses";
 import { TResponseErrorCodesEnum } from "@/types/response-error-codes";
 import { ResponseQueue, _syncLocks, delay } from "./response-queue";
 import { SurveyState } from "./survey-state";

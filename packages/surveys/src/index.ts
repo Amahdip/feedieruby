@@ -1,5 +1,5 @@
 import { h, render } from "preact";
-import { SurveyContainerProps } from "@formbricks/types/formbricks-surveys";
+import { SurveyContainerProps } from "@salamruby/types/salamruby-surveys";
 import { RenderSurvey } from "@/components/general/render-survey";
 import { I18nProvider } from "@/components/i18n/provider";
 import { FILE_PICK_EVENT } from "@/lib/constants";
@@ -67,7 +67,7 @@ export const renderSurvey = (props: SurveyContainerProps) => {
     }
   } else {
     const modalContainer = document.createElement("div");
-    modalContainer.id = "formbricks-modal-container";
+    modalContainer.id = "salamruby-modal-container";
     document.body.appendChild(modalContainer);
 
     render(
@@ -90,14 +90,14 @@ export const onFilePick = (files: { name: string; type: string; base64: string }
   globalThis.dispatchEvent(fileUploadEvent);
 };
 
-// Initialize the global formbricksSurveys object if it doesn't exist
+// Initialize the global salamrubySurveys object if it doesn't exist
 if (globalThis.window !== undefined) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type definition is in @formbricks/types package
-  (globalThis.window as any).formbricksSurveys = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type definition is in @salamruby/types package
+  (globalThis.window as any).salamrubySurveys = {
     renderSurveyInline,
     renderSurveyModal,
     renderSurvey,
     onFilePick,
     setNonce: setStyleNonce,
-  } as typeof globalThis.window.formbricksSurveys;
+  } as typeof globalThis.window.salamrubySurveys;
 }

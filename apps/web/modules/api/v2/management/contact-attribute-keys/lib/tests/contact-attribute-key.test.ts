@@ -1,14 +1,14 @@
 import { describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { ContactAttributeKey, Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
+import { prisma } from "@salamruby/database";
+import { ContactAttributeKey, Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
 import {
   TContactAttributeKeyInput,
   TGetContactAttributeKeysFilter,
 } from "@/modules/api/v2/management/contact-attribute-keys/types/contact-attribute-keys";
 import { createContactAttributeKey, getContactAttributeKeys } from "../contact-attribute-key";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     $transaction: vi.fn(),
     contactAttributeKey: {

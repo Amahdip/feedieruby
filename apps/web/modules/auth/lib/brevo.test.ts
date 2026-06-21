@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { logger } from "@formbricks/logger";
+import { logger } from "@salamruby/logger";
 import { validateInputs } from "@/lib/utils/validate";
 import { createBrevoCustomer, deleteBrevoCustomerByEmail, updateBrevoCustomer } from "./brevo";
 

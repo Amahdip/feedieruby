@@ -2,10 +2,10 @@
 
 import { CheckCircle2Icon, ChevronsDownIcon, XCircleIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { TResponseData } from "@formbricks/types/responses";
-import { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { getTextContent } from "@formbricks/types/surveys/validation";
-import { TUserLocale } from "@formbricks/types/user";
+import { TResponseData } from "@salamruby/types/responses";
+import { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { getTextContent } from "@salamruby/types/surveys/validation";
+import { TUserLocale } from "@salamruby/types/user";
 import { getLocalizedValue } from "@/lib/i18n/utils";
 import { getSurveyDateFormatMap } from "@/lib/utils/date-display";
 import { parseRecallInfo } from "@/lib/utils/recall";

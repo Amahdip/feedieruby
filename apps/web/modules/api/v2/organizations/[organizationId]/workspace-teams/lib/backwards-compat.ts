@@ -1,4 +1,4 @@
-import { type WorkspaceTeam } from "@formbricks/database/prisma";
+import { type WorkspaceTeam } from "@salamruby/database/prisma";
 
 /**
  * Backwards compatibility layer for the project-teams → workspace-teams API rename.

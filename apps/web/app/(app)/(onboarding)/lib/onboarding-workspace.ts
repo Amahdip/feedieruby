@@ -1,7 +1,7 @@
 import "server-only";
-import { AuthorizationError, ResourceNotFoundError } from "@formbricks/types/errors";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TWorkspace } from "@formbricks/types/workspace";
+import { AuthorizationError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TWorkspace } from "@salamruby/types/workspace";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getOrganization, updateOrganization } from "@/lib/organization/service";

@@ -1,14 +1,14 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZId, ZString } from "@formbricks/types/common";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZId, ZString } from "@salamruby/types/common";
 import {
   DatabaseError,
   OperationNotAllowedError,
   ResourceNotFoundError,
   ValidationError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import {
   DATE_OPERATORS,
   TAllOperators,
@@ -30,7 +30,7 @@ import {
   ZSegmentCreateInput,
   ZSegmentFilters,
   ZSegmentUpdateInput,
-} from "@formbricks/types/segment";
+} from "@salamruby/types/segment";
 import { getSurvey } from "@/lib/survey/service";
 import { validateInputs } from "@/lib/utils/validate";
 import { isResourceFilter, searchForAttributeKeyInSegment } from "@/modules/ee/contacts/segments/lib/utils";

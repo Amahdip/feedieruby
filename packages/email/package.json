@@ -1,8 +1,8 @@
 {
-  "name": "@formbricks/email",
+  "name": "@salamruby/email",
   "version": "1.0.0",
   "private": true,
-  "description": "Email templates for Formbricks with React Email preview server",
+  "description": "Email templates for SalamRuby with React Email preview server",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -18,9 +18,9 @@
     "react-email": "5.2.11"
   },
   "devDependencies": {
-    "@formbricks/config-typescript": "workspace:*",
-    "@formbricks/eslint-config": "workspace:*",
-    "@formbricks/types": "workspace:*",
+    "@salamruby/config-typescript": "workspace:*",
+    "@salamruby/eslint-config": "workspace:*",
+    "@salamruby/types": "workspace:*",
     "autoprefixer": "10.4.27",
     "clsx": "2.1.1",
     "postcss": "8.5.14",

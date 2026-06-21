@@ -1,16 +1,16 @@
 import "server-only";
 import crypto from "node:crypto";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
 import {
   INVALID_PASSWORD_RESET_TOKEN_ERROR_CODE,
   InvalidPasswordResetTokenError,
-} from "@formbricks/types/errors";
-import type { TUserEmail, TUserLocale } from "@formbricks/types/user";
-import { ZUserEmail, ZUserLocale, ZUserPassword } from "@formbricks/types/user";
+} from "@salamruby/types/errors";
+import type { TUserEmail, TUserLocale } from "@salamruby/types/user";
+import { ZUserEmail, ZUserLocale, ZUserPassword } from "@salamruby/types/user";
 import { hashPassword } from "@/lib/auth";
 import { DEBUG_SHOW_RESET_LINK, PASSWORD_RESET_TOKEN_LIFETIME_MINUTES, WEBAPP_URL } from "@/lib/constants";
 import { hashString } from "@/lib/hash-string";

@@ -11,7 +11,7 @@ interface WorkspaceAndOrgSwitchProps {
   currentWorkspaceName?: string; // Optional: for pages without context
   isMultiOrgEnabled: boolean;
   organizationWorkspacesLimit: number;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isLicenseActive: boolean;
   isOwnerOrManager: boolean;
   isAccessControlAllowed: boolean;
@@ -25,7 +25,7 @@ export const WorkspaceAndOrgSwitch = ({
   currentWorkspaceName,
   isMultiOrgEnabled,
   organizationWorkspacesLimit,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isLicenseActive,
   isOwnerOrManager,
   isAccessControlAllowed,
@@ -47,7 +47,7 @@ export const WorkspaceAndOrgSwitch = ({
             currentOrganizationId={currentOrganizationId}
             isOwnerOrManager={isOwnerOrManager}
             organizationWorkspacesLimit={organizationWorkspacesLimit}
-            isFormbricksCloud={isFormbricksCloud}
+            isSalamRubyCloud={isSalamRubyCloud}
             isLicenseActive={isLicenseActive}
             isAccessControlAllowed={isAccessControlAllowed}
             isEnvironmentBreadcrumbVisible={false}

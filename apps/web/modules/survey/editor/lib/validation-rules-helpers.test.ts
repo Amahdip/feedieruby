@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
 import type {
   TSurveyElement,
   TSurveyMultipleChoiceElement,
   TSurveyRankingElement,
-} from "@formbricks/types/surveys/elements";
+} from "@salamruby/types/surveys/elements";
 import { RULE_TYPE_CONFIG } from "./validation-rules-config";
 import {
   getAddressFields,

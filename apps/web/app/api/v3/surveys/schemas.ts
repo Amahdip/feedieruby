@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { z } from "zod";
-import { ZSurveyBlocks } from "@formbricks/types/surveys/blocks";
+import { ZSurveyBlocks } from "@salamruby/types/surveys/blocks";
 import {
   ZSurveyEndings,
   ZSurveyHiddenFields,
@@ -9,7 +9,7 @@ import {
   ZSurveyType,
   ZSurveyVariables,
   ZSurveyWelcomeCard,
-} from "@formbricks/types/surveys/types";
+} from "@salamruby/types/surveys/types";
 import { type InvalidParam, isInvalidParamCode } from "@/app/api/v3/lib/response";
 import { normalizeV3SurveyWriteLanguageCode } from "./language";
 import { V3_SURVEY_TRANSLATABLE_METADATA_KEYS } from "./translation-fields";

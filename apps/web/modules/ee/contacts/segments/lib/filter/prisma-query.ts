@@ -1,8 +1,8 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { err, ok } from "@formbricks/types/error-handlers";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { err, ok } from "@salamruby/types/error-handlers";
 import {
   DATE_OPERATORS,
   TBaseFilters,
@@ -15,7 +15,7 @@ import {
   TSegmentPersonFilter,
   TSegmentSegmentFilter,
   ZRelativeDateValue,
-} from "@formbricks/types/segment";
+} from "@salamruby/types/segment";
 import { isResourceFilter } from "@/modules/ee/contacts/segments/lib/utils";
 import { endOfDay, startOfDay, subtractTimeUnit } from "../date-utils";
 import { getSegment } from "../segments";

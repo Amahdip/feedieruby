@@ -5,10 +5,10 @@ import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { type Workspace } from "@formbricks/database/prisma-browser";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { type Workspace } from "@salamruby/database/prisma-browser";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { addMultiLanguageLabels, extractLanguageCodes } from "@/lib/i18n/utils";
 import { addElementToBlock } from "@/modules/survey/editor/lib/blocks";
 import { scrollElementCardIntoView } from "@/modules/survey/editor/lib/utils";
@@ -81,20 +81,21 @@ export const AddElementToBlockButton = ({
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary">
-          <PlusIcon className="size-4" />
-          <div>
-            <p className="text-sm font-medium text-slate-900">
-              {t("workspace.surveys.edit.add_question_to_block")}
-            </p>
-          </div>
+        <Button variant="secondary" className="gap-2">
+          <PlusIcon className="size-4 shrink-0" />
+          <span className="text-sm font-medium text-slate-900">
+            {t("workspace.surveys.edit.add_question_to_block")}
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         {Object.entries(availableElementTypes).map(([type, name]) => (
-          <DropdownMenuItem key={type} className="min-h-8" onClick={() => handleAddElement(type)}>
-            {ELEMENTS_ICON_MAP[type as TSurveyElementTypeEnum]}
-            <span className="ml-2">{name}</span>
+          <DropdownMenuItem
+            key={type}
+            className="min-h-8"
+            icon={ELEMENTS_ICON_MAP[type as TSurveyElementTypeEnum]}
+            onClick={() => handleAddElement(type)}>
+            <span>{name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

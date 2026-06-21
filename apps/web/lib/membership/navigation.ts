@@ -1,4 +1,4 @@
-export const getBillingFallbackPath = (workspaceId: string, isFormbricksCloud: boolean): string => {
-  const settingsPath = isFormbricksCloud ? "billing" : "enterprise";
+export const getBillingFallbackPath = (workspaceId: string, isSalamRubyCloud: boolean): string => {
+  const settingsPath = isSalamRubyCloud ? "billing" : "enterprise";
   return `/workspaces/${workspaceId}/settings/organization/${settingsPath}`;
 };

@@ -1,6 +1,6 @@
-import { TOrganizationRole } from "@formbricks/types/memberships";
-import { TOrganization } from "@formbricks/types/organizations";
-import { IS_FORMBRICKS_CLOUD } from "@/lib/constants";
+import { TOrganizationRole } from "@salamruby/types/memberships";
+import { TOrganization } from "@salamruby/types/organizations";
+import { IS_SALAMRUBY_CLOUD } from "@/lib/constants";
 import { getTranslate } from "@/lingodotdev/server";
 import { MembersInfo } from "@/modules/organization/settings/teams/components/edit-memberships/members-info";
 import { getInvitesByOrganizationId } from "@/modules/organization/settings/teams/lib/invite";
@@ -49,7 +49,7 @@ export const EditMemberships = async ({
             members={members ?? []}
             currentUserRole={role}
             isAccessControlAllowed={isAccessControlAllowed}
-            isFormbricksCloud={IS_FORMBRICKS_CLOUD}
+            isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
             isUserManagementDisabledFromUi={isUserManagementDisabledFromUi}
           />
         )}

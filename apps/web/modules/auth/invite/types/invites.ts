@@ -1,5 +1,5 @@
-import { Invite } from "@formbricks/database/prisma";
-import { TUserLocale } from "@formbricks/types/user";
+import { Invite } from "@salamruby/database/prisma";
+import { TUserLocale } from "@salamruby/types/user";
 
 export interface InviteWithCreator extends Pick<
   Invite,

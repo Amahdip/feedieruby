@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { AuthenticationError } from "@formbricks/types/errors";
+import { AuthenticationError } from "@salamruby/types/errors";
 import { SettingsCard } from "@/app/(app)/workspaces/[workspaceId]/settings/components/SettingsCard";
 import { redirectBillingRoleFromRestrictedSettings } from "@/app/(app)/workspaces/[workspaceId]/settings/lib/redirect-billing-role";
 import { PrettyUrlsTable } from "@/app/(app)/workspaces/[workspaceId]/settings/organization/domain/components/pretty-urls-table";
-import { IS_FORMBRICKS_CLOUD, IS_STORAGE_CONFIGURED } from "@/lib/constants";
+import { IS_SALAMRUBY_CLOUD, IS_STORAGE_CONFIGURED } from "@/lib/constants";
 import { getTranslate } from "@/lingodotdev/server";
 import { getWhiteLabelPermission } from "@/modules/ee/license-check/lib/utils";
 import { FaviconCustomizationSettings } from "@/modules/ee/whitelabel/favicon-customization/components/favicon-customization-settings";
@@ -18,7 +18,7 @@ const Page = async (props: Readonly<{ params: Promise<{ workspaceId: string }> }
   await redirectBillingRoleFromRestrictedSettings(params.workspaceId);
   const t = await getTranslate();
 
-  if (IS_FORMBRICKS_CLOUD) {
+  if (IS_SALAMRUBY_CLOUD) {
     return notFound();
   }
 

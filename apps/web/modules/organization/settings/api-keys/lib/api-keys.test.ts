@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { ApiKey, ApiKeyPermission, Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { ApiKey, ApiKeyPermission, Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
 import { TApiKeyWithEnvironmentPermission } from "../types/api-keys";
 import {
   createApiKey,
@@ -39,7 +39,7 @@ const mockApiKeyWithEnvironments: TApiKeyWithEnvironmentPermission = {
 };
 
 // Mock modules before tests
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     apiKey: {
       findFirst: vi.fn(),

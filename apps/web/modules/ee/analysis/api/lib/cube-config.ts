@@ -5,8 +5,8 @@ import { env } from "@/lib/env";
 
 export const CUBE_API_TOKEN_TTL_SECONDS = 5 * 60;
 export const CUBE_QUERY_SCOPE = "xm:cube:query";
-export const DEFAULT_CUBE_JWT_AUDIENCE = "formbricks-cube";
-export const DEFAULT_CUBE_JWT_ISSUER = "formbricks-web";
+export const DEFAULT_CUBE_JWT_AUDIENCE = "salamruby-cube";
+export const DEFAULT_CUBE_JWT_ISSUER = "salamruby-web";
 
 export type TCubeQuerySource =
   | "charts.executeQueryAction"
@@ -36,12 +36,21 @@ export const normalizeCubeApiUrl = (baseUrl: string): string => {
   return `${normalizedBaseUrl}/cubejs-api/v1`;
 };
 
-export const getCubeApiCredentials = () => ({
-  apiUrl: normalizeCubeApiUrl(env.CUBEJS_API_URL),
-  apiSecret: env.CUBEJS_API_SECRET,
-  audience: env.CUBEJS_JWT_AUDIENCE ?? DEFAULT_CUBE_JWT_AUDIENCE,
-  issuer: env.CUBEJS_JWT_ISSUER ?? DEFAULT_CUBE_JWT_ISSUER,
-});
+export const getCubeApiCredentials = () => {
+  const apiUrl = env.CUBEJS_API_URL;
+  const apiSecret = env.CUBEJS_API_SECRET;
+
+  if (!apiUrl || !apiSecret) {
+    throw new Error("Cube analytics is not configured on this deployment.");
+  }
+
+  return {
+    apiUrl: normalizeCubeApiUrl(apiUrl),
+    apiSecret,
+    audience: env.CUBEJS_JWT_AUDIENCE ?? DEFAULT_CUBE_JWT_AUDIENCE,
+    issuer: env.CUBEJS_JWT_ISSUER ?? DEFAULT_CUBE_JWT_ISSUER,
+  };
+};
 
 export const createCubeApiToken = (
   apiSecret: string,

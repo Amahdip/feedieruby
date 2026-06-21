@@ -4,20 +4,20 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ImagePlusIcon, TrashIcon } from "lucide-react";
 import { type Dispatch, type SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { type TI18nString } from "@formbricks/types/i18n";
+import { type TI18nString } from "@salamruby/types/i18n";
 import {
   TSurveyElement,
   TSurveyElementChoice,
   TSurveyElementTypeEnum,
-} from "@formbricks/types/surveys/elements";
+} from "@salamruby/types/surveys/elements";
 import {
   TSurvey,
   TSurveyEndScreenCard,
   TSurveyRecallItem,
   TSurveyRedirectUrlCard,
   TSurveyWelcomeCard,
-} from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+} from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { createI18nString, extractLanguageCodes } from "@/lib/i18n/utils";
 import { debounce } from "@/lib/utils/debounce";
 import { useSyncScroll } from "@/lib/utils/hooks/useSyncScroll";
@@ -458,14 +458,14 @@ export const ElementFormInput = ({
           <div className="flex w-full items-start gap-2">
             <div className="flex-1">
               <LocalizedEditor
-                key={`${elementId}-${id}-${selectedLanguageCode}`}
+                key={`${elementId}-${id}-${usedLanguageCode}`}
                 id={id}
                 value={value}
                 localSurvey={localSurvey}
                 elementIdx={elementIdx}
                 isInvalid={isInvalid}
                 updateElement={(isWelcomeCard || isEndingCard ? updateSurvey : updateElement)!}
-                selectedLanguageCode={selectedLanguageCode}
+                selectedLanguageCode={usedLanguageCode}
                 firstRender={firstRender}
                 setFirstRender={setFirstRender}
                 locale={locale}

@@ -4,7 +4,6 @@ import {
   ArrowUpRightIcon,
   BarChart3Icon,
   Building2Icon,
-  ChevronRightIcon,
   Cog,
   FoldersIcon,
   Loader2,
@@ -13,20 +12,21 @@ import {
   MessageSquareTextIcon,
   PanelLeftCloseIcon,
   PanelLeftOpenIcon,
+  PanelRightCloseIcon,
+  PanelRightOpenIcon,
   PlusIcon,
   RocketIcon,
   SettingsIcon,
   UserCircleIcon,
   UserIcon,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TUser } from "@formbricks/types/user";
+import { TOrganizationRole } from "@salamruby/types/memberships";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TUser } from "@salamruby/types/user";
 import {
   getOrganizationsForSwitcherAction,
   getWorkspacesForSwitcherAction,
@@ -34,8 +34,15 @@ import {
 import { NavigationLink } from "@/app/(app)/workspaces/[workspaceId]/components/NavigationLink";
 import { SettingsSidebarContent } from "@/app/(app)/workspaces/[workspaceId]/components/SettingsSidebarContent";
 import { isNewerVersion } from "@/app/(app)/workspaces/[workspaceId]/lib/utils";
-import FBLogo from "@/images/formbricks-wordmark.svg";
+import {
+  HIDE_CONTACTS_FEATURE,
+  HIDE_DASHBOARDS_FEATURE,
+  HIDE_SALAMRUBY_EXTERNAL_LINKS,
+  HIDE_UNIFY_FEEDBACK,
+  HIDE_VERSION_UPDATE_PROMPT,
+} from "@/lib/brand-color";
 import { cn } from "@/lib/cn";
+import { getSidebarDropdownSide, isRtlLocale } from "@/lib/i18n/rtl";
 import { getBillingFallbackPath } from "@/lib/membership/navigation";
 import { getAccessFlags } from "@/lib/membership/utils";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
@@ -51,10 +58,13 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/modules/ui/components/dropdown-menu";
+import { FeedieRubyIconLight } from "@/modules/ui/components/feedieruby-brand";
 import { GoBackButton } from "@/modules/ui/components/go-back-button";
+import { SidebarExpandChevron } from "@/modules/ui/components/sidebar-expand-chevron";
 import { ModalButton } from "@/modules/ui/components/upgrade-prompt";
 import { CreateWorkspaceModal } from "@/modules/workspaces/components/create-workspace-modal";
 import { WorkspaceLimitModal } from "@/modules/workspaces/components/workspace-limit-modal";
@@ -65,7 +75,7 @@ interface NavigationProps {
   user: TUser;
   organization: TOrganization;
   workspace: { id: string; name: string };
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isDevelopment: boolean;
   membershipRole?: TOrganizationRole;
   publicDomain: string;
@@ -81,7 +91,7 @@ export const MainNavigation = ({
   user,
   workspace,
   membershipRole,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isDevelopment,
   publicDomain,
   organizationWorkspacesLimit,
@@ -93,6 +103,8 @@ export const MainNavigation = ({
   const router = useRouter();
   const pathname = usePathname();
   const { t } = useTranslation();
+  const isRtl = isRtlLocale(user.locale);
+  const sidebarDropdownSide = getSidebarDropdownSide(isRtl);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(true);
   const [latestVersion, setLatestVersion] = useState("");
@@ -127,64 +139,77 @@ export const MainNavigation = ({
   }, [isCollapsed]);
 
   const mainNavigationSections = useMemo(
-    () => [
-      {
-        id: "ask",
-        name: t("common.ask"),
-        items: [
-          {
-            name: t("common.surveys"),
-            href: `/workspaces/${workspace.id}/surveys`,
-            icon: MessageCircle,
-            isActive: pathname?.includes("/surveys"),
-            isHidden: false,
-            disabled: isMembershipPending || isBilling,
-          },
-          {
-            href: `/workspaces/${workspace.id}/contacts`,
-            name: t("common.contacts"),
-            icon: UserIcon,
-            isActive:
-              pathname?.includes("/contacts") ||
-              pathname?.includes("/segments") ||
-              pathname?.includes("/attributes"),
-            disabled: isMembershipPending || isBilling,
-          },
-        ],
-      },
-      {
-        id: "unify-feedback",
-        name: (
-          <span className="inline-flex items-center gap-2">
-            <span>{t("workspace.unify.unify_feedback")}</span>
-            <Badge
-              text="Beta"
-              type="gray"
-              size="tiny"
-              className="text-[10px] font-semibold normal-case tracking-normal"
-            />
-          </span>
-        ),
-        items: [
-          {
-            name: t("workspace.unify.feedback_records"),
-            href: `/workspaces/${workspace.id}/unify/feedback-records`,
-            icon: MessageSquareTextIcon,
-            isActive: pathname?.includes("/unify/"),
-            isHidden: false,
-            disabled: isMembershipPending || isBilling,
-          },
-          {
-            name: t("common.dashboards"),
-            href: `/workspaces/${workspace.id}/dashboards`,
-            icon: BarChart3Icon,
-            isActive: pathname?.includes("/dashboards") || pathname?.includes("/charts"),
-            isHidden: false,
-            disabled: isMembershipPending || isBilling,
-          },
-        ],
-      },
-    ],
+    () =>
+      [
+        {
+          id: "ask",
+          name: t("common.ask"),
+          items: [
+            {
+              name: t("common.surveys"),
+              href: `/workspaces/${workspace.id}/surveys`,
+              icon: MessageCircle,
+              isActive: pathname?.includes("/surveys"),
+              isHidden: false,
+              disabled: isMembershipPending || isBilling,
+            },
+            {
+              href: `/workspaces/${workspace.id}/contacts`,
+              name: t("common.contacts"),
+              icon: UserIcon,
+              isActive:
+                pathname?.includes("/contacts") ||
+                pathname?.includes("/segments") ||
+                pathname?.includes("/attributes"),
+              isHidden: HIDE_CONTACTS_FEATURE,
+              disabled: isMembershipPending || isBilling,
+            },
+          ],
+        },
+        !HIDE_UNIFY_FEEDBACK && {
+          id: "unify-feedback",
+          name: (
+            <span className="inline-flex items-center gap-2">
+              <span>{t("workspace.unify.unify_feedback")}</span>
+              <Badge
+                text={t("common.beta")}
+                type="gray"
+                size="tiny"
+                className="text-[10px] font-semibold normal-case tracking-normal"
+              />
+            </span>
+          ),
+          items: [
+            {
+              name: t("workspace.unify.feedback_records"),
+              href: `/workspaces/${workspace.id}/unify/feedback-records`,
+              icon: MessageSquareTextIcon,
+              isActive: pathname?.includes("/unify/"),
+              isHidden: false,
+              disabled: isMembershipPending || isBilling,
+            },
+            {
+              name: t("common.dashboards"),
+              href: `/workspaces/${workspace.id}/dashboards`,
+              icon: BarChart3Icon,
+              isActive: pathname?.includes("/dashboards") || pathname?.includes("/charts"),
+              isHidden: HIDE_DASHBOARDS_FEATURE,
+              disabled: isMembershipPending || isBilling,
+            },
+          ],
+        },
+      ].filter(Boolean) as {
+        id: string;
+        name: React.ReactNode;
+        items: {
+          name: string;
+          href: string;
+          icon: typeof MessageCircle;
+          isActive: boolean;
+          isHidden: boolean;
+          disabled: boolean;
+        }[];
+      }[],
     [t, workspace.id, pathname, isMembershipPending, isBilling]
   );
 
@@ -205,18 +230,22 @@ export const MainNavigation = ({
       href: `/workspaces/${workspace.id}/settings/account/profile`,
       icon: UserCircleIcon,
     },
-    {
-      label: t("common.documentation"),
-      href: "https://formbricks.com/docs",
-      target: "_blank",
-      icon: ArrowUpRightIcon,
-    },
-    {
-      label: t("common.share_feedback"),
-      href: "https://github.com/formbricks/formbricks/issues",
-      target: "_blank",
-      icon: ArrowUpRightIcon,
-    },
+    ...(HIDE_SALAMRUBY_EXTERNAL_LINKS
+      ? []
+      : [
+          {
+            label: t("common.documentation"),
+            href: "https://salamruby.com/docs",
+            target: "_blank",
+            icon: ArrowUpRightIcon,
+          },
+          {
+            label: t("common.share_feedback"),
+            href: "https://github.com/salamruby/salamruby/issues",
+            target: "_blank",
+            icon: ArrowUpRightIcon,
+          },
+        ]),
   ];
 
   const [isWorkspaceDropdownOpen, setIsWorkspaceDropdownOpen] = useState(false);
@@ -339,7 +368,7 @@ export const MainNavigation = ({
   }, [isOwnerOrManager]);
 
   const trialDaysRemaining = useMemo(() => {
-    if (!isFormbricksCloud || organization.billing?.stripe?.subscriptionStatus !== "trialing") return null;
+    if (!isSalamRubyCloud || organization.billing?.stripe?.subscriptionStatus !== "trialing") return null;
     const trialEnd = organization.billing.stripe.trialEnd;
     if (!trialEnd) return null;
     const ts = new Date(trialEnd).getTime();
@@ -347,14 +376,14 @@ export const MainNavigation = ({
     const msPerDay = 86_400_000;
     return Math.ceil((ts - Date.now()) / msPerDay);
   }, [
-    isFormbricksCloud,
+    isSalamRubyCloud,
     organization.billing?.stripe?.subscriptionStatus,
     organization.billing?.stripe?.trialEnd,
   ]);
 
-  const mainNavigationLink = isBilling
-    ? getBillingFallbackPath(workspace.id, isFormbricksCloud)
-    : `/workspaces/${workspace.id}/surveys/`;
+  const dashboardHref = isBilling
+    ? getBillingFallbackPath(workspace.id, isSalamRubyCloud)
+    : `/workspaces/${workspace.id}/surveys`;
 
   const handleWorkspaceChange = (workspaceId: string) => {
     const targetPath =
@@ -396,7 +425,7 @@ export const MainNavigation = ({
   };
 
   const workspaceLimitModalButtons = (): [ModalButton, ModalButton] => {
-    if (isFormbricksCloud) {
+    if (isSalamRubyCloud) {
       return [
         {
           text: t("workspace.settings.billing.upgrade"),
@@ -414,7 +443,7 @@ export const MainNavigation = ({
         text: t("workspace.settings.billing.upgrade"),
         href: isLicenseActive
           ? `/workspaces/${workspace.id}/settings/organization/enterprise`
-          : "https://formbricks.com/upgrade-self-hosted-license",
+          : "https://salamruby.com/upgrade-self-hosted-license",
       },
       {
         text: t("common.cancel"),
@@ -446,7 +475,7 @@ export const MainNavigation = ({
   );
 
   const switcherTriggerClasses = cn(
-    "w-full border-t px-3 py-3 text-left transition-colors duration-200 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-inset",
+    "w-full border-t px-3 py-3 text-start transition-colors duration-200 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-inset",
     isCollapsed ? "flex items-center justify-center" : ""
   );
 
@@ -461,13 +490,19 @@ export const MainNavigation = ({
       {workspace && (
         <aside
           className={cn(
-            "z-40 flex flex-col justify-between rounded-r-xl border-r border-slate-200 bg-white pt-3 shadow-md transition-all duration-100",
+            "z-40 flex flex-col justify-between rounded-e-xl border-e border-slate-200 bg-white pt-3 shadow-md transition-all duration-100",
             isSettingsMode || !isCollapsed ? "w-sidebar-collapsed" : "w-sidebar-expanded"
           )}>
           {isSettingsMode ? (
             <div className="flex flex-col overflow-hidden">
-              <div className="mb-2 px-3">
-                <GoBackButton url={`/workspaces/${workspace.id}/surveys`} />
+              <div className="mb-2 flex flex-col gap-3 px-3">
+                <Link
+                  href={dashboardHref}
+                  className="flex shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+                  aria-label={t("common.home")}>
+                  <FeedieRubyIconLight className="size-8" priority />
+                </Link>
+                <GoBackButton url={dashboardHref} />
               </div>
 
               {/* Settings sidebar content */}
@@ -477,7 +512,7 @@ export const MainNavigation = ({
                 organizationId={organization.id}
                 organizationName={organization.name}
                 membershipRole={membershipRole}
-                isFormbricksCloud={isFormbricksCloud}
+                isSalamRubyCloud={isSalamRubyCloud}
                 isCollapsed={false}
                 isTextVisible={false}
                 workspaces={workspaces}
@@ -494,17 +529,20 @@ export const MainNavigation = ({
             <div>
               {/* Logo and Toggle */}
 
-              <div className="flex items-center justify-between px-3 pb-4">
-                {!isCollapsed && (
-                  <Link
-                    href={mainNavigationLink}
-                    className={cn(
-                      "flex items-center justify-center transition-opacity duration-100",
-                      isTextVisible ? "opacity-0" : "opacity-100"
-                    )}>
-                    <Image src={FBLogo} width={160} height={30} alt={t("workspace.formbricks_logo")} />
-                  </Link>
-                )}
+              <div
+                className={cn(
+                  "flex items-center gap-2 px-3 pb-4",
+                  isCollapsed ? "flex-col justify-center" : "justify-between"
+                )}>
+                <Link
+                  href={dashboardHref}
+                  className={cn(
+                    "flex shrink-0 items-center rounded-lg transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400",
+                    !isCollapsed && isTextVisible ? "opacity-0" : "opacity-100"
+                  )}
+                  aria-label={t("common.home")}>
+                  <FeedieRubyIconLight className={cn(isCollapsed ? "size-9" : "size-8")} priority />
+                </Link>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -513,7 +551,13 @@ export const MainNavigation = ({
                     "rounded-xl bg-slate-50 p-1 text-slate-600 transition-all hover:bg-slate-100 focus:outline-none focus:ring-0 focus:ring-transparent"
                   )}>
                   {isCollapsed ? (
-                    <PanelLeftOpenIcon strokeWidth={1.5} />
+                    isRtl ? (
+                      <PanelRightOpenIcon strokeWidth={1.5} />
+                    ) : (
+                      <PanelLeftOpenIcon strokeWidth={1.5} />
+                    )
+                  ) : isRtl ? (
+                    <PanelRightCloseIcon strokeWidth={1.5} />
                   ) : (
                     <PanelLeftCloseIcon strokeWidth={1.5} />
                   )}
@@ -542,7 +586,8 @@ export const MainNavigation = ({
                               isTextVisible={isTextVisible}
                               disabled={item.disabled}
                               disabledMessage={item.disabled ? disabledNavigationMessage : undefined}
-                              linkText={item.name}>
+                              linkText={item.name}
+                              isRtl={isRtl}>
                               <item.icon className={mainNavIconClassName} strokeWidth={1.5} />
                             </NavigationLink>
                           )
@@ -562,7 +607,8 @@ export const MainNavigation = ({
                       disabledMessage={
                         settingsNavigationItem.disabled ? disabledNavigationMessage : undefined
                       }
-                      linkText={settingsNavigationItem.name}>
+                      linkText={settingsNavigationItem.name}
+                      isRtl={isRtl}>
                       <settingsNavigationItem.icon className={mainNavIconClassName} strokeWidth={1.5} />
                     </NavigationLink>
                   </ul>
@@ -578,10 +624,11 @@ export const MainNavigation = ({
                 {!isCollapsed &&
                   isOwnerOrManager &&
                   latestVersion &&
-                  !isFormbricksCloud &&
-                  !isDevelopment && (
+                  !isSalamRubyCloud &&
+                  !isDevelopment &&
+                  !HIDE_VERSION_UPDATE_PROMPT && (
                     <Link
-                      href="https://github.com/formbricks/formbricks/releases"
+                      href="https://github.com/salamruby/salamruby/releases"
                       target="_blank"
                       className="m-2 flex items-center gap-x-4 rounded-lg border border-slate-200 bg-slate-100 p-2 text-sm text-slate-800 hover:border-slate-300 hover:bg-slate-200">
                       <p className="flex items-center justify-center gap-x-2 text-xs">
@@ -593,7 +640,7 @@ export const MainNavigation = ({
 
                 {/* Trial Days Remaining */}
                 {!isCollapsed &&
-                  isFormbricksCloud &&
+                  isSalamRubyCloud &&
                   trialDaysRemaining !== null &&
                   (newTrialBannerVariant === "new-trial-banner" ? (
                     <TrialBannerNew
@@ -638,16 +685,20 @@ export const MainNavigation = ({
                             {isPending && (
                               <Loader2 className="size-4 animate-spin text-slate-600" strokeWidth={1.5} />
                             )}
-                            <ChevronRightIcon className="size-4 shrink-0 text-slate-600" strokeWidth={1.5} />
+                            <SidebarExpandChevron isRtl={isRtl} />
                           </>
                         )}
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent side="right" sideOffset={10} alignOffset={5} align="end">
-                      <div className="px-2 py-1.5 text-sm font-medium text-slate-500">
-                        <FoldersIcon className="mr-2 inline size-4" strokeWidth={1.5} />
+                    <DropdownMenuContent
+                      side={sidebarDropdownSide}
+                      sideOffset={10}
+                      alignOffset={5}
+                      align="end">
+                      <DropdownMenuLabel className="flex items-center gap-2 font-medium text-slate-500">
+                        <FoldersIcon className="size-4 shrink-0" strokeWidth={1.5} />
                         {t("common.change_workspace")}
-                      </div>
+                      </DropdownMenuLabel>
                       {(isLoadingWorkspaces || isInitialWorkspacesLoading) && (
                         <div className="flex items-center justify-center py-2">
                           <Loader2 className="size-4 animate-spin" />
@@ -678,24 +729,24 @@ export const MainNavigation = ({
                             ))}
                           </DropdownMenuGroup>
                           {isOwnerOrManager && (
-                            <DropdownMenuCheckboxItem
+                            <DropdownMenuItem
                               onClick={handleWorkspaceCreate}
-                              className="w-full cursor-pointer justify-between">
-                              <span>{t("common.add_new_workspace")}</span>
-                              <PlusIcon className="ml-2 size-4" strokeWidth={1.5} />
-                            </DropdownMenuCheckboxItem>
+                              className="cursor-pointer"
+                              icon={<PlusIcon className="size-4 shrink-0" strokeWidth={1.5} />}>
+                              {t("common.add_new_workspace")}
+                            </DropdownMenuItem>
                           )}
                         </>
                       )}
                       <DropdownMenuSeparator />
-                      <DropdownMenuCheckboxItem
+                      <DropdownMenuItem
                         onClick={() =>
                           handleSettingNavigation(`/workspaces/${workspace.id}/settings/workspace/general`)
                         }
-                        className="cursor-pointer">
-                        <Cog className="mr-2 size-4" strokeWidth={1.5} />
+                        className="cursor-pointer"
+                        icon={<Cog className="size-4 shrink-0" strokeWidth={1.5} />}>
                         {t("common.settings")}
-                      </DropdownMenuCheckboxItem>
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
 
@@ -720,16 +771,20 @@ export const MainNavigation = ({
                             {isPending && (
                               <Loader2 className="size-4 animate-spin text-slate-600" strokeWidth={1.5} />
                             )}
-                            <ChevronRightIcon className="size-4 shrink-0 text-slate-600" strokeWidth={1.5} />
+                            <SidebarExpandChevron isRtl={isRtl} />
                           </>
                         )}
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent side="right" sideOffset={10} alignOffset={5} align="end">
-                      <div className="px-2 py-1.5 text-sm font-medium text-slate-500">
-                        <Building2Icon className="mr-2 inline size-4" strokeWidth={1.5} />
+                    <DropdownMenuContent
+                      side={sidebarDropdownSide}
+                      sideOffset={10}
+                      alignOffset={5}
+                      align="end">
+                      <DropdownMenuLabel className="flex items-center gap-2 font-medium text-slate-500">
+                        <Building2Icon className="size-4 shrink-0" strokeWidth={1.5} />
                         {t("common.change_organization")}
-                      </div>
+                      </DropdownMenuLabel>
                       {isLoadingOrganizations && (
                         <div className="flex items-center justify-center py-2">
                           <Loader2 className="size-4 animate-spin" />
@@ -759,14 +814,14 @@ export const MainNavigation = ({
                         </DropdownMenuGroup>
                       )}
                       <DropdownMenuSeparator />
-                      <DropdownMenuCheckboxItem
+                      <DropdownMenuItem
                         onClick={() =>
                           handleSettingNavigation(`/workspaces/${workspace.id}/settings/organization/general`)
                         }
-                        className="cursor-pointer">
-                        <SettingsIcon className="mr-2 size-4" strokeWidth={1.5} />
+                        className="cursor-pointer"
+                        icon={<SettingsIcon className="size-4 shrink-0" strokeWidth={1.5} />}>
                         {t("common.settings")}
-                      </DropdownMenuCheckboxItem>
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </>
@@ -794,7 +849,7 @@ export const MainNavigation = ({
                           </p>
                           <p className="text-sm text-slate-500">{t("common.account")}</p>
                         </div>
-                        <ChevronRightIcon className="size-4 shrink-0 text-slate-600" strokeWidth={1.5} />
+                        <SidebarExpandChevron isRtl={isRtl} />
                       </>
                     )}
                   </button>
@@ -802,7 +857,7 @@ export const MainNavigation = ({
 
                 <DropdownMenuContent
                   id="userDropdownInnerContentWrapper"
-                  side="right"
+                  side={sidebarDropdownSide}
                   sideOffset={10}
                   alignOffset={5}
                   align="end">
@@ -814,7 +869,7 @@ export const MainNavigation = ({
                       key={link.label}
                       rel={link.target === "_blank" ? "noopener noreferrer" : undefined}>
                       <DropdownMenuItem>
-                        <link.icon className="mr-2 size-4" strokeWidth={1.5} />
+                        <link.icon className="me-2 size-4" strokeWidth={1.5} />
                         {link.label}
                       </DropdownMenuItem>
                     </Link>
@@ -832,7 +887,7 @@ export const MainNavigation = ({
                       });
                       router.push(route?.url || loginUrl);
                     }}
-                    icon={<LogOutIcon className="mr-2 size-4" strokeWidth={1.5} />}>
+                    icon={<LogOutIcon className="me-2 size-4" strokeWidth={1.5} />}>
                     {t("common.logout")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>

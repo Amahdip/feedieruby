@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { TJsWorkspaceStateSurvey } from "@formbricks/types/js";
-import { TSegment } from "@formbricks/types/segment";
-import { TSurvey, TSurveyFilterCriteria, TSurveyStatus, TSurveyType } from "@formbricks/types/surveys/types";
+import { TJsWorkspaceStateSurvey } from "@salamruby/types/js";
+import { TSegment } from "@salamruby/types/segment";
+import { TSurvey, TSurveyFilterCriteria, TSurveyStatus, TSurveyType } from "@salamruby/types/surveys/types";
 import { anySurveyHasFilters, buildOrderByClause, buildWhereClause, transformPrismaSurvey } from "./utils";
 
 describe("Survey Utils", () => {

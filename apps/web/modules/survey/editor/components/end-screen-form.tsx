@@ -3,8 +3,8 @@
 import { PlusIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurvey, TSurveyEndScreenCard, TSurveyRedirectUrlCard } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { TSurvey, TSurveyEndScreenCard, TSurveyRedirectUrlCard } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { createI18nString, extractLanguageCodes, getLocalizedValue } from "@/lib/i18n/utils";
 import { headlineToRecall, recallToHeadline } from "@/lib/utils/recall";
 import { ElementFormInput } from "@/modules/survey/components/element-form-input";
@@ -119,7 +119,7 @@ export const EndScreenForm = ({
               } else {
                 updateSurvey({
                   buttonLabel: { default: t("workspace.surveys.edit.create_your_own_survey") },
-                  buttonLink: "https://formbricks.com",
+                  buttonLink: "https://salamruby.ir",
                 });
               }
               setshowEndingCardCTA(!showEndingCardCTA);
@@ -189,7 +189,7 @@ export const EndScreenForm = ({
                           id="buttonLink"
                           name="buttonLink"
                           className={`relative text-black caret-black ${!isExternalUrlsAllowed ? "cursor-not-allowed opacity-50" : ""}`}
-                          placeholder="https://formbricks.com"
+                          placeholder="https://salamruby.com"
                           value={
                             recallToHeadline(
                               {

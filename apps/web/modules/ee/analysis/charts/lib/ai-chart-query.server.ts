@@ -1,6 +1,6 @@
 import "server-only";
 import { z } from "zod";
-import { type TChartQuery } from "@formbricks/types/analysis";
+import { type TChartQuery } from "@salamruby/types/analysis";
 import { generateOrganizationAIObject } from "@/lib/ai/service";
 import { generateSchemaContext } from "@/modules/ee/analysis/lib/ai-schema-context";
 import {

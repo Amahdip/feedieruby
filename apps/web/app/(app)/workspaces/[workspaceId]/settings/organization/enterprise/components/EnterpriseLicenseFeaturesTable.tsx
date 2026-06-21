@@ -20,76 +20,76 @@ const getFeatureDefinitions = (t: TFunction): TFeatureDefinition[] => {
   return [
     {
       key: "removeBranding",
-      labelKey: t("workspace.settings.enterprise.hide_powered_by_formbricks"),
+      labelKey: t("workspace.settings.enterprise.hide_powered_by_salamruby"),
       docsUrl:
-        "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/hide-powered-by-formbricks",
+        "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/hide-powered-by-salamruby",
     },
     {
       key: "whitelabel",
       labelKey: t("workspace.settings.enterprise.whitelabel_email_follow_ups"),
       docsUrl:
-        "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/whitelabel-email-follow-ups",
+        "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/whitelabel-email-follow-ups",
     },
     {
       key: "accessControl",
       labelKey: t("workspace.settings.enterprise.teams_and_access_roles"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/team-access",
+      docsUrl: "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/team-access",
     },
     {
       key: "contacts",
       labelKey: t("workspace.settings.enterprise.contacts_and_segments"),
       docsUrl:
-        "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/contact-management-segments",
+        "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/contact-management-segments",
     },
     {
       key: "quotas",
       labelKey: t("workspace.settings.enterprise.quota_management"),
-      docsUrl: "https://formbricks.com/docs/xm-and-surveys/surveys/general-features/quota-management",
+      docsUrl: "https://salamruby.com/docs/xm-and-surveys/surveys/general-features/quota-management",
     },
     {
       key: "feedbackDirectories",
       labelKey: t("workspace.settings.enterprise.feedback_directories"),
-      docsUrl: "https://formbricks.com/docs/unify-feedback/feedback-directories",
+      docsUrl: "https://salamruby.com/docs/unify-feedback/feedback-directories",
     },
     {
       key: "dashboards",
       labelKey: t("workspace.settings.enterprise.insights_dashboards"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/dashboards",
+      docsUrl: "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/dashboards",
     },
     {
       key: "auditLogs",
       labelKey: t("workspace.settings.enterprise.audit_logs"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/audit-logging",
+      docsUrl: "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/audit-logging",
     },
     {
       key: "sso",
       labelKey: t("workspace.settings.enterprise.oidc_sso"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/oidc-sso",
+      docsUrl: "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/oidc-sso",
     },
     {
       key: "saml",
       labelKey: t("workspace.settings.enterprise.saml_sso"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/advanced/enterprise-features/saml-sso",
+      docsUrl: "https://salamruby.com/docs/self-hosting/advanced/enterprise-features/saml-sso",
     },
     {
       key: "spamProtection",
       labelKey: t("workspace.settings.enterprise.spam_protection_recaptcha"),
-      docsUrl: "https://formbricks.com/docs/xm-and-surveys/surveys/general-features/spam-protection",
+      docsUrl: "https://salamruby.com/docs/xm-and-surveys/surveys/general-features/spam-protection",
     },
     {
       key: "twoFactorAuth",
       labelKey: t("workspace.settings.enterprise.two_factor_authentication"),
-      docsUrl: "https://formbricks.com/docs/xm-and-surveys/core-features/user-management/two-factor-auth",
+      docsUrl: "https://salamruby.com/docs/xm-and-surveys/core-features/user-management/two-factor-auth",
     },
     {
       key: "workspaces",
       labelKey: t("workspace.settings.enterprise.custom_workspace_count"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/advanced/license#what-features-are-free",
+      docsUrl: "https://salamruby.com/docs/self-hosting/advanced/license#what-features-are-free",
     },
     {
       key: "aiSmartTools",
       labelKey: t("workspace.settings.general.ai_smart_tools_enabled"),
-      docsUrl: "https://formbricks.com/docs/self-hosting/configuration/ai",
+      docsUrl: "https://salamruby.com/docs/self-hosting/configuration/ai",
     },
   ];
 };

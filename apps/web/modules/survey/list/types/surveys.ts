@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Language, Workspace } from "@formbricks/database/prisma";
-import { ZSurveyStatus } from "@formbricks/types/surveys/types";
+import { Language, Workspace } from "@salamruby/database/prisma";
+import { ZSurveyStatus } from "@salamruby/types/surveys/types";
 
 export const ZSurvey = z.object({
   id: z.string(),

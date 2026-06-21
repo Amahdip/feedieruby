@@ -1,7 +1,7 @@
-import { Response, Survey } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { Result, okVoid } from "@formbricks/types/error-handlers";
-import { TSurveyQuestionTypeEnum } from "@formbricks/types/surveys/types";
+import { Response, Survey } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { Result, okVoid } from "@salamruby/types/error-handlers";
+import { TSurveyQuestionTypeEnum } from "@salamruby/types/surveys/types";
 import { ApiErrorResponseV2 } from "@/modules/api/v2/types/api-error";
 import { deleteFile } from "@/modules/storage/service";
 import { parseStorageFileUrl } from "@/modules/storage/utils";

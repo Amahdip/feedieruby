@@ -55,7 +55,7 @@ export type {
   Dashboard,
   DashboardWidget,
   FeedbackSource,
-  FeedbackSourceFormbricksMapping,
+  FeedbackSourceSalamRubyMapping,
   FeedbackSourceFieldMapping,
   FeedbackDirectory,
   FeedbackDirectoryWorkspace,

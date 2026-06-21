@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { cn } from "@/lib/cn";
-import { FORMBRICKS_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
+import { SALAMRUBY_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { createEmailTokenAction } from "@/modules/auth/actions";
 import { buildVerificationRequestedPath } from "@/modules/auth/lib/verification-links";
@@ -96,7 +96,7 @@ export const LoginForm = ({
 
   const onSubmit: SubmitHandler<TLoginForm> = async (data) => {
     if (typeof window !== "undefined") {
-      localStorage.setItem(FORMBRICKS_LOGGED_IN_WITH_LS, "Email");
+      localStorage.setItem(SALAMRUBY_LOGGED_IN_WITH_LS, "Email");
     }
     try {
       const signInResponse = await signIn("credentials", {
@@ -149,7 +149,7 @@ export const LoginForm = ({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setLastLoggedInWith(localStorage.getItem(FORMBRICKS_LOGGED_IN_WITH_LS) || "");
+      setLastLoggedInWith(localStorage.getItem(SALAMRUBY_LOGGED_IN_WITH_LS) || "");
     }
   }, []);
 
@@ -294,7 +294,7 @@ export const LoginForm = ({
 
         {publicSignUpEnabled && !totpLogin && isMultiOrgEnabled && (
           <div className="mt-9 text-center text-xs">
-            <span className="leading-5 text-slate-500">{t("auth.login.new_to_formbricks")}</span>
+            <span className="leading-5 text-slate-500">{t("auth.login.new_to_salamruby")}</span>
             <br />
             <Link
               href={inviteToken ? `/auth/signup?inviteToken=${inviteToken}` : "/auth/signup"}

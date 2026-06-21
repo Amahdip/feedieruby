@@ -1,7 +1,7 @@
 import "server-only";
-import type { IdentityProvider } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { AuthorizationError, InvalidInputError, OperationNotAllowedError } from "@formbricks/types/errors";
+import type { IdentityProvider } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { AuthorizationError, InvalidInputError, OperationNotAllowedError } from "@salamruby/types/errors";
 import { DISABLE_ACCOUNT_DELETION_SSO_CONFIRMATION } from "@/lib/constants";
 import { getOrganizationsWhereUserIsSingleOwner } from "@/lib/organization/service";
 import { getUserAuthenticationData, verifyUserPassword } from "@/lib/user/password";

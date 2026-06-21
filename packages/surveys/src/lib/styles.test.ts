@@ -1,11 +1,12 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { type TSurveyStyling } from "@formbricks/types/surveys/types";
-import { type TWorkspaceStyling } from "@formbricks/types/workspace";
+import { type TSurveyStyling } from "@salamruby/types/surveys/types";
+import { type TWorkspaceStyling } from "@salamruby/types/workspace";
 import { addCustomThemeToDom, addStylesToDom, getStyleNonce, setStyleNonce } from "./styles";
 
 // Mock CSS module imports
 vi.mock("@/styles/global.css?inline", () => ({ default: ".global {}" }));
+vi.mock("@/styles/iran-sans-fonts.css?inline", () => ({ default: ".iran-sans {}" }));
 vi.mock("@/styles/preflight.css?inline", () => ({ default: ".preflight {}" }));
 vi.mock("../../../../apps/web/modules/ui/components/editor/styles-editor-frontend.css?inline", () => ({
   default: ".editor {}",
@@ -57,10 +58,10 @@ describe("setStyleNonce and getStyleNonce", () => {
     expect(getStyleNonce()).toBeUndefined();
   });
 
-  test("should update existing formbricks__css element with nonce", () => {
+  test("should update existing salamruby__css element with nonce", () => {
     // Create an existing style element
     const existingElement = document.createElement("style");
-    existingElement.id = "formbricks__css";
+    existingElement.id = "salamruby__css";
     document.head.appendChild(existingElement);
 
     const nonce = "test-nonce-456";
@@ -69,10 +70,10 @@ describe("setStyleNonce and getStyleNonce", () => {
     expect(existingElement.getAttribute("nonce")).toBe(nonce);
   });
 
-  test("should update existing formbricks__css__custom element with nonce", () => {
+  test("should update existing salamruby__css__custom element with nonce", () => {
     // Create an existing custom style element
     const existingElement = document.createElement("style");
-    existingElement.id = "formbricks__css__custom";
+    existingElement.id = "salamruby__css__custom";
     document.head.appendChild(existingElement);
 
     const nonce = "test-nonce-789";
@@ -84,12 +85,12 @@ describe("setStyleNonce and getStyleNonce", () => {
   test("should not update nonce on existing elements when nonce is undefined", () => {
     // Create existing style elements
     const mainElement = document.createElement("style");
-    mainElement.id = "formbricks__css";
+    mainElement.id = "salamruby__css";
     mainElement.setAttribute("nonce", "existing-nonce");
     document.head.appendChild(mainElement);
 
     const customElement = document.createElement("style");
-    customElement.id = "formbricks__css__custom";
+    customElement.id = "salamruby__css__custom";
     customElement.setAttribute("nonce", "existing-nonce");
     document.head.appendChild(customElement);
 
@@ -118,7 +119,7 @@ describe("addStylesToDom", () => {
   });
 
   afterEach(() => {
-    const styleElement = document.getElementById("formbricks__css");
+    const styleElement = document.getElementById("salamruby__css");
     if (styleElement) {
       styleElement.remove();
     }
@@ -127,23 +128,23 @@ describe("addStylesToDom", () => {
 
   test("should add a style element to the head with combined CSS", () => {
     addStylesToDom();
-    const styleElement = document.getElementById("formbricks__css") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css") as HTMLStyleElement;
     expect(styleElement).not.toBeNull();
     expect(styleElement.tagName).toBe("STYLE");
     expect(document.head.contains(styleElement)).toBe(true);
 
-    const expectedCss = ".preflight {}.global {}.editor {}";
+    const expectedCss = ".iran-sans {}.preflight {}.global {}.editor {}";
     expect(styleElement.innerHTML).toBe(expectedCss);
   });
 
   test("should not add a new style element if one already exists", () => {
     addStylesToDom(); // First call
-    const firstStyleElement = document.getElementById("formbricks__css");
+    const firstStyleElement = document.getElementById("salamruby__css");
     const initialInnerHTML = firstStyleElement?.innerHTML;
 
     addStylesToDom(); // Second call
-    const secondStyleElement = document.getElementById("formbricks__css");
-    const allStyleElements = document.querySelectorAll("#formbricks__css");
+    const secondStyleElement = document.getElementById("salamruby__css");
+    const allStyleElements = document.querySelectorAll("#salamruby__css");
 
     expect(allStyleElements.length).toBe(1);
     expect(secondStyleElement).toBe(firstStyleElement);
@@ -155,21 +156,21 @@ describe("addStylesToDom", () => {
     setStyleNonce(nonce);
     addStylesToDom();
 
-    const styleElement = document.getElementById("formbricks__css") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css") as HTMLStyleElement;
     expect(styleElement).not.toBeNull();
     expect(styleElement.getAttribute("nonce")).toBe(nonce);
   });
 
   test("should not apply nonce when nonce is not set", () => {
     addStylesToDom();
-    const styleElement = document.getElementById("formbricks__css") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css") as HTMLStyleElement;
     expect(styleElement).not.toBeNull();
     expect(styleElement.getAttribute("nonce")).toBeNull();
   });
 
   test("should update nonce on existing style element if nonce is set after creation", () => {
     addStylesToDom(); // Create element without nonce
-    const styleElement = document.getElementById("formbricks__css") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css") as HTMLStyleElement;
     expect(styleElement.getAttribute("nonce")).toBeNull();
 
     const nonce = "test-nonce-update";
@@ -181,7 +182,7 @@ describe("addStylesToDom", () => {
 
   test("should not overwrite existing nonce when updating via addStylesToDom", () => {
     const existingElement = document.createElement("style");
-    existingElement.id = "formbricks__css";
+    existingElement.id = "salamruby__css";
     existingElement.setAttribute("nonce", "existing-nonce");
     document.head.appendChild(existingElement);
 
@@ -194,7 +195,7 @@ describe("addStylesToDom", () => {
 
   test("should overwrite existing nonce when setStyleNonce is called directly", () => {
     const existingElement = document.createElement("style");
-    existingElement.id = "formbricks__css";
+    existingElement.id = "salamruby__css";
     existingElement.setAttribute("nonce", "existing-nonce");
     document.head.appendChild(existingElement);
 
@@ -214,7 +215,7 @@ describe("addCustomThemeToDom", () => {
   });
 
   afterEach(() => {
-    const styleElement = document.getElementById("formbricks__css__custom");
+    const styleElement = document.getElementById("salamruby__css__custom");
     if (styleElement) {
       styleElement.remove();
     }
@@ -244,7 +245,7 @@ describe("addCustomThemeToDom", () => {
   test("should add a custom theme style element to the head", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#FF0000" } });
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     expect(styleElement).not.toBeNull();
     expect(styleElement.tagName).toBe("STYLE");
     expect(document.head.contains(styleElement)).toBe(true);
@@ -253,12 +254,12 @@ describe("addCustomThemeToDom", () => {
   test("should reuse existing custom theme style element", () => {
     const styling1 = getBaseWorkspaceStyling({ brandColor: { light: "#FF0000" } });
     addCustomThemeToDom({ styling: styling1 });
-    const firstElement = document.getElementById("formbricks__css__custom");
+    const firstElement = document.getElementById("salamruby__css__custom");
 
     const styling2 = getBaseWorkspaceStyling({ brandColor: { light: "#00FF00" } });
     addCustomThemeToDom({ styling: styling2 });
-    const secondElement = document.getElementById("formbricks__css__custom");
-    const allElements = document.querySelectorAll("#formbricks__css__custom");
+    const secondElement = document.getElementById("salamruby__css__custom");
+    const allElements = document.querySelectorAll("#salamruby__css__custom");
 
     expect(allElements.length).toBe(1);
     expect(secondElement).toBe(firstElement);
@@ -267,7 +268,7 @@ describe("addCustomThemeToDom", () => {
   test("should apply minimal styling with brandColor and default roundness", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#0000FF" } }); // A dark color, roundness will use default
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     expect(variables["--fb-brand-color"]).toBe("#0000FF");
@@ -279,7 +280,7 @@ describe("addCustomThemeToDom", () => {
   test("should apply brand-text-color as black for light brandColor", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#FFFF00" } }); // A light color
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
     expect(variables["--fb-brand-text-color"]).toBe("black"); // isLight('#FFFF00') is true
   });
@@ -287,7 +288,7 @@ describe("addCustomThemeToDom", () => {
   test("should default brand-text-color to white if brandColor is undefined", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: null }); // Explicitly null brandColor
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
     expect(variables["--fb-brand-text-color"]).toBe("#ffffff");
   });
@@ -310,7 +311,7 @@ describe("addCustomThemeToDom", () => {
       overwriteThemeStyling: false,
     };
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     expect(variables["--fb-brand-color"]).toBe("#112233");
@@ -340,7 +341,7 @@ describe("addCustomThemeToDom", () => {
   test("should generate calendar-tile-color for light brandColor", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#ffffff" } });
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     expect(variables["--fb-calendar-tile-color"]).toBeDefined();
@@ -388,7 +389,7 @@ describe("addCustomThemeToDom", () => {
     };
 
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     // Buttons
@@ -438,7 +439,7 @@ describe("addCustomThemeToDom", () => {
     };
 
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     expect(variables["--fb-button-border-radius"]).toBe("10px");
@@ -452,7 +453,7 @@ describe("addCustomThemeToDom", () => {
       inputTextColor: { light: "#112233" },
     };
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     expect(variables["--fb-input-placeholder-color"]).toBeDefined();
@@ -466,7 +467,7 @@ describe("addCustomThemeToDom", () => {
       brandColor: { light: "#123456" },
     });
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     // For dark elementHeadlineColor ('#202020'), isLight is false, so mix with white.
@@ -477,7 +478,7 @@ describe("addCustomThemeToDom", () => {
   test("should handle roundness 0 correctly", () => {
     const styling = getBaseWorkspaceStyling({ roundness: 0, brandColor: { light: "#123456" } });
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
     expect(variables["--fb-border-radius"]).toBe("0px");
   });
@@ -490,7 +491,7 @@ describe("addCustomThemeToDom", () => {
         brandColor: { light: "#123" },
       });
       addCustomThemeToDom({ styling });
-      const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+      const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
       const variables = getCssVariables(styleElement);
       expect(variables["--fb-input-background-color-selected"]).toBe("var(--slate-50)");
     });
@@ -502,7 +503,7 @@ describe("addCustomThemeToDom", () => {
       brandColor: { light: "#123" },
     }); // Not white
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
     // We can't easily test the exact mixed color without duplicating mixColor logic or having access to its exact output for these inputs.
     // So, we just check that it's defined and not the slate-50 default.
@@ -513,7 +514,7 @@ describe("addCustomThemeToDom", () => {
   test("should not set calendar-tile-color if brandColor is undefined", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: null });
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
     expect(variables["--fb-calendar-tile-color"]).toBeUndefined();
   });
@@ -521,7 +522,7 @@ describe("addCustomThemeToDom", () => {
   test("should not define variables for undefined styling properties", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#ABC" } }); // Only brandColor is defined
     addCustomThemeToDom({ styling });
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
 
     expect(variables["--fb-brand-color"]).toBe("#ABC");
@@ -537,7 +538,7 @@ describe("addCustomThemeToDom", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#FF0000" } });
     addCustomThemeToDom({ styling });
 
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     expect(styleElement).not.toBeNull();
     expect(styleElement.getAttribute("nonce")).toBe(nonce);
   });
@@ -546,7 +547,7 @@ describe("addCustomThemeToDom", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#FF0000" } });
     addCustomThemeToDom({ styling });
 
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     expect(styleElement).not.toBeNull();
     expect(styleElement.getAttribute("nonce")).toBeNull();
   });
@@ -554,7 +555,7 @@ describe("addCustomThemeToDom", () => {
   test("should update nonce on existing custom style element if nonce is set after creation", () => {
     const styling = getBaseWorkspaceStyling({ brandColor: { light: "#FF0000" } });
     addCustomThemeToDom({ styling }); // Create element without nonce
-    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const styleElement = document.getElementById("salamruby__css__custom") as HTMLStyleElement;
     expect(styleElement.getAttribute("nonce")).toBeNull();
 
     const nonce = "test-nonce-custom-update";
@@ -566,7 +567,7 @@ describe("addCustomThemeToDom", () => {
 
   test("should not overwrite existing nonce when updating custom theme via addCustomThemeToDom", () => {
     const existingElement = document.createElement("style");
-    existingElement.id = "formbricks__css__custom";
+    existingElement.id = "salamruby__css__custom";
     existingElement.setAttribute("nonce", "existing-custom-nonce");
     document.head.appendChild(existingElement);
 
@@ -580,7 +581,7 @@ describe("addCustomThemeToDom", () => {
 
   test("should overwrite existing nonce when setStyleNonce is called directly on custom theme", () => {
     const existingElement = document.createElement("style");
-    existingElement.id = "formbricks__css__custom";
+    existingElement.id = "salamruby__css__custom";
     existingElement.setAttribute("nonce", "existing-custom-nonce");
     document.head.appendChild(existingElement);
 

@@ -5,7 +5,7 @@ const { mockFindUnique } = vi.hoisted(() => ({
   mockFindUnique: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     session: {
       findUnique: mockFindUnique,

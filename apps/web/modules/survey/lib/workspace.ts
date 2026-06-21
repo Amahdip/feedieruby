@@ -1,9 +1,9 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma, Workspace } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma, Workspace } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError } from "@salamruby/types/errors";
 
 type WorkspaceWithTeam = Workspace & {
   teamIds: string[];

@@ -1,6 +1,6 @@
 ---
 title: "Actions"
-description: "Actions are predefined events within your app that prompt Formbricks to display a survey when triggered. These are detected by the Formbricks widget, which then presents the appropriate survey based on your predefined settings."
+description: "Actions are predefined events within your app that prompt SalamRuby to display a survey when triggered. These are detected by the SalamRuby widget, which then presents the appropriate survey based on your predefined settings."
 icon: "code"
 ---
 
@@ -11,20 +11,20 @@ icon: "code"
     The user performs an action in your application.
   </Step>
 
-<Step title="Formbricks widget detects action">
+<Step title="SalamRuby widget detects action">
   The embedded widget (SDK) detects the action, if you set up a [No Code
   Action](/xm-and-surveys/surveys/website-app-surveys/actions#setting-up-no-code-actions) or a [Code
   Action](/xm-and-surveys/surveys/website-app-surveys/actions#setting-up-code-actions) to do so.
 </Step>
 
 <Step title="Check for survey trigger">
-  If a survey is set to trigger on that action, Formbricks checks if the user or visitor qualifies.
+  If a survey is set to trigger on that action, SalamRuby checks if the user or visitor qualifies.
 </Step>
 
   <Step title="Check for user or visitor qualification">
     If the user or visitor already filled out a survey in the past couple of days (see [Workspace-wide Survey Cooldown](/xm-and-surveys/surveys/website-app-surveys/recontact#workspace-wide-survey-cooldown)), the survey will not be shown to prevent survey fatigue.
 
-    Also, if this user or visitor has seen this specific survey before, Formbricks might not show it as this is dependent on the [Recontact Options](/xm-and-surveys/surveys/website-app-surveys/recontact).
+    Also, if this user or visitor has seen this specific survey before, SalamRuby might not show it as this is dependent on the [Recontact Options](/xm-and-surveys/surveys/website-app-surveys/recontact).
 
   </Step>
 
@@ -47,7 +47,7 @@ icon: "code"
 
 ## **Setting Up No-Code Actions**
 
-Formbricks offers an intuitive No-Code interface that allows you to configure actions without needing to write any code.
+SalamRuby offers an intuitive No-Code interface that allows you to configure actions without needing to write any code.
 
 <Note>
   No Code Actions are **not available for surveys in mobile apps**. No Code Action tracking are heavily
@@ -58,7 +58,7 @@ Formbricks offers an intuitive No-Code interface that allows you to configure ac
 
 <Steps>
   <Step title="Visit the Settings tab and click on `User Actions`">
-    ![Action overview on Formbricks Open Source Survey Solution](/images/xm-and-surveys/surveys/website-app-surveys/actions/actions-view.webp "Action overview on Formbricks Open Source Survey Solution")
+    ![Action overview on SalamRuby Open Source Survey Solution](/images/xm-and-surveys/surveys/website-app-surveys/actions/actions-view.webp "Action overview on SalamRuby Open Source Survey Solution")
   </Step>
 
   <Step title="Click on 'Add Action' in the top right corner to see the following:">
@@ -125,25 +125,25 @@ You can limit action tracking to specific subpages of your website or web app by
 For more granular control, you can implement actions directly in your code:
 
 <Steps>
-  <Step title="Configure action in Formbricks">
-    First, add the action via the Formbricks web interface to make it available for survey configuration:
+  <Step title="Configure action in SalamRuby">
+    First, add the action via the SalamRuby web interface to make it available for survey configuration:
 
 ![Add a code action to open source in app survey](/images/xm-and-surveys/surveys/website-app-surveys/actions/code-action.webp "Add a code action to open source in app survey")
 
   </Step>
 
   <Step title="Add action tracking to your code">
-    Use formbricks.track() to send an action event to Formbricks:
+    Use salamruby.track() to send an action event to SalamRuby:
 
     ```
-    formbricks.track("action");
+    salamruby.track("action");
     ```
 
     Here is an example of how to fire an action when a user clicks a button:
 
     ```javascript
     const handleClick = () => {
-      formbricks.track("Button Clicked");
+      salamruby.track("Button Clicked");
     };
 
     return <button onClick={handleClick}>Click Me</button>;

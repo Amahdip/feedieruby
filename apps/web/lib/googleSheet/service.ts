@@ -1,17 +1,17 @@
 import "server-only";
 import { z } from "zod";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZString } from "@formbricks/types/common";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZString } from "@salamruby/types/common";
 import {
   AuthenticationError,
   DatabaseError,
   OperationNotAllowedError,
   UnknownError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import {
   TIntegrationGoogleSheets,
   ZIntegrationGoogleSheets,
-} from "@formbricks/types/integration/google-sheet";
+} from "@salamruby/types/integration/google-sheet";
 import {
   GOOGLE_SHEETS_CLIENT_ID,
   GOOGLE_SHEETS_CLIENT_SECRET,

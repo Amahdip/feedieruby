@@ -37,14 +37,14 @@ export const SettingsCard = ({
   return (
     <div
       className={cn(
-        "relative my-4 w-full max-w-4xl rounded-xl border border-slate-200 bg-white py-4 text-left shadow-sm",
+        "relative my-4 w-full max-w-4xl rounded-xl border border-slate-200 bg-white py-4 text-start shadow-sm",
         className
       )}
       id={title}>
       <div className="flex justify-between border-b border-slate-200 px-4 pb-4">
         <div>
           <H4 className="font-medium tracking-normal">{title}</H4>
-          <div className="ml-2">
+          <div className="ms-2">
             {beta && <Badge size="normal" type="warning" text="Beta" />}
             {soon && (
               <Badge size="normal" type="success" text={t("workspace.settings.enterprise.coming_soon")} />

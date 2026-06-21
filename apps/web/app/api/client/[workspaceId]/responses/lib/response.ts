@@ -1,9 +1,9 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import type { TContactAttributes } from "@formbricks/types/contact-attribute";
-import type { TResponse } from "@formbricks/types/responses";
-import type { TTag } from "@formbricks/types/tags";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import type { TContactAttributes } from "@salamruby/types/contact-attribute";
+import type { TResponse } from "@salamruby/types/responses";
+import type { TTag } from "@salamruby/types/tags";
 import { evaluateResponseQuotas } from "@/modules/ee/quotas/lib/evaluation-service";
 
 type TQuotaEvaluationResponseInput = {

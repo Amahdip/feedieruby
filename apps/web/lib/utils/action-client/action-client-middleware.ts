@@ -1,7 +1,7 @@
 import { returnValidationErrors } from "next-safe-action";
 import { ZodIssue, z } from "zod";
-import { AuthorizationError } from "@formbricks/types/errors";
-import { type TOrganizationRole } from "@formbricks/types/memberships";
+import { AuthorizationError } from "@salamruby/types/errors";
+import { type TOrganizationRole } from "@salamruby/types/memberships";
 import { getMembershipRole } from "@/lib/membership/hooks/actions";
 import { getTeamRoleByTeamIdUserId, getWorkspacePermissionByUserId } from "@/modules/ee/teams/lib/roles";
 import { type TTeamRole } from "@/modules/ee/teams/team-list/types/team";

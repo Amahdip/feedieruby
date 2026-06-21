@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { ZId, ZStorageUrl } from "@formbricks/types/common";
+import { ZId, ZStorageUrl } from "@salamruby/types/common";
 import { authenticatedActionClient } from "@/lib/utils/action-client";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";
 import { withAuditLogging } from "@/modules/ee/audit-logs/lib/handler";

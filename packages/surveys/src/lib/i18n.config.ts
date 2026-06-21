@@ -7,6 +7,7 @@ import deTranslations from "../../locales/de.json";
 import enTranslations from "../../locales/en.json";
 import esTranslations from "../../locales/es.json";
 import etTranslations from "../../locales/et.json";
+import faTranslations from "../../locales/fa.json";
 import frTranslations from "../../locales/fr.json";
 import hiTranslations from "../../locales/hi.json";
 import huTranslations from "../../locales/hu.json";
@@ -33,6 +34,7 @@ i18n
       "en",
       "es",
       "et",
+      "fa",
       "fr",
       "hi",
       "hu",
@@ -55,6 +57,7 @@ i18n
       en: { translation: enTranslations },
       es: { translation: esTranslations },
       et: { translation: etTranslations },
+      fa: { translation: faTranslations },
       fr: { translation: frTranslations },
       hi: { translation: hiTranslations },
       hu: { translation: huTranslations },
@@ -71,6 +74,7 @@ i18n
     },
 
     interpolation: { escapeValue: false },
+    showSupportNotice: false,
   });
 
 export default i18n;

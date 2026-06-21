@@ -46,8 +46,8 @@ vi.mock("./utils", async () => {
   };
 });
 
-// Special handling for @formbricks/logger due to hoisting issues
-vi.mock("@formbricks/logger", () => {
+// Special handling for @salamruby/logger due to hoisting issues
+vi.mock("@salamruby/logger", () => {
   const localLoggerErrorMock = vi.fn();
   loggerErrorMockHandle = localLoggerErrorMock;
   return {

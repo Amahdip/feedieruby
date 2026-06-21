@@ -1,9 +1,9 @@
 import { useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { DateElement as SurveyUIDateElement } from "@formbricks/survey-ui";
-import { type TResponseData, type TResponseTtc } from "@formbricks/types/responses";
-import type { TSurveyDateElement } from "@formbricks/types/surveys/elements";
-import { TSurveyLanguage } from "@formbricks/types/surveys/types";
+import { DateElement as SurveyUIDateElement } from "@salamruby/survey-ui";
+import { type TResponseData, type TResponseTtc } from "@salamruby/types/responses";
+import type { TSurveyDateElement } from "@salamruby/types/surveys/elements";
+import { TSurveyLanguage } from "@salamruby/types/surveys/types";
 import { getLocalizedValue } from "@/lib/i18n";
 import { getUpdatedTtc, useTtc } from "@/lib/ttc";
 

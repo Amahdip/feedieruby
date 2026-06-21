@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { TFeedbackSourceWithMappings } from "@formbricks/types/feedback-source";
-import { TResponse } from "@formbricks/types/responses";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { TFeedbackSourceWithMappings } from "@salamruby/types/feedback-source";
+import { TResponse } from "@salamruby/types/responses";
+import { TSurvey } from "@salamruby/types/surveys/types";
 
 vi.mock("server-only", () => ({}));
 
@@ -11,7 +11,7 @@ vi.mock("@/modules/hub", () => ({
   createFeedbackRecordsBatch: (...args: unknown[]) => mockCreateFeedbackRecordsBatch(...args),
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     info: vi.fn(),
     warn: vi.fn(),
@@ -46,19 +46,19 @@ const mockSurvey = {
 } as unknown as TSurvey;
 
 function createFeedbackSource(
-  overrides: Partial<Pick<TFeedbackSourceWithMappings, "id" | "formbricksMappings">> = {}
+  overrides: Partial<Pick<TFeedbackSourceWithMappings, "id" | "salamrubyMappings">> = {}
 ): TFeedbackSourceWithMappings {
   return {
     id: "conn-1",
     createdAt: new Date(),
     updatedAt: new Date(),
     name: "Test FeedbackSource",
-    type: "formbricks_survey",
+    type: "salamruby_survey",
     status: "active",
     workspaceId: "env-1",
     feedbackDirectoryId: "frd-1",
     lastSyncAt: null,
-    formbricksMappings: [
+    salamrubyMappings: [
       {
         id: "map-1",
         createdAt: new Date(),
@@ -79,7 +79,7 @@ const oneFeedbackRecord = [
   {
     field_id: "el-1",
     field_type: "rating" as const,
-    source_type: "formbricks_survey",
+    source_type: "salamruby_survey",
     source_id: "survey-1",
     source_name: "Test Survey",
     field_label: "Question?",
@@ -119,7 +119,7 @@ describe("handleFeedbackSourcePipeline", () => {
     expect(transformResponseToFeedbackRecords).toHaveBeenCalledWith(
       mockResponse,
       mockSurvey,
-      feedbackSource.formbricksMappings,
+      feedbackSource.salamrubyMappings,
       "frd-1"
     );
     expect(mockCreateFeedbackRecordsBatch).not.toHaveBeenCalled();
@@ -180,7 +180,7 @@ describe("handleFeedbackSourcePipeline", () => {
     };
     vi.mocked(getFeedbackSourcesBySurveyId).mockResolvedValue([
       createFeedbackSource({
-        formbricksMappings: [
+        salamrubyMappings: [
           { ...baseMapping, id: "m1", elementId: "el-1" },
           { ...baseMapping, id: "m2", elementId: "el-2" },
         ],

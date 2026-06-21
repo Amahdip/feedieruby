@@ -1,7 +1,7 @@
 import { Cell, Row, flexRender } from "@tanstack/react-table";
 import { Maximize2Icon } from "lucide-react";
 import React from "react";
-import { TResponseTableData } from "@formbricks/types/responses";
+import { TResponseTableData } from "@salamruby/types/responses";
 import { cn } from "@/lib/cn";
 import { getCommonPinningStyles } from "@/modules/ui/components/data-table/lib/utils";
 import { TableCell } from "@/modules/ui/components/table";
@@ -19,6 +19,8 @@ const ResponseTableCellComponent = ({
   isExpanded,
   setSelectedResponseId,
 }: ResponseTableCellProps) => {
+  const isDateColumn = cell.column.id === "createdAt";
+
   // Function to handle cell click
   const handleCellClick = () => {
     if (cell.column.id !== "select") {
@@ -32,11 +34,11 @@ const ResponseTableCellComponent = ({
   };
 
   // Conditional rendering of maximize icon
-  const renderMaximizeIcon = cell.column.id === "createdAt" && (
+  const renderMaximizeIcon = isDateColumn && (
     <button
       type="button"
       aria-label="Expand response"
-      className="hidden flex-shrink-0 cursor-pointer items-center rounded-md border border-slate-200 bg-white p-2 hover:border-slate-300 focus:outline-none group-hover:flex"
+      className="hidden shrink-0 cursor-pointer items-center rounded-md border border-slate-200 bg-white p-2 hover:border-slate-300 focus:outline-none group-hover:flex"
       onClick={handleCellClick}>
       <Maximize2Icon className="size-4" />
     </button>
@@ -49,14 +51,19 @@ const ResponseTableCellComponent = ({
         "border-slate-200 bg-white shadow-none group-hover:bg-slate-100",
         row.getIsSelected() && "bg-slate-100",
         {
-          "border-r": !cell.column.getIsLastColumn(),
-          "border-l": !cell.column.getIsFirstColumn(),
+          "border-e": !cell.column.getIsLastColumn(),
+          "border-s": !cell.column.getIsFirstColumn(),
         }
       )}
       style={cellStyles}
       onClick={handleCellClick}>
-      <div className="flex w-full items-center">
-        <div className={cn("flex flex-1 items-center truncate", isExpanded ? "h-full" : "h-10")}>
+      <div className={cn("flex w-full items-center", isDateColumn ? "gap-2" : "")}>
+        <div
+          className={cn(
+            "flex items-center truncate",
+            isDateColumn ? "min-w-0" : "flex-1",
+            isExpanded ? "h-full" : "h-10"
+          )}>
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </div>
         {renderMaximizeIcon}

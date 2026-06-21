@@ -1,28 +1,30 @@
 "use client";
 
-import { ArrowLeftIcon, SettingsIcon } from "lucide-react";
+import { SettingsIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { getLanguageLabel } from "@formbricks/i18n-utils/src/utils";
-import { TSegment } from "@formbricks/types/segment";
-import { TSurveyBlock } from "@formbricks/types/surveys/blocks";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { getLanguageLabel } from "@salamruby/i18n-utils/src/utils";
+import { TSegment } from "@salamruby/types/segment";
+import { TSurveyBlock } from "@salamruby/types/surveys/blocks";
 import {
   TSurvey,
   TSurveyEditorTabs,
   ZSurvey,
   ZSurveyEndScreenCard,
   ZSurveyRedirectUrlCard,
-} from "@formbricks/types/surveys/types";
+} from "@salamruby/types/surveys/types";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
 import { isDeepEqual } from "@/lib/utils/object";
 import { createSegmentAction } from "@/modules/ee/contacts/segments/actions";
+import { surveyUsesStorage } from "@/modules/storage/lib/survey-uses-storage";
 import { TSurveyDraft } from "@/modules/survey/editor/types/survey";
 import { Alert, AlertButton, AlertTitle } from "@/modules/ui/components/alert";
 import { AlertDialog } from "@/modules/ui/components/alert-dialog";
 import { Button } from "@/modules/ui/components/button";
+import { GoBackButton } from "@/modules/ui/components/go-back-button";
 import { Input } from "@/modules/ui/components/input";
 import { updateSurveyAction, updateSurveyDraftAction } from "../actions";
 import { isSurveyValid } from "../lib/validation";
@@ -544,18 +546,7 @@ export const SurveyMenuBar = ({
   return (
     <div className="border-b border-slate-200 bg-white px-5 py-2.5 sm:flex sm:items-center sm:justify-between">
       <div className="flex h-full items-center gap-x-2 whitespace-nowrap">
-        {!isCxMode && (
-          <Button
-            size="sm"
-            variant="secondary"
-            className="h-full"
-            onClick={() => {
-              handleBack();
-            }}>
-            <ArrowLeftIcon />
-            {t("common.back")}
-          </Button>
-        )}
+        {!isCxMode && <GoBackButton align="none" className="h-full" onClick={handleBack} />}
         <p className="hidden pl-4 font-semibold md:block">{workspace.name} / </p>
         <Input
           defaultValue={localSurvey.name}
@@ -569,14 +560,14 @@ export const SurveyMenuBar = ({
 
       <div className="mt-3 flex items-center gap-2 sm:ml-4 sm:mt-0">
         <AutoSaveIndicator isDraft={localSurvey.status === "draft"} lastSaved={lastAutoSaved} />
-        {!isStorageConfigured && (
+        {!isStorageConfigured && surveyUsesStorage(localSurvey) && (
           <div>
             <Alert variant="warning" size="small">
               <AlertTitle>{t("common.storage_not_configured")}</AlertTitle>
               <AlertButton className="flex items-center justify-center">
                 <a
                   className="flex h-full w-full items-center justify-center !bg-white"
-                  href="https://formbricks.com/docs/self-hosting/configuration/file-uploads"
+                  href="https://salamruby.com/docs/self-hosting/configuration/file-uploads"
                   target="_blank"
                   rel="noopener noreferrer">
                   <span>{t("common.learn_more")}</span>

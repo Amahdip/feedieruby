@@ -1,16 +1,16 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   UniqueConstraintError,
-} from "@formbricks/types/errors";
-import { TResponseWithQuotaFull, TSurveyQuota } from "@formbricks/types/quota";
-import { TResponse } from "@formbricks/types/responses";
-import { TTag } from "@formbricks/types/tags";
+} from "@salamruby/types/errors";
+import { TResponseWithQuotaFull, TSurveyQuota } from "@salamruby/types/quota";
+import { TResponse } from "@salamruby/types/responses";
+import { TTag } from "@salamruby/types/tags";
 import { TResponseInputV2 } from "@/app/api/v2/client/[workspaceId]/responses/types/response";
 import { getOrganization } from "@/lib/organization/service";
 import { calculateTtcTotal } from "@/lib/response/utils";
@@ -20,11 +20,11 @@ import { evaluateResponseQuotas } from "@/modules/ee/quotas/lib/evaluation-servi
 import { getContact } from "./contact";
 import { createResponse, createResponseWithQuotaEvaluation } from "./response";
 
-let mockIsFormbricksCloud = false;
+let mockIsSalamRubyCloud = false;
 
 vi.mock("@/lib/constants", () => ({
-  get IS_FORMBRICKS_CLOUD() {
-    return mockIsFormbricksCloud;
+  get IS_SALAMRUBY_CLOUD() {
+    return mockIsSalamRubyCloud;
   },
   IS_PRODUCTION: false,
   FB_LOGO_URL: "https://example.com/mock-logo.png",
@@ -54,14 +54,14 @@ vi.mock("@/lib/response/utils");
 vi.mock("@/lib/utils/helper");
 vi.mock("@/lib/utils/validate");
 vi.mock("@/modules/ee/quotas/lib/evaluation-service");
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     response: {
       create: vi.fn(),
     },
   },
 }));
-vi.mock("@formbricks/logger");
+vi.mock("@salamruby/logger");
 vi.mock("./contact");
 
 const workspaceId = "test-workspace-id";
@@ -173,7 +173,7 @@ describe("createResponse V2", () => {
   });
 
   afterEach(() => {
-    mockIsFormbricksCloud = false;
+    mockIsSalamRubyCloud = false;
   });
 
   test("should throw ResourceNotFoundError if organization not found", async () => {

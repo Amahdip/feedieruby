@@ -1,11 +1,11 @@
 import "server-only";
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZId, ZOptionalNumber } from "@formbricks/types/common";
-import { DatabaseError } from "@formbricks/types/errors";
-import { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZId, ZOptionalNumber } from "@salamruby/types/common";
+import { DatabaseError } from "@salamruby/types/errors";
+import { TSurvey } from "@salamruby/types/surveys/types";
 import { selectSurvey } from "@/lib/survey/service";
 import { transformPrismaSurvey } from "@/lib/survey/utils";
 import { validateInputs } from "@/lib/utils/validate";

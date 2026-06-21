@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: Formbricks API
-  description: Manage Formbricks ressources programmatically.
+  title: SalamRuby API
+  description: Manage SalamRuby ressources programmatically.
   version: 2.0.0
 servers:
-  - url: https://app.formbricks.com/api
-    description: Formbricks Cloud
+  - url: https://app.salamruby.com/api
+    description: SalamRuby Cloud
 tags:
   - name: responses
     description: Operations for managing responses.

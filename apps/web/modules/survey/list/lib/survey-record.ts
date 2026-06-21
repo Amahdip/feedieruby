@@ -1,5 +1,5 @@
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
 import type { TSurvey } from "@/modules/survey/list/types/surveys";
 
 export const surveySelect = {

@@ -1,15 +1,15 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { TContactAttributes } from "@formbricks/types/contact-attribute";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { TContactAttributes } from "@salamruby/types/contact-attribute";
 import {
   DatabaseError,
   InvalidInputError,
   ResourceNotFoundError,
   UniqueConstraintError,
-} from "@formbricks/types/errors";
-import { TResponseWithQuotaFull } from "@formbricks/types/quota";
-import { TResponse, TResponseInput, ZResponseInput } from "@formbricks/types/responses";
+} from "@salamruby/types/errors";
+import { TResponseWithQuotaFull } from "@salamruby/types/quota";
+import { TResponse, TResponseInput, ZResponseInput } from "@salamruby/types/responses";
 import {
   buildClientResponse,
   createResponseWithQuotaEvaluation as createClientResponseWithQuotaEvaluation,

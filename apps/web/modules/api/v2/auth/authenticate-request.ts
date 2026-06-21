@@ -1,5 +1,5 @@
-import { TAuthenticationApiKey } from "@formbricks/types/auth";
-import { Result, err, ok } from "@formbricks/types/error-handlers";
+import { TAuthenticationApiKey } from "@salamruby/types/auth";
+import { Result, err, ok } from "@salamruby/types/error-handlers";
 import {
   type AuthenticateApiKeyOptions,
   authenticateApiKeyFromHeaders,

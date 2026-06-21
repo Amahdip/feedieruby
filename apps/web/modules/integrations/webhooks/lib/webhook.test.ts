@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { InvalidInputError } from "@formbricks/types/errors";
+import { InvalidInputError } from "@salamruby/types/errors";
 import { generateStandardWebhookSignature } from "@/lib/crypto";
 import {
   createPinnedDispatcher,
@@ -10,7 +10,7 @@ import { getTranslate } from "@/lingodotdev/server";
 import { isDiscordWebhook } from "@/modules/integrations/webhooks/lib/utils";
 import { testEndpoint } from "./webhook";
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     webhook: {
       create: vi.fn(),

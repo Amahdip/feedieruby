@@ -1,7 +1,7 @@
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { DatabaseError } from "@formbricks/types/errors";
-import { TIntegrationItem } from "@formbricks/types/integration";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { DatabaseError } from "@salamruby/types/errors";
+import { TIntegrationItem } from "@salamruby/types/integration";
 import {
   TIntegrationAirtableConfigData,
   TIntegrationAirtableCredential,
@@ -10,7 +10,7 @@ import {
   ZIntegrationAirtableTables,
   ZIntegrationAirtableTablesWithFields,
   ZIntegrationAirtableTokenSchema,
-} from "@formbricks/types/integration/airtable";
+} from "@salamruby/types/integration/airtable";
 import { AIRTABLE_CLIENT_ID, AIRTABLE_MESSAGE_LIMIT } from "../constants";
 import { createOrUpdateIntegration, getIntegrationByType } from "../integration/service";
 import { delay } from "../utils/promises";

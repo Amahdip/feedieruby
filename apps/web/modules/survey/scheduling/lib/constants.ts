@@ -20,7 +20,11 @@ const parseSchedulingTimePart = (
 
 // Use static NEXT_PUBLIC_* lookups so these values can be safely inlined into client bundles.
 export const SURVEY_SCHEDULING_TIME_ZONE =
-  process.env.NEXT_PUBLIC_SURVEY_SCHEDULING_TIME_ZONE ?? "Europe/Berlin";
+  process.env.NEXT_PUBLIC_SURVEY_SCHEDULING_TIME_ZONE ?? "Asia/Tehran";
+export const SURVEY_SCHEDULING_TIME_ZONE_I18N_KEYS: Record<string, string> = {
+  "Asia/Tehran": "common.timezones.asia_tehran",
+  "Europe/Berlin": "common.timezones.europe_berlin",
+};
 export const SURVEY_SCHEDULING_LOCAL_HOUR = parseSchedulingTimePart(
   process.env.NEXT_PUBLIC_SURVEY_SCHEDULING_LOCAL_HOUR,
   0,

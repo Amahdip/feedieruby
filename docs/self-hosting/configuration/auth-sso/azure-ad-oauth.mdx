@@ -1,24 +1,24 @@
 ---
 title: Azure AD OAuth
-description: "Configure Microsoft Entra ID (Azure AD) OAuth for secure Single Sign-On with your Formbricks instance. Use enterprise-grade authentication for your survey platform."
+description: "Configure Microsoft Entra ID (Azure AD) OAuth for secure Single Sign-On with your SalamRuby instance. Use enterprise-grade authentication for your survey platform."
 icon: "microsoft"
 ---
 
-<Note>AzureAD OAuth is part of the Formbricks [Enterprise Edition](/self-hosting/advanced/license)</Note>
+<Note>AzureAD OAuth is part of the SalamRuby [Enterprise Edition](/self-hosting/advanced/license)</Note>
 
 ### Microsoft Entra ID
 
-Do you have a Microsoft Entra ID Tenant? Integrate it with your Formbricks instance to allow users to log in using their existing Microsoft credentials. This guide will walk you through the process of setting up an Application Registration for your Formbricks instance.
+Do you have a Microsoft Entra ID Tenant? Integrate it with your SalamRuby instance to allow users to log in using their existing Microsoft credentials. This guide will walk you through the process of setting up an Application Registration for your SalamRuby instance.
 
 ### Requirements
 
 - A Microsoft Entra ID Tenant populated with users. [Create a tenant as per Microsoft's documentation](https://learn.microsoft.com/en-us/entra/fundamentals/create-new-tenant).
 
-- A Formbricks instance running and accessible.
+- A SalamRuby instance running and accessible.
 
-- The callback URI for your Formbricks instance: `{WEBAPP_URL}/api/auth/callback/azure-ad`
+- The callback URI for your SalamRuby instance: `{WEBAPP_URL}/api/auth/callback/azure-ad`
 
-## How to connect your Formbricks instance to Microsoft Entra
+## How to connect your SalamRuby instance to Microsoft Entra
 
 <Steps>
   <Step title="Access the Microsoft Entra admin center">
@@ -35,7 +35,7 @@ Do you have a Microsoft Entra ID Tenant? Integrate it with your Formbricks insta
   </Step>
 
   <Step title="Configure the application">
-    - Name your application something descriptive, such as `Formbricks SSO`.
+    - Name your application something descriptive, such as `SalamRuby SSO`.
 
     ![third](https://res.cloudinary.com/dwdb9tvii/image/upload/v1738250292/image_rooa3w.jpg)
 
@@ -43,7 +43,7 @@ Do you have a Microsoft Entra ID Tenant? Integrate it with your Formbricks insta
 
     ![fourth](https://res.cloudinary.com/dwdb9tvii/image/upload/v1738250542/image_nyndzo.jpg)
 
-    - Under **Redirect URI**, select **Web** for the platform and paste your Formbricks callback URI (see Requirements above).
+    - Under **Redirect URI**, select **Web** for the platform and paste your SalamRuby callback URI (see Requirements above).
 
     ![fifth](https://res.cloudinary.com/dwdb9tvii/image/upload/v1738250776/image_s3pgb6.jpg)
 
@@ -85,15 +85,15 @@ Do you have a Microsoft Entra ID Tenant? Integrate it with your Formbricks insta
   </Step>
 
   <Step title="Update environment variables">
-    - Update these environment variables in your `docker-compose.yml` or pass it like your other environment variables to the Formbricks container.
+    - Update these environment variables in your `docker-compose.yml` or pass it like your other environment variables to the SalamRuby container.
 
     <Note>
       You must wrap the `AZUREAD_CLIENT_SECRET` value in double quotes (e.g., "THis~iS4faKe.53CreTvALu3"`) to prevent issues with special characters.
     </Note>
 
-    An example `.env` for Microsoft Entra ID in Formbricks would look like this:
+    An example `.env` for Microsoft Entra ID in SalamRuby would look like this:
 
-    ```yml Formbricks Env for Microsoft Entra ID SSO
+    ```yml SalamRuby Env for Microsoft Entra ID SSO
     AZUREAD_CLIENT_ID=a25cadbd-f049-4690-ada3-56a163a72f4c
     AZUREAD_TENANT_ID=2746c29a-a3a6-4ea1-8762-37816d4b7885
     AZUREAD_CLIENT_SECRET="THis~iS4faKe.53CreTvALu3"
@@ -101,7 +101,7 @@ Do you have a Microsoft Entra ID Tenant? Integrate it with your Formbricks insta
   </Step>
 
   <Step title="Restart and test">
-    - Restart your Formbricks instance.
+    - Restart your SalamRuby instance.
     - You're all set! Users can now sign up & log in using their Microsoft credentials associated with your Entra ID Tenant.
   </Step>
 </Steps>

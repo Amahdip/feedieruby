@@ -1,5 +1,5 @@
-import { TOrganization } from "@formbricks/types/organizations";
-import { TSurvey, TSurveyCreateInputWithWorkspaceId } from "@formbricks/types/surveys/types";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TSurvey, TSurveyCreateInputWithWorkspaceId } from "@salamruby/types/surveys/types";
 import { responses } from "@/app/lib/api/response";
 import { getElementsFromBlocks } from "@/lib/survey/utils";
 import { getIsSpamProtectionEnabled } from "@/modules/ee/license-check/lib/utils";

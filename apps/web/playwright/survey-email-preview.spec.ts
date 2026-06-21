@@ -1,7 +1,8 @@
 import { expect } from "@playwright/test";
-import { prisma } from "@formbricks/database";
-import { type Prisma } from "@formbricks/database/prisma";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+import { prisma } from "@salamruby/database";
+import { type Prisma } from "@salamruby/database/prisma";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { WEBAPP_URL } from "@/lib/constants";
 import {
   EMBED_SURVEY_PREVIEW_CHOICE_IDS,
   EMBED_SURVEY_PREVIEW_HEADLINE,
@@ -108,8 +109,8 @@ test.describe("Survey Email Preview", () => {
     await expect(firstChoiceLink).toHaveAttribute("href", /skipPrefilled=true/);
     await expect(firstChoiceLink).toHaveAttribute("target", "_blank");
 
-    const poweredByLink = previewFrame.getByRole("link", { name: "Powered by Formbricks" });
-    await expect(poweredByLink).toHaveAttribute("href", "https://formbricks.com?utm_source=email_branding");
+    const poweredByLink = previewFrame.getByRole("link", { name: "Powered by salamruby" });
+    await expect(poweredByLink).toHaveAttribute("href", `${WEBAPP_URL}?utm_source=email_branding`);
   });
 
   test("keeps non-option email previews clickable in the summary modal", async ({ page, users }) => {

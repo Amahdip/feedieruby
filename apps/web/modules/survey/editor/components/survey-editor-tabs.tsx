@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Fragment, type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { TSurveyEditorTabs } from "@formbricks/types/surveys/types";
+import { TSurveyEditorTabs } from "@salamruby/types/surveys/types";
 import { cn } from "@/lib/cn";
 
 interface Tab {
@@ -90,15 +90,15 @@ export const SurveyEditorTabs = ({
                 tab.id === activeId
                   ? "border-brand-dark font-semibold text-slate-900"
                   : "border-transparent text-slate-500 hover:text-slate-700",
-                "flex h-full items-center border-b-2 px-3 text-sm font-medium"
+                "flex h-full items-center gap-2 border-b-2 px-3 text-sm font-medium"
               )}
               aria-current={tab.id === activeId ? "page" : undefined}>
-              {tab.icon && <div className="mr-2 size-5">{tab.icon}</div>}
+              {tab.icon && <div className="size-5 shrink-0">{tab.icon}</div>}
               {tab.label}
-              {tab.alert && <AlertTriangleIcon className="ml-1.5 size-4 text-amber-500" />}
+              {tab.alert && <AlertTriangleIcon className="size-4 shrink-0 text-amber-500" />}
             </button>
             {index < tabsToDisplay.length - 1 && (
-              <ChevronRightIcon className="size-4 text-slate-300" aria-hidden="true" />
+              <ChevronRightIcon className="size-4 text-slate-300 rtl:rotate-180" aria-hidden="true" />
             )}
           </Fragment>
         ))}

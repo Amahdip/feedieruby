@@ -14,10 +14,10 @@ If you run `pnpm i` and get an error with the packages, try running `pnpm clean`
 
 ## "I get a full-screen error with cryptic strings"
 
-This usually happens when the Formbricks Widget isn't correctly or completely built.
+This usually happens when the SalamRuby Widget isn't correctly or completely built.
 
 ```bash
-pnpm build --filter=@formbricks/js
+pnpm build --filter=@salamruby/js
 
 // Run the app again
 pnpm dev
@@ -28,10 +28,10 @@ pnpm dev
 Since we're working with a monorepo structure, the repository can get quite big. If you're having trouble working with the repository, try the following:
 
 ```bash helloWorld.js
-pnpm dev --filter=@formbricks/web...
+pnpm dev --filter=@salamruby/web...
 ```
 
-It’s better to use a single terminal with `pnpm dev` rather than having multiple open (one with the Formbricks app and one with the demo).
+It’s better to use a single terminal with `pnpm dev` rather than having multiple open (one with the SalamRuby app and one with the demo).
 
 ## Error: "Uncaught (in promise) SyntaxError: Unexpected token !DOCTYPE ... is not valid JSON"![Syntax Error](https://res.cloudinary.com/dwdb9tvii/image/upload/v1738109837/image_wbxv8k.jpg)
 

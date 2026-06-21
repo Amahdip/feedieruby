@@ -1,7 +1,7 @@
 import "server-only";
 import dns from "node:dns";
 import { Agent } from "undici";
-import { InvalidInputError } from "@formbricks/types/errors";
+import { InvalidInputError } from "@salamruby/types/errors";
 import { DANGEROUSLY_ALLOW_WEBHOOK_INTERNAL_URLS } from "../constants";
 
 const BLOCKED_HOSTNAMES = new Set([

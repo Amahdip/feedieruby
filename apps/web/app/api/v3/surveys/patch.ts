@@ -1,8 +1,8 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
-import type { TSurvey } from "@formbricks/types/surveys/types";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
+import type { TSurvey } from "@salamruby/types/surveys/types";
 import { selectSurvey } from "@/lib/survey/service";
 import { stripIsDraftFromBlocks, transformPrismaSurvey } from "@/lib/survey/utils";
 import {

@@ -4,7 +4,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { DatabaseIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { TChartQuery } from "@formbricks/types/analysis";
+import type { TChartQuery } from "@salamruby/types/analysis";
 import { ChartRenderer } from "@/modules/ee/analysis/charts/components/chart-renderer";
 import { DataViewer } from "@/modules/ee/analysis/charts/components/data-viewer";
 import type { TChartDataRow, TChartType } from "@/modules/ee/analysis/types/analysis";

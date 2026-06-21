@@ -1,10 +1,10 @@
 import "server-only";
 import { cache as reactCache } from "react";
 import { z } from "zod";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { ZId, ZOptionalNumber } from "@formbricks/types/common";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { ZId, ZOptionalNumber } from "@salamruby/types/common";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TResponseContact,
   TResponseContactAttributes,
@@ -12,8 +12,8 @@ import {
   TResponseFilterCriteria,
   TResponseTtc,
   ZResponseFilterCriteria,
-} from "@formbricks/types/responses";
-import { TSurveyElement, TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
+} from "@salamruby/types/responses";
+import { TSurveyElement, TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
 import {
   TSurvey,
   TSurveyElementSummaryAddress,
@@ -27,8 +27,8 @@ import {
   TSurveyElementSummaryRanking,
   TSurveyLanguage,
   TSurveySummary,
-} from "@formbricks/types/surveys/types";
-import { getTextContent } from "@formbricks/types/surveys/validation";
+} from "@salamruby/types/surveys/types";
+import { getTextContent } from "@salamruby/types/surveys/validation";
 import { getQuotasSummary } from "@/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/survey";
 import { RESPONSES_PER_PAGE } from "@/lib/constants";
 import { getDisplayCountBySurveyId } from "@/lib/display/service";

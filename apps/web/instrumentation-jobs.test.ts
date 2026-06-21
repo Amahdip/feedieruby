@@ -16,7 +16,7 @@ const slowTest = (name: string, fn: () => Promise<void>): void => {
   test(name, fn, TEST_TIMEOUT_MS);
 };
 
-vi.mock("@formbricks/jobs", () => ({
+vi.mock("@salamruby/jobs", () => ({
   removeRecurringSurveySchedulingJobSchedule: mockRemoveRecurringSurveySchedulingJobSchedule,
   startJobsRuntime: mockStartJobsRuntime,
   upsertRecurringSurveySchedulingJobSchedule: mockUpsertRecurringSurveySchedulingJobSchedule,
@@ -27,7 +27,7 @@ vi.mock("@/lib/jobs/config", () => ({
   getJobsWorkerBootstrapConfig: mockGetJobsWorkerBootstrapConfig,
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     debug: mockDebug,
     error: mockError,

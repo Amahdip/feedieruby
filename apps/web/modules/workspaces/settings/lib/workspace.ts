@@ -1,11 +1,11 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { PrismaErrorType } from "@formbricks/database/types/error";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { DatabaseError, InvalidInputError, ValidationError } from "@formbricks/types/errors";
-import { TWorkspace, TWorkspaceUpdateInput, ZWorkspaceUpdateInput } from "@formbricks/types/workspace";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { PrismaErrorType } from "@salamruby/database/types/error";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { DatabaseError, InvalidInputError, ValidationError } from "@salamruby/types/errors";
+import { TWorkspace, TWorkspaceUpdateInput, ZWorkspaceUpdateInput } from "@salamruby/types/workspace";
 import { DEFAULT_LOCALE } from "@/lib/constants";
 import { validateInputs } from "@/lib/utils/validate";
 import { deleteFilesByWorkspaceId } from "@/modules/storage/service";

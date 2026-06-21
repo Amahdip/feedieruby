@@ -3,7 +3,7 @@ import {
   INVALID_PASSWORD_RESET_TOKEN_ERROR_CODE,
   InvalidPasswordResetTokenError,
   OperationNotAllowedError,
-} from "@formbricks/types/errors";
+} from "@salamruby/types/errors";
 import { completePasswordReset } from "@/modules/auth/forgot-password/lib/password-reset-service";
 import { resetPasswordAction } from "./actions";
 

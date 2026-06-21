@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FORMBRICKS_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
+import { SALAMRUBY_LOGGED_IN_WITH_LS } from "@/lib/localStorage";
 import { AzureButton } from "./azure-button";
 import { GithubButton } from "./github-button";
 import { GoogleButton } from "./google-button";
@@ -39,7 +39,7 @@ export const SSOOptions = ({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setLastLoggedInWith(localStorage.getItem(FORMBRICKS_LOGGED_IN_WITH_LS) || "");
+      setLastLoggedInWith(localStorage.getItem(SALAMRUBY_LOGGED_IN_WITH_LS) || "");
     }
   }, []);
 

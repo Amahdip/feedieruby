@@ -1,7 +1,7 @@
 import { cache as reactCache } from "react";
-import { prisma } from "@formbricks/database";
-import { Organization, Prisma } from "@formbricks/database/prisma";
-import { DatabaseError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Organization, Prisma } from "@salamruby/database/prisma";
+import { DatabaseError } from "@salamruby/types/errors";
 
 export const getFirstOrganization = reactCache(async (): Promise<Organization | null> => {
   try {

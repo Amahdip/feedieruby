@@ -4,8 +4,8 @@ import type { Session } from "next-auth";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TOrganization } from "@formbricks/types/organizations";
-import { TUser } from "@formbricks/types/user";
+import { TOrganization } from "@salamruby/types/organizations";
+import { TUser } from "@salamruby/types/user";
 import { DeleteAccountModal } from "@/modules/account/components/DeleteAccountModal";
 import {
   ACCOUNT_DELETION_SSO_REAUTH_ERROR_QUERY_PARAM,
@@ -16,7 +16,7 @@ import { TooltipRenderer } from "@/modules/ui/components/tooltip";
 
 interface DeleteAccountProps {
   session: Session | null;
-  IS_FORMBRICKS_CLOUD: boolean;
+  IS_SALAMRUBY_CLOUD: boolean;
   user: TUser;
   organizationsWithSingleOwner: TOrganization[];
   accountDeletionError?: string | string[];
@@ -27,7 +27,7 @@ interface DeleteAccountProps {
 
 export const DeleteAccount = ({
   session,
-  IS_FORMBRICKS_CLOUD,
+  IS_SALAMRUBY_CLOUD,
   user,
   organizationsWithSingleOwner,
   accountDeletionError,
@@ -67,13 +67,13 @@ export const DeleteAccount = ({
   }
 
   return (
-    <div>
+    <div className="text-start">
       <DeleteAccountModal
         requiresPasswordConfirmation={requiresPasswordConfirmation}
         open={isModalOpen}
         setOpen={setModalOpen}
         user={user}
-        isFormbricksCloud={IS_FORMBRICKS_CLOUD}
+        isSalamRubyCloud={IS_SALAMRUBY_CLOUD}
         organizationsWithSingleOwner={organizationsWithSingleOwner}
         isSsoIdentityConfirmationDisabled={isSsoIdentityConfirmationDisabled}
       />

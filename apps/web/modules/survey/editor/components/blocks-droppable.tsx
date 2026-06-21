@@ -1,11 +1,11 @@
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { Workspace } from "@formbricks/database/prisma-browser";
-import { TI18nString } from "@formbricks/types/i18n";
-import { TSurveyBlockLogic } from "@formbricks/types/surveys/blocks";
-import { TSurveyElement } from "@formbricks/types/surveys/elements";
-import { TSurvey } from "@formbricks/types/surveys/types";
-import { TUserLocale } from "@formbricks/types/user";
+import { Workspace } from "@salamruby/database/prisma-browser";
+import { TI18nString } from "@salamruby/types/i18n";
+import { TSurveyBlockLogic } from "@salamruby/types/surveys/blocks";
+import { TSurveyElement } from "@salamruby/types/surveys/elements";
+import { TSurvey } from "@salamruby/types/surveys/types";
+import { TUserLocale } from "@salamruby/types/user";
 import { BlockCard } from "@/modules/survey/editor/components/block-card";
 
 interface BlocksDroppableProps {
@@ -27,7 +27,7 @@ interface BlocksDroppableProps {
   setActiveElementId: (elementId: string | null) => void;
   invalidElements: string[] | null;
   addElement: (element: any, index?: number) => void;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isCxMode: boolean;
   locale: TUserLocale;
   responseCount: number;
@@ -56,7 +56,7 @@ export const BlocksDroppable = ({
   updateBlockLogicFallback,
   updateBlockButtonLabel,
   addElement,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isCxMode,
   locale,
   responseCount,
@@ -100,7 +100,7 @@ export const BlocksDroppable = ({
               lastElementIndex={lastElementIndex}
               invalidElements={invalidElements ?? undefined}
               addElement={addElement}
-              isFormbricksCloud={isFormbricksCloud}
+              isSalamRubyCloud={isSalamRubyCloud}
               isCxMode={isCxMode}
               locale={locale}
               responseCount={responseCount}

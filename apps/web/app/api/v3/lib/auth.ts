@@ -1,10 +1,10 @@
 /**
  * V3 API auth — session (browser) or API key with workspace-scoped access.
  */
-import { ApiKeyPermission } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import type { TAuthenticationApiKey } from "@formbricks/types/auth";
-import { AuthorizationError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { ApiKeyPermission } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import type { TAuthenticationApiKey } from "@salamruby/types/auth";
+import { AuthorizationError, ResourceNotFoundError } from "@salamruby/types/errors";
 import { checkAuthorizationUpdated } from "@/lib/utils/action-client/action-client-middleware";
 import type { TTeamPermission } from "@/modules/ee/teams/workspace-teams/types/team";
 import { problemForbidden, problemUnauthorized } from "./response";

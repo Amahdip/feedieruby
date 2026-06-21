@@ -1,6 +1,5 @@
-import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import Logo from "@/images/powered-by-formbricks.svg";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/cn";
 import { LoadingSpinner } from "@/modules/ui/components/loading-spinner";
 
@@ -15,6 +14,7 @@ export const SurveyLoadingAnimation = ({
   isBackgroundLoaded = true,
   isBrandingEnabled,
 }: SurveyLoadingAnimationProps) => {
+  const { t } = useTranslation();
   const [isHidden, setIsHidden] = useState(false);
   const [minTimePassed, setMinTimePassed] = useState(false);
   const [isMediaLoaded, setIsMediaLoaded] = useState(false); // Tracks if all media are fully loaded
@@ -99,7 +99,7 @@ export const SurveyLoadingAnimation = ({
       });
     });
 
-    const targetNode = document.getElementById("formbricks-survey-container");
+    const targetNode = document.getElementById("salamruby-survey-container");
     if (targetNode) {
       observer.observe(targetNode, { childList: true });
     }
@@ -123,7 +123,9 @@ export const SurveyLoadingAnimation = ({
           isReadyToTransition ? "animate-surveyExit" : "animate-surveyLoading"
         )}>
         {isBrandingEnabled && (
-          <Image src={Logo} alt="Logo" className={cn("w-32 transition-all duration-1000 md:w-40")} />
+          <p className={cn("text-center text-xs font-semibold text-slate-700 transition-all duration-1000")}>
+            {t("common.powered_by_salamruby")}
+          </p>
         )}
         <LoadingSpinner />
       </div>

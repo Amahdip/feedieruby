@@ -6,7 +6,7 @@ import Papa, { type ParseResult } from "papaparse";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { TOrganizationRole } from "@formbricks/types/memberships";
+import { TOrganizationRole } from "@salamruby/types/memberships";
 import { ZInvitees } from "@/modules/organization/settings/teams/types/invites";
 import { Alert, AlertDescription } from "@/modules/ui/components/alert";
 import { Button } from "@/modules/ui/components/button";
@@ -16,7 +16,7 @@ interface BulkInviteTabProps {
   setOpen: (v: boolean) => void;
   onSubmit: (data: { name: string; email: string; role: TOrganizationRole; teamIds: string[] }[]) => void;
   isAccessControlAllowed: boolean;
-  isFormbricksCloud: boolean;
+  isSalamRubyCloud: boolean;
   isStorageConfigured: boolean;
 }
 
@@ -24,7 +24,7 @@ export const BulkInviteTab = ({
   setOpen,
   onSubmit,
   isAccessControlAllowed,
-  isFormbricksCloud,
+  isSalamRubyCloud,
   isStorageConfigured,
 }: BulkInviteTabProps) => {
   const { t } = useTranslation();
@@ -51,7 +51,7 @@ export const BulkInviteTab = ({
       complete: (results: ParseResult<{ name: string; email: string; role: string }>) => {
         const members = results.data.map((csv) => {
           let orgRole = isAccessControlAllowed ? csv.role.trim().toLowerCase() : "owner";
-          if (!isFormbricksCloud) {
+          if (!isSalamRubyCloud) {
             orgRole = orgRole === "billing" ? "owner" : orgRole;
           }
 
@@ -137,7 +137,7 @@ export const BulkInviteTab = ({
       <div className="flex justify-between">
         <Link
           download
-          href="/sample-csv/formbricks-organization-members-template.csv"
+          href="/sample-csv/salamruby-organization-members-template.csv"
           target="_blank"
           rel="noopener noreferrer">
           <Button variant="secondary" size="default">

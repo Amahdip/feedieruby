@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { z } from "zod";
-import { TSurveyElementTypeEnum } from "@formbricks/types/surveys/elements";
-import { type TSurvey } from "@formbricks/types/surveys/types";
+import { TSurveyElementTypeEnum } from "@salamruby/types/surveys/elements";
+import { type TSurvey } from "@salamruby/types/surveys/types";
 import {
   EXAMPLE_AI_GENERATED_TAG_NAME,
   EXAMPLE_IMPRESSION_ONLY_COUNT,
@@ -24,7 +24,7 @@ vi.mock("@/lib/ai/service", () => ({
   generateOrganizationAIObject: mocks.generateOrganizationAIObject,
 }));
 
-vi.mock("@formbricks/logger", () => ({
+vi.mock("@salamruby/logger", () => ({
   logger: {
     error: mocks.loggerError,
   },

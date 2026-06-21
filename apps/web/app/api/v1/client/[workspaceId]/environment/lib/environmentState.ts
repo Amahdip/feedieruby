@@ -1,7 +1,7 @@
 import "server-only";
-import { createCacheKey } from "@formbricks/cache";
-import { prisma } from "@formbricks/database";
-import { TJsWorkspaceState } from "@formbricks/types/js";
+import { createCacheKey } from "@salamruby/cache";
+import { prisma } from "@salamruby/database";
+import { TJsWorkspaceState } from "@salamruby/types/js";
 import {
   addLegacyProjectOverwritesToList,
   addLegacyProjectToEnvironmentState,

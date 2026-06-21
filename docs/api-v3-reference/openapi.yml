@@ -3,7 +3,7 @@
 
 openapi: 3.1.0
 info:
-  title: Formbricks API v3
+  title: SalamRuby API v3
   description: |
     **GET /api/v3/surveys**, **POST /api/v3/surveys**, **POST /api/v3/surveys/generate**, **POST /api/v3/surveys/validate**, **GET /api/v3/surveys/{surveyId}**, **PATCH /api/v3/surveys/{surveyId}**, and **DELETE /api/v3/surveys/{surveyId}** — authenticate with **session cookie** or **`x-api-key`** (management key with access to the workspace).
 
@@ -198,7 +198,7 @@ paths:
       summary: Create a survey
       description: |
         Creates a block-based survey template from one strict survey document. The endpoint accepts
-        multilingual authoring maps keyed by real locale codes and converts them to Formbricks'
+        multilingual authoring maps keyed by real locale codes and converts them to SalamRuby'
         internal default-language representation. Non-default locale keys in translated content
         must be declared in `languages`; undeclared locale keys return `unsupported_locale` in
         `invalid_params` instead of silently mutating workspace languages.
@@ -589,7 +589,7 @@ paths:
                     code: bad_gateway
                     requestId: req_123
         "503":
-          description: AI is not configured on this Formbricks instance
+          description: AI is not configured on this SalamRuby instance
           content:
             application/problem+json:
               schema:
@@ -600,7 +600,7 @@ paths:
                   value:
                     title: AI Unavailable
                     status: 503
-                    detail: AI is not configured for this Formbricks instance.
+                    detail: AI is not configured for this SalamRuby instance.
                     code: ai_instance_not_configured
                     requestId: req_123
         "500":
@@ -781,7 +781,7 @@ paths:
             Comma-separated language selector filter for translatable fields, for example `?lang=de-DE,pt-PT`.
             The response shape stays stable: translatable fields are always maps, never strings, and response
             keys match the emitted `languages[].code` values for this survey.
-            For compatibility with existing Formbricks surveys, GET accepts language tags such as `de`,
+            For compatibility with existing SalamRuby surveys, GET accepts language tags such as `de`,
             `de-DE`, `zh-Hans`, and `zh-Hans-CN`, accepts `_` or `-` separators, is case-insensitive, and
             accepts configured workspace aliases such as `english`. Bare language selectors are resolved
             against the survey's configured languages and return `400` if ambiguous, for example if both

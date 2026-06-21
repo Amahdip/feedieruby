@@ -9,7 +9,7 @@ import {
 } from "./schema-definition";
 
 const chartCubeSchemaPath = fileURLToPath(
-  new URL("../../../../../../charts/formbricks/cube/schema/FeedbackRecords.js", import.meta.url)
+  new URL("../../../../../../charts/salamruby/cube/schema/FeedbackRecords.js", import.meta.url)
 );
 const dockerCubeSchemaPath = fileURLToPath(
   new URL("../../../../../../docker/cube/schema/FeedbackRecords.js", import.meta.url)

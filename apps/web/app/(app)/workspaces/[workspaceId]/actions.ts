@@ -1,13 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { ZId } from "@formbricks/types/common";
-import {
-  AuthorizationError,
-  OperationNotAllowedError,
-  ResourceNotFoundError,
-} from "@formbricks/types/errors";
-import { ZWorkspaceUpdateInput } from "@formbricks/types/workspace";
+import { ZId } from "@salamruby/types/common";
+import { AuthorizationError, OperationNotAllowedError, ResourceNotFoundError } from "@salamruby/types/errors";
+import { ZWorkspaceUpdateInput } from "@salamruby/types/workspace";
 import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
 import { getOrganization } from "@/lib/organization/service";
 import { capturePostHogEvent, groupIdentifyPostHog } from "@/lib/posthog";

@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { Prisma } from "@formbricks/database/prisma";
+import { Prisma } from "@salamruby/database/prisma";
 import { upsertAccount } from "./service";
 
 const { mockUpsert } = vi.hoisted(() => ({
   mockUpsert: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     account: {
       upsert: mockUpsert,

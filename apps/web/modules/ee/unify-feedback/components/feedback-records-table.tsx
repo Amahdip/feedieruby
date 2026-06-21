@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import type { TFeedbackSourceFieldMapping } from "@formbricks/types/feedback-source";
+import type { TFeedbackSourceFieldMapping } from "@salamruby/types/feedback-source";
 import { listFeedbackRecordsAction } from "@/lib/feedback-source/actions";
 import { formatDateForDisplay, formatDateTimeForDisplay } from "@/lib/utils/datetime";
 import { getFormattedErrorMessage } from "@/lib/utils/helper";
@@ -501,8 +501,8 @@ const FeedbackRecordRow = ({
   const value = formatValue(record, t, locale);
   const isLongValue = value.length > 60;
   const collectedAt = formatDateTimeForDisplay(new Date(record.collected_at), locale);
-  const isFormbricksSurveySource =
-    (record.source_type === "formbricks" || record.source_type === "formbricks_survey") && !!record.source_id;
+  const isSalamRubySurveySource =
+    (record.source_type === "salamruby" || record.source_type === "salamruby_survey") && !!record.source_id;
   const surveySummaryHref = `/workspaces/${workspaceId}/surveys/${record.source_id}/summary`;
 
   return (
@@ -535,7 +535,7 @@ const FeedbackRecordRow = ({
         <Badge text={formatSourceType(record.source_type, t)} type="gray" size="tiny" />
       </td>
       <td className="px-4 py-3" title={record.source_name ?? undefined}>
-        {isFormbricksSurveySource ? (
+        {isSalamRubySurveySource ? (
           <Link
             href={surveySummaryHref}
             className="block min-w-0 truncate text-slate-700 underline underline-offset-2 hover:text-slate-900"

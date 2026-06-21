@@ -1,8 +1,8 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import type { Awaitable } from "next-auth";
 import type { Adapter, AdapterAccount } from "next-auth/adapters";
-import type { PrismaClient } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
+import type { PrismaClient } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
 import { resolveAccountProvider } from "@/modules/ee/sso/lib/provider-normalization";
 
 type TProviderAccountKey = Pick<AdapterAccount, "provider" | "providerAccountId">;
@@ -30,7 +30,7 @@ const withAdapterErrorLogging =
 
 /**
  * NextAuth resolves accounts by each provider's NextAuth `id` — Microsoft's is "azure-ad" — but
- * Formbricks persists the canonical `IdentityProvider` value ("azuread") in `Account.provider`.
+ * SalamRuby persists the canonical `IdentityProvider` value ("azuread") in `Account.provider`.
  * Left unreconciled, the adapter's native lookup misses the stored row, falls back to matching by
  * email, and rejects the sign-in with `OAuthAccountNotLinked`.
  *

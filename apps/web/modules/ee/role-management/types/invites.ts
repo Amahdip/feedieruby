@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ZInvite } from "@formbricks/database/zod/invites";
+import { ZInvite } from "@salamruby/database/zod/invites";
 
 export const ZInviteUpdateInput = ZInvite.pick({
   role: true,

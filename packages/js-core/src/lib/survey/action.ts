@@ -21,7 +21,7 @@ export const trackAction = async (
 
   const aliasName = alias ?? name;
 
-  logger.debug(`Formbricks: Action "${aliasName}" tracked`);
+  logger.debug(`SalamRuby: Action "${aliasName}" tracked`);
 
   // get a list of surveys that are collecting insights
   const activeSurveys = appConfig.get().filteredSurveys;
@@ -65,7 +65,7 @@ export const trackCodeAction = async (
   if (!actionClass) {
     return err({
       code: "invalid_code",
-      message: `Action with identifier '${code}' is unknown. Please add this action in Formbricks in order to use it via the SDK action tracking.`,
+      message: `Action with identifier '${code}' is unknown. Please add this action in SalamRuby in order to use it via the SDK action tracking.`,
     });
   }
 

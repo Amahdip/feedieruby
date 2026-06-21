@@ -6,7 +6,7 @@ const mocks = vi.hoisted(() => ({
   workspaceTeamFindMany: vi.fn(),
 }));
 
-vi.mock("@formbricks/database", () => ({
+vi.mock("@salamruby/database", () => ({
   prisma: {
     membership: {
       findFirst: mocks.membershipFindFirst,

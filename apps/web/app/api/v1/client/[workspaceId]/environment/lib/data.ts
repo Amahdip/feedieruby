@@ -1,14 +1,14 @@
 import "server-only";
-import { prisma } from "@formbricks/database";
-import { Prisma } from "@formbricks/database/prisma";
-import { logger } from "@formbricks/logger";
-import { ZId } from "@formbricks/types/common";
-import { DatabaseError, ResourceNotFoundError } from "@formbricks/types/errors";
+import { prisma } from "@salamruby/database";
+import { Prisma } from "@salamruby/database/prisma";
+import { logger } from "@salamruby/logger";
+import { ZId } from "@salamruby/types/common";
+import { DatabaseError, ResourceNotFoundError } from "@salamruby/types/errors";
 import {
   TJsWorkspaceStateActionClass,
   TJsWorkspaceStateSurvey,
   TJsWorkspaceStateWorkspaceSetting,
-} from "@formbricks/types/js";
+} from "@salamruby/types/js";
 import { validateInputs } from "@/lib/utils/validate";
 import { resolveStorageUrlsInObject } from "@/modules/storage/utils";
 import { transformPrismaSurvey } from "@/modules/survey/lib/utils";

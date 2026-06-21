@@ -1,4 +1,4 @@
-import { TValidationRuleType } from "@formbricks/types/surveys/validation-rules";
+import { TValidationRuleType } from "@salamruby/types/surveys/validation-rules";
 
 // Rule type definitions with i18n keys
 export const RULE_TYPE_CONFIG: Record<

@@ -1,4 +1,4 @@
-import { OrganizationRole, Team, TeamUserRole } from "@formbricks/database/prisma";
+import { OrganizationRole, Team, TeamUserRole } from "@salamruby/database/prisma";
 import { CreateMembershipInvite } from "@/modules/auth/signup/types/invites";
 
 /**
