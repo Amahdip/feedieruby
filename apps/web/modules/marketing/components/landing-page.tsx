@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AuroraBackground } from "@/modules/marketing/components/aurora-background";
 import { HeroAurora } from "@/modules/marketing/components/hero-aurora";
@@ -28,6 +28,14 @@ export const LandingPage = () => {
   const { t, i18n } = useTranslation();
 
   const isRtl = i18n.language === "fa-IR" || i18n.language.startsWith("fa");
+
+  // Keep <html> lang/dir in sync with the chosen language. Without this, the
+  // client-side language toggle leaves the page as fa-IR/rtl — so English
+  // renders right-to-left and the Persian font shapes Latin digits as Persian.
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+    document.documentElement.dir = isRtl ? "rtl" : "ltr";
+  }, [i18n.language, isRtl]);
 
   const toggleLanguage = () => {
     const nextLang = isRtl ? "en-US" : "fa-IR";
@@ -307,13 +315,8 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative overflow-hidden bg-fr-ivory py-20 lg:py-32">
-        {/* smooth blend from the dark hero into the light features section */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#07070E] to-transparent"
-        />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="features" className="bg-fr-ivory py-20 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2
               className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
@@ -344,6 +347,16 @@ export const LandingPage = () => {
       {/* Pricing Section */}
       <section id="pricing" className="relative overflow-hidden py-20 lg:py-32">
         <TimeNetworkBackground />
+        {/* fade the top into the features section above */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-24 bg-gradient-to-b from-[#F5F4F8] to-[#F5F4F8]/0"
+        />
+        {/* fade the bottom into the FAQ section below */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-24 bg-gradient-to-t from-[#F5F4F8] to-[#F5F4F8]/0"
+        />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2
