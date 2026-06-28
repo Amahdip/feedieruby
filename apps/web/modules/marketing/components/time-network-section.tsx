@@ -67,7 +67,7 @@ const THEMES: Record<ThemeKey, Theme> = {
 };
 
 function autoKey(): ThemeKey {
-  const h = new Date().getHours();
+  const h = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tehran" })).getHours();
   if (h < 5) return "night";
   if (h < 7) return "preDawn";
   if (h < 9) return "sunrise";
