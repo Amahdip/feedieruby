@@ -316,7 +316,7 @@ export const generatePersonalLinksAction = authenticatedActionClient
     ];
 
     const csvData = contactsResult
-      .map((contact) => {
+      .map((contact: any) => {
         if (!contact) {
           return null;
         }

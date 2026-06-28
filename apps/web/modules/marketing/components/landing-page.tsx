@@ -17,6 +17,9 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { AuroraBackground } from "@/modules/marketing/components/aurora-background";
+import { HeroAurora } from "@/modules/marketing/components/hero-aurora";
+import { TimeNetworkBackground } from "@/modules/marketing/components/time-network-section";
 import { FeedyRubyWordmark } from "@/modules/ui/components/feedyruby-brand";
 
 export const LandingPage = () => {
@@ -267,32 +270,35 @@ export const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#07070E] py-24 text-white lg:py-36">
+        <HeroAurora />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center lg:mx-auto lg:max-w-3xl">
-            <div className="bg-fr-fuchsia/10 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold text-fr-fuchsia">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-fr-fuchsia ring-1 ring-inset ring-white/10 backdrop-blur">
               <span className="size-1.5 animate-pulse rounded-full bg-fr-fuchsia" />
               {t("marketing.landing.hero.badge")}
             </div>
-            <h1 className="mt-6 text-4xl font-extrabold leading-[1.15] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              {t("marketing.landing.hero.title")} <br />
+            <h1
+              className="mt-6 text-4xl font-extrabold leading-[1.4] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              style={{ textWrap: "balance" }}>
+              {t("marketing.landing.hero.title")}{" "}
               <span className="bg-gradient-to-r from-fr-violet via-fr-fuchsia to-fr-orange bg-clip-text text-transparent">
                 {t("marketing.landing.hero.titleMinutes")}
               </span>
             </h1>
-            <p className="mt-6 text-lg text-slate-600 sm:text-xl">
+            <p className="mt-6 text-lg text-slate-300 sm:text-xl">
               {t("marketing.landing.hero.description")}
             </p>
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/auth/signup"
-                className="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-fr-violet via-fr-fuchsia to-fr-orange px-6 py-3.5 text-base font-medium text-white shadow-md transition-all hover:scale-[1.02] hover:opacity-90">
+                className="shadow-fr-fuchsia/20 inline-flex items-center justify-center rounded-md bg-gradient-to-r from-fr-violet via-fr-fuchsia to-fr-orange px-6 py-3.5 text-base font-medium text-white shadow-lg transition-all hover:scale-[1.02] hover:opacity-90">
                 {t("marketing.landing.hero.startFree")}
                 <ArrowRight className="ms-2 size-5 rtl:rotate-180" />
               </Link>
               <a
                 href="#features"
-                className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-6 py-3.5 text-base font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-50">
+                className="inline-flex items-center justify-center rounded-md border border-white/20 bg-white/5 px-6 py-3.5 text-base font-medium text-slate-100 backdrop-blur transition-all hover:bg-white/10">
                 {t("marketing.landing.hero.learnMore")}
               </a>
             </div>
@@ -301,10 +307,17 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="border-t border-slate-200 py-20 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="features" className="relative overflow-hidden bg-fr-ivory py-20 lg:py-32">
+        {/* smooth blend from the dark hero into the light features section */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#07070E] to-transparent"
+        />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <h2
+              className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+              style={{ textWrap: "balance" }}>
               {t("marketing.landing.features.title")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
@@ -329,13 +342,18 @@ export const LandingPage = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="border-t border-slate-200 bg-slate-100 py-20 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section id="pricing" className="relative overflow-hidden py-20 lg:py-32">
+        <TimeNetworkBackground />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <h2
+              className="text-3xl font-bold tracking-tight sm:text-4xl"
+              style={{ textWrap: "balance", color: "var(--tn-ink, #fff)" }}>
               {t("marketing.landing.pricing.title")}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
+            <p
+              className="mx-auto mt-4 max-w-2xl text-base"
+              style={{ color: "var(--tn-ink, #fff)", opacity: 0.78 }}>
               {t("marketing.landing.pricing.subtitle")}
             </p>
           </div>
@@ -389,7 +407,9 @@ export const LandingPage = () => {
       <section id="faq" className="border-t border-slate-200 py-20 lg:py-32">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <h2
+              className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+              style={{ textWrap: "balance" }}>
               {t("marketing.landing.faq.title")}
             </h2>
             <p className="mt-4 text-base text-slate-600">{t("marketing.landing.faq.subtitle")}</p>
@@ -425,9 +445,9 @@ export const LandingPage = () => {
 
       {/* Final CTA Section */}
       <section className="relative overflow-hidden bg-fr-void py-20 text-white">
-        <div className="from-fr-violet/20 absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] via-fr-void to-fr-void opacity-90" />
-        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+        <AuroraBackground />
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl" style={{ textWrap: "balance" }}>
             {t("marketing.landing.cta.title")}
           </h2>
           <p className="text-fr-muted mx-auto mt-4 max-w-xl text-lg">{t("marketing.landing.cta.subtitle")}</p>

@@ -43,27 +43,33 @@ export const FeedyRubyMark = ({ className, priority = false }: Readonly<BrandIma
   />
 );
 
+/**
+ * Wordmark rendered as HTML gradient text + the vector gem icon.
+ *
+ * We deliberately do NOT use the `<text>`-based wordmark SVGs here: SVGs loaded
+ * via <img>/next/image can't access the page's web fonts, so the Farsi script
+ * (Vazirmatn) loses its shaping and renders broken. Rendering the brand name as
+ * real HTML text inherits the page font (Iran Sans X), which shapes Farsi
+ * correctly, and the FeedyRuby gem-spectrum gradient is applied via
+ * background-clip.
+ */
 export const FeedyRubyWordmark = ({
   className,
   priority = false,
   isRtl = false,
-  isDark = false,
 }: Readonly<BrandImageProps>) => {
-  let src: string = BRAND_ASSETS.wordmarkLight;
-  if (isRtl) {
-    src = isDark ? BRAND_ASSETS.wordmarkFaDark : BRAND_ASSETS.wordmarkFaLight;
-  } else {
-    src = isDark ? BRAND_ASSETS.wordmarkDark : BRAND_ASSETS.wordmarkLight;
-  }
+  const text = isRtl ? APP_NAME : APP_NAME_LATIN;
 
   return (
-    <Image
-      src={src}
-      alt={isRtl ? "فیدی‌روبی" : APP_NAME_LATIN}
-      width={isRtl ? 290 : 256}
-      height={isRtl ? 60 : 56}
-      priority={priority}
-      className={cn("h-8 w-auto max-w-[10rem]", className)}
-    />
+    <span dir={isRtl ? "rtl" : "ltr"} className={cn("inline-flex items-center gap-2", className)}>
+      <span
+        className={cn(
+          "bg-gradient-to-r from-[#FBBF24] via-[#EC4899] to-[#7C3AED] bg-clip-text",
+          "text-2xl font-bold leading-none tracking-tight text-transparent"
+        )}>
+        {text}
+      </span>
+      <FeedyRubyMark className="size-7" priority={priority} />
+    </span>
   );
 };

@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "autoPort": false,
+      "name": "web",
+      "port": 3000,
+      "runtimeArgs": ["--filter", "@feedyruby/web", "dev"],
+      "runtimeExecutable": "pnpm"
+    }
+  ],
+  "version": "0.0.1"
+}
