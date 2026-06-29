@@ -12,6 +12,9 @@ export const STUDIO_NAME = "TechRuby";
 /** Portfolio / engineering studio (Persian) */
 export const STUDIO_NAME_FA = "تک‌روبی";
 
+/** Product site */
+export const APP_URL = "https://feedyruby.ir";
+
 /** Portfolio site */
 export const STUDIO_URL = "https://techruby.ir";
 
