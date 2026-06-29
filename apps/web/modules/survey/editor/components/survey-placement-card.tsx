@@ -143,7 +143,11 @@ export const SurveyPlacementCard = ({ localSurvey, setLocalSurvey }: SurveyPlace
                   i18nKey="workspace.surveys.edit.set_global_placement_in_look_feel_settings_hint"
                   components={{
                     lookFeelLink: (
-                      <Link href={`${workspaceBasePath}/look`} target="_blank" className="underline" />
+                      <Link
+                        href={`${workspaceBasePath}/settings/workspace/look`}
+                        target="_blank"
+                        className="underline"
+                      />
                     ),
                   }}
                 />
