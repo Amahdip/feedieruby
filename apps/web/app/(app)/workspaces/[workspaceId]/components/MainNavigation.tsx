@@ -877,7 +877,7 @@ export const MainNavigation = ({
                   <DropdownMenuItem
                     onClick={async () => {
                       const loginUrl = `${publicDomain}/auth/login`;
-                      const route = await signOutWithAudit({
+                      await signOutWithAudit({
                         reason: "user_initiated",
                         redirectUrl: loginUrl,
                         organizationId: organization.id,
@@ -885,7 +885,7 @@ export const MainNavigation = ({
                         callbackUrl: loginUrl,
                         clearWorkspaceId: true,
                       });
-                      router.push(route?.url || loginUrl);
+                      window.location.href = loginUrl;
                     }}
                     icon={<LogOutIcon className="me-2 size-4" strokeWidth={1.5} />}>
                     {t("common.logout")}
