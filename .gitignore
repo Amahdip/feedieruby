@@ -67,3 +67,5 @@ i18n.cache
 stats.html
 # next-agents-md
 .next-docs/
+seo-plan.md
+.secrets

@@ -12,11 +12,24 @@ export const STUDIO_NAME = "TechRuby";
 /** Portfolio / engineering studio (Persian) */
 export const STUDIO_NAME_FA = "تک‌روبی";
 
+/** Coding school / parent brand (English) */
+export const SCHOOL_NAME = "SalamRuby";
+
+/** Coding school / parent brand (Persian) */
+export const SCHOOL_NAME_FA = "مدرسه‌ی برنامه‌نویسی سلام‌روبی";
+
 /** Product site */
 export const APP_URL = "https://feedyruby.ir";
 
 /** Portfolio site */
 export const STUDIO_URL = "https://techruby.ir";
+
+/**
+ * Coding-school site — the parent brand at the top of the hierarchy
+ * (SalamRuby school → TechRuby studio → FeedyRuby product). Linked from the
+ * product so the brands are connected for users and for search engines.
+ */
+export const SCHOOL_URL = "https://salamruby.ir";
 
 /** i18n keys for studio attribution (see common.studio_* in locales) */
 export const STUDIO_CREDIT_I18N_KEY = "common.studio_credit";

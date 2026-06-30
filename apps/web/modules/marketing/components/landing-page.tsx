@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SCHOOL_URL } from "@/lib/brand-color";
 import { AuroraBackground } from "@/modules/marketing/components/aurora-background";
 import { HeroAurora } from "@/modules/marketing/components/hero-aurora";
 import { TimeNetworkBackground } from "@/modules/marketing/components/time-network-section";
@@ -487,7 +488,16 @@ export const LandingPage = () => {
 
           <div className="flex flex-col items-center justify-between gap-4 text-xs text-slate-400 sm:flex-row">
             <p>{t("marketing.landing.footer.rights", { year: new Date().getFullYear() })}</p>
-            <p>{t("marketing.landing.footer.target")}</p>
+            <p className="flex items-center gap-1">
+              <span>{t("marketing.landing.footer.madeByLead")}</span>
+              <a
+                href={SCHOOL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-slate-500 transition-colors hover:text-fr-fuchsia hover:underline">
+                {t("marketing.landing.footer.schoolName")}
+              </a>
+            </p>
           </div>
         </div>
       </footer>

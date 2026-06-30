@@ -650,8 +650,10 @@
       "footer": {
         "contact": "Contact",
         "docs": "Docs",
+        "madeByLead": "Built by",
         "privacy": "Privacy Policy",
         "rights": "© {year} FeedyRuby & SalamRuby School. All rights reserved.",
+        "schoolName": "SalamRuby Coding School",
         "target": "Targeted for Iran-first and Global researchers.",
         "terms": "Terms of Service"
       },

@@ -10,6 +10,7 @@ import {
   SENTRY_DSN,
   SENTRY_ENVIRONMENT,
   SENTRY_RELEASE,
+  WEBAPP_URL,
   isRtlLocale,
 } from "@/lib/constants";
 import { iranSansX } from "@/lib/fonts/iran-sans-x";
@@ -25,6 +26,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(WEBAPP_URL || "https://feedyruby.ir"),
   title: {
     template: `%s | ${APP_NAME}`,
     default: "فیدی‌روبی | فرم‌ساز و پرسش‌نامه ساز آنلاین",
