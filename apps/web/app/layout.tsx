@@ -66,19 +66,19 @@ export const metadata: Metadata = {
     url: "https://feedyruby.ir",
     images: [
       {
-        url: "https://feedyruby.ir/favicon/android-chrome-512x512.png",
-        width: 512,
-        height: 512,
-        alt: "فیدی‌روبی",
+        url: "/og/feedyruby-og.png",
+        width: 1200,
+        height: 630,
+        alt: "فیدی‌روبی — فرم‌ساز و پرسش‌نامه‌ساز آنلاین فارسی",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "فیدی‌روبی | فرم‌ساز و پرسش‌نامه ساز آنلاین",
     description:
       "سیستم پیشرفته نظرسنجی آنلاین و دریافت بازخورد با پنل فارسی، راست‌چین و امنیت بالای داده‌ها روی سرورهای ایرانی.",
-    images: ["https://feedyruby.ir/favicon/android-chrome-512x512.png"],
+    images: ["/og/feedyruby-og.png"],
   },
 };
 
