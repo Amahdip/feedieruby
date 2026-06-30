@@ -169,7 +169,7 @@ export default function PorslineAlternativePage() {
   ];
 
   return (
-    <main className="relative overflow-hidden bg-fr-ivory text-slate-800 antialiased">
+    <main className="relative bg-fr-ivory text-slate-800 antialiased">
       <JsonLd data={jsonLd} />
 
       {/* Ambient ellipse glows — blurred brand-color blobs for depth (Aparat-style) */}
