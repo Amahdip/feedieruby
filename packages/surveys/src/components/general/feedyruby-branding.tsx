@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 
+const APP_URL = "https://feedyruby.ir";
 const STUDIO_URL = "https://techruby.ir";
 
 export function FeedyRubyBranding() {
@@ -9,29 +10,36 @@ export function FeedyRubyBranding() {
   const lead = t("common.studio_credit_lead");
   const tail = t("common.studio_credit_tail");
 
-  const credit = (
-    <p className="text-signature text-xs">
-      <span className="text-branding-text font-semibold">{productName}</span>
-      <span aria-hidden className="text-slate-300">
-        {" "}
-        ·{" "}
-      </span>
-      <span className="text-branding-text">
-        {lead}
-        {lead ? "\u00a0" : ""}
-        <b>
-          <span className="hover:text-signature">{studioName}</span>
-        </b>
-        {tail ? `\u00a0${tail}` : ""}
-      </span>
-    </p>
-  );
-
+  // Two distinct links: the product name points at FeedyRuby, the studio name at
+  // TechRuby. Previously the whole credit was a single anchor to TechRuby, so the
+  // FeedyRuby keyword carried no link back to the product.
   return (
     <span className="flex justify-center">
-      <a href={STUDIO_URL} target="_blank" tabIndex={-1} rel="noopener noreferrer">
-        {credit}
-      </a>
+      <p className="text-signature text-xs">
+        <a
+          href={APP_URL}
+          target="_blank"
+          tabIndex={-1}
+          rel="noopener noreferrer"
+          className="text-branding-text hover:text-signature font-semibold">
+          {productName}
+        </a>
+        <span aria-hidden className="text-slate-300">
+          {" "}
+          ·{" "}
+        </span>
+        <a
+          href={STUDIO_URL}
+          target="_blank"
+          tabIndex={-1}
+          rel="noopener noreferrer"
+          className="text-branding-text hover:text-signature">
+          {lead}
+          {lead ? " " : ""}
+          <b>{studioName}</b>
+          {tail ? ` ${tail}` : ""}
+        </a>
+      </p>
     </span>
   );
 }
