@@ -102,6 +102,10 @@ export function TimeNetworkBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // On mobile the fiber burst is visual noise and costs battery — skip the
+    // canvas entirely and let the soft gradient `theme.bg` stand on its own.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     const R = 150; // brush radius in CSS px
@@ -213,7 +217,7 @@ export function TimeNetworkBackground() {
       aria-hidden
       className="absolute inset-0 overflow-hidden"
       style={{ background: theme.bg, transition: "background .8s ease" }}>
-      <canvas ref={canvasRef} className="absolute inset-0" />
+      <canvas ref={canvasRef} className="absolute inset-0 hidden md:block" />
     </div>
   );
 }
