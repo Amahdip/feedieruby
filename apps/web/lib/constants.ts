@@ -67,7 +67,9 @@ export const SAML_PRODUCT = "feedyruby";
 export const SAML_AUDIENCE = "https://saml.feedyruby.ir";
 export const SAML_PATH = "/api/auth/saml/callback";
 
-export const SIGNUP_ENABLED = IS_FEEDYRUBY_CLOUD || IS_DEVELOPMENT || E2E_TESTING;
+// Public self-serve signup. FeedyRuby is a managed product, so signup is on by
+// default; set SIGNUP_DISABLED=1 to fall back to invite-only.
+export const SIGNUP_ENABLED = env.SIGNUP_DISABLED !== "1";
 export const EMAIL_AUTH_ENABLED = env.EMAIL_AUTH_DISABLED !== "1";
 export const INVITE_DISABLED = env.INVITE_DISABLED === "1";
 

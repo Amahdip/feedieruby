@@ -27,7 +27,6 @@ import { applyIPRateLimit } from "@/modules/core/rate-limit/helpers";
 import { rateLimitConfigs } from "@/modules/core/rate-limit/rate-limit-configs";
 import { withAuditLogging } from "@/modules/ee/audit-logs/lib/handler";
 import { ensureCloudStripeSetupForOrganization } from "@/modules/ee/billing/lib/organization-billing";
-import { getIsMultiOrgEnabled } from "@/modules/ee/license-check/lib/utils";
 import { subscribeUserToMailingList } from "@/modules/ee/mailing/lib/mailing-subscription";
 import { sendInviteAcceptedEmail, sendVerificationEmail } from "@/modules/email";
 import { createWorkspace } from "@/modules/workspaces/settings/lib/workspace";
@@ -155,9 +154,9 @@ async function handleInviteAcceptance(
 }
 
 async function handleOrganizationCreation(ctx: ActionClientCtx, user: TCreatedUser): Promise<void> {
-  const isMultiOrgEnabled = await getIsMultiOrgEnabled();
-  if (!isMultiOrgEnabled) return;
-
+  // Every self-serve signup (no invite) gets its own organization + workspace.
+  // This is intentionally not gated on the multi-org license: FeedyRuby runs as
+  // a managed product where each signup owns a single organization.
   const organization = await createOrganization({ name: `${user.name}'s Organization` });
   ctx.auditLoggingCtx.organizationId = organization.id;
 

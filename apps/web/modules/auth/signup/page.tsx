@@ -22,11 +22,7 @@ import { verifyInviteToken } from "@/lib/jwt";
 import { findMatchingLocale } from "@/lib/utils/locale";
 import { FormWrapper } from "@/modules/auth/components/form-wrapper";
 import { getIsValidInviteToken } from "@/modules/auth/signup/lib/invite";
-import {
-  getIsMultiOrgEnabled,
-  getIsSamlSsoEnabled,
-  getIsSsoEnabled,
-} from "@/modules/ee/license-check/lib/utils";
+import { getIsSamlSsoEnabled, getIsSsoEnabled } from "@/modules/ee/license-check/lib/utils";
 import { SignupForm } from "./components/signup-form";
 
 export const SignupPage = async ({
@@ -36,15 +32,11 @@ export const SignupPage = async ({
 }) => {
   const searchParams = await searchParamsProps;
   const inviteToken = searchParams["inviteToken"] ?? null;
-  const [isMultOrgEnabled, isSsoEnabled, isSamlSsoEnabled] = await Promise.all([
-    getIsMultiOrgEnabled(),
-    getIsSsoEnabled(),
-    getIsSamlSsoEnabled(),
-  ]);
+  const [isSsoEnabled, isSamlSsoEnabled] = await Promise.all([getIsSsoEnabled(), getIsSamlSsoEnabled()]);
 
   const samlSsoEnabled = isSamlSsoEnabled && SAML_OAUTH_ENABLED;
   const locale = await findMatchingLocale();
-  if (!SIGNUP_ENABLED || !isMultOrgEnabled) {
+  if (!SIGNUP_ENABLED) {
     if (!inviteToken) notFound();
 
     try {
