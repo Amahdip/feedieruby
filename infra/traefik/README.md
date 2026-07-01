@@ -20,13 +20,13 @@ compose project.
 |------|-------------------|---------|
 | feedyruby.ir | `feedyruby-salamruby-1` (Next.js :3000) | `feedyruby_default` |
 | files.feedyruby.ir | `feedyruby-rustfs-1` | `feedyruby_default` |
-| techruby.ir | `techruby-web` (Next.js :3000) | `rubytech_default` |
+| techruby.ir | `techruby-web` (Next.js :3000) | `techruby_default` |
 
 Traefik is attached to **both** networks. Drop either and the corresponding
 site 502s. Routing is label-driven (Docker provider) — see each backend's
 `traefik.*` labels in its own compose.
 
-`rubytech_default` was renamed from the old, misleading `salamruby_default`
+`techruby_default` was renamed from the old, misleading `salamruby_default`
 (techruby has nothing to do with salamruby). It is currently a manually-created
 external bridge network shared by `techruby-web` + `traefik`. Optional future
 hardening: let `/home/ubuntu/rubytech/docker-compose.yml` own it as its project

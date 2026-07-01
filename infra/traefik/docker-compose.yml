@@ -8,7 +8,7 @@
 #
 # Traefik must stay attached to BOTH networks or a site goes dark:
 #   feedyruby_default -> feedyruby.ir app + files.feedyruby.ir (rustfs)
-#   rubytech_default  -> techruby.ir (techruby-web)   [renamed from salamruby_default]
+#   techruby_default  -> techruby.ir (techruby-web)   [renamed from salamruby_default]
 #
 # TLS: acme.json is intentionally empty. The host is in Iran and cannot reach
 # Let's Encrypt (ACME API is on Cloudflare, blocked), so Traefik falls back to
@@ -31,10 +31,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - feedyruby_default
-      - rubytech_default
+      - techruby_default
 
 networks:
   feedyruby_default:
     external: true
-  rubytech_default:
+  techruby_default:
     external: true
