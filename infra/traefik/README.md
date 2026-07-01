@@ -29,7 +29,7 @@ site 502s. Routing is label-driven (Docker provider) — see each backend's
 `techruby_default` was renamed from the old, misleading `salamruby_default`
 (techruby has nothing to do with salamruby). It is currently a manually-created
 external bridge network shared by `techruby-web` + `traefik`. Optional future
-hardening: let `/home/ubuntu/rubytech/docker-compose.yml` own it as its project
+hardening: let `/home/ubuntu/techruby/docker-compose.yml` own it as its project
 default instead of `external`.
 
 ## TLS
@@ -57,7 +57,7 @@ bound to the old interface — recreate that backend (not just `restart`, which
 can trip over a stale HostConfig network reference):
 
 ```sh
-cd /home/ubuntu/rubytech && docker compose up -d --no-build --force-recreate web
+cd /home/ubuntu/techruby && docker compose up -d --no-build --force-recreate web
 ```
 
 ## Known remaining leftover (not yet done)
