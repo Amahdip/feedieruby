@@ -15,7 +15,6 @@ import {
 } from "@/lib/constants";
 import { iranSansX } from "@/lib/fonts/iran-sans-x";
 import { I18nProvider } from "@/lingodotdev/client";
-import { getLocale } from "@/lingodotdev/language";
 import { loadLocaleResources } from "@/lingodotdev/load-locale";
 import "../modules/ui/globals.css";
 
@@ -83,7 +82,12 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const locale = await getLocale();
+  // Static locale for the shared shell so the whole public surface (landing,
+  // marketing, robots, sitemap) renders statically and stays cacheable. Reading
+  // the session here (the old getLocale()) forced every route dynamic + no-store.
+  // Anonymous traffic already resolved to DEFAULT_LOCALE anyway; logged-in users'
+  // saved locale is applied client-side by the i18n provider.
+  const locale = DEFAULT_LOCALE;
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
   const localeResources = await loadLocaleResources(locale);
 

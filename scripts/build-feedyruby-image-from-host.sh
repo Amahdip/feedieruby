@@ -20,6 +20,10 @@ export ENCRYPTION_KEY="${ENCRYPTION_KEY:-0123456789abcdef0123456789abcdef}"
 export REDIS_URL="${REDIS_URL:-redis://redis:6379}"
 export HUB_API_URL="${HUB_API_URL:-http://hub:8080}"
 export HUB_API_KEY="${HUB_API_KEY:-build-time-placeholder}"
+# Public origin — baked into statically-generated robots.txt/sitemap.xml at build
+# time. Without this they fall back to http://localhost:3000 and break indexing.
+export WEBAPP_URL="${WEBAPP_URL:-https://feedyruby.ir}"
+export PUBLIC_URL="${PUBLIC_URL:-https://feedyruby.ir}"
 
 touch apps/web/.env
 

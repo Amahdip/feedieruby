@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import type { Session } from "next-auth";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { getOnboardingWorkspace } from "@/app/(app)/(onboarding)/lib/onboarding-workspace";
-import { getOnboardingRedirectPath } from "@/app/(app)/(onboarding)/lib/redirect-if-onboarding-complete";
 import { JsonLd } from "@/app/(marketing)/components/json-ld";
-import ClientWorkspaceRedirect from "@/app/ClientWorkspaceRedirect";
+import RedirectAuthedHome from "@/app/RedirectAuthedHome";
 import {
   APP_NAME,
   APP_NAME_LATIN,
@@ -14,32 +9,22 @@ import {
   SCHOOL_URL,
   STUDIO_URL,
 } from "@/lib/brand-color";
-import { WEBAPP_URL } from "@/lib/constants";
-import { getIsFreshInstance } from "@/lib/instance/service";
-import { getMembershipByUserIdOrganizationId } from "@/lib/membership/service";
-import { getAccessFlags } from "@/lib/membership/utils";
-import { getOrganizationsByUserId } from "@/lib/organization/service";
-import { getUser } from "@/lib/user/service";
-import { getUserWorkspaces } from "@/lib/workspace/service";
-import { getLocale } from "@/lingodotdev/language";
+import { DEFAULT_LOCALE, WEBAPP_URL } from "@/lib/constants";
 import { getTranslate } from "@/lingodotdev/server";
-import { authOptions } from "@/modules/auth/lib/authOptions";
 import { LandingPage } from "@/modules/marketing/components/landing-page";
-import { ClientLogout } from "@/modules/ui/components/client-logout";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
 /**
- * Server-rendered structured data for the public homepage. Connects FeedyRuby
- * to its parent brand SalamRuby (parentOrganization + sameAs) so search engines
- * treat them as one entity graph, and exposes the landing FAQ as a FAQPage for
- * rich results. Built server-side so crawlers see it without running JS.
+ * Server-rendered structured data for the public homepage. Built with the
+ * default locale (no session read) so the page renders statically and stays
+ * edge-cacheable. Connects FeedyRuby to its parent brand SalamRuby and exposes
+ * the landing FAQ as a FAQPage for rich results.
  */
 async function buildHomeJsonLd() {
-  const locale = await getLocale();
-  const t = await getTranslate(locale);
+  const t = await getTranslate(DEFAULT_LOCALE);
   const base = (WEBAPP_URL || "https://feedyruby.ir").replace(/\/$/, "");
   const logo = `${base}/favicon/android-chrome-512x512.png`;
 
@@ -97,67 +82,14 @@ async function buildHomeJsonLd() {
 }
 
 const Page = async () => {
-  const session: Session | null = await getServerSession(authOptions);
-  const isFreshInstance = await getIsFreshInstance();
-
-  if (!session) {
-    if (isFreshInstance) {
-      return redirect("/setup/intro");
-    } else {
-      const jsonLd = await buildHomeJsonLd();
-      return (
-        <>
-          <JsonLd data={jsonLd} />
-          <LandingPage />
-        </>
-      );
-    }
-  }
-
-  const user = await getUser(session.user.id);
-  if (!user) {
-    return <ClientLogout />;
-  }
-
-  const userOrganizations = await getOrganizationsByUserId(session.user.id);
-
-  if (userOrganizations.length === 0) {
-    return redirect("/setup/organization/create");
-  }
-
-  // Collect workspace IDs across all organizations
-  const allWorkspaceIds: string[] = [];
-  for (const org of userOrganizations) {
-    const workspaces = await getUserWorkspaces(user.id, org.id);
-    for (const ws of workspaces) {
-      allWorkspaceIds.push(ws.id);
-    }
-  }
-
-  const currentUserMembership = await getMembershipByUserIdOrganizationId(
-    session.user.id,
-    userOrganizations[0].id
+  const jsonLd = await buildHomeJsonLd();
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <RedirectAuthedHome />
+      <LandingPage />
+    </>
   );
-
-  const { isManager, isOwner } = getAccessFlags(currentUserMembership?.role);
-
-  if (allWorkspaceIds.length === 0 && !isOwner && !isManager) {
-    return redirect(`/organizations/${userOrganizations[0].id}/landing`);
-  }
-
-  if (isOwner || isManager) {
-    const onboardingWorkspace = await getOnboardingWorkspace(session.user.id, userOrganizations[0].id);
-    const onboardingRedirectPath = await getOnboardingRedirectPath({
-      organizationId: userOrganizations[0].id,
-      workspace: onboardingWorkspace,
-    });
-
-    if (onboardingRedirectPath) {
-      return redirect(onboardingRedirectPath);
-    }
-  }
-
-  return <ClientWorkspaceRedirect userWorkspaceIds={allWorkspaceIds} />;
 };
 
 export default Page;

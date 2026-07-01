@@ -135,7 +135,11 @@ export const LoginForm = ({
       }
 
       if (!signInResponse?.error) {
-        router.push(resolvedCallbackPath || "/");
+        // Send successful logins straight to the authenticated resolver. "/" is
+        // now a static, edge-cached landing, so redirecting there would show the
+        // marketing page instead of the workspace; "/continue" resolves the
+        // user's organization/workspace and forwards them in.
+        router.push(resolvedCallbackPath || "/continue");
       }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : String(error));
